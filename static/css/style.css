@@ -122,12 +122,14 @@ html, body {
   font-weight: bold;
 }
 
+// 320
 .logo-pc {
-  width: 320px;
+  height: 60px;
 }
 
+// 150
 .logo-mobile{
-  width: 150px;
+  height: 30px;
 }
 
 .text-title{
