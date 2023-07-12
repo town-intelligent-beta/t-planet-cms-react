@@ -141,14 +141,21 @@ export function append_plan_submit_data(page, form) {
     // Set local storage
     form.append("list_sdg", list_sdg);
   } else if (page == "cms_impact.html") {
+
+
+    const textareaIds = [
+      ...document.querySelectorAll("textarea[id^='sdg_']"),
+      ...document.querySelectorAll("textarea[id^='parent_task_overview_']")
+    ].map(item => `#${item.id}`);
+    register_ckeditor(textareaIds);
+
     var dataJSON = {};
     for (var index = 0 ; index <17; index++) {
       // Append to JSON
       if (document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des") == null) {
         continue;
       }
-	    dataJSON[index] = document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des").value;
-
+	    dataJSON[index] = document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des").innerText;
     }
 
     // Additional SDGs data
@@ -157,8 +164,7 @@ export function append_plan_submit_data(page, form) {
       if (document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des") == null) {
         continue;
       }
-	    dataJSON[index] = document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des").value;
-
+	    dataJSON[index] = document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des").innerText;
     }
 
     // {"0":"透過深度參與豐富指標","11":"定期聚板相關市集","14":"社區友善農業的產銷創生解方"}

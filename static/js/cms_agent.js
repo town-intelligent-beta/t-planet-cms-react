@@ -231,6 +231,10 @@ $(function () {
 });
 
 export function cms_plan_add_parent_tasks(uuid_task) {
+  if (typeof update_ckeditor_data === "function") {
+    update_ckeditor_data();
+  }
+
   // Path
   var path = window.location.pathname;
   var page = path.split("/").pop();
@@ -269,19 +273,54 @@ export function cms_plan_add_parent_tasks(uuid_task) {
   }
 
   // Parent task submit
-  var form = new FormData();
-  form.append("email", getLocalStorage("email"));
-  form.append("uuid", uuid_plan);
-  form.append("task", uuid_task);
-  form.append("name", document.getElementById("parent_task_name_" + uuid_task).value);
-  form.append("task_start_date", document.getElementById("parent_task_start_date_" + uuid_task).value);
-  form.append("task_due_date", document.getElementById("parent_task_due_date_" + uuid_task).value);
-  form.append("overview", document.getElementById("parent_task_overview_" + uuid_task).value);
-  form.append("gps_flag", gps_flag);
+  // Variables
+  var list_parent_tasks = [];
 
-  // Task submit
-  var obj_task = task_submit(form);
+  // Get history parent tasks
+  var result_parent_tasks = list_plan_tasks(uuid, 1);
+  if (result_parent_tasks.result) {
+    try {
+      list_parent_tasks = result_parent_tasks.tasks;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
+  // Update all tasks from web and submit
+  for (var index_task = 0; index_task < list_parent_tasks.length; index_task++) {
+    // Form
+    var form = new FormData();
+
+    try {
+      // Keep old data
+      form.append("uuid", uuid);
+      form.append("task", list_parent_tasks[index_task]);
+      form.append("email", getLocalStorage("email"));
+
+      // name
+      form.append("name", document.getElementById("parent_task_name_" + list_parent_tasks[index_task]).value);
+
+      // start date
+      form.append("task_start_date", document.getElementById("parent_task_start_date_" + list_parent_tasks[index_task]).value);
+
+      // due date
+      form.append("task_due_date", document.getElementById("parent_task_due_date_" + list_parent_tasks[index_task]).value);
+
+      // overview
+      form.append("overview", document.getElementById("parent_task_overview_" + list_parent_tasks[index_task]).value);
+
+      // GPS
+      try {
+        form.append("gps_flag", document.getElementById("gps_flag_" + list_parent_tasks[index_task]).checked);
+      } catch(e) {
+        console.log(e);
+      }
+
+      var obj_task = task_submit(form);
+    } catch(e) {
+      console.log(e)
+    }
+  }
   // Redirect to add parent window
   window.location.replace("/backend/cms_missions_display.html?uuid=" + uuid_plan + "&task=" + obj_task.task + "&gps=" + gps_flag);
 }
