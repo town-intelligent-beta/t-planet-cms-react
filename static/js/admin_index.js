@@ -51,6 +51,7 @@ function exChange(data) {
   if (`${data['twins-description']}`.localeCompare("undefined") === -1) {
     $('#textarea4').val(`${data['twins-description']}`)
   }
+  register_ckeditor(['#textarea1', '#textarea2', '#textarea3', '#textarea4']);
 }
 
 function prepare_mockup_upload() {
