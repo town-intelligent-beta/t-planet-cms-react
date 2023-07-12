@@ -127,7 +127,7 @@ const str_project_management_modal = `
                       <p class="mt-2 mb-0">熱區圖示</p>
                     </div>
                   </div>
-                  <a href="/backend/heat_map_menu.html?uuid=UUID_PROJECT" class="stretched-link"></a>
+                  <a href="/backend/heat_map.html?uuid=UUID_PROJECT" class="stretched-link"></a>
                 </div>
               </div>
               <div class="col-2">
@@ -186,7 +186,7 @@ const str_project_management_modal = `
                       <p class="mt-2 mb-0">熱區圖示</p>
                     </div>
                   </div>
-                  <a href="/backend/heat_map_menu.html??uuid=UUID_PROJECT" class="stretched-link"></a>
+                  <a href="/backend/heat_map.html??uuid=UUID_PROJECT" class="stretched-link"></a>
                 </div>
               </div>
               <div class="col-6 mt-4">
