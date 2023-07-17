@@ -1,5 +1,4 @@
 // import { setLocalStorage, getLocalStorage } from './localStorage.js'
-import { get_task_info } from './tasks.js'
 
 export function getGPS(project_UUID) {
   var resultJSON = {};
@@ -22,24 +21,6 @@ export function getGPS(project_UUID) {
   });
 
   return resultJSON;
-}
-
-function randomNumber(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-export function successCallback(b64, map, obj_task, obj_task_gps) {
-  var listeIDLocastion = obj_task_gps.gps.split(",")
-
-  // The location of Uluru
-  var uluru = { lat: parseFloat(listeIDLocastion[0]), lng: parseFloat(listeIDLocastion[1]) };
-
-  var marker = new google.maps.Marker({
-    position: uluru,
-    map: map,
-    icon: b64,
-    title: obj_task.uuid + " : " + obj_task.name
-  });
 }
 
 export function pad(d) {
