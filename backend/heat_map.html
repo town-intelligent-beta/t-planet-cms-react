@@ -19,6 +19,7 @@
       integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
       integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/static/css/style.css" >
     <script src="/static/js/config.js"></script>
@@ -37,11 +38,10 @@
       import { set_page_info_heat_map } from '/static/js/heat_map.js'
       window.set_page_info_heat_map = set_page_info_heat_map;
     </script>
-
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2Ibmm6ht0sAfkdDn_1cPDGGAWS4qetYs&callback=set_page_info_heat_map&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK_diudJMtv_GgPgLLY9CGn3Un7Y9wU5c&callback=set_page_info_heat_map&v=weekly"
     defer
-  ></script>
+    ></script>
   </head>
 
   <body>
@@ -90,10 +90,17 @@
             <h4>永續專案: <span id="project_title"> </span></h4>
           </div>
         </div> <!-- <div class="row mt-5 mb-4"> -->
+        <form>
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <select id="sdgs-select" class="form-control"></select>
+            </div>
+          </div>
+        </form>
         <p><div id="map"></div></p>
         <div class="row justify-content-center justify-content-md-end mt-5 mb-5">
           <div class="col-md-2">
-            <a href="/backend/heat_map_menu.html" type="button" class="btn btn-dark rounded-pill btn-block">返回</a>
+            <a href="/backend/cms_agent.html" type="button" class="btn btn-dark rounded-pill btn-block">返回</a>
           </div>
         </div>
     </section>
