@@ -64,3 +64,6 @@ var group = getLocalStorage("group");
 
 // navbar
 navbar(group);
+
+// Translate
+$("body").t2s();
