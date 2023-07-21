@@ -27,7 +27,31 @@ function register_ckeditor(elementIds) {
       const element = document.querySelector(elementId);
       window.ckeditorEditors[elementId] = -1;
 
-      ClassicEditor.create(element)
+      ClassicEditor.create(element, {
+        extraPlugins: [SimpleUploadAdapterPlugin],
+        simpleUpload: {
+          uploadUrl: HOST_URL_TPLANET_DAEMON + "/portal/upload_img"
+          // uploadUrl: "http://localhost:3000/image/upload"
+        },
+
+        // FIXME: 移除 MediaEmbed, ImageUpload 插件配置
+        removePlugins: ["MediaEmbed"], // 移除 MediaEmbed 和 ImageInsert 插件
+        toolbar: {
+          items: [
+            // 可以根據需要保留其他工具按鈕，這裡只保留了文本相關的按鈕
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'undo',
+            'redo'
+          ]
+        },
+      })
         .then((newEditor) => {
           window.ckeditorEditors[elementId] = newEditor;
           console.log(`editor[${elementId}] registered`);
