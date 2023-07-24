@@ -23,7 +23,30 @@ function logout() {
   });
 }
 
+function set_navbar_animation() {
+  $('.navbar').hover(function() {
+    $('.navbar').removeClass('blur');
+  });
+
+  var lastScrollTop = 0;
+  $(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    // scroll down
+    if (scrollTop > lastScrollTop){
+      $('.navbar').addClass('blur');
+      lastScrollTop = scrollTop;
+      return;
+    }
+
+    // scroll up
+    $('.navbar').removeClass('blur');
+    lastScrollTop = scrollTop;
+  });
+}
+
 function navbar(group) {
+  set_navbar_animation()
+
   // home logo href
   if (group == "200" || group == "201" ) {
       document.getElementById("index_logo").href =
