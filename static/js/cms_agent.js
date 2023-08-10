@@ -221,7 +221,6 @@ $(function () {
     } else if (id_btn_submit == "btn_cms_plan_save") {
       alert("儲存成功");
     } else if (id_btn_submit == "btn_cms_plan_preview") {
-      // window.location.replace("/backend/cms_project_detail.html?uuid=" + uuid);
       window.open(
         "/backend/cms_project_detail.html?uuid=" + uuid,
         "_blank" // <- This is what makes it open in a new window.
@@ -470,29 +469,6 @@ $(function () {
       obj_div_row.append(obj_div_child);
       obj_sdgs_container.append(obj_div_row);
     }
-
-    /*
-    if (page == "cms_deep_participation.html") {
-      // id = icon_container
-      var obj_icon_container = document.getElementById("icon_container");
-
-      // <a class="d-block">
-      var obj_a = document.createElement("a");
-      obj_a.className = "d-block";
-
-      // <img class="mr-3" src="/static/imgs/SDGs_04.jpg" alt="" style="width:60px">
-      var obj_img = document.createElement("img");
-      obj_img.id = "target_sdgs_" + getLocalStorage("target_sdgs");
-      obj_img.className = "participation-margin mt-md-0";
-      obj_img.src = "/static/imgs/SDGs_" + getLocalStorage("target_sdgs") + ".jpg";
-      obj_img.alt = "";
-      obj_img.style = "width:100px";
-
-      // Append
-      obj_a.append(obj_img);
-      obj_icon_container.append(obj_a);
-    }
-    */
 
     // Finish
     $("#SDGsModal").modal("hide");

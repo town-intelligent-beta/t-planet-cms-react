@@ -15,7 +15,8 @@ if (uuid != null) {
       var oDiv = document.getElementById("coverImg");
       oDiv.style.backgroundImage = "url(" + path_cover + ")";
       oDiv.style.backgroundRepeat = "no-repeat";
-      oDiv.style.backgroundSize = "100% 100%";
+      // oDiv.style.backgroundSize = "100% 100%";
+      oDiv.style.backgroundSize = "cover";
       oDiv.onclick = function() {
         onclickuploadProjectCover();
       }
@@ -82,7 +83,7 @@ export async function uploadProjectCover() {
   var uuid = urlParams.get("uuid")
 
   // Preview
-  await upload_image_file(1870, 400, "coverImg", true);
+  await upload_image_file(700, 400, "coverImg", true);
 
   prepare_project_cover_upload().then(async function () {
     var coverImg = document.getElementById("coverImg").style.backgroundImage.replace('url("', '');
@@ -94,6 +95,12 @@ export async function uploadProjectCover() {
   }).then(function (resultJSON) {
     if (resultJSON.result == "true") {
       alert("更新成功");
+
+      try {
+        document.getElementById("divUploadImg").style.backgroundImage =  "";
+        document.getElementById("btnUploadImg").style.display = "none";
+      } catch (e) {}
+
     } else {
       alert("更新失敗，請洽系統管理員。");
     }

@@ -257,7 +257,7 @@ const str_parent_task_block = `
       <div class="col-md-6">
         <div id="coverImg_UUID_TASK" class="border d-flex flex-column align-items-center justify-content-center" style="height:300px">
           <button type="button" id="btnUploadImg_UUID_TASK" onclick="uploadTaskCover('UUID_TASK')">
-            <div id="divUploadImg_UUID_TASK" class="bg-contain" style="background-image: url(/static/imgs/image_icon.svg);width:100px; height:100px; background-repeat: no-repeat"></div>
+            <div id="divUploadImg_UUID_TASK" class="bg-contain" style="background-image: url(/static/imgs/image_icon.svg);width:100px; height:100px; background-repeat: no-repeat; background-size: cover;"></div>
           </button>
         </div>
       </div>
@@ -338,56 +338,101 @@ const str_parent_task_block = `
   </div>
 </div> `
 
-const str_project_block_in_project_page_backup = `<div class="card mb-4 border-3 border-dark h-100 p-3" style="border-radius: 20px;">
-  <div class="d-flex justify-content-center">
-    <div class="img-fluid bg-cover" style="background-image:url(PROJECT_COVER); width: 400px; height:100px; background-repeat: no-repeat"></div>
+const str_navbar = `    <nav class="navbar navbar-expand-xl navbar-light bg-navbar fz-18">
+<div name="admin_dropdown" class="container-fluid">
+  <a id="index_logo" class="navbar-brand d-none d-md-block my-md-1" href="/index.html">
+    <img class="logo-pc" src="/static/imgs/2nd-home.svg" alt="">
+  </a>
+  <a id="index_logo" class="navbar-brand d-md-none" href="/index.html">
+    <img class="logo-mobile" src="/static/imgs/2nd-home.svg" alt="">
+  </a>
+  <button class="navbar-toggler mr-md-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li id="index" class="nav-item">
+        <a class="nav-link fw-bold" href="/index.html">關於 Second Home </a>
+      </li>
+      <li id="kpi" class="nav-item">
+        <a class="nav-link fw-bold" href="/kpi.html">永續專案</a>
+      </li>
+      <li id="solution" class="nav-item">
+        <a class="nav-link fw-bold" href="/solution.html">解決方案</a>
+      </li>
+      <li id="news_list" class="nav-item">
+        <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
+      </li>
+      <li id="contact_us" class="nav-item">
+        <a class="nav-link fw-bold" href="/contact_us.html">聯絡我們</a>
+      </li>
+      <li id="account_status" class="nav-item d-flex align-items-center">
+        <img class="align-top" src="/static/imgs/user.svg" alt=""><a class="nav-link fw-bold px-0" href="/tplanet_signin.html">登入</a><span class="nav-link px-1 align-middle" style="margin-bottom:2px">/</span><a class="nav-link fw-bold px-0" href="/tplanet_signup.html">註冊</a>
+      </li>
+    </ul>
   </div>
-  <div class="card-body d-flex flex-column">
-    <div class="d-flex justify-content-between">
-      <p class="h5 mb-0">PROJECT_NAME</p>
-      <p class="text-danger mb-0">專案</p>
-    </div>
-    <p class="card-text mt-4">提案者:<span class="pl-2">PROJECT_A<span></p>
-    <p class="card-text">期間: <span class="pl-2">PROJECT_START ~ PROJECT_DUE<span></p>
-    <p class="card-text">預算: <span class="pl-2">新台幣 BUDGET 元<span></p>
-    <a href="#" class="stretched-link"></a>
-    <div class="d-flex align-items-center mt-2" style="position: relative;">
-      <p class="mb-0">SDGs: </p>
-      <div class="pl-2">
-      <!--
-        <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
-          <img style="width:13%" src="/static/imgs/SDGs_01.jpg" alt="">
-        </a>
-        <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-          <img style="width:13%" src="/static/imgs/SDGs_04.jpg" alt="">
-        </a>
-        <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-          <img style="width:13%"  src="/static/imgs/SDGs_06.jpg" alt="">
-        </a>
-        <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-          <img style="width:13%"  src="/static/imgs/SDGs_09.jpg" alt="">
-        </a>
-        <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-          <img style="width:13%"  src="/static/imgs/SDGs_11.jpg" alt="">
-        </a>
-        <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-          <img style="width:13%"  src="/static/imgs/SDGs_13.jpg" alt="">
-        </a>
-        -->
-        SDGS_LIST
+</div>
+</nav>`
+
+const str_footer = `    <footer class="bg-footer">
+<div class="container-fluid">
+  <div class="row justify-content-center pt-4">
+    <div class="col-lg-9 d-none d-lg-block">
+      <div class="h-100 d-flex align-items-center justify-content-center justify-content-lg-start mt-2 mt-lg-0 fz-18">
+        <p class="mr-3 mb-0"><a href="/index.html" class="text-dark nav-link px-0 fw-bold">關於 Second Home</a></p>
+        <p class="mr-3 mb-0"><a href="/kpi.html" class="text-dark nav-link px-0 fw-bold">永續專案</a></p>
+        <p class="mr-3 mb-0"><a href="/solution.html" class="text-dark nav-link px-0 fw-bold">解決方案</a></p>
+        <p class="mr-3 mb-0"><a href="/news_list.html" class="text-dark nav-link px-0 fw-bold">最新消息</a></p>
+        <p class="mr-3 mb-0"><a href="/contact_us.html" class="text-dark nav-link px-0 fw-bold">聯絡我們</a></p>
+        <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="https://privacy.townway.com.tw/">隱私權條款</a></p>
       </div>
+    </div>
+    <div class="col-lg-3 mb-4 mb-lg-0">
+      <div class="d-flex h-100 align-items-center justify-content-center justify-content-lg-end">
+        <div>
+          <a class="text-decoration-none" href="#" target="_blank">
+            <img class="mr-1 footer_images" src="/static/imgs/townWay-icon.svg" alt="" style="height: 35px;">
+          </a>
+          <a class="text-decoration-none" href="https://www.facebook.com/townway104" target="_blank">
+            <img class="mr-1 footer_images" src="/static/imgs/fb-icon.svg" alt="" style="height: 25px;">
+          </a>
+          <a class="text-decoration-none" href="https://www.linkedin.com/company/townintelligent" target="_blank">
+            <img class="mr-1 footer_images" src="/static/imgs/linkedin-icon.svg" alt="" style="height: 25px;">
+          </a>
+          <a class="text-decoration-none" href="https://www.instagram.com/townway104" target="_blank">
+            <img class="mr-1 footer_images" src="/static/imgs/instagram-icon.svg" alt="" style="height: 25px;">
+          </a>
+          <a class="text-decoration-none" href="https://www.youtube.com/user/forus999" target="_blank">
+            <img class="footer_images" src="/static/imgs/youtube-icon.svg" alt="" style="height: 25px;">
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- mobile -->
+    <div class="d-flex flex-wrap justify-content-center d-lg-none fz-18">
+      <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/index.html">關於 Second Home</a></p>
+      <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/kpi.html">永續專案</a></p>
+      <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/solution.html">解決方案</a></p>
+      <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/news_list.html">最新消息</a></p>
+      <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/contact_us.html">聯絡我們</a></p>
+      <p class="mb-0"><a class="text-dark nav-link px-0 fw-bold" href="https://privacy.townway.com.tw/">隱私權條款</a></p>
+    </div>
+  </div>
+  <div class="py-4">
+    <div class="text-center">
+      <p class="fw-bold mb-0">Copyright &copy; 2022 SECOND HOME</p>
     </div>
   </div>
 </div>
-`
+</footer>`
 
-// FIXME
 const str_project_block_in_project_page = `<a class="text-dark" href="/cms_project_detail.html?uuid=PROJECT_UUID" style="display: block; text-decoration:none">
 
     <div class="card mb-4 kpi-card" style="border-radius: 20px;">
       <div class="d-flex justify-content-center">
         <!-- <div class="img-fluid bg-cover shadow" style="background-repeat: no-repeat; background-position: center center; background-size: cover; background-image:url(PROJECT_COVER); width:100% ;height:200px; border-radius: 18px;"></div> -->
-        <img src="PROJECT_COVER" class="img-fluid bg-cover shadow" style="background-repeat: no-repeat; background-position: center center; background-size: cover; background-image:url(PROJECT_COVER); width:100% ;height:200px; border-radius: 18px;"></div>
+        <div class="img-fluid bg-cover shadow" style="background-repeat: no-repeat; background-position: center center; background-size: cover; background-image:url(PROJECT_COVER); width:100% ;height:200px; border-radius: 18px;"></div>
       </div>
       <div class="card-body d-flex flex-column">
         <p class="h5">PROJECT_NAME</p>

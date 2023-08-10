@@ -83,11 +83,12 @@ function upload_image_file(width = null, height = null, id_preview = null, backg
         if (id_preview != null) {
           if (background == true) {
             document.getElementById(id_preview).style.backgroundImage =  "url(" + scaledBase64Img  + ")";
+            document.getElementById(id_preview).style.backgroundSize = "cover";
           } else {
             document.getElementById(id_preview).src = scaledBase64Img;
+            document.getElementById(id_preview).style.width = canvas.width + "px";
+            document.getElementById(id_preview).style.height = canvas.height + "px";
           }
-          document.getElementById(id_preview).style.width = canvas.width + "px";
-          document.getElementById(id_preview).style.height = canvas.height + "px";
         }
 
         // 解除頁面載入特效

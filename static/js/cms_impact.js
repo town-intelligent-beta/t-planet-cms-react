@@ -61,11 +61,13 @@ export function add_parent_task_block (obj_task = null) {
     document.getElementById("btnUploadImg_" + obj_task.uuid).style.display = "none";
     document.getElementById("coverImg_" + obj_task.uuid).style.backgroundImage =  "url(" + path_cover + ")";
     document.getElementById("coverImg_" + obj_task.uuid).style.backgroundRepeat = "no-repeat";
-    document.getElementById("coverImg_" + obj_task.uuid).style.backgroundSize = "100% 100%";
+    // document.getElementById("coverImg_" + obj_task.uuid).style.backgroundSize = "100% 100%";
+    document.getElementById("coverImg_" + obj_task.uuid).style.backgroundSize = "cover";
+
     // Onclick
     var oDiv = document.getElementById("coverImg_" + obj_task.uuid);
     oDiv.onclick = function() {
-      onclickuploadTaskCover(obj_task.uuid);
+      onclickuploadTaskCover(obj_task.uuid, null, null, null, true);
     }
 
     // GPS

@@ -1,5 +1,20 @@
 import { set_page_info } from './set_page_info.js'
 
+function add_navbar() {
+  $('#navbar').html(str_navbar)
+
+  // Set navbar
+  var path = window.location.pathname;
+  var page = path.split("/").pop().split(".html")[0]
+  var selector = "#" + page;
+  $(selector).addClass('active');
+}
+
+function add_footer() {
+  // str_footer
+  $('#footer').html(str_footer)
+}
+
 function logout() {
   // Modify account
   var dataJSON = {};
@@ -45,6 +60,7 @@ function set_navbar_animation() {
 }
 
 function navbar(group) {
+  add_navbar()
   set_navbar_animation()
 
   // home logo href
@@ -87,3 +103,6 @@ var group = getLocalStorage("group");
 
 // navbar
 navbar(group);
+
+// footer
+add_footer();
