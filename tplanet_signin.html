@@ -30,9 +30,7 @@
 
     <script>
     $(function () {
-      $('form').on('submit', function(e) {
-
-        // TODO: Get path
+      $("[id='btn_signin']").on("click", function(e){
         var url = new URL(window.location.href);
         var next = url.searchParams.get("next");
 
@@ -113,7 +111,7 @@
           </div>
           <div class="row justify-content-center mt-3">
             <div class="col-10 col-md-2 px-0">
-              <button type="submit" class="btn btn-block btn-dark">登入</button>
+              <button id="btn_signin" type="button" class="btn btn-block btn-dark">登入</button>
             </div>
           </div>
           <div class="row justify-content-center mt-3">
@@ -154,4 +152,13 @@
     <!-- footer -->
     <div id="footer"></div>
   </body>
+  <script>
+    $("#password").keypress(function(event) {
+      // 如果按下的键是Enter键 (key code 13)
+      if (event.which === 13) {
+        event.preventDefault();
+        $("#btn_signin").click();
+      }
+    });
+  </script>
 </html>

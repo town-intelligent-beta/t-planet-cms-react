@@ -6,25 +6,6 @@ import { draw_bar } from './chart/bar.js'
 const cms_project_submit_pages = ["cms_plan_info.html", "cms_sdgs_setting.html", "cms_impact.html", "cms_contact_person.html"];
 const cms_support_format = ["cms_missions_display.html", "cms_support_form.html", "cms_deep_participation.html"]
 
-// Submit 之前的處理
-function submit_pre_processing(page, uuid, task) {
-  var uuid_project = null;
-  var uuid_task = null;
-  if (page == "cms_sdgs_setting.html") {
-    if (uuid != null) {
-      uuid_project = uuid;
-    } else if (getLocalStorage("uuid_project") != "") {
-      uuid_project = plan_submit(getLocalStorage("uuid_project"));
-    } else {
-      uuid_project = plan_submit();
-    }
-  }
-
-  uuid_task = task;
-  return [uuid_project, uuid_task];
-}
-
-
 $(function () {
   $("#add_c_project").on("click", function(event) {
     event.preventDefault();
@@ -114,13 +95,6 @@ $(function () {
     var uuid = urlParams.get("uuid")
     var task = urlParams.get("task")
 
-    // Submit pre-processing
-    if (uuid == null) {
-      var list_plan_task_uuid = submit_pre_processing(page, uuid, task);
-      uuid = list_plan_task_uuid[0];
-      task = list_plan_task_uuid[1];
-    }
-
     // Get index
     var index = get_page_index(page);
 
@@ -129,6 +103,7 @@ $(function () {
     if (uuid != null) {
       param = param + "?uuid=" + uuid;
     }
+
     if (task != null) {
       param = param + "&task=" + task;
     }
@@ -250,11 +225,10 @@ export function cms_plan_add_parent_tasks(uuid_task) {
     uuid_plan = uuid;
   } else if (getLocalStorage("uuid_project") != "") {
     uuid_plan = getLocalStorage("uuid_project");
-  } else {
-    var form = new FormData();
-    uuid_plan = plan_submit(form, uuid_plan);
   }
-  setLocalStorage("uuid_project", uuid_plan);
+
+  if ( uuid_plan != null && getLocalStorage("uuid_project") == "")
+    setLocalStorage("uuid_project", uuid_plan);
 
   // Update project
   var form_plan = new FormData();

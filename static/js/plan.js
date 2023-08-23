@@ -11,6 +11,21 @@ export function addWeight(w1, w2) {
 }
 
 export function plan_submit(form, uuid = null) {
+  var resultJSON = {};
+
+  // FIXME: Require field check
+  // Workaround for Prevent null project
+  var path = window.location.pathname;
+  var page = path.split("/").pop();
+
+  if (page != "cms_agent.html" && uuid == null) {
+    try {
+      let nameValue = form.get('name');
+      if (nameValue === '' || nameValue === null || typeof nameValue === 'undefined')
+        return;
+    } catch (e) { return; }
+  }
+
   form.append("email", getLocalStorage("email"));
   if (uuid != null) {
     form.append("uuid", uuid);
@@ -18,7 +33,6 @@ export function plan_submit(form, uuid = null) {
 
   form.append("list_project_type", 0);
 
-  var resultJSON = {};
   $.ajax({
     "url": HOST_URL_TPLANET_DAEMON + "/projects/upload",
     "method": "POST",
@@ -141,7 +155,6 @@ export function append_plan_submit_data(page, form) {
     // Set local storage
     form.append("list_sdg", list_sdg);
   } else if (page == "cms_impact.html") {
-
 
     const textareaIds = [
       ...document.querySelectorAll("textarea[id^='sdg_']"),
