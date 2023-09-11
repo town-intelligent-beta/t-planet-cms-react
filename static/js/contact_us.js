@@ -1,18 +1,20 @@
 // btn sdg trigger
 $(function () {
-  $("[id='btn_sdg']").on("click", function(e) {
+  $("[id='btn_sdg']").on("click", function (e) {
     e.stopPropagation();
     var obj_name = $(this).attr("name");
 
-    for(var index = 1; index <= 17; index++) {
+    for (var index = 1; index <= 17; index++) {
       var index_sdg = "";
-      if (index  < 10) {
+      if (index < 10) {
         index_sdg = ("0" + index).slice(-2);
       } else {
         index_sdg = index;
       }
 
-      document.getElementsByName(index_sdg.toString())[0].style.backgroundColor = "";
+      document.getElementsByName(
+        index_sdg.toString()
+      )[0].style.backgroundColor = "";
     }
 
     // Set task sdgs
@@ -23,7 +25,7 @@ $(function () {
 
 // btn_add_sdg_into_task
 $(function () {
-  $("#btn_add_sdg_into_task").on("click", function(e) {
+  $("#btn_add_sdg_into_task").on("click", function (e) {
     e.stopPropagation();
     var list_target_sdgs = [];
     if (getLocalStorage("list_target_sdgs") != "") {
@@ -54,7 +56,8 @@ $(function () {
       var obj_img = document.createElement("img");
       obj_img.id = "target_sdgs_" + getLocalStorage("target_sdgs");
       obj_img.className = "mr-3";
-      obj_img.src = "/static/imgs/SDGs_" + getLocalStorage("target_sdgs") + ".jpg";
+      obj_img.src =
+        "/static/imgs/SDGs_" + getLocalStorage("target_sdgs") + ".jpg";
       obj_img.alt = "";
       obj_img.style = "width:50px";
 
@@ -69,31 +72,30 @@ $(function () {
 });
 
 function comment_submit(form) {
-
   var resultJSON = {};
   $.ajax({
-    "url": HOST_URL_TPLANET_DAEMON + "/portal/comment",
-    "method": "POST",
-    "async": false,
-    "timeout": 0,
-    "processData": false,
-    "mimeType": "multipart/form-data",
-    "contentType": false,
-    "data": form,
-    success: function(returnData) {
-       const obj = JSON.parse(returnData);
-       resultJSON = obj;
+    url: HOST_URL_TPLANET_DAEMON + "/portal/comment",
+    method: "POST",
+    async: false,
+    timeout: 0,
+    processData: false,
+    mimeType: "multipart/form-data",
+    contentType: false,
+    data: form,
+    success: function (returnData) {
+      const obj = JSON.parse(returnData);
+      resultJSON = obj;
     },
-    error: function(xhr, ajaxOptions, thrownError){
+    error: function (xhr, ajaxOptions, thrownError) {
       console.log(thrownError);
-    }
+    },
   });
 
   return resultJSON;
 }
 
 $(function () {
-  $("[id='form_contact_us']").on("click", function(e){
+  $("[id='form_contact_us']").on("click", function (e) {
     e.preventDefault();
 
     var form = new FormData();
@@ -109,9 +111,7 @@ $(function () {
     // Submit
     var repos = comment_submit(form);
 
-    if (repos.result == true)
-      alert("您的建議已送出！編號為：" + repos.uuid);
-    else
-      alert("您的建議沒有成功送出，請洽系統管理員！");
+    if (repos.result == true) alert("您的建議已送出！編號為：" + repos.uuid);
+    else alert("您的建議沒有成功送出，請洽系統管理員！");
   });
 });
