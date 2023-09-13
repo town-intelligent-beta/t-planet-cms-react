@@ -1,29 +1,25 @@
 import { comment_list, comment_get } from "./comment.js";
 import { mockup_get, mockup_upload } from "./mockup.js";
+import { get_cropped_image, update_background_image } from "./utils/croppie.js";
 
-export function uploadCmsContactUsCover() {
-  var file = new FileModal("image/*");
-  file.onload = function (base64Img) {
-    // Preview
-    document.getElementById("contact-us-banner-img").style.backgroundImage =
-      "url(" + base64Img + ")";
-    // Upload
-    try {
-      var form = new FormData();
-      form.append("email", getLocalStorage("email"));
-      form.append(
-        "contact-us-banner-img",
-        DataURIToBlob(base64Img),
-        "contact-us-banner-img"
-      );
+export const uploadCmsContactUsCover = async () => {
+  const cropped = await get_cropped_image("image/*");
+  if (cropped == null) {
+    return;
+  }
 
-      var result = mockup_upload(form);
-    } catch (e) {
-      alert(e);
-    }
-  };
-  file.show();
-}
+  update_background_image("#contact-us-banner-img", cropped);
+
+  const form = new FormData();
+  form.append("email", getLocalStorage("email"));
+  form.append(
+    "contact-us-banner-img",
+    DataURIToBlob(cropped),
+    "contact-us-banner-img"
+  );
+
+  mockup_upload(form);
+};
 
 export function set_page_info_cms_contact_us_detail() {
   // Params

@@ -1,5 +1,9 @@
 import { mockup_upload } from "./mockup.js";
-import { get_cropped_image } from "./utils/croppie.js";
+import {
+  get_cropped_image,
+  update_background_image,
+  update_image_path,
+} from "./utils/croppie.js";
 
 function mockup_get() {
   var form = new FormData();
@@ -178,25 +182,52 @@ export async function mockup_new() {
     });
 }
 
-export function banner_image_read() {
-  upload_image_file(2400, null, "Tbanner_image", true);
-}
+export const banner_image_read = async () => {
+  const cropped = await get_cropped_image("image/*", {
+    width: 2400,
+  });
+  if (cropped === null) {
+    return;
+  }
 
-export function t_planet_img_read() {
-  upload_image_file(null, null, "t_planet_img", false);
-}
+  update_background_image("#Tbanner_image", cropped);
+};
 
-export function csr_img_read() {
-  upload_image_file(null, null, "csr_img", true);
-}
+export const t_planet_img_read = async () => {
+  const cropped = await get_cropped_image("image/*");
+  if (cropped === null) {
+    return;
+  }
 
-export function sdg_img_read() {
-  upload_image_file(null, null, "sdg_img", true);
-}
+  update_image_path("#t_planet_img", cropped);
+};
 
-export function twins_img_read() {
-  upload_image_file(null, null, "twins_img", true);
-}
+export const csr_img_read = async () => {
+  const cropped = await get_cropped_image("image/*");
+  if (cropped === null) {
+    return;
+  }
+
+  update_background_image("#csr_img", cropped);
+};
+
+export const sdg_img_read = async () => {
+  const cropped = await get_cropped_image("image/*");
+  if (cropped === null) {
+    return;
+  }
+
+  update_background_image("#sdg_img", cropped);
+};
+
+export const twins_img_read = async () => {
+  const cropped = await get_cropped_image("image/*");
+  if (cropped === null) {
+    return;
+  }
+
+  update_background_image("#twins_img", cropped);
+};
 
 // Add_parent_tasks
 $(document).ready(function () {

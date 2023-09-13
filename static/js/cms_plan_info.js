@@ -1,4 +1,5 @@
 import { plan_info } from "./plan.js";
+import { get_cropped_image, update_background_image } from "./utils/croppie.js";
 
 export function set_page_info_cms_plan_info(uuid) {
   if (uuid != null) {
@@ -85,7 +86,15 @@ export async function uploadProjectCover() {
   var uuid = urlParams.get("uuid");
 
   // Preview
-  await upload_image_file(700, 400, "coverImg", true);
+  const cropped = await get_cropped_image("image/*", {
+    width: 700,
+    height: 400,
+  });
+  if (cropped === null) {
+    return;
+  }
+
+  update_background_image("#coverImg", cropped);
 
   prepare_project_cover_upload()
     .then(async function () {

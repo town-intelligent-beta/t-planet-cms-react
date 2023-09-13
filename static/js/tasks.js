@@ -15,8 +15,6 @@ function parent_task_queue(queue, uuid) {
   return queue;
 } */
 
-import { get_cropped_image } from "./utils/croppie";
-
 export function add_to_child_task_queue(uuid) {
   var queue = [];
   if (getLocalStorage("child_task_queue") != "") {
@@ -212,7 +210,15 @@ export async function uploadTaskCover(uuid_task) {
   var uuid = urlParams.get("uuid");
 
   // Preview
-  await upload_image_file(443, 300, "coverImg_" + uuid_task, true);
+  const cropped = await get_cropped_image("image/*", {
+    width: 443,
+    height: 300,
+  });
+  if (cropped === null) {
+    return;
+  }
+
+  update_background_image(`#coverImg_${uuid_task}`, cropped);
 
   prepare_task_cover_upload()
     .then(async function () {

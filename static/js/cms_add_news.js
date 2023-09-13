@@ -1,5 +1,10 @@
 import { news_add } from "./news.js";
 import { mockup_upload, mockup_get } from "./mockup.js";
+import {
+  get_cropped_image,
+  update_background_image,
+  update_image_path,
+} from "./utils/croppie.js";
 
 export function set_page_info_cms_add_news() {
   var form = new FormData();
@@ -21,24 +26,41 @@ export function set_page_info_cms_add_news() {
   $("#news_end").datepicker();
 }
 
-export async function uploadNewsCover() {
-  await upload_image_file(450, null, "news_banner", false);
-}
+export const uploadNewsCover = async () => {
+  const cropped = await get_cropped_image("image/*", { width: 450 });
+  if (cropped === null) {
+    return;
+  }
+
+  update_image_path("#news_banner", cropped);
+};
 
 export async function add_news_img(no) {
-  await upload_image_file(294, 165, "news_img_" + no, false);
+  const cropped = await get_cropped_image("image/*", {
+    width: 294,
+    height: 165,
+  });
+  if (cropped === null) {
+    return;
+  }
+
+  update_image_path(`#news_img_${no}`, cropped);
 }
 
 export async function changeNewsListBanner() {
-  var image_src = await upload_image_file(
-    2400,
-    null,
-    "news_banner_image",
-    true
-  );
+  const cropped = await get_cropped_image("image/*", {
+    width: 2400,
+    height: null,
+  });
+  if (cropped === null) {
+    return;
+  }
+
+  update_background_image("#news_banner_image", cropped);
+
   var form = new FormData();
   form.append("email", getLocalStorage("email"));
-  form.append("news-banner-img", DataURIToBlob(image_src));
+  form.append("news-banner-img", DataURIToBlob(cropped));
 
   var result_banner_upload = mockup_upload(form);
 }
