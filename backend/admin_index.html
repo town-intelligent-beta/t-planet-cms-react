@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
-    <link rel="stylesheet" href="/static/css/kpi.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/loading.css" />
+    <link rel="stylesheet" href="/static/css/kpi.css" />
     <script src="/static/js/config.js"></script>
     <script src="/static/js/innerHTML.js"></script>
     <script src="/static/js/localStorage.js"></script>
@@ -27,7 +40,14 @@
     <script src="/static/js/core/upload_adapter.js"></script>
     <script src="/static/js/core/editor.js"></script>
     <script type="module">
-      import { mockup_new, banner_image_read, t_planet_img_read, csr_img_read, sdg_img_read, twins_img_read } from '/static/js/admin_index.js'
+      import {
+        mockup_new,
+        banner_image_read,
+        t_planet_img_read,
+        csr_img_read,
+        sdg_img_read,
+        twins_img_read,
+      } from "/static/js/admin_index.js";
       window.mockup_new = mockup_new;
       window.banner_image_read = banner_image_read;
       window.t_planet_img_read = t_planet_img_read;
@@ -43,10 +63,36 @@
     <!-- content -->
     <section>
       <div class="container-fluid px-0 mt-4">
-        <div class="bg-cover img-fluid w-100" id="Tbanner_image" style="background-image: url(/static/imgs/admin_index_banner.png); height: 450px; background-repeat: no-repeat">
-          <div class="d-flex align-items-center justify-content-center h-100 position-relative">
-            <a class="btn btn-light btn-lg btn-alpha" href="#" role="button" style="width: 115px; height: 49px; position: relative;">更換圖片
-              <input type="btn btn-warning btn-lg bg-2ndhome border-0" id="banner-image" onclick="banner_image_read()" style="width: 100px; opacity: 0; position: absolute; top: 6px; left: 8px;"/>
+        <div
+          class="bg-cover img-fluid w-100"
+          id="Tbanner_image"
+          style="
+            background-image: url(/static/imgs/admin_index_banner.png);
+            height: 450px;
+            background-repeat: no-repeat;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-center h-100 position-relative"
+          >
+            <a
+              class="btn btn-light btn-lg btn-alpha"
+              href="#"
+              role="button"
+              style="width: 115px; height: 49px; position: relative"
+              >更換圖片
+              <input
+                type="btn btn-warning btn-lg bg-2ndhome border-0"
+                id="banner-image"
+                onclick="banner_image_read()"
+                style="
+                  width: 100px;
+                  opacity: 0;
+                  position: absolute;
+                  top: 6px;
+                  left: 8px;
+                "
+              />
             </a>
           </div>
         </div>
@@ -57,7 +103,7 @@
           <p>上傳中 ...</p>
         </div>
         <div id="loading-spinner">
-          <img src="/static/imgs/loading.png" alt="Loading">
+          <img src="/static/imgs/loading.png" alt="Loading" />
         </div>
       </div>
 
@@ -68,14 +114,45 @@
               <p class="bg-2ndhome p-2">平台文案</p>
             </div>
             <div class="col-12">
-              <textarea class="form-control h-100" id="textarea1" style="resize : none; height: 212px;" rows="6" placeholder="請輸入文案文字"></textarea>
+              <textarea
+                class="form-control h-100"
+                id="textarea1"
+                style="resize: none; height: 212px"
+                rows="6"
+                placeholder="請輸入文案文字"
+              ></textarea>
             </div>
             <div class="col-12 my-3">
-              <div class="img-fluid w-100 bg-contain-center t-planet-img-container">
-                <div class="d-flex align-items-center justify-content-center h-100" style="position: relative;">
-                  <img id="t_planet_img" src="/static/imgs/admin_index_map.png" alt="" class="w-100 h-100">
-                    <a class="btn btn-light btn-lg btn-alpha" role="button" style="position: absolute;">更換圖片
-                    <input type="btn btn-warning btn-lg bg-2ndhome border-0" id="t-planet-img" onclick="t_planet_img_read()" style="width: 100px; opacity: 0; position: absolute; top: 6px; left: 8px;"/>
+              <div
+                class="img-fluid w-100 bg-contain-center t-planet-img-container"
+              >
+                <div
+                  class="d-flex align-items-center justify-content-center h-100"
+                  style="position: relative"
+                >
+                  <img
+                    id="t_planet_img"
+                    src="/static/imgs/admin_index_map.png"
+                    alt=""
+                    class="w-100 h-100"
+                  />
+                  <a
+                    class="btn btn-light btn-lg btn-alpha"
+                    role="button"
+                    style="position: absolute"
+                    >更換圖片
+                    <input
+                      type="btn btn-warning btn-lg bg-2ndhome border-0"
+                      id="t-planet-img"
+                      onclick="t_planet_img_read()"
+                      style="
+                        width: 100px;
+                        opacity: 0;
+                        position: absolute;
+                        top: 6px;
+                        left: 8px;
+                      "
+                    />
                   </a>
                 </div>
               </div>
@@ -83,13 +160,44 @@
           </div>
           <div class="row mt-4 h-100 admin-index-project mx-2">
             <div class="col-md-6 mobil-mb">
-              <textarea class="form-control h-100" id="textarea2" style="resize: none; height: 300px;" placeholder="請輸入文案文字"></textarea>
+              <textarea
+                class="form-control h-100"
+                id="textarea2"
+                style="resize: none; height: 300px"
+                placeholder="請輸入文案文字"
+              ></textarea>
             </div>
             <div class="col-md-6 mt-3 mt-md-0">
-              <div id="csr_img" class="img-fluid w-100 bg-cover" style="background-image: url(/static/imgs/admin_index_csr.png); height: 300px; background-repeat: no-repeat">
-                <div class="d-flex align-items-center justify-content-center h-100">
-                  <a class="btn btn-light btn-lg btn-alpha" href="#" role="button" style="position: relative;">更換圖片
-                    <input type="btn btn-warning btn-lg bg-2ndhome border-0" id="csr-img" onclick="csr_img_read()" style="width: 100px; opacity: 0; position: absolute; top: 6px; left: 8px;"/>
+              <div
+                id="csr_img"
+                class="img-fluid w-100 bg-cover"
+                style="
+                  background-image: url(/static/imgs/admin_index_csr.png);
+                  height: 300px;
+                  background-repeat: no-repeat;
+                "
+              >
+                <div
+                  class="d-flex align-items-center justify-content-center h-100"
+                >
+                  <a
+                    class="btn btn-light btn-lg btn-alpha"
+                    href="#"
+                    role="button"
+                    style="position: relative"
+                    >更換圖片
+                    <input
+                      type="btn btn-warning btn-lg bg-2ndhome border-0"
+                      id="csr-img"
+                      onclick="csr_img_read()"
+                      style="
+                        width: 100px;
+                        opacity: 0;
+                        position: absolute;
+                        top: 6px;
+                        left: 8px;
+                      "
+                    />
                   </a>
                 </div>
               </div>
@@ -97,13 +205,44 @@
           </div>
           <div class="row mt-4 h-100 admin-index-project mx-2">
             <div class="col-md-6 mobil-mb">
-              <textarea class="form-control h-100" id="textarea3" style="resize: none; height: 300px;" placeholder="請輸入文案文字"></textarea>
+              <textarea
+                class="form-control h-100"
+                id="textarea3"
+                style="resize: none; height: 300px"
+                placeholder="請輸入文案文字"
+              ></textarea>
             </div>
             <div class="col-md-6 mt-3 mt-md-0">
-              <div id="sdg_img" class="img-fluid w-100 bg-cover" style="background-image: url(/static/imgs/admin_index_sdgs.png); height: 300px; background-repeat: no-repeat">
-                <div class="d-flex align-items-center justify-content-center h-100">
-                  <a class="btn btn-light btn-lg btn-alpha" href="#" role="button" style="position: relative;">更換圖片
-                    <input type="btn btn-warning btn-lg bg-2ndhome border-0" id="sdg-img" onclick="sdg_img_read()" style="width: 100px; opacity: 0; position: absolute; top: 6px; left: 8px;"/>
+              <div
+                id="sdg_img"
+                class="img-fluid w-100 bg-cover"
+                style="
+                  background-image: url(/static/imgs/admin_index_sdgs.png);
+                  height: 300px;
+                  background-repeat: no-repeat;
+                "
+              >
+                <div
+                  class="d-flex align-items-center justify-content-center h-100"
+                >
+                  <a
+                    class="btn btn-light btn-lg btn-alpha"
+                    href="#"
+                    role="button"
+                    style="position: relative"
+                    >更換圖片
+                    <input
+                      type="btn btn-warning btn-lg bg-2ndhome border-0"
+                      id="sdg-img"
+                      onclick="sdg_img_read()"
+                      style="
+                        width: 100px;
+                        opacity: 0;
+                        position: absolute;
+                        top: 6px;
+                        left: 8px;
+                      "
+                    />
                   </a>
                 </div>
               </div>
@@ -111,13 +250,44 @@
           </div>
           <div class="row mt-4 h-100 admin-index-project mx-2">
             <div class="col-md-6 mobil-mb">
-              <textarea class="form-control h-100" id="textarea4" style="resize: none; height: 300px;" placeholder="請輸入文案文字"></textarea>
+              <textarea
+                class="form-control h-100"
+                id="textarea4"
+                style="resize: none; height: 300px"
+                placeholder="請輸入文案文字"
+              ></textarea>
             </div>
             <div class="col-md-6 mt-3 mt-md-0">
-              <div id="twins_img" class="img-fluid w-100 bg-cover" style="background-image: url(/static/imgs/admin_index_digital_twins.png); height: 300px; background-repeat: no-repeat">
-                <div class="d-flex align-items-center justify-content-center h-100">
-                  <a class="btn btn-light btn-lg btn-alpha" href="#" role="button" style="position: relative;">更換圖片
-                    <input type="btn btn-warning btn-lg bg-2ndhome border-0" id="twins-img" onclick="twins_img_read()" style="width: 100px; opacity: 0; position: absolute; top: 6px; left: 8px;"/>
+              <div
+                id="twins_img"
+                class="img-fluid w-100 bg-cover"
+                style="
+                  background-image: url(/static/imgs/admin_index_digital_twins.png);
+                  height: 300px;
+                  background-repeat: no-repeat;
+                "
+              >
+                <div
+                  class="d-flex align-items-center justify-content-center h-100"
+                >
+                  <a
+                    class="btn btn-light btn-lg btn-alpha"
+                    href="#"
+                    role="button"
+                    style="position: relative"
+                    >更換圖片
+                    <input
+                      type="btn btn-warning btn-lg bg-2ndhome border-0"
+                      id="twins-img"
+                      onclick="twins_img_read()"
+                      style="
+                        width: 100px;
+                        opacity: 0;
+                        position: absolute;
+                        top: 6px;
+                        left: 8px;
+                      "
+                    />
                   </a>
                 </div>
               </div>
@@ -126,12 +296,25 @@
           <div class="row mt-4 mb-5 pb-3">
             <div class="col-12">
               <div class="d-flex justify-content-center">
- <!--                <a id="add"class="btn btn-primary d-none d-md-block mr-4" style="width: 15%">新增</a> -->
-                <a id="store" href="#" type="button" class="btn btn-success d-none d-md-block rounded-pill" style="width: 150px">儲存</a>
+                <!--                <a id="add"class="btn btn-primary d-none d-md-block mr-4" style="width: 15%">新增</a> -->
+                <a
+                  id="store"
+                  href="#"
+                  type="button"
+                  class="btn btn-success d-none d-md-block rounded-pill"
+                  style="width: 150px"
+                  >儲存</a
+                >
               </div>
               <div class="d-md-none">
-<!--		      <a id="add"  class="btn btn-primary btn-block">新增</a> -->
-                <a id="store" href="#" type="button" class="btn btn-success btn-block rounded-pill mt-3">儲存</a>
+                <!--		      <a id="add"  class="btn btn-primary btn-block">新增</a> -->
+                <a
+                  id="store"
+                  href="#"
+                  type="button"
+                  class="btn btn-success btn-block rounded-pill mt-3"
+                  >儲存</a
+                >
               </div>
             </div>
           </div>
