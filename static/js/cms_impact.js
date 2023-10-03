@@ -1,5 +1,6 @@
 import { list_plan_tasks, plan_info } from "./plan.js";
 import { task_submit, get_task_info, onclickuploadTaskCover } from "./tasks.js";
+import { get_sorted_tasks } from "./utils/transformers.js";
 export function add_parent_task_block(obj_task = null) {
   // Params
   var queryString = window.location.search;
@@ -29,7 +30,7 @@ export function add_parent_task_block(obj_task = null) {
     parent_task_block.innerHTML = str_parent_task_innetHTML;
     // Append
     var obj_form_parent_task = document.getElementById("div_parent_task");
-    obj_form_parent_task.append(parent_task_block);
+    obj_form_parent_task.prepend(parent_task_block);
     // Set date picker
     $("#parent_task_start_date_" + uuid_parent).datepicker();
     $("#parent_task_due_date_" + uuid_parent).datepicker();
@@ -168,10 +169,14 @@ export function set_page_info_cms_impact(uuid) {
   if (list_parent_task_uuid.result == false) {
     return;
   }
-  for (var index = 0; index < list_parent_task_uuid.tasks.length; index++) {
-    var obj_task = get_task_info(list_parent_task_uuid.tasks[index]);
-    add_parent_task_block(obj_task);
-  }
+
+  const tasks = list_parent_task_uuid.tasks.map((task_uuid) =>
+    get_task_info(task_uuid)
+  );
+  const sorted_tasks = get_sorted_tasks(tasks);
+  sorted_tasks.map((task) => {
+    add_parent_task_block(task);
+  });
 }
 // Add_parent_tasks
 $(function () {

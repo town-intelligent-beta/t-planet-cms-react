@@ -2,7 +2,7 @@ import { draw_bar_chart, getMappedSdgData, allSdgImages } from "./chart/bar.js";
 import { getProjectWeight, list_plan_tasks, plan_info } from "./plan.js";
 import { get_task_info } from "./tasks.js";
 import { renderHandlebars } from "./utils/handlebars.js";
-import { parse_sdgs_items } from "./utils/transformers.js";
+import { get_sorted_tasks, parse_sdgs_items } from "./utils/transformers.js";
 import { isOverflow } from "./utils/widgets.js";
 
 export function set_page_info_cms_project_detail(uuid) {
@@ -180,8 +180,9 @@ export function set_page_info_cms_project_detail(uuid) {
   var list_tasks = obj_tasks.tasks;
   var obj_tasks_container = document.getElementById("tasks_container");
 
-  for (var index = 0; index < list_tasks.length; index++) {
-    var obj_task = get_task_info(list_tasks[index]);
+  const tasks = obj_tasks.tasks.map((task_uuid) => get_task_info(task_uuid));
+  const sorted_tasks = get_sorted_tasks(tasks);
+  sorted_tasks.map((obj_task) => {
 
     // Create DOM
     /*
@@ -267,7 +268,7 @@ export function set_page_info_cms_project_detail(uuid) {
     obj_div_des.append(obj_p_idea);
 
     obj_tasks_container.append(obj_div_root);
-  }
+  });
 
   // Set cover
 
