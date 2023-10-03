@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+    />
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" >
+    <link rel="stylesheet" href="/static/css/style.css" />
     <script src="/static/js/config.js"></script>
     <script src="/static/js/innerHTML.js"></script>
     <script src="/static/js/localStorage.js"></script>
@@ -30,68 +46,132 @@
     <div id="navbar"></div>
     <!-- content -->
     <section>
-      <div id="contact_us_banner_1" class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-none d-md-block"
-      style="background-image:url(/static/imgs/2nd-home-contact-us.png); height:350px">
-      </div>
-      <div id="contact_us_banner_2" class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-md-none"
-      style="background-image:url(/static/imgs/2nd-home-contact-us.png); height:200px">
-      </div>
+      <div
+        id="contact_us_banner_1"
+        class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-none d-md-block"
+        style="
+          background-image: url(/static/imgs/2nd-home-contact-us.png);
+          height: 350px;
+        "
+      ></div>
+      <div
+        id="contact_us_banner_2"
+        class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-md-none"
+        style="
+          background-image: url(/static/imgs/2nd-home-contact-us.png);
+          height: 200px;
+        "
+      ></div>
       <div class="container">
         <div class="mt-5 mb-5">
           <div class="row">
             <div class="form-group col-md-6 mt-3 mt-md-0">
               <label for="inputEvent1"><span>*</span>姓名</label>
-              <input type="text" class="form-control" id="name" placeholder="">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder=""
+              />
             </div>
             <div class="form-group col-md-6 mt-3 mt-md-0">
               <label for="inputEvent2"><span>*</span>電子郵件</label>
-              <input type="email" class="form-control" id="email" placeholder="">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder=""
+              />
             </div>
             <div class="form-group col-md-6 mt-3 mt-md-0">
               <label for="inputEvent3"><span>*</span>公司名稱</label>
-              <input type="text" class="form-control" id="org" placeholder="">
+              <input type="text" class="form-control" id="org" placeholder="" />
             </div>
             <div class="form-group col-md-6 mt-3 mt-md-0">
               <label for="inputEvent4"><span>*</span>官方網站</label>
-              <input type="text" class="form-control" id="website" placeholder="">
+              <input
+                type="text"
+                class="form-control"
+                id="website"
+                placeholder=""
+              />
             </div>
             <div class="form-group col-md-6 mt-3 mt-md-0">
               <label for="inputEvent5"><span>*</span>聯絡電話</label>
-              <input type="tel" class="form-control" id="tel" placeholder="">
+              <input type="tel" class="form-control" id="tel" placeholder="" />
             </div>
             <div class="form-group col-md-6 mt-3 mt-md-0">
               <label for="inputEvent6">關注議題</label>
               <div class="d-flex flex-wrap" id="icon_container">
-                <button type="button" class="btn btn-outline-dark rounded-0 mt-3 mr-3 mb-3 mt-md-0" style="height:40px; width:40px" data-toggle="modal" data-target="#SDGsModal">+</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-dark rounded-0 mt-3 mr-3 mb-3 mt-md-0"
+                  style="height: 40px; width: 40px"
+                  data-toggle="modal"
+                  data-target="#SDGsModal"
+                >
+                  +
+                </button>
               </div>
             </div>
             <div class="form-group col-12 mt-3 mt-md-0">
               <label for="inputEvent7"><span>*</span>需求</label>
-              <textarea class="form-control" id="comment" style="resize : none" rows="10"></textarea>
+              <textarea
+                class="form-control"
+                id="comment"
+                style="resize: none"
+                rows="10"
+              ></textarea>
             </div>
           </div>
-          <div class=" d-flex justify-content-center mt-3">
-          </div>
+          <div class="d-flex justify-content-center mt-3"></div>
           <div class="text-center mt-4">
-            <button id="form_contact_us" type="button" class="btn btn-secondary">確定送出</button>
+            <button
+              id="form_contact_us"
+              type="button"
+              class="btn btn-secondary"
+            >
+              確定送出
+            </button>
           </div>
         </div>
       </div>
     </section>
     <!-- footer -->
     <div id="footer"></div>
-    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-backdrop="static" data-keyboard="false" id="SDGsModal" tabindex="-1">
+    <div
+      aria-hidden="true"
+      aria-labelledby="staticBackdropLabel"
+      class="modal fade"
+      data-backdrop="static"
+      data-keyboard="false"
+      id="SDGsModal"
+      tabindex="-1"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">新增 SDGs 指標</h5><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="staticBackdropLabel">新增 SDGs 指標</h5>
+            <button
+              aria-label="Close"
+              class="close"
+              data-dismiss="modal"
+              type="button"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <div class="p-3" style="height: 550px; overflow-y:auto;">
+            <div class="p-3" style="height: 550px; overflow-y: auto">
               <div class="card">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="01">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_01.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_01.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 1 終結貧窮</p>
                   </div>
                 </div>
@@ -99,7 +179,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="02">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_02.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_02.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 2 消除飢餓</p>
                   </div>
                 </div>
@@ -107,7 +192,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="03">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_03.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_03.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 3 健康與福祉</p>
                   </div>
                 </div>
@@ -115,7 +205,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="04">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_04.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_04.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 4 優質教育</p>
                   </div>
                 </div>
@@ -123,7 +218,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="05">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_05.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_05.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 5 性別平等</p>
                   </div>
                 </div>
@@ -131,7 +231,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="06">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_06.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_06.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 6 淨水與衛生</p>
                   </div>
                 </div>
@@ -139,7 +244,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="07">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_07.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_07.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 7 永續能源</p>
                   </div>
                 </div>
@@ -147,7 +257,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="08">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_08.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_08.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 8 就業與經濟成長</p>
                   </div>
                 </div>
@@ -155,7 +270,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="09">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_09.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_09.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 9 永續工業、產業創新、韌性基礎建設</p>
                   </div>
                 </div>
@@ -163,7 +283,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="10">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_10.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_10.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 10 減少不平等</p>
                   </div>
                 </div>
@@ -171,7 +296,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="11">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_11.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_11.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 11 永續城鄉</p>
                   </div>
                 </div>
@@ -179,7 +309,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="12">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_12.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_12.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 12 永續消費與生產</p>
                   </div>
                 </div>
@@ -187,7 +322,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="13">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_13.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_13.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 13 氣候行動</p>
                   </div>
                 </div>
@@ -195,7 +335,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="14">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_14.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_14.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 14 海洋生態</p>
                   </div>
                 </div>
@@ -203,7 +348,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="15">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_15.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_15.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 15 陸地生態</p>
                   </div>
                 </div>
@@ -211,7 +361,12 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="16">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_16.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_16.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 16 和平與正義制度</p>
                   </div>
                 </div>
@@ -219,100 +374,208 @@
               <div class="card mt-2">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center" id="btn_sdg" name="17">
-                    <img alt="" class="mr-2" src="/static/imgs/SDGs_17.jpg" style="width: 50px">
+                    <img
+                      alt=""
+                      class="mr-2"
+                      src="/static/imgs/SDGs_17.jpg"
+                      style="width: 50px"
+                    />
                     <p class="mb-0">SDG 17 全球夥伴</p>
                   </div>
                 </div>
               </div>
-              <div style="display:none" id="five">
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="18">
-                    <img alt="" class="mr-2" src="/static/imgs/morality.png" style="width: 50px">
-                    <p class="mb-0">德</p>
+              <div style="display: none" id="five">
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="18"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/morality.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">德</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="19">
-                    <img alt="" class="mr-2" src="/static/imgs/intelligence.png" style="width: 50px">
-                    <p class="mb-0">智</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="19"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/intelligence.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">智</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="20">
-                    <img alt="" class="mr-2" src="/static/imgs/physique.png" style="width: 50px">
-                    <p class="mb-0">體</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="20"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/physique.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">體</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="21">
-                    <img alt="" class="mr-2" src="/static/imgs/social-skills.png" style="width: 50px">
-                    <p class="mb-0">群</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="21"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/social-skills.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">群</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="22">
-                    <img alt="" class="mr-2" src="/static/imgs/aesthetics.png" style="width: 50px">
-                    <p class="mb-0">美</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="22"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/aesthetics.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">美</p>
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
 
-              <div style="display:none" id="community">
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="23">
-                    <img alt="" class="mr-2" src="/static/imgs/people.png" style="width: 50px">
-                    <p class="mb-0">人</p>
+              <div style="display: none" id="community">
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="23"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/people.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">人</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="24">
-                    <img alt="" class="mr-2" src="/static/imgs/culture.png" style="width: 50px">
-                    <p class="mb-0">文</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="24"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/culture.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">文</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="25">
-                    <img alt="" class="mr-2" src="/static/imgs/place.png" style="width: 50px">
-                    <p class="mb-0">地</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="25"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/place.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">地</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="26">
-                    <img alt="" class="mr-2" src="/static/imgs/specialty.png" style="width: 50px">
-                    <p class="mb-0">產</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="26"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/specialty.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">產</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card mt-2">
-                <div class="card-body p-2">
-                  <div class="d-flex align-items-center" id="btn_sdg" name="27">
-                    <img alt="" class="mr-2" src="/static/imgs/landscape.png" style="width: 50px">
-                    <p class="mb-0">景</p>
+                <div class="card mt-2">
+                  <div class="card-body p-2">
+                    <div
+                      class="d-flex align-items-center"
+                      id="btn_sdg"
+                      name="27"
+                    >
+                      <img
+                        alt=""
+                        class="mr-2"
+                        src="/static/imgs/landscape.png"
+                        style="width: 50px"
+                      />
+                      <p class="mb-0">景</p>
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-center">
-            <button class="btn btn-secondary" data-dismiss="modal" type="button">關閉</button> <button class="btn btn-primary" id="btn_add_sdg_into_task" type="button">新增</button>
+            <button
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              type="button"
+            >
+              關閉
+            </button>
+            <button
+              class="btn btn-primary"
+              id="btn_add_sdg_into_task"
+              type="button"
+            >
+              新增
+            </button>
           </div>
         </div>
       </div>

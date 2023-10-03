@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+    />
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
-    <link rel="stylesheet" href="/static/css/progress_bar.css">
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+      integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+      integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/loading.css" />
+    <link rel="stylesheet" href="/static/css/progress_bar.css" />
     <script src="/static/js/innerHTML.js"></script>
     <script src="/static/js/config.js"></script>
     <script src="/static/js/localStorage.js"></script>
@@ -29,19 +60,24 @@
     <script src="/static/js/core/editor.js"></script>
     <script type="module" src="/static/js/cms_add_news.js"></script>
     <script type="module">
-      import { changeNewsListBanner, uploadNewsCover, add_news_img, btn_cms_news_submit } from '/static/js/cms_add_news.js'
+      import {
+        changeNewsListBanner,
+        uploadNewsCover,
+        add_news_img,
+        btn_cms_news_submit,
+      } from "/static/js/cms_add_news.js";
       window.changeNewsListBanner = changeNewsListBanner;
       window.uploadNewsCover = uploadNewsCover;
       window.add_news_img = add_news_img;
       window.btn_cms_news_submit = function () {
         // update the textarea value
         update_ckeditor_data();
-        console.log(document.getElementById("news_description").value)
+        console.log(document.getElementById("news_description").value);
         btn_cms_news_submit();
       };
 
       $(document).ready(() => {
-        register_ckeditor(['#news_description']);
+        register_ckeditor(["#news_description"]);
       });
     </script>
     <script type="module" src="/static/js/set_page_info.js"></script>
@@ -53,8 +89,17 @@
     <!-- content -->
     <section>
       <div class="container-fluid px-0d-flex align-items-center">
-        <div id="news_banner_image" class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center" style="background-image: url(/static/imgs/add-news-cover.png); height: 350px; background-repeat: no-repeat; position: relative;">
-    <!--       <button class="btn btn-warning btn-lg bg-2ndhome border-0" id="btnUploadNewsCover" onclick="changeNewsListBanner()" style="width: 300px; height: 50px; position: absolute;right:45px; bottom: 57px; cursor: pointer;">
+        <div
+          id="news_banner_image"
+          class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center"
+          style="
+            background-image: url(/static/imgs/add-news-cover.png);
+            height: 350px;
+            background-repeat: no-repeat;
+            position: relative;
+          "
+        >
+          <!--       <button class="btn btn-warning btn-lg bg-2ndhome border-0" id="btnUploadNewsCover" onclick="changeNewsListBanner()" style="width: 300px; height: 50px; position: absolute;right:45px; bottom: 57px; cursor: pointer;">
             <div id="divUploadNewsCover" class="bg-contain">編輯封面圖片</div>
           </button> -->
         </div>
@@ -65,7 +110,7 @@
           <p>上傳中 ...</p>
         </div>
         <div id="loading-spinner">
-          <img src="/static/imgs/loading.png" alt="Loading">
+          <img src="/static/imgs/loading.png" alt="Loading" />
         </div>
       </div>
 
@@ -76,42 +121,94 @@
               <p class="bg-2ndhome px-3 p-2">新增專案</p>
               <div class="row">
                 <div class="col-md-6 mt-3 xs-2">
-                  <div class="border d-flex flex-column align-items-center justify-content-center h-100">
-                    <img id="news_banner" src="/static/imgs/image_icon.svg" width="450" height="350" alt="">
+                  <div
+                    class="border d-flex flex-column align-items-center justify-content-center h-100"
+                  >
+                    <img
+                      id="news_banner"
+                      src="/static/imgs/image_icon.svg"
+                      width="450"
+                      height="350"
+                      alt=""
+                    />
                     <p class="mb-0">上傳照片</p>
                     <p>（建議尺寸450 x 350）</p>
                   </div>
-                  <a href="#" onclick="uploadNewsCover();" class="stretched-link"></a>
+                  <a
+                    href="#"
+                    onclick="uploadNewsCover();"
+                    class="stretched-link"
+                  ></a>
                 </div>
                 <div class="col-md-6 mt-3">
                   <div>
                     <div class="form-row">
                       <div class="form-group col-12 mt-3 mt-md-0">
                         <label for="inputEvent">專案標題</label>
-                        <input type="text" class="form-control" id="news_title" placeholder="填寫活動設計名稱">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="news_title"
+                          placeholder="填寫活動設計名稱"
+                        />
                       </div>
                       <div class="form-group col-6">
                         <label for="inputDatePicker1">開始日期</label>
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                          <input id="news_start" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                          <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        <div
+                          class="input-group date"
+                          id="datetimepicker1"
+                          data-target-input="nearest"
+                        >
+                          <input
+                            id="news_start"
+                            type="text"
+                            class="form-control datetimepicker-input"
+                            data-target="#datetimepicker1"
+                          />
+                          <div
+                            class="input-group-append"
+                            data-target="#datetimepicker1"
+                            data-toggle="datetimepicker"
+                          >
+                            <div class="input-group-text">
+                              <i class="fa fa-calendar"></i>
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div class="form-group col-6">
                         <label for="inputDatePicker2">結束日期</label>
-                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                          <input id="news_end" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
-                          <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        <div
+                          class="input-group date"
+                          id="datetimepicker2"
+                          data-target-input="nearest"
+                        >
+                          <input
+                            id="news_end"
+                            type="text"
+                            class="form-control datetimepicker-input"
+                            data-target="#datetimepicker2"
+                          />
+                          <div
+                            class="input-group-append"
+                            data-target="#datetimepicker2"
+                            data-toggle="datetimepicker"
+                          >
+                            <div class="input-group-text">
+                              <i class="fa fa-calendar"></i>
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group mb-0">
                           <label for="textareaIdea">簡介</label>
-                          <textarea class="form-control" id="news_description" placeholder="填寫活動簡介" style="resize: none; height: 215px;"></textarea>
+                          <textarea
+                            class="form-control"
+                            id="news_description"
+                            placeholder="填寫活動簡介"
+                            style="resize: none; height: 215px"
+                          ></textarea>
                         </div>
                       </div>
                     </div>
@@ -121,33 +218,67 @@
                   <label for="inputEvent6">專案圖片</label>
                   <div class="row">
                     <div class="col-md-4 mt-3 mt-md-0">
-                      <div class="card card-button" style="height: 250px;">
-                        <div class="d-flex justify-content-center align-items-center h-100">
+                      <div class="card card-button" style="height: 250px">
+                        <div
+                          class="d-flex justify-content-center align-items-center h-100"
+                        >
                           <div class="text-center">
-                            <img id="news_img_0" src="/static/imgs/image_icon.svg" alt="" style="width:50px">
+                            <img
+                              id="news_img_0"
+                              src="/static/imgs/image_icon.svg"
+                              alt=""
+                              style="width: 50px"
+                            />
                           </div>
                         </div>
-                        <a href="#" onclick="add_news_img('0');" class="stretched-link"></a>
+                        <a
+                          href="#"
+                          onclick="add_news_img('0');"
+                          class="stretched-link"
+                        ></a>
                       </div>
                     </div>
                     <div class="col-md-4 mt-3 mt-md-0">
-                      <div class="card card-button" style="height: 250px;">
-                        <div class="d-flex justify-content-center align-items-center h-100">
+                      <div class="card card-button" style="height: 250px">
+                        <div
+                          class="d-flex justify-content-center align-items-center h-100"
+                        >
                           <div class="text-center">
-                            <img id="news_img_1" src="/static/imgs/image_icon.svg" alt="" style="width:50px">
+                            <img
+                              id="news_img_1"
+                              src="/static/imgs/image_icon.svg"
+                              alt=""
+                              style="width: 50px"
+                            />
                           </div>
                         </div>
-                        <a href="#" onclick="add_news_img('1');" class="stretched-link"></a>
+                        <a
+                          href="#"
+                          onclick="add_news_img('1');"
+                          class="stretched-link"
+                        ></a>
                       </div>
                     </div>
                     <div class="col-md-4 mt-3 mt-md-0">
-                      <div class="card card-button" style="height: 250px;">
-                        <div class="d-flex justify-content-center align-items-center h-100">
+                      <div class="card card-button" style="height: 250px">
+                        <div
+                          class="d-flex justify-content-center align-items-center h-100"
+                        >
                           <div class="text-center">
-                            <img id="news_img_2" src="/static/imgs/image_icon.svg" alt="" style="width:50px">
+                            <img
+                              id="news_img_2"
+                              src="/static/imgs/image_icon.svg"
+                              alt=""
+                              style="width: 50px"
+                            />
                           </div>
                         </div>
-                        <a href="#" onclick="add_news_img('2')"; class="stretched-link"></a>
+                        <a
+                          href="#"
+                          onclick="add_news_img('2')"
+                          ;
+                          class="stretched-link"
+                        ></a>
                       </div>
                     </div>
                   </div>
@@ -156,7 +287,13 @@
             </div>
           </div>
           <div class="text-center mb-4">
-            <button onclick="btn_cms_news_submit()" type="button" class="btn btn-dark">確定送出</button>
+            <button
+              onclick="btn_cms_news_submit()"
+              type="button"
+              class="btn btn-dark"
+            >
+              確定送出
+            </button>
           </div>
         </div>
       </div>

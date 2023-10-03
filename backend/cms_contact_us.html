@@ -1,24 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
-      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
-      integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/kpi.css">
-    <link rel="stylesheet" href="/static/css/progress_bar.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+      integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+      integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/kpi.css" />
+    <link rel="stylesheet" href="/static/css/progress_bar.css" />
     <script src="/static/js/config.js"></script>
     <script src="/static/js/innerHTML.js"></script>
     <script src="/static/js/localStorage.js"></script>
@@ -32,11 +61,11 @@
     <script type="module" src="/static/js/set_page_info.js"></script>
     <script type="module" src="/static/js/init.js"></script>
     <script type="module">
-      import { delComment } from '../static/js/comment.js'
+      import { delComment } from "../static/js/comment.js";
       window.delComment = delComment;
     </script>
     <script type="module">
-      import { uploadCmsContactUsCover } from '../static/js/cms_contact_us.js'
+      import { uploadCmsContactUsCover } from "../static/js/cms_contact_us.js";
       window.uploadCmsContactUsCover = uploadCmsContactUsCover;
     </script>
   </head>
@@ -47,8 +76,28 @@
     <!-- content -->
     <section>
       <div class="container-fluid px-0 d-flex align-items-center">
-        <div id="contact-us-banner-img" class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center" style="background-image: url(/static/imgs/cms-contact-us.png); height: 350px; background-repeat: no-repeat; position: relative;">
-          <button class="btn btn-warning btn-lg bg-2ndhome border-0" onclick="uploadCmsContactUsCover()" style="width: 300px; height: 50px; position: absolute;right:45px; bottom: 57px; cursor: pointer;">
+        <div
+          id="contact-us-banner-img"
+          class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center"
+          style="
+            background-image: url(/static/imgs/cms-contact-us.png);
+            height: 350px;
+            background-repeat: no-repeat;
+            position: relative;
+          "
+        >
+          <button
+            class="btn btn-warning btn-lg bg-2ndhome border-0"
+            onclick="uploadCmsContactUsCover()"
+            style="
+              width: 300px;
+              height: 50px;
+              position: absolute;
+              right: 45px;
+              bottom: 57px;
+              cursor: pointer;
+            "
+          >
             <div id="divUploadNewsCover" class="bg-contain">編輯封面圖片</div>
           </button>
         </div>
@@ -56,7 +105,12 @@
       <div class="container my-5">
         <div class="row">
           <div class="col-12">
-            <a href="/backend/admin_agent_dashboard.html" class="btn btn-dark rounded-pill" style="width: 120px">回控制頁</a>
+            <a
+              href="/backend/admin_agent_dashboard.html"
+              class="btn btn-dark rounded-pill"
+              style="width: 120px"
+              >回控制頁</a
+            >
           </div>
         </div>
         <div class="table-responsive">
@@ -69,18 +123,21 @@
                 <th scope="col" class="text-center table-width-m">公司名稱</th>
                 <th scope="col" class="text-center table-width-m">官方網站</th>
                 <th scope="col" class="text-center table-width-m">聯絡電話</th>
-                <th scope="costr_cms_comment_trl" class="text-center table-width-l">關注議題</th>
+                <th
+                  scope="costr_cms_comment_trl"
+                  class="text-center table-width-l"
+                >
+                  關注議題
+                </th>
                 <th scope="col" class="text-center table-width-m"></th>
               </tr>
             </thead>
-            <tbody id="comment_list">
-            </tbody>
+            <tbody id="comment_list"></tbody>
           </table>
         </div>
       </div>
     </section>
     <!-- footer -->
     <div id="footer"></div>
-
   </body>
 </html>

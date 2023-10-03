@@ -1,33 +1,31 @@
-import { comment_list, comment_get } from './comment.js'
-import { mockup_get, mockup_upload } from './mockup.js'
+import { comment_list, comment_get } from "./comment.js";
+import { mockup_get, mockup_upload } from "./mockup.js";
+import { get_cropped_image, update_background_image } from "./utils/croppie.js";
 
-export function uploadCmsContactUsCover () {
-  var file = new FileModal("image/*");
-  file.onload = function(base64Img){
+export const uploadCmsContactUsCover = async () => {
+  const cropped = await get_cropped_image("image/*");
+  if (cropped == null) {
+    return;
+  }
 
-    // Preview
-    document.getElementById("contact-us-banner-img").style.backgroundImage =  "url(" + base64Img + ")";
-    // Upload
-    try {
-      var form = new FormData();
-      form.append("email", getLocalStorage("email"));
-      form.append("contact-us-banner-img", DataURIToBlob(base64Img), "contact-us-banner-img");
+  update_background_image("#contact-us-banner-img", cropped);
 
-      var result = mockup_upload(form);
+  const form = new FormData();
+  form.append("email", getLocalStorage("email"));
+  form.append(
+    "contact-us-banner-img",
+    DataURIToBlob(cropped),
+    "contact-us-banner-img"
+  );
 
-    } catch (e) {
-      alert(e)
-    }
-
-  };
-  file.show();
-}
+  mockup_upload(form);
+};
 
 export function set_page_info_cms_contact_us_detail() {
   // Params
   var queryString = window.location.search;
   var urlParams = new URLSearchParams(queryString);
-  var uuid = urlParams.get("uuid")
+  var uuid = urlParams.get("uuid");
 
   // Get comment
   var obj_comment_result = comment_get(uuid);
@@ -55,11 +53,11 @@ export function set_page_info_cms_contact_us_detail() {
       var obj_img = document.createElement("img");
       obj_img.className = "mr-3";
 
-      obj_img.src = "/static/imgs/SDGs_" + obj_comment.sdgs[index] + ".jpg"
+      obj_img.src = "/static/imgs/SDGs_" + obj_comment.sdgs[index] + ".jpg";
       obj_img.alt = "";
       obj_img.style = "width:40px";
 
-      obj_a.append(obj_img)
+      obj_a.append(obj_img);
       document.getElementById("weight_container").append(obj_a);
     }
   } catch (e) {
@@ -70,11 +68,15 @@ export function set_page_info_cms_contact_us_detail() {
 export function set_page_info_cms_contact_us() {
   var form = new FormData();
   form.append("email", getLocalStorage("email"));
-  var obj_mockup = mockup_get(form)
+  var obj_mockup = mockup_get(form);
 
   try {
     if (obj_mockup.description.hasOwnProperty("contact-us-banner-img")) {
-      document.getElementById("contact-us-banner-img").style.backgroundImage = "url(" + HOST_URL_TPLANET_DAEMON + obj_mockup.description["contact-us-banner-img"] + ")";
+      document.getElementById("contact-us-banner-img").style.backgroundImage =
+        "url(" +
+        HOST_URL_TPLANET_DAEMON +
+        obj_mockup.description["contact-us-banner-img"] +
+        ")";
     }
   } catch (e) {
     console.log(e);
@@ -90,15 +92,36 @@ export function set_page_info_cms_contact_us() {
   }
 
   try {
-    for (var index = 0; index< list_comments.length; index++) {
+    for (var index = 0; index < list_comments.length; index++) {
       var obj_tr = document.createElement("tr");
-      var str_cms_comment_tr_final = str_cms_comment_tr.replaceAll("UUID", list_comments[index].uuid);
-      str_cms_comment_tr_final = str_cms_comment_tr_final.replace("NAME", list_comments[index].name);
-      str_cms_comment_tr_final = str_cms_comment_tr_final.replace("EMAIL", list_comments[index].email);
-      str_cms_comment_tr_final = str_cms_comment_tr_final.replace("ORG", list_comments[index].org);
-      str_cms_comment_tr_final = str_cms_comment_tr_final.replace("WEBSITE", list_comments[index].website);
-      str_cms_comment_tr_final = str_cms_comment_tr_final.replace("TEL", list_comments[index].tel);
-      str_cms_comment_tr_final = str_cms_comment_tr_final.replace("COMMENT", list_comments[index].comment.substring(1, 6) + "...");
+      var str_cms_comment_tr_final = str_cms_comment_tr.replaceAll(
+        "UUID",
+        list_comments[index].uuid
+      );
+      str_cms_comment_tr_final = str_cms_comment_tr_final.replace(
+        "NAME",
+        list_comments[index].name
+      );
+      str_cms_comment_tr_final = str_cms_comment_tr_final.replace(
+        "EMAIL",
+        list_comments[index].email
+      );
+      str_cms_comment_tr_final = str_cms_comment_tr_final.replace(
+        "ORG",
+        list_comments[index].org
+      );
+      str_cms_comment_tr_final = str_cms_comment_tr_final.replace(
+        "WEBSITE",
+        list_comments[index].website
+      );
+      str_cms_comment_tr_final = str_cms_comment_tr_final.replace(
+        "TEL",
+        list_comments[index].tel
+      );
+      str_cms_comment_tr_final = str_cms_comment_tr_final.replace(
+        "COMMENT",
+        list_comments[index].comment.substring(1, 6) + "..."
+      );
 
       // Append
       obj_tr.innerHTML = str_cms_comment_tr_final;

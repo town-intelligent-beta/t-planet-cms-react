@@ -1,22 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+      integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+      integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
-    <link rel="stylesheet" href="/static/css/progress_bar.css">
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/loading.css" />
+    <link rel="stylesheet" href="/static/css/progress_bar.css" />
     <script src="/static/js/innerHTML.js"></script>
     <script src="/static/js/config.js"></script>
     <script src="/static/js/localStorage.js"></script>
@@ -27,7 +58,7 @@
     <script type="module" src="/static/js/news_list.js"></script>
     <script type="module" src="/static/js/cms_add_news.js"></script>
     <script type="module">
-      import { changeNewsListBanner } from '/static/js/cms_add_news.js'
+      import { changeNewsListBanner } from "/static/js/cms_add_news.js";
       window.changeNewsListBanner = changeNewsListBanner;
     </script>
     <script type="module" src="/static/js/set_page_info.js"></script>
@@ -39,9 +70,30 @@
     <!-- content -->
     <section class="flex-grow-1">
       <div class="container-fluid px-0 d-flex align-items-center">
-        <div id="news_banner_image" class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center" style="background-image: url(/static/imgs/news-banner.jpg); height: 350px; background-repeat: no-repeat; position: relative;">
+        <div
+          id="news_banner_image"
+          class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center"
+          style="
+            background-image: url(/static/imgs/news-banner.jpg);
+            height: 350px;
+            background-repeat: no-repeat;
+            position: relative;
+          "
+        >
           <div>
-            <button class="btn btn-warning btn-lg bg-2ndhome border-0" id="btnUploadNewsCover" onclick="changeNewsListBanner()" style="width: 300px; height: 50px; position: absolute;right:45px; bottom: 57px; cursor: pointer;">
+            <button
+              class="btn btn-warning btn-lg bg-2ndhome border-0"
+              id="btnUploadNewsCover"
+              onclick="changeNewsListBanner()"
+              style="
+                width: 300px;
+                height: 50px;
+                position: absolute;
+                right: 45px;
+                bottom: 57px;
+                cursor: pointer;
+              "
+            >
               <div id="divUploadNewsCover" class="bg-contain">編輯封面圖片</div>
             </button>
           </div>
@@ -53,26 +105,33 @@
           <p>上傳中 ...</p>
         </div>
         <div id="loading-spinner">
-          <img src="/static/imgs/loading.png" alt="Loading">
+          <img src="/static/imgs/loading.png" alt="Loading" />
         </div>
       </div>
 
       <div class="container">
         <div class="row mt-5">
           <div class="col-12 mb-4 text-center text-md-left">
-            <a href="/backend/admin_agent_dashboard.html" class="btn btn-dark mr-2 rounded-pill" style="width: 120px">回控制頁</a>
-            <a href="/backend/cms_add_news.html" class="btn btn-success rounded-pill" style="width: 100px">新增</a>
+            <a
+              href="/backend/admin_agent_dashboard.html"
+              class="btn btn-dark mr-2 rounded-pill"
+              style="width: 120px"
+              >回控制頁</a
+            >
+            <a
+              href="/backend/cms_add_news.html"
+              class="btn btn-success rounded-pill"
+              style="width: 100px"
+              >新增</a
+            >
           </div>
         </div>
 
         <!-- list -->
-        <div class="row" id="main_news">
-
-        </div>
+        <div class="row" id="main_news"></div>
         <div class="row mt-5 mt-md-3 mb-5">
           <div class="col-md-12">
-            <div class="row" id="news_container">
-            </div>
+            <div class="row" id="news_container"></div>
           </div>
         </div>
       </div>
