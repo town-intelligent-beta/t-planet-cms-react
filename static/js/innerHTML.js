@@ -297,24 +297,24 @@ const str_parent_task_block = `
         </div>
         <div class="d-none d-md-block">
           <div class="d-flex justify-content-center justify-content-md-end mt-3">
-            <button type="button" class="btn btn-danger rounded-pill mr-3" style="width: 150px" data-bs-target="#exampleModalToggle2_UUID_TASK" data-bs-toggle="modal">刪除</button>
+            <button type="button" class="btn btn-danger rounded-pill mr-3" style="width: 150px" data-target="#exampleModalToggle2_UUID_TASK" data-toggle="modal">刪除</button>
             <button type="button" id="btn_cms_plan_add_parent_tasks" class="btn btn-success rounded-pill" style="width: 150px" name="UUID_TASK" onclick="cms_plan_add_parent_tasks('UUID_TASK')">新增</button>
           </div>
         </div>
         <div class="d-md-none">
           <div class="d-flex justify-content-center justify-content-md-end mt-3">
-            <button type="button" class="btn btn-danger rounded-pill mr-3" style="width: 50%" data-bs-target="#exampleModalToggle2_UUID_TASK" data-bs-toggle="modal">刪除</button>
+            <button type="button" class="btn btn-danger rounded-pill mr-3" style="width: 50%" data-target="#exampleModalToggle2_UUID_TASK" data-toggle="modal">刪除</button>
             <button type="button" id="btn_cms_plan_add_parent_tasks" class="btn btn-success rounded-pill" style="width: 50%" name="UUID_TASK" onclick="cms_plan_add_parent_tasks('UUID_TASK')">新增</button>
           </div>
         </div>
-        <!-- <button type="button" class="btn btn-block btn-outline-secondary" data-bs-toggle="modal" href="#exampleModalToggle_UUID_TASK" id="UUID_TASK">新增/刪除</button> -->
+        <!-- <button type="button" class="btn btn-block btn-outline-secondary" data-toggle="modal" href="#exampleModalToggle_UUID_TASK" id="UUID_TASK">新增/刪除</button> -->
           <!-- Modal -->
           <div class="modal fade" id="exampleModalToggle_UUID_TASK" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-body d-flex flex-column justify-content-arround" style="gap: 15px; height: 200px;">
                   <button type="button" id="btn_cms_plan_add_parent_tasks" class="btn btn-secondary m-auto"  style="width: 80%; height: 50px;" name="UUID_TASK" onclick="cms_plan_add_parent_tasks('UUID_TASK')">新增任務</button>
-                  <button type="button" class="btn btn-secondary m-auto" style="width: 80%;  height: 50px;" data-bs-target="#exampleModalToggle2_UUID_TASK" data-bs-toggle="modal">刪除活動設計</button>
+                  <button type="button" class="btn btn-secondary m-auto" style="width: 80%;  height: 50px;" data-target="#exampleModalToggle2_UUID_TASK" data-toggle="modal">刪除活動設計</button>
                 </div>
               </div>
             </div>
@@ -326,8 +326,8 @@ const str_parent_task_block = `
                   確定刪除此項活動設計嗎？
                 </div>
                 <div class="modal-footer justify-content-center border-0">
-                  <button type="button" class="btn btn-secondary rounded-pill" style="width: 150px;" data-bs-dismiss="modal">取消</button>
-                  <button type="button" class="btn btn-danger rounded-pill" style="width: 150px;" id="delete-task" data-bs-dismiss="modal" name="UUID_TASK" onclick="deleted_task('UUID_TASK')">確定</button>
+                  <button type="button" class="btn btn-secondary rounded-pill" style="width: 150px;" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-danger rounded-pill" style="width: 150px;" id="delete-task" data-dismiss="modal" name="UUID_TASK" onclick="deleted_task('UUID_TASK')">確定</button>
                 </div>
               </div>
             </div>
