@@ -1,6 +1,7 @@
-import { getSroiData, setSroiData } from "./api/sroi.js";
+import { getSroiData, getSroiDataMeta, setSroiData } from "./api/sroi.js";
 import { draw_doughnut_chart, isValidDoughnutChartData } from "./chart/bar.js";
 import { plan_info } from "./plan.js";
+import { renderHandlebars } from "./utils/handlebars.js";
 
 let data = {};
 
@@ -60,7 +61,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
   registerHandlebarsPartial();
   const obj_project = plan_info(uuid);
 
-  const sroiData = await getSroiData(uuid);
+  const sroiData = await getSroiDataMeta(uuid);
   data = {
     ...obj_project,
     visible: sroiData.visible,
@@ -71,7 +72,19 @@ export const set_page_info_cms_sroi = async (uuid) => {
 
   $("#cms-sroi").on("click", "#refresh", async (e) => {
     e.preventDefault();
+
+    renderHandlebars("sroi-section", "tpl-sroi-section-loading", {});
+
+
+    // 開始計時
+    const startTime = performance.now();
     const sroiData = await getSroiData(uuid);
+    // 結束計時
+    const endTime = performance.now();
+    // 計算執行時間
+    const duration = (endTime - startTime) / 1000;
+    console.log(`getSroiData 程式碼執行時間: ${duration} 秒`);
+
     data = {
       ...data,
       sroiData,
