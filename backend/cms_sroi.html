@@ -123,13 +123,11 @@
           <p class="bg-2ndhome p-2">社會投資報酬率 (SROI) 方法學</p>
           <div class="px-4">
             <div class="d-flex">
-              <p class="flex-grow-1">
-                透過
-                <a
-                  target="_blank"
-                  href="{{spreadsheet_url}}"
-                >SROI 方法學計算式</a>，更能讓團隊在社會責任活動中更精確地衡量社會、環境及經濟所創造的價值。
-              </p>
+              <iframe id="iframe_sroi" width="100%" style="height: 50vh;"
+                src="{{spreadsheet_url}}">
+              </iframe>
+            </div><br>
+            <div class="d-flex justify-content-end">
               <button id="refresh" class="btn btn-primary">更新</button>
             </div>
             <div id="sroi-section" class="tabs-section pt-4"></div>
@@ -247,7 +245,6 @@
       </div>
     </script>
 
-
     <script id="tpl-sroi-section-loading" type="text/x-handlebars-template">
       <h5 class="text-center font-weight-bold py-4">載入中 ... </h5>
     </script>
@@ -255,7 +252,6 @@
     <script id="tpl-sroi-section-error" type="text/x-handlebars-template">
       <h5 class="text-center font-weight-bold py-4">載入失敗</h5>
     </script>
-
 
   </head>
   <body>

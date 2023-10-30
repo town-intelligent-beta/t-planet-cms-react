@@ -65,7 +65,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
   data = {
     ...obj_project,
     visible: sroiData.visible,
-    spreadsheet_url: `https://docs.google.com/spreadsheets/d/${sroiData.file_id}`,
+    spreadsheet_url: `https://docs.google.com/spreadsheets/d/${sroiData.file_id}?headers=false&chrome=false&single=true&widget=false&rm=minimal`,
   };
 
   renderSroiPage(data);
@@ -74,16 +74,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
     e.preventDefault();
 
     renderHandlebars("sroi-section", "tpl-sroi-section-loading", {});
-
-
-    // 開始計時
-    const startTime = performance.now();
     const sroiData = await getSroiData(uuid);
-    // 結束計時
-    const endTime = performance.now();
-    // 計算執行時間
-    const duration = (endTime - startTime) / 1000;
-    console.log(`getSroiData 程式碼執行時間: ${duration} 秒`);
 
     data = {
       ...data,
