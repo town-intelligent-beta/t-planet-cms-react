@@ -63,7 +63,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
   const obj_project = plan_info(uuid);
   const sroiData = await getSroiDataMeta(uuid);
   data = {
-    ...obj_project,<<<<<<< main
+    ...obj_project,
     visible: sroiData.visible,
     spreadsheet_url: `https://docs.google.com/spreadsheets/d/${sroiData.file_id}?headers=false&chrome=false&single=true&widget=false&rm=minimal`,
   };
