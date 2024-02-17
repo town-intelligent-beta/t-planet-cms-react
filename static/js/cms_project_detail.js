@@ -1,10 +1,52 @@
-import { draw_bar_chart, getMappedSdgData, allSdgImages } from "./chart/bar.js";
+import { allSdgImages, draw_bar_chart, getMappedSdgData } from "./chart/bar.js";
 import { getProjectWeight, list_plan_tasks, plan_info } from "./plan.js";
 import { get_task_info } from "./tasks.js";
 import { renderHandlebars } from "./utils/handlebars.js";
 import { get_sorted_tasks, parse_sdgs_items } from "./utils/transformers.js";
 import { isOverflow } from "./utils/widgets.js";
+function createModalDialog(title, content) {
+  const modal = document.createElement("div");
+  modal.classList.add(`modal`, `fade`);
+  modal.setAttribute("tabindex", "-1");
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-labelledby", "modalTitle");
+  modal.setAttribute("aria-hidden", "true");
 
+  const dialog = document.createElement("div");
+  dialog.classList.add("modal-dialog");
+  dialog.setAttribute("role", "document");
+
+  const contentDiv = document.createElement("div");
+  contentDiv.classList.add("modal-content");
+
+  const header = document.createElement("div");
+  header.classList.add("modal-header");
+
+  const titleEl = document.createElement("h5");
+  titleEl.classList.add("modal-title");
+  titleEl.id = "modalTitle";
+  titleEl.textContent = title;
+
+  const closeButton = document.createElement("button");
+  closeButton.type = "button";
+  closeButton.classList.add("close");
+  closeButton.setAttribute("data-dismiss", "modal");
+  closeButton.setAttribute("aria-label", "Close");
+  closeButton.innerHTML = "&times;";
+
+  const body = document.createElement("div");
+  body.classList.add("modal-body");
+  body.innerHTML = content;
+
+  header.appendChild(titleEl);
+  header.appendChild(closeButton);
+  contentDiv.appendChild(header);
+  contentDiv.appendChild(body);
+  dialog.appendChild(contentDiv);
+  modal.appendChild(dialog);
+
+  return modal;
+}
 export function set_page_info_cms_project_detail(uuid) {
   var obj_project = plan_info(uuid);
 
@@ -183,7 +225,6 @@ export function set_page_info_cms_project_detail(uuid) {
   const tasks = obj_tasks.tasks.map((task_uuid) => get_task_info(task_uuid));
   const sorted_tasks = get_sorted_tasks(tasks);
   sorted_tasks.map((obj_task) => {
-
     // Create DOM
     /*
     <div class="row mt-4 mt-md-5 mb-3">
@@ -201,7 +242,8 @@ export function set_page_info_cms_project_detail(uuid) {
     </div>
     */
     var obj_div_root = document.createElement("div");
-    obj_div_root.className = "row mt-4 mt-md-5 mb-3";
+    obj_div_root.className =
+      "row align-items-center bg-gray py-2 mt-4 mt-md-5 mb-3 project-detail-item";
 
     var obj_div_product = document.createElement("div");
     obj_div_product.className = "col-md-5";
@@ -244,17 +286,40 @@ export function set_page_info_cms_project_detail(uuid) {
     var obj_div_des = document.createElement("div");
     obj_div_des.className = "col-md-4 mt-4 mt-md-0";
     var obj_p_name = document.createElement("p");
-    obj_p_name.innerHTML = "活動設計名稱: ";
+    obj_p_name.classList.add("mb-3");
+    obj_p_name.innerHTML = `<span style='font-size: 18px;'>活動設計名稱 (${obj_task.uuid}): </span><br/>`;
     var obj_span_name = document.createElement("span");
-    obj_span_name.innerHTML = obj_task.name;
+    obj_span_name.innerHTML =
+      "<b style='font-size: 14px'>" + obj_task.name + "</b>";
+
     var obj_p_period = document.createElement("p");
+    obj_p_period.classList.add("mb-3");
     obj_p_period.innerHTML = "日期: ";
     var obj_span_period = document.createElement("span");
     obj_span_period.innerHTML = obj_task.period;
-    var obj_p_idea = document.createElement("p");
-    obj_p_idea.className = "small";
 
-    obj_p_idea.innerHTML = obj_task.overview;
+    const obj_desc = document.createElement("p");
+    obj_desc.style =
+      "max-height: 80px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;";
+    obj_desc.innerHTML = obj_task.overview;
+
+    const obj_btn_readmore = document.createElement("a");
+    obj_btn_readmore.href = "javascript:void(0);";
+    obj_btn_readmore.className = "";
+    obj_btn_readmore.textContent = "Read more...";
+
+    if (obj_desc.textContent.length > 44) {
+      obj_btn_readmore.style.display = "block";
+    } else {
+      obj_btn_readmore.style.display = "none";
+    }
+
+    const modal = createModalDialog("活動設計概要", obj_task.overview);
+
+    obj_btn_readmore.addEventListener("click", () => {
+      $(modal).modal("show");
+    });
+
     obj_div_qrocde.append(obj_qrcode);
     obj_div_product.append(obj_img_product);
     obj_div_root.append(obj_div_product);
@@ -265,8 +330,13 @@ export function set_page_info_cms_project_detail(uuid) {
     obj_p_period.append(obj_span_period);
     obj_div_des.append(obj_p_name);
     obj_div_des.append(obj_p_period);
-    obj_div_des.append(obj_p_idea);
-
+    const obj_is_idea = document.createElement("p");
+    if (obj_task.overview.length > 0) {
+      obj_is_idea.innerHTML = "(已填寫設計理念)";
+      obj_div_des.appendChild(obj_is_idea);
+    }
+    obj_div_des.appendChild(obj_desc);
+    obj_div_des.appendChild(obj_btn_readmore);
     obj_tasks_container.append(obj_div_root);
   });
 
