@@ -52,9 +52,9 @@
     <script type="module" src="/static/js/cms_sroi.js"></script>
     <script type="module" src="/static/js/cms_plan_info.js"></script>
     <!-- <script type="module">
-      import { uploadProjectCover } from "/static/js/cms_plan_info.js";
-      window.uploadProjectCover = uploadProjectCover;
-    </script> -->
+        import { uploadProjectCover } from "/static/js/cms_plan_info.js";
+        window.uploadProjectCover = uploadProjectCover;
+      </script> -->
     <script type="module" src="/static/js/set_page_info.js"></script>
     <script src="/static/js/qrcode.js"></script>
     <script type="module" src="/static/js/init.js"></script>
@@ -64,7 +64,7 @@
           {{#each head as |h|}}
             <p class="text-center font-weight-bold">{{h}}</p>
           {{/each}}
-          <!-- <h3>{{head}}</h3> -->
+          <h3>{{head}}</h3>
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -100,150 +100,98 @@
               <p>期間: {{period}}</p>
               <p>
                 是否揭露:
-                <input
-                  name="visible"
-                  class="visible mx-2"
-                  type="checkbox"
-                  value="true"
-                />
+                <input name="visible" class="visible mx-2" type="checkbox" value="true" />
                 是
-                <input
-                  name="visible"
-                  class="visible mx-2"
-                  type="checkbox"
-                  value="false"
-                />
+                <input name="visible" class="visible mx-2" type="checkbox" value="false" />
                 否
               </p>
             </div>
           </div>
         </div>
-
         <div class="mt-4">
-          <p class="bg-2ndhome p-2">社會投資報酬率 (SROI) 方法學</p>
-          <div class="px-4">
-            <div class="d-flex">
-              <iframe id="iframe_sroi" width="100%" style="height: 50vh;"
-                src="{{spreadsheet_url}}">
-              </iframe>
-            </div><br>
-            <div class="d-flex justify-content-end">
-              <button id="refresh" class="btn btn-primary">更新</button>
-            </div>
-            <div id="sroi-section" class="tabs-section pt-4"></div>
+          <p class="bg-2ndhome p-2">永續指標數據量化方法學</p>
+          <div class="content px-2">
+            <h6>導入 SROI 方法學的宗旨</h6>
+            <p>"SROI（Social Return on Investment,
+              社會投資回報率）是由英國政府第三部門所擬定用來評估組織在社會、環境、經濟等面向中所產生的改變，並將其賦與統一貨幣價值，以利於更公正客觀地判斷資源投入與最終成果所鏈接的因果關係。其六大步驟如下:</p>
+            <ol>
+              <li>定義範圍及利害關係人</li>
+              <li>影響力地圖描繪專案成果</li>
+              <li>盤點成果並賦予定價</li>
+              <li>成果轉換為具體的影響力</li>
+              <li>計算資源投入前後之價值</li>
+              <li>社會影響力揭露及追蹤</li>
+            </ol>
+            <p>透過直接與利害關係人密切地訪談與互動，蒐集資料，建立永續專案的掌握度，此由下而上 (Bottom up) 的資料蒐集及側錄過程，與社會影響力決策系統的核心目標不謀而合。因此，導入SROI
+              方法學的概念是「小鎮智能」與合作夥伴
+              - 「小鎮文創」、「小鎮賦能」及「小鎮風土」今年重要的里程碑。</p>
+            <p>未來，組織能清晰地了解自身的社會影響力，有了數據的支持，在ESG(Environmental、Social、Governance) 由上而下 (Top down)
+              的政策及數位化轉型的浪潮下，能快速且有效率地因應，確保企業與組織間的資源投入與運用富含可持續性。</p>
+
+            <h6>如何使用本試算表</h6>
+            <ol>
+              <li>SROI 方法學將評估「社會、經濟、環境」三面向，請依序在各面向分頁中【反灰處】填入數值，價值計算將自動產出。</li>
+              <li>總價值計算分頁將依據「社會、經濟、環境」三面向分頁所產出之小計數值計算出 SROI，其公式為：<br>
+                <code>SROI = 總社會現值 / 總投入價值</code>
+              </li>
+            </ol>
+            <div color="#ffffff" class="filter"></div>
           </div>
+          <div class="text-center">
+            <button class="show-more-btn">顯示更多</button>
+          </div>
+          <div class="mt-4">
+            <p class="bg-2ndhome p-2">社會投資報酬率 (SROI) 方法學</p>
+            <div class="px-4">
+              <div class="d-flex">
+                <iframe id="iframe_sroi" width="100%" style="height: 50vh;"
+                  src="{{spreadsheet_url}}">
+                </iframe>
+              </div><br>
+              <div class="d-flex justify-content-end">
+                <button id="refresh" class="btn btn-primary">更新</button>
+              </div>
+              <div id="sroi-section" class="tabs-section pt-4"></div>
+            </div>
+          </div>
+          <div id="sroi-section" class="tabs-section pt-4"></div>
         </div>
-
         {{#with sroiData}}
+        <div class="mt-4">
+          <p class="bg-2ndhome p-2">價值計算</p>
 
-          <div class="mt-4">
-            <p class="bg-2ndhome p-2">
-              <a
-                class="text-decoration-none text-dark"
-                data-toggle="collapse"
-                href="#social"
-                role="button"
-                aria-expanded="false"
-                aria-controls="social"
-              >
-                <i class="fa fa-plus"></i>
-                社會面向
-              </a>
-            </p>
-
-            <div class="px-4 pb-4 collapse" id="social">
-              {{> sroiTable item=sroi_social}}
-            </div>
-
-
-            <div class="px-4">
-              <p>社會面向價值計算小計 : {{computed.social_subtotal}}</p>
-            </div>
-          </div>
-
-          <div class="mt-4">
-            <p class="bg-2ndhome p-2">
-              <a
-                class="text-decoration-none text-dark"
-                data-toggle="collapse"
-                href="#economic"
-                role="button"
-                aria-expanded="false"
-                aria-controls="economic"
-              >
-                <i class="fa fa-plus"></i>經濟面向
-              </a>
-            </p>
-
-            <div class="px-4 pb-4 collapse" id="economic">
-              {{> sroiTable item=sroi_economy}}
-            </div>
-
-            <div class="px-4">
-              <p>經濟面向價值計算小計 : {{computed.economy_subtotal}}</p>
-            </div>
-          </div>
-
-          <div class="mt-4">
-            <p class="bg-2ndhome p-2">
-              <a
-                class="text-decoration-none text-dark"
-                data-toggle="collapse"
-                href="#environment"
-                role="button"
-                aria-expanded="false"
-                aria-controls="environment"
-              >
-                <i class="fa fa-plus"></i>
-                環境面向</a>
-            </p>
-
-            <div class="px-4 pb-4 collapse" id="environment">
-              {{> sroiTable item=sroi_environment}}
-            </div>
-
-            <div class="px-4">
-              <p>環境面向價值計算小計 : {{computed.environment_subtotal}}</p>
-            </div>
-          </div>
-
-          <div class="mt-4">
-            <p class="bg-2ndhome p-2">價值計算</p>
-
-            <div class="px-4">
-              <div class="row">
-                <div class="col-md-8">
-                  <p>總社會現值 : {{computed.total_benefit}}</p>
-                  <p>總投入價值 : {{computed.total_cost}}</p>
-                  <p>SROI : {{sroi}}</p>
-                  <ul class="list-unstyled">
-                    <li>
-                      1. 免責聲明：以上提供的 SROI 計算公式僅供參考，使用者應理解其限制性質並自行承擔風險。
-                    </li>
-                    <li>
-                      2. SROI 計算為評估社會影響的方法之一，並不代表對所有決策的唯一評估標準。
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-md-4">
-                  <div class="position-relative p-4">
-                    <canvas id="sroi_chart" class="d-inline-block"></canvas>
-                    <div
-                      class="position-absolute text-center"
-                      style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
-                    >
-                      <h5>SROI</h5>
-                      <h6>{{sroi}}</h6>
-                    </div>
+          <div class="px-4">
+            <div class="row">
+              <div class="col-md-8">
+                <p>總社會現值 : {{computed.total_benefit}}</p>
+                <p>總投入價值 : {{computed.total_cost}}</p>
+                <p>SROI : {{sroi}}</p>
+                <ul class="list-unstyled">
+                  <li>
+                    1. 免責聲明：以上提供的 SROI 計算公式僅供參考，使用者應理解其限制性質並自行承擔風險。
+                  </li>
+                  <li>
+                    2. SROI 計算為評估社會影響的方法之一，並不代表對所有決策的唯一評估標準。
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <div class="position-relative p-4">
+                  <canvas id="sroi_chart" class="d-inline-block"></canvas>
+                  <div class="position-absolute text-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%)">
+                    <h5>SROI</h5>
+                    <h6>{{sroi}}</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
         {{/with}}
       </div>
     </script>
+
     <script id="tpl-sroi-section-loading" type="text/x-handlebars-template">
       <h5 class="text-center font-weight-bold py-4">載入中 ... </h5>
     </script>
@@ -252,13 +200,86 @@
       <h5 class="text-center font-weight-bold py-4">載入失敗</h5>
     </script>
   </head>
+
   <body>
     <!-- navbar -->
     <div id="navbar"></div>
 
     <!-- content -->
     <section>
-      <div id="cms-sroi" class="container pt-4"></div>
+      <div class="container pt-4">
+        <div id="cms-sroi"></div>
+        <div class="row flex-row mb-5">
+          <div class="col-12">
+            <div
+              class="nav nav-pills"
+              id="v-pills-tab"
+              role="tablist"
+              aria-orientation="vertical"
+            >
+              <a
+                class="text-center p-2 text-dark text-decoration-none bg-warning active col-3"
+                id="v-pills-home-tab"
+                data-toggle="pill"
+                href="#v-pills-home"
+                role="tab"
+                aria-controls="v-pills-home"
+                aria-selected="true"
+                >社會面向</a
+              >
+              <a
+                class="text-center p-2 text-dark text-decoration-none bg-warning col-3"
+                id="v-pills-profile-tab"
+                data-toggle="pill"
+                href="#v-pills-profile"
+                role="tab"
+                aria-controls="v-pills-profile"
+                aria-selected="false"
+                >經濟面向</a
+              >
+              <a
+                class="text-center p-2 text-dark text-decoration-none bg-warning col-3"
+                id="v-pills-messages-tab"
+                data-toggle="pill"
+                href="#v-pills-messages"
+                role="tab"
+                aria-controls="v-pills-messages"
+                aria-selected="false"
+                >環境面向</a
+              >
+              <a
+                class="text-center p-2 text-light text-decoration-none bg-success col-3"
+                href="/backend/cms_sroi_evidence.html" target="_blank"  
+                >佐證資料</a
+              >
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div
+                class="tab-pane fade show active"
+                id="v-pills-home"
+                role="tabpanel"
+                aria-labelledby="v-pills-home-tab"
+              >
+                <div id="tableSocial"></div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="v-pills-profile"
+                role="tabpanel"
+                aria-labelledby="v-pills-profile-tab"
+              ></div>
+              <div
+                class="tab-pane fade"
+                id="v-pills-messages"
+                role="tabpanel"
+                aria-labelledby="v-pills-messages-tab"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- footer -->
     <div id="footer"></div>
