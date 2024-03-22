@@ -1,19 +1,35 @@
-import { draws } from './app.js'
-import { list_plans, plan_info, append_plan_submit_data, plan_submit, delete_plan, list_plan_tasks, getProjectWeight } from './plan.js'
-import { task_submit, child_task_submit } from './tasks.js'
-import { draw_bar } from './chart/bar.js'
+import {
+  append_plan_submit_data,
+  delete_plan,
+  list_plan_tasks,
+  list_plans,
+  plan_info,
+  plan_submit,
+} from "./plan.js";
+import { child_task_submit, task_submit } from "./tasks.js";
 
-const cms_project_submit_pages = ["cms_plan_info.html", "cms_sdgs_setting.html", "cms_impact.html", "cms_contact_person.html"];
-const cms_support_format = ["cms_missions_display.html", "cms_support_form.html", "cms_deep_participation.html"]
+const cms_project_submit_pages = [
+  "cms_plan_info.html",
+  "cms_sdgs_setting.html",
+  "cms_impact.html",
+  "cms_contact_person.html",
+];
+const cms_support_format = [
+  "cms_missions_display.html",
+  "cms_support_form.html",
+  "cms_deep_participation.html",
+];
 
 $(function () {
-  $("#add_c_project").on("click", function(event) {
+  $("#add_c_project").on("click", function (event) {
     event.preventDefault();
 
     var obj_project = null;
     var form = new FormData();
-    if (obj_project = plan_submit(form)) {
-      window.location.replace("/backend/cms_plan_info.html?uuid=" + obj_project.uuid);
+    if ((obj_project = plan_submit(form))) {
+      window.location.replace(
+        "/backend/cms_plan_info.html?uuid=" + obj_project.uuid
+      );
     }
   });
 });
@@ -21,16 +37,16 @@ $(function () {
 function get_page_index(page) {
   for (var index = 0; index < cms_support_format.length; index++) {
     if (page == cms_support_format[index]) {
-	    return 3
+      return 3;
     }
   }
 
   for (var index = 0; index < cms_project_submit_pages.length; index++) {
     if (page == cms_project_submit_pages[index]) {
-      return index
+      return index;
     }
   }
-  return null
+  return null;
 }
 
 function get_index_page(index) {
@@ -39,7 +55,7 @@ function get_index_page(index) {
 
 // Previous page
 $(function () {
-  $("#btn_ab_project_prev").on("click", function(e) {
+  $("#btn_ab_project_prev").on("click", function (e) {
     e.preventDefault(); // To prevent following the link (optional)
 
     // Get path
@@ -49,8 +65,8 @@ $(function () {
     // Get parent uuid
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var uuid = urlParams.get("uuid")
-    var task = urlParams.get("task")
+    var uuid = urlParams.get("uuid");
+    var task = urlParams.get("task");
 
     // Get index
     var index = get_page_index(page);
@@ -79,7 +95,7 @@ $(function () {
 
 // Submit to next page
 $(function () {
-  $("form").on("submit", function(e){
+  $("form").on("submit", function (e) {
     e.preventDefault();
     if (typeof update_ckeditor_data === "function") {
       update_ckeditor_data();
@@ -92,8 +108,8 @@ $(function () {
     // Get parent uuid
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var uuid = urlParams.get("uuid")
-    var task = urlParams.get("task")
+    var uuid = urlParams.get("uuid");
+    var task = urlParams.get("task");
 
     // Get index
     var index = get_page_index(page);
@@ -131,7 +147,11 @@ $(function () {
       }
 
       // Update all tasks from web and submit
-      for (var index_task = 0; index_task < list_parent_tasks.length; index_task++) {
+      for (
+        var index_task = 0;
+        index_task < list_parent_tasks.length;
+        index_task++
+      ) {
         // Form
         var form = new FormData();
 
@@ -142,57 +162,90 @@ $(function () {
           form.append("email", getLocalStorage("email"));
 
           // name
-          form.append("name", document.getElementById("parent_task_name_" + list_parent_tasks[index_task]).value);
+          form.append(
+            "name",
+            document.getElementById(
+              "parent_task_name_" + list_parent_tasks[index_task]
+            ).value
+          );
 
           // start date
-          form.append("task_start_date", document.getElementById("parent_task_start_date_" + list_parent_tasks[index_task]).value);
+          form.append(
+            "task_start_date",
+            document.getElementById(
+              "parent_task_start_date_" + list_parent_tasks[index_task]
+            ).value
+          );
 
           // due date
-          form.append("task_due_date", document.getElementById("parent_task_due_date_" + list_parent_tasks[index_task]).value);
+          form.append(
+            "task_due_date",
+            document.getElementById(
+              "parent_task_due_date_" + list_parent_tasks[index_task]
+            ).value
+          );
 
           // overview
-          form.append("overview", document.getElementById("parent_task_overview_" + list_parent_tasks[index_task]).value);
+          form.append(
+            "overview",
+            document.getElementById(
+              "parent_task_overview_" + list_parent_tasks[index_task]
+            ).value
+          );
 
           // GPS
           try {
-            form.append("gps_flag", document.getElementById("gps_flag_" + list_parent_tasks[index_task]).checked);
-          } catch(e) {
+            form.append(
+              "gps_flag",
+              document.getElementById(
+                "gps_flag_" + list_parent_tasks[index_task]
+              ).checked
+            );
+          } catch (e) {
             console.log(e);
           }
 
           var obj_task = task_submit(form);
-        } catch(e) {
-          console.log(e)
+        } catch (e) {
+          console.log(e);
         }
       }
     }
 
-    if (page == "cms_support_form.html" || page == "cms_deep_participation.html") {
-      if (false == child_task_submit(page)){
+    if (
+      page == "cms_support_form.html" ||
+      page == "cms_deep_participation.html"
+    ) {
+      if (false == child_task_submit(page)) {
         return;
       }
     }
 
     // Replace page
     var btn_submit = $(this).find("button[type=submit]:focus");
-    var id_btn_submit = btn_submit.attr('id');
+    var id_btn_submit = btn_submit.attr("id");
 
     if (id_btn_submit == "btn_ab_project_next") {
       if (index < cms_project_submit_pages.length - 1) {
         var next_page = get_index_page(index + 1);
         window.location.replace("/backend/" + next_page + param);
       } else {
-        window.location.replace("/backend/" + get_index_page(cms_project_submit_pages.length - 1) + param);
+        window.location.replace(
+          "/backend/" +
+            get_index_page(cms_project_submit_pages.length - 1) +
+            param
+        );
       }
 
       if (page == "cms_contact_person.html") {
-        window.location.replace("/backend/cms_project_detail.html?uuid=" + uuid);
+        window.location.replace(
+          "/backend/cms_project_detail.html?uuid=" + uuid
+        );
       }
 
       if (page == "cms_deep_participation.html") {
         window.location.replace("/backend/cms_impact.html" + param);
       }
-
     } else if (id_btn_submit == "btn_cms_plan_save") {
       alert("儲存成功");
     } else if (id_btn_submit == "btn_cms_plan_preview") {
@@ -216,7 +269,7 @@ export function cms_plan_add_parent_tasks(uuid_task) {
   // Params
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  var uuid = urlParams.get("uuid")
+  var uuid = urlParams.get("uuid");
 
   // Submit
   var uuid_plan = null;
@@ -227,7 +280,7 @@ export function cms_plan_add_parent_tasks(uuid_task) {
     uuid_plan = getLocalStorage("uuid_project");
   }
 
-  if ( uuid_plan != null && getLocalStorage("uuid_project") == "")
+  if (uuid_plan != null && getLocalStorage("uuid_project") == "")
     setLocalStorage("uuid_project", uuid_plan);
 
   // Update project
@@ -244,7 +297,7 @@ export function cms_plan_add_parent_tasks(uuid_task) {
       gps_flag = true;
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 
   // Parent task submit
@@ -262,7 +315,11 @@ export function cms_plan_add_parent_tasks(uuid_task) {
   }
 
   // Update all tasks from web and submit
-  for (var index_task = 0; index_task < list_parent_tasks.length; index_task++) {
+  for (
+    var index_task = 0;
+    index_task < list_parent_tasks.length;
+    index_task++
+  ) {
     // Form
     var form = new FormData();
 
@@ -273,36 +330,67 @@ export function cms_plan_add_parent_tasks(uuid_task) {
       form.append("email", getLocalStorage("email"));
 
       // name
-      form.append("name", document.getElementById("parent_task_name_" + list_parent_tasks[index_task]).value);
+      form.append(
+        "name",
+        document.getElementById(
+          "parent_task_name_" + list_parent_tasks[index_task]
+        ).value
+      );
 
       // start date
-      form.append("task_start_date", document.getElementById("parent_task_start_date_" + list_parent_tasks[index_task]).value);
+      form.append(
+        "task_start_date",
+        document.getElementById(
+          "parent_task_start_date_" + list_parent_tasks[index_task]
+        ).value
+      );
 
       // due date
-      form.append("task_due_date", document.getElementById("parent_task_due_date_" + list_parent_tasks[index_task]).value);
+      form.append(
+        "task_due_date",
+        document.getElementById(
+          "parent_task_due_date_" + list_parent_tasks[index_task]
+        ).value
+      );
 
       // overview
-      form.append("overview", document.getElementById("parent_task_overview_" + list_parent_tasks[index_task]).value);
+      form.append(
+        "overview",
+        document.getElementById(
+          "parent_task_overview_" + list_parent_tasks[index_task]
+        ).value
+      );
 
       // GPS
       try {
-        form.append("gps_flag", document.getElementById("gps_flag_" + list_parent_tasks[index_task]).checked);
-      } catch(e) {
+        form.append(
+          "gps_flag",
+          document.getElementById("gps_flag_" + list_parent_tasks[index_task])
+            .checked
+        );
+      } catch (e) {
         console.log(e);
       }
 
       var obj_task = task_submit(form);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   }
   // Redirect to add parent window
-  window.location.replace("/backend/cms_missions_display.html?uuid=" + uuid_plan + "&task=" + uuid_task + "&gps=" + gps_flag);
+  window.location.replace(
+    "/backend/cms_missions_display.html?uuid=" +
+      uuid_plan +
+      "&task=" +
+      uuid_task +
+      "&gps=" +
+      gps_flag
+  );
 }
 
 // btn_cms_plan_add_form_task
 $(function () {
-  $("#btn_cms_plan_add_form_task").on("click", function(e) {
+  $("#btn_cms_plan_add_form_task").on("click", function (e) {
     e.preventDefault(); // To prevent following the link (optional)
 
     // Path
@@ -312,8 +400,8 @@ $(function () {
     // Params
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var uuid = urlParams.get("uuid")
-    var task = urlParams.get("task")
+    var uuid = urlParams.get("uuid");
+    var task = urlParams.get("task");
 
     // Submit
     var uuid_project = null;
@@ -326,13 +414,18 @@ $(function () {
     setLocalStorage("uuid_project", obj_project.uuid);
 
     // Redirect to add parent window
-    window.location.replace("/backend/cms_support_form.html?uuid=" + obj_project.uuid + "&task=" + task);
+    window.location.replace(
+      "/backend/cms_support_form.html?uuid=" +
+        obj_project.uuid +
+        "&task=" +
+        task
+    );
   });
 });
 
 // btn_cms_plan_add_deep_task
 $(function () {
-  $("#btn_cms_plan_add_deep_task").on("click", function(e) {
+  $("#btn_cms_plan_add_deep_task").on("click", function (e) {
     e.preventDefault(); // To prevent following the link (optional)
 
     // Get path
@@ -342,8 +435,8 @@ $(function () {
     // Get Parent uuid
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var task = urlParams.get("task")
-    var gps = urlParams.get("gps")
+    var task = urlParams.get("task");
+    var gps = urlParams.get("gps");
 
     // Submit
     var uuid_project = null;
@@ -356,25 +449,34 @@ $(function () {
     setLocalStorage("uuid_project", obj_project.uuid);
 
     // Redirect to add parent window
-    window.location.replace("/backend/cms_deep_participation.html?uuid=" + obj_project.uuid + "&task=" + task + "&gps=" + gps);
+    window.location.replace(
+      "/backend/cms_deep_participation.html?uuid=" +
+        obj_project.uuid +
+        "&task=" +
+        task +
+        "&gps=" +
+        gps
+    );
   });
 });
 
 // btn sdg trigger
 $(function () {
-  $("[id='btn_sdg']").on("click", function(e) {
+  $("[id='btn_sdg']").on("click", function (e) {
     e.stopPropagation();
     var obj_name = $(this).attr("name");
 
-    for(var index = 1; index <= 17; index++) {
+    for (var index = 1; index <= 17; index++) {
       var index_sdg = "";
-      if (index  < 10) {
+      if (index < 10) {
         index_sdg = ("0" + index).slice(-2);
       } else {
         index_sdg = index;
       }
 
-      document.getElementsByName(index_sdg.toString())[0].style.backgroundColor = "";
+      document.getElementsByName(
+        index_sdg.toString()
+      )[0].style.backgroundColor = "";
     }
 
     // Set task sdgs
@@ -385,8 +487,7 @@ $(function () {
 
 // btn_add_sdg_into_task
 $(function () {
-  $("#btn_add_sdg_into_task").on("click", function(e) {
-
+  $("#btn_add_sdg_into_task").on("click", function (e) {
     e.stopPropagation();
     var list_target_sdgs = [];
     if (getLocalStorage("list_target_sdgs") != "") {
@@ -403,17 +504,18 @@ $(function () {
     var obj_sdgs_container = document.getElementById("sdgs_container");
 
     if (page == "cms_support_form.html") {
-
       // Create SDGs element - row
       // <div class="row align-items-center justify-content-center mt-4">
       var obj_div_row = document.createElement("div");
-      obj_div_row.className = "row align-items-center justify-content-center mt-4";
+      obj_div_row.className =
+        "row align-items-center justify-content-center mt-4";
 
       // Create image
       // <img class="col-3 col-md-1" src="/static/imgs/SDGs_04.jpg" alt="">
       var obj_img = document.createElement("img");
       obj_img.className = "col-3 col-md-1";
-      obj_img.src = "/static/imgs/SDGs_" + getLocalStorage("target_sdgs") + ".jpg";
+      obj_img.src =
+        "/static/imgs/SDGs_" + getLocalStorage("target_sdgs") + ".jpg";
       obj_img.setAttribute("width", "49px");
       obj_img.setAttribute("height", "49px");
 
@@ -434,7 +536,7 @@ $(function () {
       obj_input.id = "target_sdgs_" + getLocalStorage("target_sdgs");
       obj_input.type = "text";
       obj_input.className = "form-control";
-      obj_input.placeholder = "請留下您的支持評論。"
+      obj_input.placeholder = "請留下您的支持評論。";
       obj_input.disabled = true;
 
       // Append
@@ -451,7 +553,7 @@ $(function () {
   });
 });
 
-export function set_page_info_cms_agent(uuid){
+export function set_page_info_cms_agent(uuid) {
   /* Create DOM */
   const list_project_obj = list_plans(getLocalStorage("email"));
 
@@ -459,25 +561,69 @@ export function set_page_info_cms_agent(uuid){
     return;
   }
 
+  const yearFilterSelect = document.getElementById("year_filter");
+  const selectAllOption = document.createElement("option");
+  selectAllOption.value = "all";
+  selectAllOption.textContent = "全部";
+  yearFilterSelect.appendChild(selectAllOption);
+  const existingYears = [];
+
   const list_project_uuids = list_project_obj.projects;
-
-  const obj_project_list = document.getElementById("project_list");
+  yearFilterSelect.querySelectorAll("option").forEach((option) => {
+    if (option.value !== "all") {
+      existingYears.push(option.value);
+    }
+  });
   for (let index = 0; index < list_project_uuids.length; index++) {
-    // Get project info
     const obj_project = plan_info(list_project_uuids[index]);
+    const period = obj_project.period;
+    const startDate = period.split("-")[0];
+    const year = startDate.split("/")[2];
 
-    const root_container = $('<div />', {
-      class: 'col-sm-12 col-md-6 col-lg-4 mb-5',
+    if (!isNaN(year) && year !== "" && !existingYears.includes(year)) {
+      existingYears.push(year);
+      existingYears.sort((a, b) => b - a);
+
+      const yearOption = document.createElement("option");
+      yearOption.value = year;
+      yearOption.textContent = year;
+      yearFilterSelect.appendChild(yearOption);
+    }
+    var project_list_container = document.querySelector("#project_list");
+    yearFilterSelect.addEventListener("change", function () {
+      var selectedYear = this.value;
+
+      project_list_container.innerHTML = "";
+      var list_project_uuids = list_plans(getLocalStorage("email")).projects;
+
+      list_project_uuids.forEach(function (uuid) {
+        var obj_project = plan_info(uuid);
+        var period = obj_project.period;
+        var regex = new RegExp("\\d{4}");
+        var yearMatch = period.match(regex);
+        var year = yearMatch ? yearMatch[0] : null;
+
+        if (selectedYear === "all" || selectedYear.trim() === year) {
+          create_project_dom(obj_project, project_list_container);
+        }
+      });
+    });
+    create_project_dom(obj_project, project_list_container);
+  }
+
+  function create_project_dom(obj_project, obj_project_list) {
+    const root_container = $("<div />", {
+      class: "col-sm-12 col-md-6 col-lg-4 mb-5",
     })
       .appendTo($(obj_project_list))
       .get(0);
 
-    const card_container = $('<div />', {
-      class: 'project card mb-4',
+    const card_container = $("<div />", {
+      class: "project card mb-4",
     })
       .append(
-        $('<a />', {
-          class: 'stretched-link',
+        $("<a />", {
+          class: "stretched-link",
           href: `${location.protocol}//${window.location.host}/backend/cms_project_detail.html?uuid=${obj_project.uuid}`,
         })
       )
@@ -489,73 +635,68 @@ export function set_page_info_cms_agent(uuid){
       image_url = `${HOST_URL_TPLANET_DAEMON}/static/project/${obj_project.uuid}/media/cover/cover.png`;
     }
 
-    $('<div />', {
-      class: 'card-img-top',
+    $("<div />", {
+      class: "card-img-top",
       style: `background-image: url(${image_url});`,
       src: image_url,
-    })
-      .appendTo($(card_container))
+    }).appendTo($(card_container));
 
-    const card_body = $('<div />', {
-      class: 'card-body d-flex flex-column',
-      style: 'min-height: 300px;',
+    const card_body = $("<div />", {
+      class: "card-body d-flex flex-column",
+      style: "min-height: 300px;",
     })
       .append(
-        $('<div />', {
-          class: 'flex-grow-1',
+        $("<div />", {
+          class: "flex-grow-1",
         })
           .append(
-            $('<h5 />', {
-              class: 'font-weight-bold mb-4',
-              style: 'color: #3E6896; font-size: 25px;',
+            $("<h5 />", {
+              class: "font-weight-bold mb-4",
+              style: "color: #3E6896; font-size: 25px;",
               html: obj_project.name,
             })
           )
           .append(
-            $('<p />', {
-              class: 'card-text',
+            $("<p />", {
+              class: "card-text",
               html: `永續企業: `,
-            })
-              .append(
-                $('<span />', {
-                  class: 'pl-2',
-                  html: obj_project.project_a,
-                })
-              )
+            }).append(
+              $("<span />", {
+                class: "pl-2",
+                html: obj_project.project_a,
+              })
+            )
           )
           .append(
-            $('<p />', {
-              class: 'card-text',
+            $("<p />", {
+              class: "card-text",
               html: `地方團隊: `,
-            })
-              .append(
-                $('<span />', {
-                  class: 'pl-2',
-                  html: obj_project.project_b,
-                })
-              )
+            }).append(
+              $("<span />", {
+                class: "pl-2",
+                html: obj_project.project_b,
+              })
+            )
           )
           .append(
-            $('<p />', {
-              class: 'card-text',
+            $("<p />", {
+              class: "card-text",
               html: `期間: `,
-            })
-              .append(
-                $('<span />', {
-                  class: 'pl-2',
-                  html: obj_project.period,
-                })
-              )
+            }).append(
+              $("<span />", {
+                class: "pl-2",
+                html: obj_project.period,
+              })
+            )
           )
       )
       .appendTo($(card_container))
       .get(0);
 
-    const sdg_container = $('<div />', {
-      class: 'row mt-3',
-      style: 'gap: 10px;',
-    })
-      .appendTo($(card_body));
+    const sdg_container = $("<div />", {
+      class: "row mt-3",
+      style: "gap: 10px;",
+    }).appendTo($(card_body));
 
     let list_sdgs = [];
     if (typeof obj_project.weight === "string") {
@@ -571,26 +712,28 @@ export function set_page_info_cms_agent(uuid){
     const isReadMore = list_sdgs.length > 5;
 
     for (const index of displaySdgsItems) {
-      const container = $('<div/>', {
-        class: 'col-2 pr-0',
-      })
+      const container = $("<div/>", {
+        class: "col-2 pr-0",
+      });
 
       const index_sdg = ("0" + (index + 1)).slice(-2);
-      $('<img/>', {
-        class: 'w-100',
+      $("<img/>", {
+        class: "w-100",
         src: `/static/imgs/SDGs_${index_sdg}.jpg`,
-        alt: '',
+        alt: "",
       }).appendTo(container);
 
       container.appendTo(sdg_container);
-    };
-
-    if (isReadMore) {
-      $('<p/>', { class: 'col-12 m-0 text-center', html: 'Read more...'}).appendTo(sdg_container);
     }
 
+    if (isReadMore) {
+      $("<p/>", {
+        class: "col-12 m-0 text-center",
+        html: "Read more...",
+      }).appendTo(sdg_container);
+    }
 
-    $('<a />', {
+    $("<a />", {
       class: "dropdown-toggle btn btn-dark w-100",
       style: "border-radius: 18px;",
       href: "#",
@@ -600,8 +743,7 @@ export function set_page_info_cms_agent(uuid){
       "data-bs-toggle": "modal",
       "data-bs-target": `#modalProjectManagement_${obj_project.uuid}`,
       html: "專案管理選單",
-    })
-      .appendTo($(root_container));
+    }).appendTo($(root_container));
 
     // Project management modal
     $("<div/>", {
@@ -614,23 +756,27 @@ export function set_page_info_cms_agent(uuid){
       "aria-hidden": true,
     })
       .html(
-        str_project_management_modal.replaceAll("UUID_PROJECT", obj_project.uuid)
+        str_project_management_modal.replaceAll(
+          "UUID_PROJECT",
+          obj_project.uuid
+        )
       )
       .appendTo("body");
 
-    $('<div/>', {
-      class: 'modal fade',
+    $("<div/>", {
+      class: "modal fade",
       id: "projectDeleteModel_" + obj_project.uuid,
       tabindex: -1,
-      role: 'dialog',
-      html: str_project_delete_modal.replaceAll("UUID_PROJECT", obj_project.uuid),
-    })
-      .appendTo("body");
+      role: "dialog",
+      html: str_project_delete_modal.replaceAll(
+        "UUID_PROJECT",
+        obj_project.uuid
+      ),
+    }).appendTo("body");
   }
-  /* Create DOM */
 }
 
-export function showProjectDeleteModel (uuid_project){
+export function showProjectDeleteModel(uuid_project) {
   delete_plan(uuid_project);
   $("#projectDeleteModel_" + uuid_project).modal("hide");
 
