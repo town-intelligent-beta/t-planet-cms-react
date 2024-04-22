@@ -47,6 +47,8 @@ $(document).ready(() => {
         });
       }
     });
+    console.log("Hello");
+    console.log(sroi_evidences);
     $.ajax({
       url: `${HOST_URL_TPLANET_DAEMON}/projects/set_sroi_evidences`,
       type: "POST",
