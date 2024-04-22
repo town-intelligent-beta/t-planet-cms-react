@@ -158,7 +158,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
 
   const loadData = (sroiType, targetElementId) => {
     $.ajax({
-      url: "http://125.229.172.232:5567/projects/get_sroi_table_values",
+      url: "${HOST_URL_TPLANET_DAEMON}/projects/get_sroi_table_values",
       type: "POST",
       data: {
         uuid_project: obj_project.uuid,
