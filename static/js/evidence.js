@@ -4,7 +4,7 @@ $(document).ready(() => {
 
   if (uuid) {
     $.ajax({
-      url: "http://125.229.172.232:5567/projects/get_sroi_evidence_identifiers",
+      url: `${HOST_URL_TPLANET_DAEMON}/projects/get_sroi_evidence_identifiers`,
       type: "POST",
       data: {
         uuid_project: uuid,
@@ -48,7 +48,7 @@ $(document).ready(() => {
       }
     });
     $.ajax({
-      url: "http://125.229.172.232:5567/projects/set_sroi_evidences",
+      url: `${HOST_URL_TPLANET_DAEMON}/projects/set_sroi_evidences`,
       type: "POST",
       data: {
         project_uuid: uuid,
