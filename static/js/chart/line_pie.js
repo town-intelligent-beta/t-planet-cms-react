@@ -1,4 +1,4 @@
-fetch("https://beta-tplanet-backend.townway.com.tw/dashboard/relational")
+fetch(HOST_URL_TPLANET_DAEMON + "/dashboard/relational")
   .then((response) => response.json())
   .then((data) => {
     const lineData = {
@@ -43,7 +43,7 @@ fetch("https://beta-tplanet-backend.townway.com.tw/dashboard/relational")
     console.error("Error fetching data:", error);
   });
 
-fetch("https://beta-tplanet-backend.townway.com.tw/dashboard/weight")
+fetch(HOST_URL_TPLANET_DAEMON + "/dashboard/weight")
   .then((response) => response.json())
   .then((data) => {
     const pieData = {
