@@ -95,7 +95,7 @@ const checkAndShowModal = () => {
 const updateInputValue = () => {
   const sdgsText =
     list_target_sdgs.length > 0 ? " SDG" + list_target_sdgs.join(", SDG") : "";
-  input.value = `我想請問，${selectOneText}列出${selectTwoText}符合${sdgsText}。`;
+  input.value = `我想請問，${selectOneText}列出${selectTwoText}，符合${sdgsText}。`;
 };
 const updateSubmitButtonState = () => {
   selectOne.value !== "---請選擇---" && selectTwo.value !== "---請選擇---"
