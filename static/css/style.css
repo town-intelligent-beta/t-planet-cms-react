@@ -405,3 +405,184 @@ section {
 table#grid-bottom-bar {
   display: none !important;
 }
+
+
+.pt-gpt {
+  padding-top: 58px;
+}
+@media (min-width: 768px) {
+  .pt-gpt {
+    padding-top: 94px;
+  }
+}
+#gpt-wrapper header {
+  position: absolute;
+  transition: all 0.5s;
+  height: calc(100% - 300px);
+  transform: translate(-100%);
+}
+#gpt-wrapper .bg-gpt-primary {
+  background-color: #171717b6;
+}
+.bg-gpt-secondary {
+  background-color: #212121;
+}
+.bg-gpt-third {
+  background-color: #444654;
+}
+#gpt-wrapper .text-gpt-light {
+  color: #ececec;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+#gpt-wrapper section {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  #gpt-wrapper header {
+    position: static;
+    transform: none;
+    height: 100%;
+  }
+  #gpt-wrapper .bg-gpt-primary {
+    background-color: #171717;
+  }
+}
+
+#gpt-wrapper header.transform-open {
+  transform: translate(0);
+}
+
+#gpt-wrapper .gpt-logo {
+  background-color: var(--light);
+  padding: 0.5em;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+.h-full {
+  overflow-y: scroll;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  section.h-full {
+    height: 100vh;
+  }
+}
+.input-fixed {
+  position: fixed;
+  bottom: 50px;
+  width: inherit;
+  z-index: 100;
+}
+.gpt-input,
+.gpt-input:active,
+.gpt-input:focus {
+  background-color: #ffffff42;
+  color: #ececec;
+}
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pt-gpt {
+  padding-top: 58px;
+}
+@media (min-width: 768px) {
+  .pt-gpt {
+    padding-top: 94px;
+  }
+}
+#gpt-wrapper header {
+  position: absolute;
+  transition: all 0.5s;
+  height: calc(100% - 300px);
+  transform: translate(-100%);
+}
+#gpt-wrapper .bg-gpt-primary {
+  background-color: #171717b6;
+}
+.bg-gpt-secondary {
+  background-color: #212121;
+}
+.bg-gpt-third {
+  background-color: #444654;
+}
+#gpt-wrapper .text-gpt-light {
+  color: #ececec;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+#gpt-wrapper section {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  #gpt-wrapper header {
+    position: static;
+    transform: none;
+    height: 100%;
+  }
+  #gpt-wrapper .bg-gpt-primary {
+    background-color: #171717;
+  }
+}
+
+#gpt-wrapper header.transform-open {
+  transform: translate(0);
+}
+
+#gpt-wrapper .gpt-logo {
+  background-color: var(--light);
+  padding: 0.5em;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+.h-full {
+  overflow-y: scroll;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  section.h-full {
+    height: 100vh;
+  }
+}
+.input-fixed {
+  position: fixed;
+  bottom: 50px;
+  width: inherit;
+  z-index: 100;
+}
+.gpt-input,
+.gpt-input:active,
+.gpt-input:focus {
+  background-color: #ffffff42;
+  color: #ececec;
+}
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
