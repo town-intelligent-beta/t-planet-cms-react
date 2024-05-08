@@ -577,8 +577,13 @@ export function set_page_info_cms_agent(uuid) {
   for (let index = 0; index < list_project_uuids.length; index++) {
     const obj_project = plan_info(list_project_uuids[index]);
     const period = obj_project.period;
-    const startDate = period.split("-")[0];
-    const year = startDate.split("/")[2];
+    let startDate = "";
+    let year = ""
+
+    if (period.includes("-")) {
+      startDate = period.split("-")[0];
+      year = startDate.split("/")[2];
+    }
 
     if (!isNaN(year) && year !== "" && !existingYears.includes(year)) {
       existingYears.push(year);
