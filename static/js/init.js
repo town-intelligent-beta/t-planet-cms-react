@@ -124,28 +124,28 @@ function navbar(group) {
 
       var obj_dropdown_item_index = document.createElement("a");
       obj_dropdown_item_index.className = "dropdown-item";
-      obj_dropdown_item_index.href = "admin_index.html";
+      obj_dropdown_item_index.href = "/backend/admin_agent_dashboard.html";
       obj_dropdown_item_index.innerHTML = "<img src='/static/imgs/index.svg' style='width: 25px; height: 25px;'> 首頁管理";
 
       var obj_dropdown_item_sustainable = document.createElement("a");
       obj_dropdown_item_sustainable.className = "dropdown-item";
-      obj_dropdown_item_sustainable.href = "cms_agent.html";
+      obj_dropdown_item_sustainable.href = "/backend/cms_agent.html";
       obj_dropdown_item_sustainable.innerHTML = "<img src='/static/imgs/cooperate.svg' style='width: 25px; height: 25px;'> 永續專區";
 
 
       var obj_dropdown_item_AI = document.createElement("a");
       obj_dropdown_item_AI.className = "dropdown-item";
-      obj_dropdown_item_AI.href = "cms_ai_gpt.html";
+      obj_dropdown_item_AI.href = "/backend/cms_ai_gpt.html";
       obj_dropdown_item_AI.innerHTML = "<img src='/static/imgs/ai.svg' style='width: 30px; height: 30px;'> AI Eval";
 
       var obj_dropdown_item_news = document.createElement("a");
       obj_dropdown_item_news.className = "dropdown-item";
-      obj_dropdown_item_news.href = "cms_news_list.html";
+      obj_dropdown_item_news.href = "/backend/cms_news_list.html";
       obj_dropdown_item_news.innerHTML = "<img src='/static/imgs/news.svg' style='width: 25px; height: 25px;'> 最新消息";
 
       var obj_dropdown_item_contact = document.createElement("a");
       obj_dropdown_item_contact.className = "dropdown-item";
-      obj_dropdown_item_contact.href = "cms_contact_us.html";
+      obj_dropdown_item_contact.href = "/backend/cms_contact_us.html";
       obj_dropdown_item_contact.innerHTML = "<img src='/static/imgs/contact_us.svg' style='width: 25px; height: 25px;'> 聯繫我們";
 
       var obj_dropdown_item_logout = document.createElement("a");
@@ -155,7 +155,7 @@ function navbar(group) {
 
       var obj_dropdown_item_delete = document.createElement("a");
       obj_dropdown_item_delete.className = "dropdown-item";
-      obj_dropdown_item_delete.href = "admin_agent_accountDelete.html";
+      obj_dropdown_item_delete.href = "/backend/admin_agent_accountDelete.html";
       obj_dropdown_item_delete.innerHTML = "<img src='/static/imgs/delete.svg' style='width: 25px; height: 25px;'> 刪除帳號";
 
       obj_dropdown_menu.appendChild(obj_dropdown_item_index);
