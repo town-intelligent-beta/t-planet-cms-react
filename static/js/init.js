@@ -1,4 +1,4 @@
-import { set_page_info } from './set_page_info.js'
+import { set_page_info } from './set_page_info.js';
 
 function add_navbar() {
   $('#navbar').html(str_navbar)
@@ -97,9 +97,8 @@ function navbar(group) {
   set_navbar_animation()
 
   // home logo href
-  if (group == "200" || group == "201") {
-    document.getElementById("index_logo").href =
-      "/backend/admin_agent_dashboard.html";
+  if (group == "200" || group == "201" ) {
+    document.getElementById("index_logo").href = "/index.html";
 
     try {
       var obj_account_status = document.getElementById("account_status");
