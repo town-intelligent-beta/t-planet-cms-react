@@ -580,7 +580,7 @@ export function set_page_info_cms_agent(uuid) {
     let startDate = "";
     let year = ""
 
-    if (period.includes("-")) {
+    if (typeof period === "string" && period.includes("-")) {
       startDate = period.split("-")[0];
       year = startDate.split("/")[2];
     }
