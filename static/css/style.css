@@ -42,7 +42,6 @@ img {
 .navbar.blur .nav-item.active {
   opacity: 0.5;
 }
-
 body {
   padding-top: 94px;
 }
@@ -227,7 +226,10 @@ section {
   color: #4e4e4e;
   background-color: #ebebeb;
 }
-
+.dropdown-item:active {
+  background-color: #fff38d;
+  color: #4e4e4e;
+}
 @media (min-width: 0px) {
   .admin-index-img {
     width: 90%;
@@ -369,8 +371,14 @@ section {
     min-height: 300px;
   }
 }
-.custom-select {
-  width: inherit;
+
+.agent-col {
+  width: calc(100% / 7);
+  padding: 12px;
+
+  .card-button {
+    height: 180px;
+  }
 }
 .content {
   position: relative;
