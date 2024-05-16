@@ -47,17 +47,18 @@ $(document).ready(() => {
         });
       }
     });
-    console.log("Hello");
-    console.log(sroi_evidences);
+    const requestData = {
+      uuid_project: uuid,
+      sroi_evidences: sroi_evidences,
+    };
     $.ajax({
       url: `${HOST_URL_TPLANET_DAEMON}/projects/set_sroi_evidences`,
       type: "POST",
-      data: {
-        project_uuid: uuid,
-        sroi_evidences: sroi_evidences,
-      },
+      data: JSON.stringify(requestData),
+      contentType: "application/json",
       success: (response) => {
-        console.log("success");
+        alert("儲存成功");
+        window.location.href = "cms_sroi.html?uuid=" + uuid;
       },
       error: (error) => {
         console.log(error);
@@ -77,6 +78,5 @@ $(document).ready(() => {
       btn.textContent = "隱藏";
       filter.style.visibility = "hidden";
     }
-  }
-  );
+  });
 });
