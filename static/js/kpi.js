@@ -63,6 +63,9 @@ export function get_total_project_weight(list_project_uuids) {
       totalProjectWeight = addWeight(totalProjectWeight, weight)
     }
 
+    console.log("Hello totalProjectWeight")
+    console.log(totalProjectWeight)
+
     return totalProjectWeight;
 }
 

@@ -120,17 +120,30 @@ selectTwo.addEventListener("change", () => {
 submitBtn.addEventListener("click", () => {
   const requestBody = {
     role: "小鎮賦能",
-    type: "mock",
+    type: "RAG",
+    format: "html",
+    tools: [{ "tool": "agent", "load_tools": "custom" }],
     injection: [
       { key: "topic", value: selectOneText },
-      {
-        key: "topic",
-        value: selectTwoText,
-        weight: list_target_sdgs,
-      },
+      { key: "topic", value: selectTwoText, weight: list_target_sdgs },
     ],
     message: input.value,
   };
+
+  const questionEl = document.createElement("p");
+  const responseEl = document.createElement("p");
+  questionEl.classList.add("p-lg-3", "p-1");
+  responseEl.classList.add("bg-gpt-third", "p-lg-3", "p-1", "mb-5", "d-flex", "align-items-start");
+  questionEl.id = "question";
+  responseEl.id = "response";
+  questionEl.textContent = `${settings.username}：${input.value}`;
+  chat.appendChild(questionEl);
+  chat.appendChild(responseEl);
+
+  const spinner = document.createElement("div");
+  spinner.classList.add("spinner");
+  responseEl.appendChild(spinner);
+
   fetch("https://beta-llmtwins.4impact.cc/prompt", {
     method: "POST",
     headers: {
@@ -140,30 +153,8 @@ submitBtn.addEventListener("click", () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const questionEl = document.createElement("p");
-      const responseEl = document.createElement("p");
-      questionEl.classList.add("p-lg-3", "p-1");
-      responseEl.classList.add(
-        "bg-gpt-third",
-        "p-lg-3",
-        "p-1",
-        "mb-5",
-        "d-flex",
-        "align-items-start"
-      );
-      questionEl.id = "question";
-      responseEl.id = "response";
-      questionEl.textContent = `${settings.username}：${input.value}`;
-      chat.appendChild(questionEl);
-      chat.appendChild(responseEl);
-      const spinner = document.createElement("div");
-      spinner.classList.add("spinner");
-      responseEl.appendChild(spinner);
-
-      setTimeout(() => {
-        spinner.remove();
-        responseEl.innerHTML = `${settings.assistant_name}：${data.message}`;
-      }, 2000);
+      spinner.remove();
+      responseEl.innerHTML = `${settings.assistant_name}：${data.message}`;
       input.value = "";
       list_target_sdgs = [];
       selectOne.value = "---請選擇---";
