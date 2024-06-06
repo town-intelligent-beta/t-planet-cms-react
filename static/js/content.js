@@ -461,65 +461,69 @@ export async function set_page_info_content() {
     $('.tabs a').get(0).click();
 
     // SROI
-    const sroiData = await getSroiData(uuid);
-    const { social_subtotal, economy_subtotal, environment_subtotal } =
-      sroiData;
 
-    if (
-      social_subtotal == 0 &&
-      economy_subtotal == 0 &&
-      environment_subtotal == 0
-    ) {
+    if (SROI) {
 
-      sroiData.visible = false;
+      const sroiData = await getSroiData(uuid);
+      const { social_subtotal, economy_subtotal, environment_subtotal } =
+        sroiData;
+
+      if (
+        social_subtotal == 0 &&
+        economy_subtotal == 0 &&
+        environment_subtotal == 0
+      ) {
+
+        sroiData.visible = false;
+      }
+
+      const html = document.getElementById("tpl-sroi-section").innerHTML;
+      const template = Handlebars.compile(html);
+      document.getElementById("sroi-section").innerHTML = template(sroiData);
+
+      const labels = ["社會價值", "經濟價值", "環境價值"];
+      const datasetData = [
+        social_subtotal,
+        economy_subtotal,
+        environment_subtotal,
+      ];
+
+      // 當社會價值、經濟價值、環境價值都為0時，不顯示圓餅圖
+      if (isValidDoughnutChartData(datasetData)) {
+        draw_doughnut_chart({
+          element: document.querySelector("#sroi-section #sroi_chart"),
+          data: {
+            labels,
+            datasets: [
+              {
+                data: datasetData,
+              },
+            ],
+          },
+        });
+      }
     }
 
-    const html = document.getElementById("tpl-sroi-section").innerHTML;
-    const template = Handlebars.compile(html);
-    document.getElementById("sroi-section").innerHTML = template(sroiData);
+    // Tabs
+    $(".tabs a").on("click", (e) => {
+      e.preventDefault();
 
-    const labels = ["社會價值", "經濟價值", "環境價值"];
-    const datasetData = [
-      social_subtotal,
-      economy_subtotal,
-      environment_subtotal,
-    ];
+      $(".tabs a").addClass("text-muted").removeClass("text-dark");
+      $(e.target).removeClass("text-muted").addClass("text-dark");
 
-    // 當社會價值、經濟價值、環境價值都為0時，不顯示圓餅圖
-    if (isValidDoughnutChartData(datasetData)) {
-      draw_doughnut_chart({
-        element: document.querySelector("#sroi-section #sroi_chart"),
-        data: {
-          labels,
-          datasets: [
-            {
-              data: datasetData,
-            },
-          ],
-        },
-      });
-    }
+      $(".tabs .tabs-section").hide();
+      $($(e.target).attr("href")).show();
+    });
+
+    $(".tabs a").get(0).click();
+
+    renderHandlebars("sroi-section", "tpl-sroi-section-loading", {});
+
+    // SROI
+    getSroiData(uuid)
+      .then((sroiData) => renderSroiSection(sroiData))
+      .catch((e) => renderHandlebars("sroi-section", "tpl-sroi-section-error", {}));
   }
-
-  // Tabs
-  $(".tabs a").on("click", (e) => {
-    e.preventDefault();
-
-    $(".tabs a").addClass("text-muted").removeClass("text-dark");
-    $(e.target).removeClass("text-muted").addClass("text-dark");
-
-    $(".tabs .tabs-section").hide();
-    $($(e.target).attr("href")).show();
-  });
-
-  $(".tabs a").get(0).click();
-
-  renderHandlebars("sroi-section", "tpl-sroi-section-loading", {});
-
-  // SROI
-  getSroiData(uuid)
-    .then((sroiData) => renderSroiSection(sroiData))
-    .catch((e) => renderHandlebars("sroi-section", "tpl-sroi-section-error", {}));
 }
 
 const renderSroiSection = (sroiData) => {
