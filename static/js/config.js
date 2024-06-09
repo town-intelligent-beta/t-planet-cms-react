@@ -17,5 +17,5 @@ COPYRIGHT = "Second Home"
 WEIGHT = [1, 1, 1]
 
 // FEATURES
-LLM = false
-SROI = false
+LLM = true
+SROI = true
