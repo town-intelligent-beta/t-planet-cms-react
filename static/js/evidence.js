@@ -28,12 +28,43 @@ $(document).ready(() => {
               `<div class='d-flex justify-content-between align-items-center'><li class="mr-5">${item.id}${item.name}</li><input class="form-control w-50 my-2" type="url" placeholder="請填入可檢視雲端連結" /></div>`
           ).join("")}
           </ul>`);
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "uuid_project": uuid
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch(`${HOST_URL_TPLANET_DAEMON}/projects/get_sroi_evidences`, requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.status === "OK") {
+              result.content.forEach((item) => {
+                const [id, name] = item.id.split(/(.+)/); // 將 id 和 name 分開
+                const selector = `li:contains('${id}${name}')`;
+                const input = $(selector).siblings("input.form-control");
+                input.val(item.reference);
+              });
+            } else {
+              console.error(result.error);
+            }
+          })
+          .catch((error) => console.error(error));
       },
       error: (error) => {
         console.log(error);
       },
     });
   }
+
   $("a.btn-dark").attr("href", "cms_sroi.html?uuid=" + uuid);
 
   $("#save-btn").on("click", () => {
@@ -65,6 +96,7 @@ $(document).ready(() => {
       },
     });
   });
+
   const btn = document.querySelector(".show-more-btn");
   const content = document.querySelector(".content");
   const filter = document.querySelector(".filter");
