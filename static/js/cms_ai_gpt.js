@@ -144,6 +144,8 @@ submitBtn.addEventListener("click", () => {
   spinner.classList.add("spinner");
   responseEl.appendChild(spinner);
 
+  console.log(JSON.stringify(requestBody))
+
   fetch("https://beta-llmtwins.4impact.cc/prompt", {
     method: "POST",
     headers: {
