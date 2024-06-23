@@ -1,7 +1,7 @@
 import {
   get_task_comment,
-  verify_task_on_tplanet,
   get_task_info,
+  verify_task_on_tplanet,
 } from "./tasks.js";
 import { renderHandlebarsAppendTo } from "./utils/handlebars.js";
 import { wrapImagesWithLightbox } from "./utils/lightbox.js";
@@ -61,11 +61,12 @@ export function set_page_info_admin_project_check(uuid) {
   var obj_task_info = get_task_info(uuid);
   const task_weights = parse_task_weights(obj_task_info);
 
-  list_task_comment.map((task_comment) => {
+  list_task_comment.map((task_comment, index) => {
     const data = {
       ...task_comment,
       task_weights,
       img: `${HOST_URL_TPLANET_DAEMON}${task_comment.img}`,
+      item_index: index + 1,
     };
     renderHandlebarsAppendTo("tbody_task_comment", "tpl-task", data);
   });

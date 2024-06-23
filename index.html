@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/kpi.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script src="/static/js/index.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
 
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/kpi.css">
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/innerHTML.js"></script>
+  <script src="/static/js/localStorage.js"></script>
+  <script src="/static/js/accounts.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/permission.js"></script>
+  <script src="/static/js/index.js"></script>
+  <script type="module" src="/static/js/init.js"></script>
 
-  <body class="d-flex flex-column">
-    <!-- navbar -->
-    <div id="navbar"></div>
-    <!-- content -->
-    <section class="flex-grow-1">
-      <div class="container-fluid px-0">
-        <div class="text-center">
-          <img class="img-fluid" id="Tbanner_image" src="/static/imgs/project_img.jpg" style="max-height: 100%; max-width: 100%;">
-        </div>
+</head>
+
+<body class="d-flex flex-column">
+  <!-- navbar -->
+  <div id="navbar"></div>
+  <!-- content -->
+  <section class="flex-grow-1">
+    <div class="container-fluid px-0">
+      <div class="text-center">
+        <img class="img-fluid" id="Tbanner_image" src="/static/imgs/project_img.jpg"
+          style="max-height: 100%; max-width: 100%;">
       </div>
+    </div>
+    <div class="container-fluid">
       <div class="bg-light py-4">
         <div class="row justify-content-center">
           <div class="col-md-10">
@@ -51,51 +56,51 @@
           </div>
         </div>
       </div>
-      <div class="bg-light py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-10">
-              <div class="card p-md-2">
-                <div class="row align-items-center">
-                  <div class="col-md-5 text-center">
-                    <img id="csr_img" src="/static/imgs/2nd-home-csr.png" class="img-fluid p-3 p-md-0">
-                  </div>
-                  <div class="col-md-7">
-                    <div class="card-body">
-                      <p id="textarea2" class="card-text"></p>
-                    </div>
+    </div>
+    <div class="bg-light py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <div class="card p-md-2">
+              <div class="row align-items-center">
+                <div class="col-md-5 text-center">
+                  <img id="csr_img" src="/static/imgs/2nd-home-csr.png" class="img-fluid p-3 p-md-0">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <p id="textarea2" class="card-text"></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row justify-content-center mt-5">
-            <div class="col-10">
-              <div class="card p-md-2">
-                <div class="row align-items-center">
-                  <div class="col-md-5 text-center">
-                    <img id="sdg_img" src="/static/imgs/sdgs.png" class="img-fluid p-3 p-md-0">
-                  </div>
-                  <div class="col-md-7">
-                    <div class="card-body">
-                      <p id="textarea3" class="card-text"></p>
-                    </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+          <div class="col-10">
+            <div class="card p-md-2">
+              <div class="row align-items-center">
+                <div class="col-md-5 text-center">
+                  <img id="sdg_img" src="/static/imgs/sdgs.png" class="img-fluid p-3 p-md-0">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <p id="textarea3" class="card-text"></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row justify-content-center mt-5">
-            <div class="col-10">
-              <div class="card p-md-2">
-                <div class="row align-items-center">
-                  <div class="col-md-5 text-center">
-                    <img id="twins_img" src="/static/imgs/digital-twin.png" class="img-fluid p-3 p-md-0" >
-                  </div>
-                  <div class="col-md-7">
-                    <div class="card-body">
-                      <p id="textarea4" class="card-text"></p>
-                    </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+          <div class="col-10">
+            <div class="card p-md-2">
+              <div class="row align-items-center">
+                <div class="col-md-5 text-center">
+                  <img id="twins_img" src="/static/imgs/digital-twin.png" class="img-fluid p-3 p-md-0">
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <p id="textarea4" class="card-text"></p>
                   </div>
                 </div>
               </div>
@@ -103,8 +108,10 @@
           </div>
         </div>
       </div>
-    </section>
-    <!-- footer -->
-    <div id="footer"></div>
-  </body>
+    </div>
+  </section>
+  <!-- footer -->
+  <div id="footer"></div>
+</body>
+
 </html>
