@@ -20,7 +20,6 @@ export const showMore = () => {
   }
 };
 
-
 export function refresh() {
   const html = document.getElementById("tpl-cms-sroi").innerHTML;
   const template = Handlebars.compile(html);
@@ -114,22 +113,10 @@ export const set_page_info_cms_sroi = async (uuid) => {
 
   $("#cms-sroi").on("click", ".visible", async (e) => {
     e.preventDefault();
-    // const selectedValue = e.target.value;
-    // let gid;
-
-    // if (selectedValue === '社會面向') {
-    //   gid = 874640826;
-    // } else if (selectedValue === '經濟面向') {
-    //   gid = 2040341016;
-    // } else {
-    //   gid = 553263877;
-    // }
-
     const sroiData = await setSroiData(uuid, e.target.value);
     data = {
       ...data,
       visible: sroiData.visible,
-      // spreadsheet_url: `https://docs.google.com/spreadsheets/d/${sroiData.file_id}#gid=${gid}`,
     };
 
     renderSroiPage(data);
@@ -176,6 +163,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
                 (row) =>
                   `<tr>
                 ${row
+                  .slice(0, -1)  // 移除每個 row 的最後一個元素
                   .map(
                     (cell) =>
                       `<td style="background-color: ${
@@ -199,6 +187,7 @@ export const set_page_info_cms_sroi = async (uuid) => {
       },
     });
   };
+
   loadData("SOCIAL", "tableSocial");
 
   $("#v-pills-tab a").on("click", function (e) {
