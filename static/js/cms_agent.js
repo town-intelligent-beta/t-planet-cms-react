@@ -209,6 +209,32 @@ $(function () {
         } catch (e) {
           console.log(e);
         }
+
+        // Create NFT
+        var parent_task_name = "";
+        var raw_description = "";
+        var doc = "";
+        var description = "";
+        var attribute = "";
+
+        try {
+          parent_task_name = document.getElementById("parent_task_name_" + list_parent_tasks[index_task]).value;
+          raw_description = document.getElementById("parent_task_overview_" + list_parent_tasks[index_task]).value;
+          var parser = new DOMParser();
+          doc = parser.parseFromString(raw_description, "text/html");
+          description = doc.body.firstChild.innerText;
+          attribute = make_attrubute();
+
+          const obj_input = {"uuid_project":uuid,
+            "uuid_task":list_parent_tasks[index_task],
+            "name":parent_task_name,
+            "description": description, // "社會影響力足跡: " + parent_task_name,
+            "attribute":attribute};
+
+          mintNFT(obj_input);
+        } catch (e) {
+            console.log(e);
+        }
       }
     }
 
