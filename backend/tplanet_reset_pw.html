@@ -20,6 +20,9 @@
     <script type="module" src="/static/js/forget_password.js"></script>
     <script type="module" src="/static/js/set_page_info.js"></script>
     <script type="module" src="/static/js/init.js"></script>
+    <script>
+      $("#account_email").val( getLocalStorage("email"));
+    </script>
   </head>
   <body class="d-flex flex-column">
   <!-- navbar -->
@@ -33,7 +36,7 @@
         <div class="row justify-content-center">
           <div class="col-10 col-md-2 rounded-lg px-0 mb-md-5">
               <div>
-                <p><small class="text-secondary">ABCDEFG@gmail.com</small></p>
+                <p><small id="account_email" class="text-secondary"></small></p>
               </div>
               <div class="form-group" style="position: relative;">
                 <input type="password" class="form-control form-control-sm bg-2ndhome" id="password"  placeholder="密碼">
