@@ -19,6 +19,7 @@ import { set_page_info_heat_map } from './heat_map.js'
 import { set_page_info_cms_contact_us, set_page_info_cms_contact_us_detail } from './cms_contact_us.js'
 import { set_page_info_contact_us } from './contact_us_init.js'
 import { set_page_info_admin_agent_dashboard } from './admin_agent_dashboard.js'
+import { set_page_info_admin_username } from "./admin_username.js";
 
 export function set_page_info() {
   /* Get path and parameters */
@@ -127,5 +128,9 @@ export function set_page_info() {
 
   if (page == "admin_agent_dashboard.html") {
     set_page_info_admin_agent_dashboard();
+  }
+
+  if (page == "username.html") {
+    set_page_info_admin_username();
   }
 }

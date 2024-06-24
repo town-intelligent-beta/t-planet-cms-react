@@ -25,6 +25,19 @@
   <script type="module" src="/static/js/admin_agent_dashboard.js"></script>
   <script type="module" src="/static/js/set_page_info.js"></script>
   <script type="module" src="/static/js/init.js"></script>
+  <style>
+    .agent-col {
+      flex: 1 0 0;
+      max-width: 200px;
+      margin: 1px;
+      padding: 1px;
+    }
+    .row.mb-5.mt-5 {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+  </style>
 </head>
 
 <body>
@@ -34,7 +47,18 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-12 d-none d-md-block">
-          <div class="row mb-5 mt-4">
+          <div class="row mb-5 mt-5">
+            <div class="agent-col" id="profile">
+              <div class="card card-button">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <div class="text-center">
+                    <img src="/static/imgs/Account.png" alt="" style="width:50px">
+                    <p class="mt-2 mb-0">帳號資訊</p>
+                  </div>
+                </div>
+                <a href="/backend/profile/username.html" class="stretched-link"></a>
+              </div>
+            </div>
             <div class="agent-col" id="admin_index" style="display: none;">
               <div class="card card-button">
                 <div class="d-flex justify-content-center align-items-center h-100">
@@ -57,7 +81,7 @@
                 <a href="/backend/cms_agent.html" class="stretched-link"></a>
               </div>
             </div>
-            <div id="llm" class="agent-col">  
+            <div id="llm" class="agent-col">
               <div class="card card-button">
                 <div class="d-flex justify-content-center align-items-center h-100">
                   <div class="text-center">
