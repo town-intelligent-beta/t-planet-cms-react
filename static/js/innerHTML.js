@@ -48,18 +48,6 @@ const str_cms_main_news = `
 </div>
 `
 
-const str_task_del_modal = `
-<div class="modal-dialog modal-dialog-centered modal-sm">
-  <div class="modal-content">
-    <div id="delete_uuid_UUID_TASK" class="modal-body text-center" style="font-size: 20px;">
-      <p>確定刪除此項活動設計嗎？</p>
-      <button type="button" class=" btn btn-secondary" style="width: 80px;" data-dismiss="modal">取消</button>
-      <button type="button" class="btn btn-danger" style="width: 80px;" data-dismiss="modal" onclick="showDeleteModal('UUID_TASK')">確定</button>
-    </div>
-  </div>
-</div>
-`
-
 const str_project_delete_modal = `
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
       <div class="modal-content">
@@ -484,48 +472,6 @@ const str_project_block_in_project_page = `<a class="text-dark" href="/cms_proje
     </div>
   </a>
 `
-
-const str_SDG_in_list_project_backup = `<a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-    <img class="pb-1" style="width:13%"  src="/static/imgs/SDGs_INDEX_SDG.jpg" alt="">
-  </a>`
-
-  const str_SDG_in_list_project = `<div class="col-2 pr-0">
-  <p href="#">
-    <img class="w-100" src="/static/imgs/SDGs_INDEX_SDG.jpg" alt="">
-  </p>
-</div>`
-
-const str_admin_dropdown = `<a class="nav-link d-md-none" href="/backend/message_list.html">
-<img src="/static/imgs/notifications_icon.svg" width="35" height="35" class="d-inline-block align-middle" alt="">
-</a>
-<a class="nav-link d-md-none" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-<img src="/static/imgs/manage_accounts_icon.svg" width="35" height="35" class="d-inline-block align-middle" alt="">
-</a>
-<div class="dropdown-menu dropdown-menu-center">
-<a class="dropdown-item d-flex align-items-center" href="/backend/ab_cms_personal_file.html">
-  <img src="/static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-  <span class="pl-2">基本資料</span>
-</a>
-<a class="dropdown-item d-flex align-items-center" href="/backend/ab_my_project.html">
-  <img src="/static/imgs/registration_icon.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-  <span class="pl-2">我的提案</span>
-</a>
-<a class="dropdown-item d-flex align-items-center" href="/backend/cms_ab.html">
-  <img src="/static/imgs/cooperate.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-  <span class="pl-2">永續專案</span>
-</a>
-<!-- <a class="dropdown-item d-flex align-items-center" href="/backend/ab_cms_personal_file.html">
-  <img src="/static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-  <span class="pl-2">基本資料</span>
-</a> -->
-<a class="dropdown-item d-flex align-items-center" href="/backend/message_list.html">
-  <img src="/static/imgs/message.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-  <span class="pl-2">訊息管理</span>
-</a>
-<a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" onclick="logout()">
-  <img src="/static/imgs/logout.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-  <span class="pl-2">登出</span>
-</a>`;
 
 const str_send_mail = `<p>寄件者：
 <span>townintelligent@gmail.com</span>

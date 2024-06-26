@@ -1,242 +1,249 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script src="https://d3js.org/d3.v6.js"></script>
-    <script src="https://unpkg.com/chart.js@4.3.0/dist/chart.umd.js"></script>
-    <script src="https://unpkg.com/chart.js-plugin-labels-dv@4.0.0/dist/chartjs-plugin-labels.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/kpi.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <script type="module" src="/static/js/project_list.js"></script>
-    <script type="module" src="/static/js/kpi.js"></script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
-  </head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css" />
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script src="https://d3js.org/d3.v6.js"></script>
+  <script src="https://unpkg.com/chart.js@4.3.0/dist/chart.umd.js"></script>
+  <script src="https://unpkg.com/chart.js-plugin-labels-dv@4.0.0/dist/chartjs-plugin-labels.min.js"></script>
 
-  <body>
-    <!-- navbar -->
-    <div id="navbar"></div>
-    <!-- content -->
-    <section>
-      <div class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-none d-md-block"
-      style="background-image:url(/static/imgs/csr-project.png); height:350px">
-      </div>
-      <div class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-md-none"
-      style="background-image:url(/static/imgs/csr-project.png); height:200px">
-      </div>
-      <div class="bg-light py-4">
-        <div class="container">
-          <!-- kpi -->
-          <div class="row justify-content-center">
-            <div class="col-10">
-              <h3 class="text-center fw-bold">計畫總指標</h3>
-            </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/kpi.css" />
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/innerHTML.js"></script>
+  <script src="/static/js/localStorage.js"></script>
+  <script type="module" src="/static/js/plan.js"></script>
+  <script type="module" src="/static/js/project_list.js"></script>
+  <script type="module" src="/static/js/kpi.js"></script>
+  <script type="module" src="/static/js/set_page_info.js"></script>
+  <script type="module" src="/static/js/init.js"></script>
+</head>
+
+<body>
+  <!-- navbar -->
+  <div id="navbar"></div>
+  <!-- content -->
+  <section>
+    <div class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-none d-md-block" style="
+          background-image: url(/static/imgs/csr-project.png);
+          height: 350px;
+        "></div>
+    <div class="jumbotron jumbotron-fluid bg-cover mb-0 bg-img-height-l d-md-none" style="
+          background-image: url(/static/imgs/csr-project.png);
+          height: 200px;
+        "></div>
+    <div class="bg-light py-4">
+      <div class="container">
+        <!-- kpi -->
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <h3 class="text-center fw-bold">計畫總指標</h3>
           </div>
-          <div class="row mt-md-4 justify-content-center">
-            <div class="col-6 col-md-2">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-1.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_1">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_1">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=0" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-2.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_2">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_2">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=1" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-3.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_3">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_3">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=2" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-4.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_4">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_4">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=3" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-5.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_5">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_5">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=4" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-6.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_6">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_6">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=5" class="stretched-link"></a>
-                </div>
+        </div>
+        <div class="row mt-md-4 justify-content-center">
+          <div class="col-6 col-md-2">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-1.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_1">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_1">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=0" class="stretched-link"></a>
               </div>
             </div>
           </div>
-          <div class="row mt-4 justify-content-center">
-            <div class="col-6 col-md-2">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-7.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_7">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_7">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=6" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-8.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_8">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_8">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=7" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-9.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_9">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_9">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=8" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-10.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_10">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_10">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=9" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-11.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_11">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_11">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=10" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-12.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_12">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_12">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=11" class="stretched-link"></a>
-                </div>
+          <div class="col-6 col-md-2">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-2.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_2">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_2">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=1" class="stretched-link"></a>
               </div>
             </div>
           </div>
-          <div class="row mt-4 justify-content-center">
-            <div class="col-6 col-md-2">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-13.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_13">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_13">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=12" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-14.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_14">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_14">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=13" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-15.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_15">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_15">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=14" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-16.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_16">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_16">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=15" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-17.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_17">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_17">0</span>件</p>
-                  <a href="/kpi_filter.html?sdg=16" class="stretched-link"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-2 mt-4 mt-md-0">
-              <div class="card rounded-0">
-                <img src="/static/imgs/SDGs-circle.png" class="card-img-top rounded-0">
-                <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_total_sdgs">0</span>人</p>
-                  <!-- <p class="card-text">專案件數:<span id="pc_total_sdgs">0</span>件</p> -->
-                </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-3.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_3">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_3">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=2" class="stretched-link"></a>
               </div>
             </div>
           </div>
-          <!-- five-life-KPI -->
-          <div id="five_life_kpi" style="display:none">
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-4.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_4">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_4">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=3" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-5.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_5">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_5">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=4" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-6.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_6">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_6">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=5" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4 justify-content-center">
+          <div class="col-6 col-md-2">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-7.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_7">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_7">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=6" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-8.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_8">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_8">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=7" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-9.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_9">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_9">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=8" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-10.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_10">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_10">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=9" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-11.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_11">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_11">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=10" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-12.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_12">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_12">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=11" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4 justify-content-center">
+          <div class="col-6 col-md-2">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-13.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_13">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_13">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=12" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-14.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_14">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_14">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=13" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-15.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_15">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_15">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=14" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-16.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_16">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_16">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=15" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-17.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">關係人口:<span id="rp_17">0</span>人</p>
+                <p class="card-text">專案件數:<span id="pc_17">0</span>件</p>
+                <a href="/kpi_filter.html?sdg=16" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mt-4 mt-md-0">
+            <div class="card rounded-0">
+              <img src="/static/imgs/SDGs-circle.png" class="card-img-top rounded-0" />
+              <div class="card-body">
+                <p class="card-text">
+                  關係人口:<span id="rp_total_sdgs">0</span>人
+                </p>
+                <!-- <p class="card-text">專案件數:<span id="pc_total_sdgs">0</span>件</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- five-life-KPI -->
+        <div id="five_life_kpi" style="display: none">
           <div class="row justify-content-center mt-4">
             <div class="col-10">
               <h3 class="text-center fw-bold">五育融通指標</h3>
@@ -245,58 +252,78 @@
           <div class="row mt-4 justify-content-md-start">
             <div class="col-6 col-md-2">
               <div class="card rounded-0">
-                <img src="/static/imgs/morality.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/morality.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_18">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_18">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_18">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_18">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=17" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2">
               <div class="card rounded-0">
-                <img src="/static/imgs/intelligence.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/intelligence.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_19">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_19">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_19">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_19">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=18" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2 mt-4 mt-md-0">
               <div class="card rounded-0">
-                <img src="/static/imgs/physique.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/physique.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_20">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_20">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_20">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_20">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=19" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2 mt-4 mt-md-0">
               <div class="card rounded-0">
-                <img src="/static/imgs/social-skills.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/social-skills.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_21">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_21">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_21">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_21">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=20" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2 mt-4 mt-md-0">
               <div class="card rounded-0">
-                <img src="/static/imgs/aesthetics.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/aesthetics.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_22">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_22">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_22">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_22">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=21" class="stretched-link"></a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-          <!-- Community-kpi -->
-          <div id="community_kpi" style="display:none">
+        <!-- Community-kpi -->
+        <div id="community_kpi" style="display: none">
           <div class="row justify-content-center mt-4">
             <div class="col-10">
               <h3 class="text-center fw-bold">社區營造指標</h3>
@@ -305,50 +332,70 @@
           <div class="row mt-4 justify-content-md-start">
             <div class="col-6 col-md-2">
               <div class="card rounded-0">
-                <img src="/static/imgs/people.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/people.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_23">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_23">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_23">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_23">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=22" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2">
               <div class="card rounded-0">
-                <img src="/static/imgs/culture.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/culture.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_24">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_24">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_24">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_24">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=23" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2 mt-4 mt-md-0">
               <div class="card rounded-0">
-                <img src="/static/imgs/place.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/place.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_25">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_25">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_25">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_25">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=24" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2 mt-4 mt-md-0">
               <div class="card rounded-0">
-                <img src="/static/imgs/specialty.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/specialty.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_26">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_26">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_26">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_26">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=25" class="stretched-link"></a>
                 </div>
               </div>
             </div>
             <div class="col-6 col-md-2 mt-4 mt-md-0">
               <div class="card rounded-0">
-                <img src="/static/imgs/landscape.png" class="card-img-top rounded-0">
+                <img src="/static/imgs/landscape.png" class="card-img-top rounded-0" />
                 <div class="card-body">
-                  <p class="card-text">關係人口:<span id="rp_27">0</span>人</p>
-                  <p class="card-text">專案件數:<span id="pc_27">0</span>件</p>
+                  <p class="card-text">
+                    關係人口:<span id="rp_27">0</span>人
+                  </p>
+                  <p class="card-text">
+                    專案件數:<span id="pc_27">0</span>件
+                  </p>
                   <a href="/kpi_filter.html?sdg=26" class="stretched-link"></a>
                 </div>
               </div>
@@ -356,54 +403,53 @@
           </div>
         </div>
       </div>
+    </div>
 
-      </div>
-
-      <div class="py-4">
-        <div class="container">
-          <!-- chart -->
-          <div class="row justify-content-center">
-            <div class="col-md-10">
-              <h3 class="text-center fw-bold">關係人口數</h3>
-            </div>
+    <div class="py-4">
+      <div class="container">
+        <!-- chart -->
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+            <h3 class="text-center fw-bold">關係人口數</h3>
           </div>
-          <div class="row mt-md-4 justify-content-center">
-            <div class="chart-container col-md-12 text-center">
-              <canvas id="weight_sdgs"></canvas>
-            </div>
+        </div>
+        <div class="row mt-md-4 justify-content-center">
+          <div class="chart-container col-md-12 text-center">
+            <canvas id="weight_sdgs"></canvas>
+          </div>
+        </div>
+
+        <div class="row mt-md-4 justify-content-center">
+          <div style="display: none" id="chart_weight_five" class="chart-container col-md-6 text-center">
+            <canvas id="weight_five"></canvas>
           </div>
 
-          <div class="row mt-md-4 justify-content-center">
-            <div style="display:none" id="chart_weight_five" class="chart-container col-md-6 text-center">
-              <canvas id="weight_five"></canvas>
-            </div>
-
-
-            <div style="display:none" id="chart_weight_comm" class="chart-container  col-md-6 text-center">
-              <canvas id="weight_comm"></canvas>
-            </div>
-
+          <div style="display: none" id="chart_weight_comm" class="chart-container col-md-6 text-center">
+            <canvas id="weight_comm"></canvas>
           </div>
         </div>
       </div>
-      <div class="bg-light py-4">
-        <div class="container">
-          <!-- list -->
-          <div class="row justify-content-center">
-            <div class="col-md-10">
-              <h3 class="text-center fw-bold">專案列表</h3>
-            </div>
-          </div>
+    </div>
+    <div class="bg-light py-4">
+      <div class="container">
+        <!-- list -->
+        <div class="row justify-content-center">
+          <h3 class="text-center fw-bold">專案列表</h3>
+        </div>
+        <div class="row justify-content-end">
+          <select id="year_filter" class="custom-select">
+          </select>
+        </div>
         <div class="row justify-content-center mt-4 mb-5">
           <div class="col-md-12">
-            <div class="row justify-content-md-start" id="project_container">
-            </div>
+            <div class="row justify-content-md-start" id="project_container"></div>
           </div>
         </div>
-        </div>
       </div>
-    </section>
-    <!-- footer -->
-    <div id="footer"></div>
-  </body>
+    </div>
+  </section>
+  <!-- footer -->
+  <div id="footer"></div>
+</body>
+
 </html>

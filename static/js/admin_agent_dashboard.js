@@ -10,4 +10,11 @@ export function set_page_info_admin_agent_dashboard() {
 
     } catch (e) { console.log(e) }
   }
+
+  // Features
+  if (LLM) {
+    $('#llm').css('display', 'block');
+  } else  {
+    $('#llm').css('display', 'none');
+  }
 }

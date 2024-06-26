@@ -15,3 +15,7 @@ COPYRIGHT = "Second Home"
 
 // Weight : SDGs, 人文地產景, 德智體群美
 WEIGHT = [1, 1, 1]
+
+// FEATURES
+LLM = true
+SROI = true
