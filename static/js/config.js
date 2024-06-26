@@ -6,7 +6,7 @@ HOST_URL_TPLANET_DAEMON = "https://beta-tplanet-backend.townway.com.tw";
 HOST_URL_EID = "https://beta-eid.townway.com.tw";
 
 // Site hoster
-SITE_HOSTERS = ["forus999@gmail.com", "secondhome2023.1@gmail.com", "mickeypeng@tpwl.org", "400@gmail.com"]
+SITE_HOSTERS = ["forus999@gmail.com", "secondhome2023.1@gmail.com", "mickeypeng@tpwl.org"]
 
 // Site information
 SITE_TYPE = 0 // 0 or 1(公板)
