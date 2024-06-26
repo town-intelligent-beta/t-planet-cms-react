@@ -1,6 +1,7 @@
 // Host
 HOST_URL_EID_DAEMON = "https://beta-eid-backend.townway.com.tw";
-HOST_URL_TPLANET_DAEMON = "https://beta-tplanet-backend.4impact.cc";
+HOST_URL_TPLANET_DAEMON = "https://tplanet-backend.townway.com.tw";
+// HOST_URL_TPLANET_DAEMON = "https://tplanet-backend.4impact.cc";
 
 // EID
 HOST_URL_EID = "https://beta-eid.townway.com.tw";
