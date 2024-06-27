@@ -98,9 +98,10 @@ const updateInputValue = () => {
   input.value = `我想請問，${selectOneText}列出${selectTwoText}，符合${sdgsText}。`;
 };
 const updateSubmitButtonState = () => {
-  selectOne.value !== "---請選擇---" && selectTwo.value !== "---請選擇---"
+  // Enable Free talk
+  /*   selectOne.value !== "---請選擇---" && selectTwo.value !== "---請選擇---"
     ? (submitBtn.disabled = false)
-    : (submitBtn.disabled = true);
+    : (submitBtn.disabled = true); */
 };
 
 selectOne.addEventListener("change", () => {
