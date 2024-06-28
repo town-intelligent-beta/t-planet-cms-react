@@ -199,11 +199,23 @@
     <script id="tpl-sroi-section-error" type="text/x-handlebars-template">
       <h5 class="text-center font-weight-bold py-4">載入失敗</h5>
     </script>
+
+    <script id="tpl-sroi-section-null" type="text/x-handlebars-template">
+      <h5 class="text-center font-weight-bold py-4">尚無 SROI 資料</h5>
+    </script>
   </head>
 
   <body>
     <!-- navbar -->
     <div id="navbar"></div>
+
+    <!-- loading -->
+    <div id="loading-container" class="loading-container" style="display: none;">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <p>AI 正在產生 SROI 檔案，請稍後 ...</p>
+    </div>    
 
     <!-- content -->
     <section>
