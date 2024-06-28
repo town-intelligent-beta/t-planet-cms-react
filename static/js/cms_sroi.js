@@ -73,134 +73,147 @@ export const set_page_info_cms_sroi = async (uuid) => {
     return;
   }
 
-  registerHandlebarsPartial();
+  // Show loading animation
+  const loadingContainer = document.getElementById("loading-container");
+  loadingContainer.style.display = "flex";
 
-  const obj_project = plan_info(uuid);
-  const sroiData = await getSroiDataMeta(uuid);
-  data = {
-    ...obj_project,
-    visible: sroiData.visible,
-    spreadsheet_url: `https://docs.google.com/spreadsheets/d/${sroiData.file_id}?headers=false&chrome=false&single=true&widget=false&rm=minimal`,
-  };
+  try {
+    registerHandlebarsPartial();
 
-  renderSroiPage(data);
-
-  $("#cms-sroi").on("click", "#refresh", async (e) => {
-    e.preventDefault();
-
-    renderHandlebars("sroi-section", "tpl-sroi-section-loading", {});
-    const sroiData = await getSroiData(uuid);
-
+    const obj_project = plan_info(uuid);
+    const sroiData = await getSroiDataMeta(uuid);
     data = {
-      ...data,
-      sroiData,
+      ...obj_project,
       visible: sroiData.visible,
-    };
-
-    const { social_subtotal, economy_subtotal, environment_subtotal } =
-      sroiData;
-
-    if (
-      social_subtotal == 0 &&
-      economy_subtotal == 0 &&
-      environment_subtotal == 0
-    ) {
-      return;
-    }
-
-    renderSroiPage(data);
-  });
-
-  $("#cms-sroi").on("click", ".visible", async (e) => {
-    e.preventDefault();
-    const sroiData = await setSroiData(uuid, e.target.value);
-    data = {
-      ...data,
-      visible: sroiData.visible,
+      spreadsheet_url: `https://docs.google.com/spreadsheets/d/${sroiData.file_id}?headers=false&chrome=false&single=true&widget=false&rm=minimal`,
     };
 
     renderSroiPage(data);
-  });
 
-  $("#cms-sroi").on("hide.bs.collapse", ".collapse", function (e) {
-    const id = e.target.id;
-    $(`[aria-controls='${id}'] .fa`)
-      .removeClass("fa-minus")
-      .addClass("fa-plus");
-  });
-  $("#v-pills-tab a").on("click", function (e) {
-    e.preventDefault();
-    const selectedTab = $(this).attr("data-gid");
-    const iframe = $(this).closest(".row").find(".tab-content").find("iframe");
-    const spreadsheetUrl = `https://docs.google.com/spreadsheets/d/${sroiData.file_id}?headers=false&chrome=false&single=true&widget=false&rm=minimal#gid=${selectedTab}`;
-    iframe.attr("src", spreadsheetUrl);
-  });
+    $("#cms-sroi").on("click", "#refresh", async (e) => {
+      e.preventDefault();
 
-  $("#cms-sroi").on("show.bs.collapse", ".collapse", function (e) {
-    const id = e.target.id;
-    $(`[aria-controls='${id}'] .fa`)
-      .removeClass("fa-plus")
-      .addClass("fa-minus");
-  });
+      renderHandlebars("sroi-section", "tpl-sroi-section-loading", {});
+      const sroiData = await getSroiData(uuid);
 
-  const loadData = (sroiType, targetElementId) => {
-    $.ajax({
-      url: `${HOST_URL_TPLANET_DAEMON}/projects/get_sroi_table_values`,
-      type: "POST",
-      data: {
-        uuid_project: obj_project.uuid,
-        sroi_type: sroiType,
-      },
-      success: (response) => {
-        const values = response.values;
-        const jsonData = {
-          values: values,
-        };
-        const generateTableHTML = (data) => {
-          return `<div class='table-responsive-md'><table class='table'>
-            ${data
-              .map(
-                (row) =>
-                  `<tr>
-                ${row
-                  .slice(0, -1)  // 移除每個 row 的最後一個元素
-                  .map(
-                    (cell) =>
-                      `<td style="background-color: ${
-                        cell.background_color || ""
-                      }">
-                    ${cell.value || ""}
-                  </td>`
-                  )
-                  .join("")}
-              </tr>`
-              )
-              .join("")}
-          </table></div>`;
-        };
+      data = {
+        ...data,
+        sroiData,
+        visible: sroiData.visible,
+      };
 
-        const tableHTML = generateTableHTML(jsonData.values);
-        $("#" + targetElementId).html(tableHTML);
-      },
-      error: (error) => {
-        console.error(error);
-      },
+      const { social_subtotal, economy_subtotal, environment_subtotal } =
+        sroiData;
+
+      if (
+        social_subtotal == 0 &&
+        economy_subtotal == 0 &&
+        environment_subtotal == 0
+      ) {
+        renderHandlebars("sroi-section", "tpl-sroi-section-null", {});
+
+        return;
+      }
+
+      renderSroiPage(data);
     });
-  };
 
-  loadData("SOCIAL", "tableSocial");
+    $("#cms-sroi").on("click", ".visible", async (e) => {
+      e.preventDefault();
+      const sroiData = await setSroiData(uuid, e.target.value);
+      data = {
+        ...data,
+        visible: sroiData.visible,
+      };
 
-  $("#v-pills-tab a").on("click", function (e) {
-    e.preventDefault();
-    const tabIndex = $(this).index();
-    const sroiType = ["SOCIAL", "ECONOMY", "ENVIRONMENT", "EVIDENCE"];
-    const dataType = sroiType[tabIndex];
-    const targetElementId = $(this).attr("aria-controls");
-    if (dataType === "EVIDENCE") {
-      var url = "/backend/cms_sroi_evidence.html?uuid=" + uuid;
-      window.open(url, "_blank");
-    } else {
-      loadData(dataType, targetElementId);
-    }
-  });
+      renderSroiPage(data);
+    });
+
+    $("#cms-sroi").on("hide.bs.collapse", ".collapse", function (e) {
+      const id = e.target.id;
+      $(`[aria-controls='${id}'] .fa`)
+        .removeClass("fa-minus")
+        .addClass("fa-plus");
+    });
+    $("#v-pills-tab a").on("click", function (e) {
+      e.preventDefault();
+      const selectedTab = $(this).attr("data-gid");
+      const iframe = $(this).closest(".row").find(".tab-content").find("iframe");
+      const spreadsheetUrl = `https://docs.google.com/spreadsheets/d/${sroiData.file_id}?headers=false&chrome=false&single=true&widget=false&rm=minimal#gid=${selectedTab}`;
+      iframe.attr("src", spreadsheetUrl);
+    });
+
+    $("#cms-sroi").on("show.bs.collapse", ".collapse", function (e) {
+      const id = e.target.id;
+      $(`[aria-controls='${id}'] .fa`)
+        .removeClass("fa-plus")
+        .addClass("fa-minus");
+    });
+
+    const loadData = (sroiType, targetElementId) => {
+      $.ajax({
+        url: `${HOST_URL_TPLANET_DAEMON}/projects/get_sroi_table_values`,
+        type: "POST",
+        data: {
+          uuid_project: obj_project.uuid,
+          sroi_type: sroiType,
+        },
+        success: (response) => {
+          const values = response.values;
+          const jsonData = {
+            values: values,
+          };
+          const generateTableHTML = (data) => {
+            return `<div class='table-responsive-md'><table class='table'>
+              ${data
+                .map(
+                  (row) =>
+                    `<tr>
+                  ${row
+                    .slice(0, -1)  // 移除每個 row 的最後一個元素
+                    .map(
+                      (cell) =>
+                        `<td style="background-color: ${
+                          cell.background_color || ""
+                        }">
+                      ${cell.value || ""}
+                    </td>`
+                    )
+                    .join("")}
+                </tr>`
+                )
+                .join("")}
+            </table></div>`;
+          };
+
+          const tableHTML = generateTableHTML(jsonData.values);
+          $("#" + targetElementId).html(tableHTML);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    };
+
+    loadData("SOCIAL", "tableSocial");
+
+    $("#v-pills-tab a").on("click", function (e) {
+      e.preventDefault();
+      const tabIndex = $(this).index();
+      const sroiType = ["SOCIAL", "ECONOMY", "ENVIRONMENT", "EVIDENCE"];
+      const dataType = sroiType[tabIndex];
+      const targetElementId = $(this).attr("aria-controls");
+      if (dataType === "EVIDENCE") {
+        var url = "/backend/cms_sroi_evidence.html?uuid=" + uuid;
+        window.open(url, "_blank");
+      } else {
+        loadData(dataType, targetElementId);
+      }
+    });
+  } catch (error) {
+    console.error('Error during request:', error);
+  } finally {
+    // Hide loading animation
+    loadingContainer.style.display = "none";
+  }
 };
