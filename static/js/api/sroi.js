@@ -20,11 +20,11 @@ export const getSroiDataMeta = async (uuid) => {
   data = {
     ...data,
     computed: {
-      social_subtotal: formatCurrency(data.social_subtotal),
-      economy_subtotal: formatCurrency(data.economy_subtotal),
-      environment_subtotal: formatCurrency(data.environment_subtotal),
-      total_cost: formatCurrency(data.total_cost),
-      total_benefit: formatCurrency(data.total_benefit),
+      social_subtotal: formatCurrency(data.social_subtotal || 0),
+      economy_subtotal: formatCurrency(data.economy_subtotal || 0),
+      environment_subtotal: formatCurrency(data.environment_subtotal || 0),
+      total_cost: formatCurrency(data.total_cost || 0),
+      total_benefit: formatCurrency(data.total_benefit || 0),
     },
   };
 
@@ -51,11 +51,11 @@ export const getSroiData = async (uuid) => {
   data = {
     ...data,
     computed: {
-      social_subtotal: formatCurrency(data.social_subtotal),
-      economy_subtotal: formatCurrency(data.economy_subtotal),
-      environment_subtotal: formatCurrency(data.environment_subtotal),
-      total_cost: formatCurrency(data.total_cost),
-      total_benefit: formatCurrency(data.total_benefit),
+      social_subtotal: formatCurrency(data.social_subtotal || 0),
+      economy_subtotal: formatCurrency(data.economy_subtotal || 0),
+      environment_subtotal: formatCurrency(data.environment_subtotal || 0),
+      total_cost: formatCurrency(data.total_cost || 0),
+      total_benefit: formatCurrency(data.total_benefit || 0),
     },
   };
 
