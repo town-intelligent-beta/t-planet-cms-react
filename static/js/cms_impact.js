@@ -165,7 +165,7 @@ function add_sdgs_input(index) {
   for (var index = 0; index < list_sdgs_input.length; index++) {
     if (parseInt(list_sdgs_input[index]) == 1) {
       add_sdgs_input(index);
-      if (obj_sdgs_comment[index.toString()] == null || obj_sdgs_comment[index.toString()] == "" || obj_sdgs_comment[index.toString()] == undefined){
+      if (obj_sdgs_comment === null || obj_sdgs_comment[index.toString()] == null || obj_sdgs_comment[index.toString()] == "" || obj_sdgs_comment[index.toString()] == undefined){
         const ai_sdgs_index = (index + 1).toString();
         if (ai_sdgs[ai_sdgs_index]) {
           add_sdgs_comment(index, ai_sdgs[ai_sdgs_index]);
