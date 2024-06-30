@@ -13,6 +13,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/static/css/style.css" >
+    <link rel="stylesheet" href="/static/css/loading.css" />
     <link rel="stylesheet" href="/static/css/progress_bar.css">
     <link rel="stylesheet" href="/static/css/kpi.css">
     <script src="/static/js/config.js"></script>
@@ -32,6 +33,7 @@
   <body>
     <!-- navbar -->
     <div id="navbar"></div>
+
     <!-- step progress bar -->
     <div class="contanier pt-3">
       <ul class="progressbar">
@@ -50,6 +52,15 @@
             <p class="bg-2ndhome px-3 py-2">選擇計劃總指標</p>
           </div>
         </div>
+
+        <!-- loading -->
+        <div id="loading-container" class="loading-container" style="display: none;">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <p>AI 自動產生 SDGs 指標中，請稍後 ...</p>
+        </div> 
+
       <form action="">
         <div class="form-row mt-3 sds-font border-light-gray p-3">
           <div class="form-group col-12 col-sm-6 col-md-4">
