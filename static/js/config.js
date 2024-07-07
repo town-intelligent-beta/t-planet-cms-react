@@ -1,5 +1,5 @@
 // Host
-HOST_URL_EID_DAEMON = "https://beta-eid-backend.townway.com.tw";
+HOST_URL_EID_DAEMON = "https://rc-eid-backend.townway.com.tw";
 HOST_URL_TPLANET_DAEMON = "https://rc-tplanet-backend.townway.com.tw";
 
 // EID
