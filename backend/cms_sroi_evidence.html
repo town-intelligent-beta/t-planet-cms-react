@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/progress_bar.css" />
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/accounts.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/permission.js"></script>
+    <script type="module" src="/static/js/set_page_info.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <div id="navbar"></div>
+    <!-- content -->
+    <section>
+      <div class="container my-5">
+        <div class="col-12">
+          <p class="bg-2ndhome p-2">佐證資料提示</p>
+          <ol class="content">
+            <li>
+              社會面向
+              <ul type="disc">
+                <li>S1：成就感（滿意度調查）</li>
+                <li>
+                  S2：文化意識（文化、美感、質感方面課程重度參與人員參加證明或簽到表）
+                </li>
+                <li>S3：生理健康（健保快譯通掛號次數）</li>
+                <li>S4：技能水平（前後次薪資單）</li>
+                <li>
+                  S5：凝聚力（普通常態性活動重度參與人員參加證明或簽到表）
+                </li>
+                <li>
+                  S6：道德知識（品格、學術知識、專業技能活動重度參與人員參加證明或簽到表）
+                </li>
+              </ul>
+            </li>
+            <li>
+              環境面向
+              <ul type="disc">
+                <li>E1：生物多樣性e11水質（前後樹種採買價格+水質檢測報告</li>
+                <li>
+                  E1：生物多樣性e12營收（該地產品定價相關行銷文案+水質監測報告）
+                </li>
+                <li>E2：土地有機化e21空氣（農地土地證明+土地更改相關資料）</li>
+                <li>
+                  E2：土地有機化e22水土（農地土地面積+農業用水帳單+友善種植使用肥料紀錄+土地更改相關資料）
+                </li>
+                <li>
+                  E2：土地有計畫e23有機（農地土地面積+有機認證+土地更改相關資料）
+                </li>
+                <li>E3：生物多樣性（作物購買單據）</li>
+                <li>E4：綠美化空間（401表或報稅資料）</li>
+                <li>
+                  E5：減少碳排放e51交通（行程Google
+                  map，km/1人，因行程所減少的交通碳排放）
+                </li>
+                <li>
+                  E5：減少碳排放e52文宣（文宣設計稿、掃描發放次數統計，因電子化所減少的紙張文宣製造碳排放，A4紙：3.2kg/500張)
+                </li>
+                <li>
+                  E5：減少碳排放e53餐具（課程/活動參與人數統計表+提供餐具照片佐證，一副筷子/湯匙：0.02kgCO2）
+                </li>
+                <li>E6：農廢棄物（廢棄物清運購買服務發票）</li>
+              </ul>
+            </li>
+            <li>
+              經濟面向
+              <ul type="disc">
+                <li>E1：長期工作（聘用員工月薪薪資單）</li>
+                <li>E2：短期工作（聘用員工時數薪資</li>
+                <li>E3：產品價值（標章認證通過證明+檢驗費用證明）</li>
+                <li>
+                  E4：無形資產（無形資產課程售價或使用者認定售價調查報告）
+                </li>
+                <li>E5：專案政策（中央型計畫核定書與KPI說明）</li>
+                <li>E6：專案政策（地方型計畫核定書與KPI說明）</li>
+                <li>E7：外界資源（401表或贊助匯款證明）</li>
+                <li>E8：媒體報道（媒體連結或紙本媒體刊登處掃描）</li>
+              </ul>
+            </li>
+            <div color="#ffffff" class="filter"></div>
+          </ol>
+          <div class="text-center">
+            <button class="show-more-btn">顯示更多</button>
+          </div>
+          <p class="bg-2ndhome p-2 mt-4">
+            社會面向<span class="text-primary">
+              (請將資料上傳雲端，並提供可檢視連結)</span
+            >
+          </p>
+          <div id="SOCIAL" class="py-4"></div>
+        </div>
+        <div class="col-12">
+          <p class="bg-2ndhome p-2">
+            經濟面向<span class="text-primary">
+              (請將資料上傳雲端，並提供可檢視連結)</span
+            >
+          </p>
+          <div id="ECONOMY" class="py-4"></div>
+        </div>
+        <div class="col-12">
+          <p class="bg-2ndhome p-2">
+            環境面向<span class="text-primary">
+              (請將資料上傳雲端，並提供可檢視連結)</span
+            >
+          </p>
+          <div id="ENVIRONMENT" class="py-4"></div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="text-center">
+            <a class="btn btn-dark mx-2">返回</a>
+            <button id="save-btn" class="btn btn-dark mx-2">儲存</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- footer -->
+    <div id="footer"></div>
+  </body>
+  <script src="/static/js/evidence.js"></script>
+</html>
