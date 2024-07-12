@@ -1,197 +1,112 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://s3.amazonaws.com/builds.handlebarsjs.com/handlebars.min-v4.7.8.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"
-      integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"
-      integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/progress_bar.css" />
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script type="module" src="/static/js/tasks.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <script type="module" src="/static/js/cms_agent.js"></script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
-    />
-    <script type="module" src="/static/js/render.js"></script>
-    <script type="module" src="/static/js/admin_project_check.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://s3.amazonaws.com/builds.handlebarsjs.com/handlebars.min-v4.7.8.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js" integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/progress_bar.css" />
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/innerHTML.js"></script>
+  <script src="/static/js/localStorage.js"></script>
+  <script src="/static/js/accounts.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/permission.js"></script>
+  <script type="module" src="/static/js/tasks.js"></script>
+  <script type="module" src="/static/js/plan.js"></script>
+  <script type="module" src="/static/js/cms_agent.js"></script>
+  <script type="module" src="/static/js/set_page_info.js"></script>
+  <script type="module" src="/static/js/init.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css" />
+  <script type="module" src="/static/js/render.js"></script>
+  <script type="module" src="/static/js/admin_project_check.js"></script>
+  <script type="module">
+    import {
+      selectComment,
+      selectCommentAll,
+      submitVerifiedTaskComment,
+    } from "/static/js/admin_project_check.js";
+    window.selectComment = selectComment;
+    window.selectCommentAll = selectCommentAll;
+    window.submitVerifiedTaskComment = submitVerifiedTaskComment;
+  </script>
+  <script id="tpl-task" type="text/x-handlebars-template">
+    <tr>
+      <th scope="row" class="text-center align-middle">
+        <div class="form-check">
+          <input class="form-check-input position-static checkbox-1x" type="checkbox" id="{{email}}" value="{{email}}" />
+        </div>
+      </th>
+      <td class="text-center align-middle">
+        {{item_index}}
+      </td>
+      <td class="text-center align-middle">
+        {{email}}
+      </td>
+      <td class="text-center align-middle">
+        {{task_weights}}
+      </td>
+      <td class="text-center align-middle">
+        {{comment}}
+      </td>
+      <td class="text-center align-middle">
+        <a href="{{img}}">
+          <img src="{{img}}" style="max-width: 60px;" />
+        </a>
+      </td>
+    </tr>
+  </script>
+</head>
 
-    <script type="module">
-      import {
-        selectComment,
-        selectCommentAll,
-        submitVerifiedTaskComment,
-      } from "/static/js/admin_project_check.js";
-      window.selectComment = selectComment;
-      window.selectCommentAll = selectCommentAll;
-      window.submitVerifiedTaskComment = submitVerifiedTaskComment;
-    </script>
-    <script id="tpl-task" type="text/x-handlebars-template">
-      <tr>
-        <th scope="row" class="text-center align-middle">
-          <div class="form-check">
-            <input
-              class="form-check-input position-static checkbox-1x"
-              type="checkbox"
-              id="{{email}}"
-              value="{{email}}"
-            />
-          </div>
-        </th>
-        <td class="text-center align-middle">
-          {{item_index}}
-        </td>
-        <td class="text-center align-middle">
-          {{email}}
-        </td>
-        <td class="text-center align-middle">
-          {{task_weights}}
-        </td>
-        <td class="text-center align-middle">
-          {{comment}}
-        </td>
-        <td class="text-center align-middle">
-          <a href="{{img}}">
-            <img src="{{img}}" style="max-width: 60px;" />
-          </a>
-        </td>
-      </tr>
-    </script>
-  </head>
-
-  <body>
-    <div class="d-flex flex-column vh-100">
-      <!-- navbar -->
-      <div id="navbar"></div>
-      <!-- content -->
-      <!-- <section class="vh-100"> -->
-      <section>
-        <div class="container">
-          <div class="row justify-content-center my-5 pt-5">
-            <div class="col-12">
-              <div action="">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr class="bg-2ndhome">
-                        <th
-                          scope="col"
-                          class="text-center align-middle table-width-s"
-                        >
-                          <div class="form-check">
-                            <input
-                              class="form-check-input position-static checkbox-1x"
-                              type="checkbox"
-                              id="checkboxAll"
-                              onclick="selectCommentAll();"
-                              aria-label="..."
-                            />
-                          </div>
-                        </th>
-                        <th scope="col" class="text-center table-width-s">
-                          項次
-                        </th>
-                        <th scope="col" class="text-center table-width-m">
-                          電子郵件
-                        </th>
-                        <th scope="col" class="text-center table-width-l">
-                          永續發展指標
-                        </th>
-                        <th scope="col" class="text-center table-width-l">
-                          評論
-                        </th>
-                        <th scope="col" class="text-center table-width-l">
-                          照片
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody id="tbody_task_comment">
-                      <!-- <tr>
-                        <th scope="row" class="text-center align-middle">
-                          <div class="form-check">
-                            <input class="form-check-input position-static checkbox-1x" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                          </div>
-                        </th>
-                        <td class="text-center align-middle">1</td>
-                        <td class="text-center align-middle">user2@gmail.com</td>
-                        <td class="text-center align-middle">SDG04、SDG07、SDG11</td>
-                        <td class="text-center align-middle">評論內容評論內容評論內容評論內容評論內容評論內容評論內容評論內容評論內容</td>
-                        <td class="text-center align-middle">
-                          <img src="/static/imgs/project_img.jpg" alt="" style="max-width:60px">
-                          <img src="/static/imgs/project_img.jpg" alt="" style="max-width:60px">
-                          <img src="/static/imgs/project_img.jpg" alt="" style="max-width:60px">
-                        </td>
-                      </tr> -->
-                    </tbody>
-                  </table>
-                </div>
-                <div class="text-center text-md-left mt-3">
-                  <button
-                    type="button"
-                    onclick="submitVerifiedTaskComment()"
-                    class="d-none d-md-block btn btn-dark mt-2 rounded-pill"
-                    style="width: 150px"
-                  >
-                    驗證
-                  </button>
-                  <button
-                    type="button"
-                    onclick="submitVerifiedTaskComment()"
-                    class="d-md-none btn btn-dark btn-block mt-2 rounded-pill"
-                  >
-                    驗證
-                  </button>
-                </div>
+<body>
+  <div class="d-flex flex-column vh-100">
+    <!-- navbar -->
+    <div id="navbar"></div>
+    <!-- content -->
+    <section>
+      <div class="container">
+        <div class="row justify-content-center my-5 pt-5">
+          <div class="col-12">
+            <div action="">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="bg-2ndhome">
+                      <th scope="col" class="text-center align-middle table-width-s">
+                        <div class="form-check">
+                          <input class="form-check-input position-static checkbox-1x" type="checkbox" id="checkboxAll" onclick="selectCommentAll();" aria-label="..." />
+                        </div>
+                      </th>
+                      <th scope="col" class="text-center table-width-s">項次</th>
+                      <th scope="col" class="text-center table-width-m">電子郵件</th>
+                      <th scope="col" class="text-center table-width-l">永續發展指標</th>
+                      <th scope="col" class="text-center table-width-l">評論</th>
+                      <th scope="col" class="text-center table-width-l">照片</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody_task_comment">
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-center text-md-left mt-3">
+                <button type="button" onclick="submitVerifiedTaskComment()" class="d-none d-md-block btn btn-dark mt-2 rounded-pill" style="width: 150px">驗證</button>
+                <button type="button" onclick="submitVerifiedTaskComment()" class="d-md-none btn btn-dark btn-block mt-2 rounded-pill">驗證</button>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <!-- footer -->
-      <div id="footer"></div>
-    </div>
-  </body>
+      </div>
+    </section>
+    <!-- footer -->
+    <div id="footer"></div>
+  </div>
+</body>
 </html>
