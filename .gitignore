@@ -5,4 +5,5 @@ README.md
 desktop.ini
 -workspace
 DS_Store
-static/
+static/css
+static/imgs
