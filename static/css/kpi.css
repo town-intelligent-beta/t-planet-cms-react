@@ -1,0 +1,126 @@
+/* admin_index 首頁管理 */
+
+.admin-index-project:nth-child(even){
+    flex-direction: row-reverse;
+}
+
+/* index.html */
+#textarea1,#textarea2,#textarea3,#textarea4{
+    white-space: pre-wrap;
+    font-size: 22px;
+}
+
+@media (max-width: 450px){
+    #textarea1,#textarea2,#textarea3,#textarea4{
+        white-space: pre-wrap;
+        font-size: 14px;
+    }
+}
+
+/* start sdgs_setting */
+.sds-font{
+    font-size: 20px;
+}
+/* end sdgs_setting */
+
+/*start cms_agent */
+.agent-position{
+    position: relative;
+    top: 30px;
+}
+.d-xs-block{
+    display: none;
+}
+/*end cms_agent */
+
+/* start cms_deep_participation */
+.participation-margin{
+    margin: 18px;
+}
+/* end cms_deep_participation */
+
+/*start cms_support_form */
+.support-form-checkbox input{
+    display: none;
+}
+.support-form-checkbox input:checked ~ span:after{
+    opacity: 1;
+}
+.support-form-checkbox span{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    position: relative;
+}
+.support-form-checkbox span:after{
+    content: "";
+    width: 19px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+/*end cms_support_form */
+
+.bg-blue{
+    background-color: #3E6896;
+}
+.text-blue{
+    color: #3E6896;
+}
+.card-txt{
+    font-size: 128px;
+    font-weight: 400;
+}
+
+.bg-green{
+    background-color: #5CB85C;
+}
+
+.kpi-card:active{
+    opacity: 0.8;
+  }
+
+@media screen and (max-width: 768px) {
+    .card-top{
+        height: 400px;
+    }
+    .card-txt{
+        font-size: 235px;
+    }
+    .mb-fix-margin{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .mb-px{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .participation-margin{
+        margin: 30px;
+    }
+    .d-xs-block{
+        display: block;
+    }
+    .sds-font{
+        font-size: 18px;
+    }
+    .admin-index-project{
+        flex-direction: column-reverse;
+    }
+    .admin-index-project:nth-child(even){
+        flex-direction: column-reverse;
+    }
+    .mobil-mb{
+        margin-top: 20px;
+    }
+    .sds-font{
+        font-size: 22px;
+    }
+
+}
