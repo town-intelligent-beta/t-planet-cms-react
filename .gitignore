@@ -1,9 +1,9 @@
 *.swp
 *.sh
-CNAME
 config.js
 README.md
 desktop.ini
 -workspace
 style.css
 DS_Store
+CNAME
