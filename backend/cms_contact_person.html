@@ -4,45 +4,16 @@
   <meta charset="UTF-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <script src=
-  "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-  </script>
-  <link crossorigin="anonymous" href=
-  "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity=
-  "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-  rel="stylesheet">
-  <script crossorigin="anonymous" integrity=
-  "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-  </script>
-  <script crossorigin="anonymous" integrity=
-  "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-  src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-  </script>
-  <link href=
-  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  rel="stylesheet">
+  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="/static/css/style.css" rel="stylesheet">
   <link href="/static/css/progress_bar.css" rel="stylesheet">
-  <script src="/static/js/config.js"></script>
-  <script src="/static/js/innerHTML.js"></script>
-  <script src="/static/js/localStorage.js"></script>
-  <script src="/static/js/accounts.js"></script>
-  <script src="/static/js/auth.js"></script>
-  <script src="/static/js/permission.js"></script>
-  <script type="module" src="/static/js/tasks.js"></script>
-  <script type="module" src="/static/js/plan.js"></script>
-  <script type="module" src="/static/js/cms_agent.js"></script>
-  <script type="module" src="/static/js/cms_contact_person.js"></script>
-  <script type="module" src="/static/js/set_page_info.js"></script>
-  <script type="module" src="/static/js/init.js"></script>
 </head>
 <body>
   <!-- navbar -->
   <div id="navbar"></div>
   <!-- step progress bar -->
-  <div class="contanier pt-3">
+  <div class="container pt-3">
     <ul class="progressbar">
       <li class="active done"><span>計畫基本資料</span></li>
       <li class="active done"><span>SDGs 指標設定</span></li>
@@ -89,7 +60,7 @@
               <div class="form-group col-md-4">
                 <div class="form-check d-flex align-items-center">
                   <input class="form-check-input checkbox-1x" id="location_1" type="checkbox">
-                  <label class="form-check-label pl-3" for="gridCheck">
+                  <label class="form-check-label pl-3" for="location_1">
                     1. T-PLANET @ 台北
                   </label>
                 </div>
@@ -97,7 +68,7 @@
               <div class="form-group col-md-4">
                 <div class="form-check d-flex align-items-center">
                   <input class="form-check-input checkbox-1x" id="location_2" type="checkbox">
-                  <label class="form-check-label pl-3" for="gridCheck">
+                  <label class="form-check-label pl-3" for="location_2">
                     2. T-PLANET @ 竹山
                   </label>
                 </div>
@@ -105,7 +76,7 @@
               <div class="form-group col-md-4">
                 <div class="form-check d-flex align-items-center">
                   <input class="form-check-input checkbox-1x" id="location_3" type="checkbox">
-                  <label class="form-check-label pl-3" for="gridCheck">
+                  <label class="form-check-label pl-3" for="location_3">
                     3. T-PLANET @ 高雄
                   </label>
                 </div>
@@ -113,7 +84,7 @@
               <div class="form-group col-md-4">
                 <div class="form-check d-flex align-items-center">
                   <input class="form-check-input checkbox-1x" id="location_4" type="checkbox">
-                  <label class="form-check-label pl-3" for="gridCheck">
+                  <label class="form-check-label pl-3" for="location_4">
                     4. T-PLANET @ 花蓮
                   </label>
                 </div>
@@ -121,7 +92,7 @@
               <div class="form-group col-md-4">
                 <div class="form-check d-flex align-items-center">
                   <input class="form-check-input checkbox-1x" id="location_5" type="checkbox">
-                  <label class="form-check-label pl-3" for="gridCheck">
+                  <label class="form-check-label pl-3" for="location_5">
                     5. T-PLANET @ 馬祖
                   </label>
                 </div>
@@ -151,5 +122,22 @@
   </section>
   <!-- footer -->
   <div id="footer"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/innerHTML.js"></script>
+  <script src="/static/js/localStorage.js"></script>
+  <script src="/static/js/accounts.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/permission.js"></script>
+  <script type="module" src="/static/js/tasks.js"></script>
+  <script type="module" src="/static/js/plan.js"></script>
+  <script type="module" src="/static/js/cms_agent.js"></script>
+  <script type="module" src="/static/js/cms_contact_person.js"></script>
+  <script type="module" src="/static/js/set_page_info.js"></script>
+  <script type="module" src="/static/js/init.js"></script>
 </body>
 </html>

@@ -45,31 +45,6 @@ export function set_relate_people_and_project_counts(totalProjectWeight, list_pr
 }
 
 export function get_total_project_weight(list_project_uuids) {
-    // Get Project weigh
-    /*
-    if (list_project_uuids.length != 0) {
-      var totalProjectWeight = {};
-    }
-    for (var index = 0; index < list_project_uuids.length; index++) {
-      var obj_project = plan_info(list_project_uuids[index]);
-      var obj_parent_tasks = list_plan_tasks(obj_project.uuid, 1);
-
-      var weight = {}
-      try {
-        if (obj_parent_tasks.tasks.length != 0) {
-          weight = getProjectWeight(obj_parent_tasks.tasks);
-        }
-      } catch (e) { console.log(e) }
-
-      totalProjectWeight = addWeight(totalProjectWeight, weight)
-    }
-
-    console.log("Hello totalProjectWeight")
-    console.log(JSON.stringify(totalProjectWeight));
-
-    return totalProjectWeight;
-    */
-
     return {"sdgs-1":24,"sdgs-2":5,"sdgs-3":1,"sdgs-4":41,"sdgs-5":23,"sdgs-6":19,"sdgs-7":1,"sdgs-8":0,"sdgs-9":0,"sdgs-10":0,"sdgs-11":34,"sdgs-12":25,"sdgs-13":17,"sdgs-14":2,"sdgs-15":19,"sdgs-16":0,"sdgs-17":23,"sdgs-18":18,"sdgs-19":17,"sdgs-20":17,"sdgs-21":37,"sdgs-22":17,"sdgs-23":18,"sdgs-24":18,"sdgs-25":37,"sdgs-26":19,"sdgs-27":17}
 }
 
@@ -143,7 +118,7 @@ export function set_page_info_kpi() {
   // Set relate people and project counts
   set_relate_people_and_project_counts(totalProjectWeight, list_project_uuids);
 
-  // SDGS
+  // SDGs
   var totalProjectWeight_for_sdgs = Object.assign({}, totalProjectWeight);
   draw_sdgs_chart(totalProjectWeight_for_sdgs);
 

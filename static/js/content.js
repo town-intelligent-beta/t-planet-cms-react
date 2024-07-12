@@ -16,14 +16,21 @@ import { parse_sdgs_items } from "./utils/transformers.js";
 import { isOverflow } from "./utils/widgets.js";
 import { getNFT } from "./nft.js";
 
-export function draw_sdgs_chart(totalProjectWeight, elementID) {
-  // Remove useless weight
-  /*   Object.keys(totalProjectWeight).forEach(function(key){
-    if (parseInt(key.substring(5,7)) > 17){
-      delete totalProjectWeight[key];
-    }
-  }); */
+import { getWeightMeta } from './api/weight.js';
 
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
+
+export function draw_sdgs_chart(totalProjectWeight, elementID) {
   // Draw
   var array_weight_colors = [
     "#e5243b",
@@ -114,9 +121,6 @@ function project_weight_chart(obj_project) {
   var obj_parent_tasks = list_plan_tasks(obj_project.uuid, 1);
   var weight = getProjectWeight(obj_parent_tasks.tasks);
   draw_sdgs_chart(weight, id);
-
-  // Draw
-  // draws(obj_project.uuid)
 }
 
 function task_weight_chart(obj_task) {
@@ -181,32 +185,25 @@ function add_task_sdgs(obj_task) {
 
   // SDGs element
   var obj_sdg_div = document.createElement("p");
-
-  // Append content to result element
-  for (var index = 0; index < list_child_tasks.length; index++) {
-    var obj_child_task = get_task_info(list_child_tasks[index]);
-
-    // Create SDGs icon
-    for (var index_sdg = 1; index_sdg <= 27; index_sdg++) {
-      var obj_content = JSON.parse(obj_child_task.content);
-
-      if (parseInt(obj_content["sdgs-" + index_sdg]) == 1) {
-        var obj_img_p = document.createElement("p");
-        var obj_img = document.createElement("img");
-        obj_img.className = "mr-2";
-
-        if (index_sdg < 10) {
-          obj_img.src = "/static/imgs/SDGs_0" + index_sdg + ".jpg";
-        } else {
-          obj_img.src = "/static/imgs/SDGs_" + index_sdg + ".jpg";
+    for (var index = 0; index < list_child_tasks.length; index++) {
+      var obj_child_task = get_task_info(list_child_tasks[index]);
+  
+      // Create SDGs icon
+      for (var index_sdg = 1; index_sdg <= allWeights.length; index_sdg++) {
+        var obj_content = JSON.parse(obj_child_task.content);
+  
+        if (parseInt(obj_content["sdgs-" + index_sdg]) == 1) {
+          var obj_img_p = document.createElement("p");
+          var obj_img = document.createElement("img");
+          obj_img.className = "mr-2";
+  
+          obj_img.src = allWeights[index_sdg - 1].thumbnail;
+          obj_img.alt = "";
+          obj_img.style = "width: 30px";
+          obj_sdg_div.append(obj_img);
         }
-
-        obj_img.alt = "";
-        obj_img.style = "width: 30px";
-        obj_sdg_div.append(obj_img);
       }
     }
-  }
 
   return obj_sdg_div;
 }
@@ -219,31 +216,26 @@ function add_project_sdgs(obj_project) {
   try {
     list_weight = obj_project.weight.split(",");
   } catch (e) {}
-
-  for (var index = 0; index < list_weight.length; index++) {
-    // Append to DOM
-    if (parseInt(list_weight[index]) == 1) {
-      // <div class="col-2 col-md-1 pr-0">
-      var obj_div = document.createElement("div");
-      obj_div.className = "col-2 col-md-1 pr-0";
-
-      // <a href="#">
-      var obj_a = document.createElement("p");
-      obj_a.href = "#";
-
-      // <img class="w-100" src="/static/imgs/SDGs_04.jpg" alt="">
-      var obj_img = document.createElement("img");
-      obj_img.className = "w-100";
-      obj_img.src =
-        "/static/imgs/SDGs_" + ("0" + (index + 1)).slice(-2) + ".jpg";
-      obj_img.alt = "";
-
-      // Append
-      obj_a.append(obj_img);
-      obj_div.append(obj_a);
-      obj_sdgs_container.append(obj_div);
+    for (var index = 0; index < list_weight.length; index++) {
+      // Append to DOM
+      if (parseInt(list_weight[index]) == 1) {
+        var obj_div = document.createElement("div");
+        obj_div.className = "col-2 col-md-1 pr-0";
+  
+        var obj_a = document.createElement("p");
+        obj_a.href = "#";
+  
+        var obj_img = document.createElement("img");
+        obj_img.className = "w-100";
+        obj_img.src = allWeights[index].thumbnail;
+        obj_img.alt = "";
+  
+        // Append
+        obj_a.append(obj_img);
+        obj_div.append(obj_a);
+        obj_sdgs_container.append(obj_div);
+      }
     }
-  }
 }
 
 export async function set_page_info_content() {
@@ -289,7 +281,25 @@ export async function set_page_info_content() {
 
   // Project weight descriptio11n
   const sdgs_items = parse_sdgs_items(obj_project);
-  renderHandlebars("project_weight_description", "tpl-sdgs", { sdgs_items });
+  const sdgsMap = sdgs_items.reduce((map, sdg) => {
+    map[sdg.index] = sdg;
+    return map;
+  }, {});
+
+  const matchedWeights = allWeights
+  .map(weight => {
+    const index = ("0" + weight.id).slice(-2);
+    const sdg = sdgsMap[index];
+    if (sdg) {
+      return {
+        ...weight,
+        value: sdg.value
+      };
+    }
+    return null;
+  })
+  .filter(weight => weight !== null);
+  renderHandlebars("project_weight_description", "tpl-sdgs", { matchedWeights });
 
   $("#project_weight_description").on("click", ".read-more", (e) => {
     e.preventDefault();
@@ -380,11 +390,7 @@ export async function set_page_info_content() {
     var obj_col_6_2 = document.createElement("div");
     obj_col_6_2.className = "col-md-6 text-md-right";
 
-    // var obj_flex_column = document.createElement("div");
-    // obj_flex_column.className = "d-flex flex-column";
     var obj_div_des = document.createElement("div");
-    // var obj_flex = document.createElement("div")
-    // obj_flex.className = "d-flex justify-content-between"
 
     obj_div_des.className = "col-12 mb-2 h5";
     obj_div_des.style = "font-weight: bolder;";
@@ -468,7 +474,6 @@ export async function set_page_info_content() {
     $('.tabs a').get(0).click();
 
     // SROI
-
     if (SROI) {
 
       const sroiData = await getSroiData(uuid);

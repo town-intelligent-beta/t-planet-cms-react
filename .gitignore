@@ -1,6 +1,5 @@
 *.swp
 *.sh
-config.js
 README.md
 desktop.ini
 -workspace

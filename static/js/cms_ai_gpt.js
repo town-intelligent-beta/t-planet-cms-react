@@ -1,3 +1,5 @@
+import { getWeightMeta } from './api/weight.js';
+
 const openBtn = document.querySelector("#open");
 const closeBtn = document.querySelector("#close");
 const header = document.querySelector("header");
@@ -24,6 +26,19 @@ versionEl.textContent = `版本：` + settings.version;
 
 const greetingsEl = document.querySelector("#greetings");
 greetingsEl.textContent = settings.assistant_name + "：" + settings.message;
+
+
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
 
 const toggleHeader = () => {
   header.classList.toggle("transform-open");
@@ -59,18 +74,26 @@ const handleClickEvent = (btn) => {
   addSDGToList(icon);
   icon_container.appendChild(icon);
   updateInputValue();
+  
+  // 切換背景顏色
+  const isSelected = btn.style.backgroundColor === "gray";
+  btn.style.backgroundColor = isSelected ? "" : "gray";
+
   icon.addEventListener("click", () => {
     removeSDGFromList(icon);
     icon.remove();
     updateInputValue();
+    
+    // 恢復原來的背景顏色
+    btn.style.backgroundColor = "";
   });
 };
 
-const btn_sdg = document.querySelectorAll("#btn_sdg");
-btn_sdg.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    handleClickEvent(btn);
-  });
+// 使用事件代理來處理動態添加的按鈕
+document.addEventListener("click", (event) => {
+  if (event.target.closest("#btn_sdg")) {
+    handleClickEvent(event.target.closest("#btn_sdg"));
+  }
 });
 
 const modleCloseBtn = document.querySelector("#closeSDGsModal");
@@ -183,3 +206,47 @@ const setInputFixedWidth = () => {
   const greetingsWidth = document.querySelector("#greetings").offsetWidth;
   inputFixed.style.width = `${greetingsWidth}px`;
 };
+
+
+// Set weight_container with allWeights
+const weight_container = document.querySelector("#weight_container");
+allWeights.forEach((category, idx) => {
+  // 創建包含卡片的 div
+  const cardDiv = document.createElement('div');
+  cardDiv.className = 'card mt-2';
+  
+  // 創建卡片內部的 div
+  const cardBodyDiv = document.createElement('div');
+  cardBodyDiv.className = 'card-body p-2';
+  
+  // 創建對齊方式的 div
+  const alignDiv = document.createElement('div');
+  alignDiv.className = 'd-flex align-items-center';
+  alignDiv.id = 'btn_sdg';
+  alignDiv.setAttribute('name', idx.toString().padStart(2, '0'));
+  
+  // 創建圖片元素
+  const img = document.createElement('img');
+  img.alt = '';
+  img.className = 'mr-2';
+  img.src = category.thumbnail;
+  img.style.width = '50px';
+  
+  // 創建段落元素
+  const p = document.createElement('p');
+  p.className = 'mb-0';
+  p.textContent = `${category.title}`;
+  
+  // 將圖片和段落添加到 alignDiv 中
+  alignDiv.appendChild(img);
+  alignDiv.appendChild(p);
+  
+  // 將 alignDiv 添加到 cardBodyDiv 中
+  cardBodyDiv.appendChild(alignDiv);
+  
+  // 將 cardBodyDiv 添加到 cardDiv 中
+  cardDiv.appendChild(cardBodyDiv);
+  
+  // 將 cardDiv 添加到目標容器中
+  weight_container.appendChild(cardDiv);
+});

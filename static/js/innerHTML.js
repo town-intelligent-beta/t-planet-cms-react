@@ -357,9 +357,11 @@ const str_navbar = `    <nav class="navbar navbar-expand-xl navbar-light bg-navb
       <li id="kpi" class="nav-item">
         <a class="nav-link fw-bold" href="/kpi.html">永續專案</a>
       </li>
+      <!--
       <li id="solution" class="nav-item" style="display:none">
         <a class="nav-link fw-bold" href="/solution.html">解決方案</a>
       </li>
+      -->
       <li id="news_list" class="nav-item">
         <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
       </li>
@@ -381,7 +383,7 @@ const str_footer = `    <footer class="bg-footer">
       <div class="h-100 d-flex align-items-center justify-content-center justify-content-lg-start mt-2 mt-lg-0 fz-18">
         <p class="mr-3 mb-0"><a id="about_fot1" href="/index.html" class="text-dark nav-link px-0 fw-bold">關於 Second Home</a></p>
         <p class="mr-3 mb-0"><a href="/kpi.html" class="text-dark nav-link px-0 fw-bold">永續專案</a></p>
-        <p id="solution_fot1" style="display:none" class="mr-3 mb-0"><a href="/solution.html" class="text-dark nav-link px-0 fw-bold">解決方案</a></p>
+        <!-- <p id="solution_fot1" style="display:none" class="mr-3 mb-0"><a href="/solution.html" class="text-dark nav-link px-0 fw-bold">解決方案</a></p> -->
         <p class="mr-3 mb-0"><a href="/news_list.html" class="text-dark nav-link px-0 fw-bold">最新消息</a></p>
         <p id="contact_us_fot1" style="display:none" class="mr-3 mb-0"><a href="/contact_us.html" class="text-dark nav-link px-0 fw-bold">聯絡我們</a></p>
         <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="https://privacy.townway.com.tw/">隱私權條款</a></p>
@@ -412,7 +414,7 @@ const str_footer = `    <footer class="bg-footer">
     <div class="d-flex flex-wrap justify-content-center d-lg-none fz-18">
       <p class="mr-3 mb-0"><a id="about_fot2" class="text-dark nav-link px-0 fw-bold" href="/index.html">關於 Second Home</a></p>
       <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/kpi.html">永續專案</a></p>
-      <p id="solution_fot2" style="display:none" class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/solution.html">解決方案</a></p>
+      <!-- <p id="solution_fot2" style="display:none" class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/solution.html">解決方案</a></p> -->
       <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/news_list.html">最新消息</a></p>
       <p id="contact_us_fot2" style="display:none" class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/contact_us.html">聯絡我們</a></p>
       <p class="mb-0"><a class="text-dark nav-link px-0 fw-bold" href="https://privacy.townway.com.tw/">隱私權條款</a></p>
@@ -441,31 +443,6 @@ const str_project_block_in_project_page = `<a class="text-dark" href="/cms_proje
         <p class="card-text">預算: <span class="pl-2">新台幣 BUDGET 元<span></p>
         <a href="/content.html?uuid=PROJECT_UUID" class="stretched-link"></a>
         <div class="row mt-3">
-
-        <!--
-          <div class="pl-2">
-            <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%" src="/static/imgs/SDGs_01.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%" src="/static/imgs/SDGs_04.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_06.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_09.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_11.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_13.jpg" alt="">
-            </a>
-
-
-          </div>
-          -->
           SDGS_LIST
         </div>
       </div>

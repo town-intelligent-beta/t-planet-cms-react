@@ -5,7 +5,7 @@ export function set_page_info_admin_username() {
   $("#groupDisplay").text(group);
   $("#account_name").val(username);
   $("#account_email").val(email);
-  if (group == 204) {
+  if(SITE_HOSTERS.includes(email) && email != SITE_HOSTERS[0]){
     try {
       $("#user_system").css("display", "none");
     } catch (e) {

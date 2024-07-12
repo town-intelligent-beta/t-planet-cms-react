@@ -4,34 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/loading.css">
     <link rel="stylesheet" href="/static/css/progress_bar.css">
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/file_handler.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script type="module" src="/static/js/news_list.js"></script>
-    <script type="module" src="/static/js/cms_add_news.js"></script>
-    <script type="module">
-      import { changeNewsListBanner } from '/static/js/cms_add_news.js'
-      window.changeNewsListBanner = changeNewsListBanner;
-    </script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
   </head>
   <body class="d-flex flex-column">
     <!-- navbar -->
@@ -41,7 +19,7 @@
       <div class="container-fluid px-0 d-flex align-items-center">
         <div id="news_banner_image" class="bg-cover img-fluid w-100 d-flex align-items-center justify-content-center" style="background-image: url(/static/imgs/news-banner.jpg); height: 350px; background-repeat: no-repeat; position: relative;">
           <div>
-            <button class="btn btn-warning btn-lg bg-2ndhome border-0" id="btnUploadNewsCover" onclick="changeNewsListBanner()" style="width: 300px; height: 50px; position: absolute;right:45px; bottom: 57px; cursor: pointer;">
+            <button class="btn btn-warning btn-lg bg-2ndhome border-0" id="btnUploadNewsCover" onclick="changeNewsListBanner()" style="width: 300px; height: 50px; position: absolute; right:45px; bottom: 57px; cursor: pointer;">
               <div id="divUploadNewsCover" class="bg-contain">編輯封面圖片</div>
             </button>
           </div>
@@ -79,5 +57,25 @@
     </section>
     <!-- footer -->
     <div id="footer"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/file_handler.js"></script>
+    <script src="/static/js/accounts.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/permission.js"></script>
+    <script type="module" src="/static/js/news_list.js"></script>
+    <script type="module" src="/static/js/cms_add_news.js"></script>
+    <script type="module">
+      import { changeNewsListBanner } from '/static/js/cms_add_news.js';
+      window.changeNewsListBanner = changeNewsListBanner;
+    </script>
+    <script type="module" src="/static/js/set_page_info.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
   </body>
 </html>

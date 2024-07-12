@@ -1,4 +1,17 @@
 import { list_plans, plan_info } from "./plan.js";
+import { getWeightMeta } from './api/weight.js';
+
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
 
 export function set_page_info_project_list() {
   const yearFilterSelect = document.getElementById("year_filter");
@@ -158,12 +171,15 @@ function generateSDGsHTML(weight) {
   let sdg = "";
   for (let index_segs = 0; index_segs < list_weight.length; index_segs++) {
     if (parseInt(list_weight[index_segs]) === 1) {
-      const index_sdg = ("0" + (index_segs + 1)).slice(-2);
-      sdg += `<div class="col-2 p-2" style="width:13%">
-                <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
-                  <img class="w-100" src="/static/imgs/SDGs_${index_sdg}.jpg" alt="">
-                </a>
-              </div>`;
+      const sdgInfo = allWeights[index_segs];
+      if (sdgInfo) {
+        sdg += `<div class="col-2 p-2" style="width:13%">
+                  <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
+                    <img class="w-100" src
+                    ="${sdgInfo.thumbnail}" alt="">
+                  </a>
+                </div>`;
+      }
     }
   }
   return sdg;

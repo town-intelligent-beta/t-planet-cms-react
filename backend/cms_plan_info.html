@@ -4,54 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/loading.css">
     <link rel="stylesheet" href="/static/css/progress_bar.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/file_handler.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script src="/static/js/core/upload_adapter.js"></script>
-    <script src="/static/js/core/editor.js"></script>
-    <script type="module" src="/static/js/cms_agent.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <script type="module" src="/static/js/tasks.js"></script>
-    <script type="module" src="/static/js/cms_plan_info.js"></script>
-    <script type="module">
-      import { uploadProjectCover } from '/static/js/cms_plan_info.js'
-      window.uploadProjectCover = uploadProjectCover;
-    </script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script src="/static/js/qrcode.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
-    <script>
-    // project_start_date
-    $( function() {
-      $("#project_start_date").datepicker();
-      $("#project_due_date").datepicker();
-      register_ckeditor(['#philosophy'])
-    });
-    </script>
   </head>
   <body>
     <!-- navbar -->
     <div id="navbar"></div>
     <!-- step progress bar -->
-    <div class="contanier pt-3">
+    <div class="container pt-3">
       <ul class="progressbar">
         <li class="active"><span>計畫基本資料</span></li>
         <li><span>SDGs 指標設定</span></li>
@@ -81,9 +46,9 @@
             <div class="col-12">
               <div id="coverImg" class="border d-flex flex-column align-items-center justify-content-center" style="height: 300px;">
                 <button type="button" class="btn btn-light border-dark" id="btnUploadImg" onclick="uploadProjectCover()">
-                  <div id="divUploadImg" class="bg-contain" style="background-image: url(/static/imgs/image_icon.svg); width: 100px; height: 100px; background-repeat: no-repeat" ></div>
+                  <div id="divUploadImg" class="bg-contain" style="background-image: url(/static/imgs/image_icon.svg); width: 100px; height: 100px; background-repeat: no-repeat"></div>
                 </button>
-                <p class="text-center small mt-3">上傳照片（建議尺寸700x400） </p>
+                <p class="text-center small mt-3">上傳照片（建議尺寸700x400）</p>
               </div>
             </div>
           </div>
@@ -118,9 +83,7 @@
             <div class="form-group col-6 mb-0">
               <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                 <input id="project_start_date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" placeholder="開始日期"/>
-
                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                 </div>
               </div>
@@ -128,7 +91,7 @@
             <div class="form-group col-6 mb-0">
               <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                 <input id="project_due_date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" placeholder="結束日期"/>
-		              <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                 </div>
               </div>
@@ -150,10 +113,10 @@
               <textarea class="form-control" id="philosophy" rows="6" style="resize: none; height: 158px;"></textarea>
             </div>
           </div>
-            <div class="row mt-4 mb-5 pb-3 justify-content-center">
+          <div class="row mt-4 mb-5 pb-3 justify-content-center">
             <div class="col-md-8">
               <div id="submit_container" class="d-flex justify-content-center">
-		            <button type="submit" id="btn_cms_plan_preview" class="btn btn-dark d-none d-md-block rounded-pill mr-3" style="width: 15%">檢視</button>
+                <button type="submit" id="btn_cms_plan_preview" class="btn btn-dark d-none d-md-block rounded-pill mr-3" style="width: 15%">檢視</button>
                 <button type="submit" id="btn_ab_project_next" class="btn btn-dark d-none d-md-block rounded-pill mr-3" style="width: 15%">下一步</button>
                 <button type="submit" id="btn_cms_plan_save" class="btn btn-success d-none d-md-block rounded-pill mr-3" style="width: 15%">儲存草稿</button>
               </div>
@@ -165,10 +128,44 @@
                 <button type="submit" id="btn_cms_plan_save" class="btn btn-success d-md-none rounded-pill w-100">儲存草稿</button>
               </div>
             </div>
+          </div>
         </form>
       </div>
     </section>
     <!-- footer -->
     <div id="footer"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/file_handler.js"></script>
+    <script src="/static/js/accounts.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/permission.js"></script>
+    <script src="/static/js/core/upload_adapter.js"></script>
+    <script src="/static/js/core/editor.js"></script>
+    <script type="module" src="/static/js/cms_agent.js"></script>
+    <script type="module" src="/static/js/plan.js"></script>
+    <script type="module" src="/static/js/tasks.js"></script>
+    <script type="module" src="/static/js/cms_plan_info.js"></script>
+    <script type="module">
+      import { uploadProjectCover } from '/static/js/cms_plan_info.js';
+      window.uploadProjectCover = uploadProjectCover;
+    </script>
+    <script type="module" src="/static/js/set_page_info.js"></script>
+    <script src="/static/js/qrcode.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
+    <script>
+      $(function() {
+        $("#project_start_date").datepicker();
+        $("#project_due_date").datepicker();
+        register_ckeditor(['#philosophy']);
+      });
+    </script>
   </body>
 </html>

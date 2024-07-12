@@ -91,13 +91,13 @@ function set_navbar_animation() {
   });
 }
 
-function navbar(group) {
+function navbar(email) {
   add_navbar()
   add_footer()
   set_navbar_animation()
 
   // home logo href
-  if (group == "200" || group == "201" ) {
+  if (SITE_HOSTERS.includes(email) && email === SITE_HOSTERS[0]) {
     document.getElementById("index_logo").href = "/index.html";
 
     try {
@@ -175,11 +175,11 @@ function navbar(group) {
 // set page info
 set_page_info();
 
-// Get group
-var group = getLocalStorage("group");
+// Get email
+var email = getLocalStorage("email");
 
 // navbar
-navbar(group);
+navbar(email);
 
 // footer
 add_footer();
