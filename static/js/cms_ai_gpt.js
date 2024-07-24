@@ -116,10 +116,13 @@ const checkAndShowModal = () => {
 };
 
 const updateInputValue = () => {
-  const sdgsText =
-    list_target_sdgs.length > 0 ? " SDG" + list_target_sdgs.join(", SDG") : "";
+  let sdgsText = "";
+  for (let i = 0; i < list_target_sdgs.length; i++) {
+    sdgsText = sdgsText + allWeights[list_target_sdgs[i] - 1].title + "、";
+  }
   input.value = `我想請問，${selectOneText}列出${selectTwoText}，符合${sdgsText}。`;
 };
+
 const updateSubmitButtonState = () => {
   // Enable Free talk
   /*   selectOne.value !== "---請選擇---" && selectTwo.value !== "---請選擇---"
@@ -164,11 +167,12 @@ submitBtn.addEventListener("click", () => {
   chat.appendChild(questionEl);
   chat.appendChild(responseEl);
 
+  // Clear input value
+  input.value = "";
+
   const spinner = document.createElement("div");
   spinner.classList.add("spinner");
   responseEl.appendChild(spinner);
-
-  console.log(JSON.stringify(requestBody))
 
   fetch(HOST_URL_LLMTWINS + "/prompt", {
     method: "POST",
@@ -207,10 +211,10 @@ const setInputFixedWidth = () => {
   inputFixed.style.width = `${greetingsWidth}px`;
 };
 
-
 // Set weight_container with allWeights
 const weight_container = document.querySelector("#weight_container");
 allWeights.forEach((category, idx) => {
+  idx = idx + 1;
   // 創建包含卡片的 div
   const cardDiv = document.createElement('div');
   cardDiv.className = 'card mt-2';
