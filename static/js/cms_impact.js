@@ -145,25 +145,37 @@ function add_sdgs_input(index) {
   obj_sdgs_container.append(obj_div);
 }
 
-export function set_page_info_cms_impact(uuid) {
+// export function set_page_info_cms_impact(uuid) {
+  export const set_page_info_cms_impact = async (uuid) => {
   var obj_plan = plan_info(uuid);
   var list_sdgs_input = [];
   try {
     list_sdgs_input = obj_plan.weight.split(",");
   } catch (e) {}
+
   var obj_sdgs_comment = "";
   try {
     obj_sdgs_comment = JSON.parse(obj_plan.weight_description);
   } catch (e) {}
+
+  // 提取本地存儲中的 ai_sdgs 並解析為 JSON
+  var ai_sdgs = JSON.parse(localStorage.getItem('ai_sdgs') || "{}");
+  console.log(JSON.stringify(ai_sdgs));
+
   for (var index = 0; index < list_sdgs_input.length; index++) {
     if (parseInt(list_sdgs_input[index]) == 1) {
       add_sdgs_input(index);
-      if (obj_sdgs_comment == null) {
-        continue;
+      if (obj_sdgs_comment === null || obj_sdgs_comment[index.toString()] == null || obj_sdgs_comment[index.toString()] == "" || obj_sdgs_comment[index.toString()] == undefined){
+        const ai_sdgs_index = (index + 1).toString();
+        if (ai_sdgs[ai_sdgs_index]) {
+          add_sdgs_comment(index, ai_sdgs[ai_sdgs_index]);
+        }
+      } else {
+        add_sdgs_comment(index, obj_sdgs_comment[index.toString()]);
       }
-      add_sdgs_comment(index, obj_sdgs_comment[index.toString()]);
     }
   }
+
   // Add parent task block list
   var list_parent_task_uuid = list_plan_tasks(uuid, 1);
   if (list_parent_task_uuid.result == false) {
@@ -178,6 +190,7 @@ export function set_page_info_cms_impact(uuid) {
     add_parent_task_block(task);
   });
 }
+
 // Add_parent_tasks
 $(function () {
   $("#add_parent_tasks").on("click", function (e) {

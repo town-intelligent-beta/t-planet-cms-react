@@ -147,7 +147,7 @@ submitBtn.addEventListener("click", () => {
 
   console.log(JSON.stringify(requestBody))
 
-  fetch("https://beta-llmtwins.4impact.cc/prompt", {
+  fetch(HOST_URL_LLMTWINS + "/prompt", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
