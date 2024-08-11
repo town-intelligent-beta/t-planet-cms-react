@@ -271,7 +271,11 @@ export async function set_page_info_content() {
   document.getElementById("project_b").innerHTML = obj_project.project_b;
   document.getElementById("email").innerHTML = obj_project.email;
   document.getElementById("philosophy").innerHTML = obj_project.philosophy;
-  document.getElementById("budget").innerHTML = obj_project.budget;
+
+  if (obj_project.is_budget_revealed === true)
+    document.getElementById("budget").innerHTML = obj_project.budget;
+  else
+    document.getElementById("budget").innerHTML = "-";
 
   // Location
   set_location(obj_project);

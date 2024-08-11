@@ -28,7 +28,15 @@ function init() {
 
   // Set value
   document.getElementById("uuid").textContent += obj_project_data.uuid;
-  document.getElementById("budget").textContent += obj_project_data.budget;
+
+  console.log("Hello obj_project_data: ", obj_project_data);
+  console.log("Hello type of obj_project_data: ", type of obj_project_data.uuid);
+
+  if (obj_project_data.is_budget_revealed === true)
+    document.getElementById("budget").textContent += obj_project_data.budget;
+  else
+    document.getElementById("budget").textContent = "(暫不揭露)";
+  
   document.getElementById("relate_people").textContent += obj_project_data.relate_people;
   document.getElementById("hoster").textContent += obj_project_data.hoster;
   document.getElementById("period").textContent += obj_project_data.period;
