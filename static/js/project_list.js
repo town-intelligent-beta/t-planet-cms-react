@@ -125,6 +125,10 @@ function filterProjectsByYear(selectedYear, list_project_uuids) {
 }
 
 function generateProjectBlockHTML(obj_project) {
+  let budgetDisplay = obj_project.is_budget_revealed === true 
+    ? `新台幣 ${obj_project.budget} 元` 
+    : "(暫不揭露)";
+
   let str_project_block_in_project_page_innetHTML = `<a class="text-dark" href="/cms_project_detail.html?uuid=${
     obj_project.uuid
   }" style="display: block; text-decoration:none">
@@ -148,9 +152,7 @@ function generateProjectBlockHTML(obj_project) {
         } ~ ${
     obj_project.period ? obj_project.period.split("-")[1] : ""
   }<span></p>
-        <p class="card-text">預算: <span class="pl-2">新台幣 ${
-          obj_project.budget
-        } 元<span></p>
+        <p class="card-text">預算: <span class="pl-2">${budgetDisplay}<span></p>
         <a href="/content.html?uuid=${
           obj_project.uuid
         }" class="stretched-link"></a>

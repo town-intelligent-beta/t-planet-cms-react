@@ -143,7 +143,7 @@ export function append_plan_submit_data(page, form) {
     form.append("project_due_date", document.getElementById("project_due_date").value);
     form.append("budget", document.getElementById("budget").value);
     form.append("philosophy", document.getElementById("philosophy").value);
-
+    form.append("is_budget_revealed", document.getElementById("displayProjectBudget").checked);
   } else if (page == "cms_sdgs_setting.html") {
 
     // Get SDGs data
