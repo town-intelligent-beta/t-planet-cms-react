@@ -337,44 +337,43 @@ const str_parent_task_block = `
   </div>
 </div> `
 
-const str_navbar = `    <nav class="navbar navbar-expand-xl navbar-light bg-navbar fz-18">
-<div name="admin_dropdown" class="container-fluid">
-  <a id="index_logo" class="navbar-brand d-none d-md-block my-md-1" href="/index.html">
-    <img class="logo-pc" src="/static/imgs/2nd-home.svg" alt="">
-  </a>
-  <a id="index_logo" class="navbar-brand d-md-none" href="/index.html">
-    <img class="logo-mobile" src="/static/imgs/2nd-home.svg" alt="">
-  </a>
-  <button class="navbar-toggler mr-md-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+const str_navbar = `
+<nav class="navbar navbar-expand-xl navbar-light bg-navbar fz-18">
+  <div name="admin_dropdown" class="container-fluid">
+    <a id="index_logo" class="navbar-brand d-none d-md-block my-md-1" href="/index.html">
+      <img class="logo-pc" src="/static/imgs/2nd-home.svg" alt="">
+    </a>
+    <a id="index_logo" class="navbar-brand d-md-none" href="/index.html">
+      <img class="logo-mobile" src="/static/imgs/2nd-home.svg" alt="">
+    </a>
+    <button class="navbar-toggler mr-md-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li id="index" class="nav-item">
-        <a id="about_nav" class="nav-link fw-bold" href="/index.html">關於 Second Home </a>
-      </li>
-      <li id="kpi" class="nav-item">
-        <a class="nav-link fw-bold" href="/kpi.html">永續專案</a>
-      </li>
-      <!--
-      <li id="solution" class="nav-item" style="display:none">
-        <a class="nav-link fw-bold" href="/solution.html">解決方案</a>
-      </li>
-      -->
-      <li id="news_list" class="nav-item">
-        <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
-      </li>
-      <li id="contact_us" class="nav-item" style="display:none">
-        <a class="nav-link fw-bold" href="/contact_us.html">聯絡我們</a>
-      </li>
-      <li id="account_status" class="nav-item d-flex align-items-center">
-        <img class="align-top" src="/static/imgs/user.svg" alt=""><a class="nav-link fw-bold px-0" href="/tplanet_signin.html">登入</a><span class="nav-link px-1 align-middle" style="margin-bottom:2px">/</span><a class="nav-link fw-bold px-0" href="/tplanet_signup.html">註冊</a>
-      </li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto ms-xl-auto">
+        <li id="index" class="nav-item">
+          <a id="about_nav" class="nav-link fw-bold" href="/index.html">關於 Second Home </a>
+        </li>
+        <li id="kpi" class="nav-item">
+          <a class="nav-link fw-bold" href="/kpi.html">永續專案</a>
+        </li>
+        <li id="news_list" class="nav-item">
+          <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
+        </li>
+        <li id="contact_us" class="nav-item" style="display:none">
+          <a class="nav-link fw-bold" href="/contact_us.html">聯絡我們</a>
+        </li>
+        <li id="account_status" class="nav-item d-flex align-items-center">
+          <img class="align-top" src="/static/imgs/user.svg" alt="">
+          <a class="nav-link fw-bold px-0" href="/tplanet_signin.html">登入</a>
+          <span class="nav-link px-1 align-middle" style="margin-bottom:2px">/</span>
+          <a class="nav-link fw-bold px-0" href="/tplanet_signup.html">註冊</a>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
-</nav>`
+</nav>`;
 
 const str_footer = `    <footer class="bg-footer">
 <div class="container-fluid">
