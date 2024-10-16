@@ -265,7 +265,7 @@ const str_parent_task_block = `
           <div class="form-row">
             <div class="form-group col-12 mt-3 mt-md-0">
               <label for="inputEvent">活動設計名稱</label>
-              <input id="parent_task_name_UUID_TASK" type="text" class="form-control" id="inputEvent" placeholder="">
+              <input id="parent_task_name_UUID_TASK" type="text" class="form-control" id="inputEvent" placeholder="" maxlength="30">
             </div>
             <div class="form-group col-6">
               <label for="inputDatePicker1">開始日期</label>
