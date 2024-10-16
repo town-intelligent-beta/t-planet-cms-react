@@ -97,7 +97,7 @@ function navbar(email) {
   set_navbar_animation()
 
   // home logo href
-  if (SITE_HOSTERS.includes(email) && email === SITE_HOSTERS[0]) {
+  if (SITE_HOSTERS.includes(email)) {
     document.getElementById("index_logo").href = "/index.html";
 
     try {
@@ -160,7 +160,11 @@ function navbar(email) {
 
       obj_dropdown_menu.appendChild(obj_dropdown_item_index);
       obj_dropdown_menu.appendChild(obj_dropdown_item_sustainable);
-      obj_dropdown_menu.appendChild(obj_dropdown_item_AI);
+
+      if (email === SITE_HOSTERS[0]) {
+        obj_dropdown_menu.appendChild(obj_dropdown_item_AI);
+      }
+
       obj_dropdown_menu.appendChild(obj_dropdown_item_news);
       obj_dropdown_menu.appendChild(obj_dropdown_item_contact);
       obj_dropdown_menu.appendChild(obj_dropdown_item_logout);
