@@ -29,9 +29,6 @@ function init() {
   // Set value
   document.getElementById("uuid").textContent += obj_project_data.uuid;
 
-  console.log("Hello obj_project_data: ", obj_project_data);
-  console.log("Hello type of obj_project_data: ", type of obj_project_data.uuid);
-
   if (obj_project_data.is_budget_revealed === true)
     document.getElementById("budget").textContent += obj_project_data.budget;
   else
