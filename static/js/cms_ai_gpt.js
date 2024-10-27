@@ -3,7 +3,7 @@ import { getWeightMeta } from './api/weight.js';
 const openBtn = document.querySelector("#open");
 const closeBtn = document.querySelector("#close");
 const header = document.querySelector("header");
-const selectOne = document.querySelector("#selectOne");
+// const selectOne = document.querySelector("#selectOne");
 const selectTwo = document.querySelector("#selectTwo");
 const input = document.querySelector("input.form-control");
 const question = document.querySelector("#quesition");
@@ -109,18 +109,30 @@ modleCloseBtn.addEventListener("click", () => {
 openBtn.addEventListener("click", toggleHeader);
 closeBtn.addEventListener("click", toggleHeader);
 
-const checkAndShowModal = () => {
+/* const checkAndShowModal = () => {
   selectOne.value !== "---請選擇---" && selectTwo.value !== "---請選擇---"
+    ? $("#SDGsModal").modal("show")
+    : $("#SDGsModal").modal("hide");
+}; */
+
+const checkAndShowModal = () => {
+  selectTwo.value !== "---請選擇---"
     ? $("#SDGsModal").modal("show")
     : $("#SDGsModal").modal("hide");
 };
 
-const updateInputValue = () => {
+const updateInputValue = (prompt=null) => {
+  if (prompt !== null) {
+    input.value = prompt;
+    return;
+  }
+  
   let sdgsText = "";
   for (let i = 0; i < list_target_sdgs.length; i++) {
     sdgsText = sdgsText + allWeights[list_target_sdgs[i] - 1].title + "、";
   }
-  input.value = `我想請問，${selectOneText}列出${selectTwoText}，符合${sdgsText}。`;
+  input.value = `請${selectOneText}列出${selectTwoText}，符合${sdgsText}。`;
+  // input.value = `請${selectOneText}列出${selectTwoText}。`;
 };
 
 const updateSubmitButtonState = () => {
@@ -130,17 +142,97 @@ const updateSubmitButtonState = () => {
     : (submitBtn.disabled = true); */
 };
 
-selectOne.addEventListener("change", () => {
-  selectOneText = selectOne.options[selectOne.selectedIndex].text;
-  updateInputValue();
-  checkAndShowModal();
-  updateSubmitButtonState();
-});
+const windowForAnalysisProjectSROI = () => {
+  return new Promise((resolve, reject) => {
+    // 創建 Bootstrap Modal 容器
+    const modal = document.createElement("div");
+    modal.className = "modal fade";
+    modal.tabIndex = "-1";
+    modal.role = "dialog";
 
-selectTwo.addEventListener("change", () => {
+    // 創建 Modal 內部結構
+    const modalDialog = document.createElement("div");
+    modalDialog.className = "modal-dialog modal-dialog-centered";
+    modalDialog.role = "document";
+
+    const modalContent = document.createElement("div");
+    modalContent.className = "modal-content";
+
+    // 創建 Modal 標題
+    const modalHeader = document.createElement("div");
+    modalHeader.className = "modal-header";
+    const title = document.createElement("h5");
+    title.className = "modal-title";
+    title.innerText = "輸入專案編號";
+    modalHeader.appendChild(title);
+
+    // 創建關閉按鈕
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "btn-close";
+    closeButton.setAttribute("data-bs-dismiss", "modal");
+    closeButton.setAttribute("aria-label", "Close");
+    modalHeader.appendChild(closeButton);
+
+    // 創建 Modal 內容（包括輸入框）
+    const modalBody = document.createElement("div");
+    modalBody.className = "modal-body";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "form-control";
+    input.placeholder = "請輸入專案編號";
+    input.value = "38896996"; // 預設專案編號
+    modalBody.appendChild(input);
+
+    // 創建確認按鈕
+    const modalFooter = document.createElement("div");
+    modalFooter.className = "modal-footer";
+
+    const confirmBtn = document.createElement("button");
+    confirmBtn.className = "btn btn-primary";
+    confirmBtn.innerText = "確認";
+    confirmBtn.onclick = () => {
+      const projectId = input.value;
+      if (projectId) {
+        resolve(projectId);  // 返回專案編號
+        bootstrapModal.hide();
+      } else {
+        alert("請輸入專案編號");
+      }
+    };
+
+    // 組裝 Modal 結構
+    modalFooter.appendChild(confirmBtn);
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modalContent.appendChild(modalFooter);
+    modalDialog.appendChild(modalContent);
+    modal.appendChild(modalDialog);
+    document.body.appendChild(modal);
+
+    // 初始化並顯示 Bootstrap 模態框
+    const bootstrapModal = new bootstrap.Modal(modal);
+    bootstrapModal.show();
+
+    // 點擊背景時的處理邏輯
+    modal.addEventListener("hidden.bs.modal", () => {
+      document.body.removeChild(modal); // 移除模態框
+      reject('視窗被關閉');
+    });
+  });
+};
+
+selectTwo.addEventListener("change", async () => {
   selectTwoText = selectTwo.options[selectTwo.selectedIndex].text;
-  updateInputValue();
-  checkAndShowModal();
+  
+  if (selectTwoText === "分析專案的 SROI 權重") {
+    let uuid = await windowForAnalysisProjectSROI();   
+    updateInputValue("請幫我分析專案編號為 " + uuid + " 的專案。");
+  } else {
+    updateInputValue();
+    checkAndShowModal();
+  }
   updateSubmitButtonState();
 });
 
@@ -187,7 +279,7 @@ submitBtn.addEventListener("click", () => {
       responseEl.innerHTML = `${settings.assistant_name}：${data.message}`;
       input.value = "";
       list_target_sdgs = [];
-      selectOne.value = "---請選擇---";
+      // selectOne.value = "---請選擇---";
       selectTwo.value = "---請選擇---";
       const icon_container = document.querySelector("#icon_container");
       icon_container.innerHTML = "";
