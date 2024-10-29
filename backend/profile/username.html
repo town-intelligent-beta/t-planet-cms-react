@@ -92,11 +92,17 @@
                         <input type="email" class="form-control" id="account_email" value="forus999@gmail.com" readonly placeholder="e-mail">
                     </div>
                     <div style="margin-left: 20%;" >
-                        <label>密碼</label>
-                        <input readonly type="password" class="form-control" id="account_password" value="12345678">
+                        <label>新密碼</label>
+                        <input type="password" class="form-control" id="new_password" placeholder="請輸入新密碼">
+                        <small id="password-error" class="text-danger"></small>
                     </div>
-                    <button type="button" class="btn btn-dark" style="height: 40px; width: 100px; visibility: hidden;">
-                        <a href="/backend/tplanet_reset_pw.html" style="color: white; text-decoration: none;">編輯</a>
+                    <div>
+                        <label>確認密碼</label>
+                        <input type="password" class="form-control" id="confirm_password" placeholder="請再次輸入密碼">
+                        <small id="confirm-password-error" class="text-danger"></small>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="submit-password" style="height: 40px; width: 80px;">
+                        確認
                     </button>
                 </div>
             </div>
