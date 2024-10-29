@@ -102,9 +102,19 @@ export function draw_comm_chart(totalProjectWeight) {
 export function set_page_info_kpi() {
   // Get all projects
   var list_project_uuids = [];
-  for (var index = 0; index < SITE_HOSTERS.length; index++) {
+  var list_site_hosters = [];
+
+  // 取得當前 URL 的參數
+  const params = new URLSearchParams(window.location.search);  
+  if (getLocalStorage("jwt") != "" && getLocalStorage("email") && getLocalStorage("email") != "" && params.has('status') && params.get('status') === 'loggedin') {
+    list_site_hosters.push(getLocalStorage("email"))
+  } else {
+    list_site_hosters = SITE_HOSTERS;
+  }
+
+  for (var index = 0; index < list_site_hosters.length; index++) {
     try {
-      var obj_list_projects = list_plans(SITE_HOSTERS[index], null);
+      var obj_list_projects = list_plans(list_site_hosters[index], null);
       list_project_uuids = list_project_uuids.concat(obj_list_projects.projects);
     } catch(e) { console.log(e) }
   }

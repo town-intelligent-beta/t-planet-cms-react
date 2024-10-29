@@ -13,7 +13,6 @@ export function addWeight(w1, w2) {
 export function plan_submit(form, uuid = null) {
   var resultJSON = {};
 
-  // FIXME: Require field check
   // Workaround for Prevent null project
   var path = window.location.pathname;
   var page = path.split("/").pop();

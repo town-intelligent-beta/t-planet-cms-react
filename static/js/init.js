@@ -1,7 +1,12 @@
 import { set_page_info } from './set_page_info.js';
 
 function add_navbar() {
-  $('#navbar').html(str_navbar)
+
+  if (getLocalStorage("jwt") === "" ) {
+    $('#navbar').html(str_navbar)
+  } else {
+    $('#navbar').html(str_navbar_loggedin)
+  }
 
   // Visible
   if (SITE_TYPE == 0) {
