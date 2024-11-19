@@ -15,7 +15,7 @@ let selectOneText = "";
 let selectTwoText = "";
 
 const settings = {
-  version: "AI-Gen-V1.0.0",
+  version: "AI-Gen-V1.1.0",
   username: "您",
   assistant_name: "Eva",
   message: "您好，我是您的 AI 永續顧問 Eva，有甚麼需要幫助的地方?",
@@ -237,6 +237,7 @@ selectTwo.addEventListener("change", async () => {
 });
 
 submitBtn.addEventListener("click", () => {
+/*
   const requestBody = {
     role: "小鎮賦能",
     type: "RAG",
@@ -247,6 +248,12 @@ submitBtn.addEventListener("click", () => {
       { key: "topic", value: selectTwoText, weight: list_target_sdgs },
     ],
     message: input.value,
+  };
+  */
+  const requestBody = {
+   role: "小鎮賦能",
+   message: input.value,
+   weight: list_target_sdgs,
   };
 
   const questionEl = document.createElement("p");
