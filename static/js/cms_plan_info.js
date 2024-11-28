@@ -37,6 +37,15 @@ if (uuid != null) {
     }
 
     document.getElementById("budget").value = obj_project.budget;
+    
+    // check if philosophy is null
+    console.log("DEBUG");
+    console.log(obj_project.philosophy);
+    if (document.getElementById("philosophy") != null) {
+      console.log("DEBUG: philosophy is not null");
+    }
+    // check if philosophy is null
+    
     document.getElementById("philosophy").value = obj_project.philosophy;
 
     if (obj_project.is_budget_revealed === true) {
