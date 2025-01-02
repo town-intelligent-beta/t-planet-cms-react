@@ -3,6 +3,7 @@ import Warning from "../assets/warning-icon.svg";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import { getGroup } from "./utils/Accounts";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -11,40 +12,13 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchAvatarImg = async () => {
-    const email = localStorage.getItem("email");
-    const dataJSON = new FormData();
-    dataJSON.append("email", email);
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_HOST_URL_EID}/accounts/get_avatar_img`,
-        {
-          method: "POST",
-          body: dataJSON,
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const resultJSON = await response.json();
-      localStorage.setItem("avatar_img", resultJSON.url);
-    } catch (error) {
-      console.error("Error fetching avatar image:", error);
-      setError(error);
-    }
-  };
-
   const signin = async (formdata) => {
     setIsLoading(true);
     setError("");
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_HOST_URL_EID}/accounts/signin`,
+        `${import.meta.env.VITE_HOST_URL_TPLANET}/accounts/signin`,
         {
           method: "POST",
           body: formdata,
@@ -72,6 +46,7 @@ export default function SignIn() {
 
     try {
       const formData = new FormData();
+      formData.append("username", email);
       formData.append("email", email);
       formData.append("password", password);
       const result = await signin(formData);
@@ -81,8 +56,8 @@ export default function SignIn() {
         localStorage.setItem("jwt", result.token);
         localStorage.setItem("username", result.username);
         localStorage.setItem("email", email);
-        await fetchAvatarImg();
-        navigate("/eid/about");
+        await getGroup(email);
+        navigate("/backend/admin_agent_dashboard");
       }
     } catch (error) {
       // 錯誤已經在 signin 函數中處理
@@ -164,7 +139,7 @@ export default function SignIn() {
         localStorage.setItem("jwt", resultJSON.token);
         localStorage.setItem("username", resultJSON.username);
         localStorage.setItem("email", resultJSON.emailAddresses[0].value);
-        navigate("/eid");
+        navigate("/backend/admin_agent_dashboard");
       } catch (e) {
         alert("登入失敗，請洽系統管理員！");
       }
