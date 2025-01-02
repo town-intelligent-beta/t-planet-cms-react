@@ -19,6 +19,7 @@ import News from "../../assets/news.svg";
 import ContactUs from "../../assets/contact_us.svg";
 import Logout from "../../assets/logout.svg";
 import Exclamation from "../../assets/exclamation.svg";
+import { logout } from "../utils/Accounts";
 
 // Register the scales
 ChartJS.register(
@@ -106,11 +107,6 @@ const Dashboard = () => {
     },
   };
 
-  const handleLogout = () => {
-    // Implement logout logic here
-    console.log("Logging out...");
-  };
-
   const menuItems = [
     {
       id: "profile",
@@ -158,7 +154,7 @@ const Dashboard = () => {
       id: "logout",
       icon: Logout,
       title: "登出",
-      onClick: handleLogout,
+      onClick: logout,
       show: true,
     },
     {

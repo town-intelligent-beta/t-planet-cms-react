@@ -1,9 +1,14 @@
 import { useEffect } from "react";
 import Logo from "../../assets/2nd-home.svg";
 import User from "../../assets/user.svg";
+import Logout from "../../assets/logout.svg";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { logout } from "../utils/Accounts";
+import { useAuth } from "../utils/ProtectRoute";
 
 export default function Str_Nav() {
+  const { isAuthenticated, isLoading } = useAuth();
+
   useEffect(() => {
     const links = document.querySelectorAll(".nav-link");
     links.forEach((link) => {
@@ -82,10 +87,11 @@ export default function Str_Nav() {
             <Nav.Item id="kpi">
               <Nav.Link href="/kpi">永續專案</Nav.Link>
             </Nav.Item>
-
-            <Nav.Item id="solution">
-              <Nav.Link href="/solution">解決方案</Nav.Link>
-            </Nav.Item>
+            {isAuthenticated ? null : (
+              <Nav.Item id="solution">
+                <Nav.Link href="/solution">解決方案</Nav.Link>
+              </Nav.Item>
+            )}
 
             <Nav.Item id="news_list">
               <Nav.Link href="/news_list">最新消息</Nav.Link>
@@ -95,16 +101,25 @@ export default function Str_Nav() {
               <Nav.Link href="/contact_us">聯絡我們</Nav.Link>
             </Nav.Item>
 
-            <Nav.Item id="account_status" className="d-flex align-items-center">
-              <img src={User} alt="" className="align-top" />
-              <Nav.Link href="/tplanet_signin" className="px-0">
-                登入
-              </Nav.Link>
-              <span className="nav-link px-1 align-middle mb-0.5">/</span>
-              <Nav.Link href="/tplanet_signup" className="px-0">
-                註冊
-              </Nav.Link>
-            </Nav.Item>
+            {isAuthenticated ? (
+              <Nav.Item id="logout" className="flex items-center">
+                <img src={Logout} alt="" className="align-top w-8" />
+                <Nav.Link className="px-0" onClick={logout}>
+                  登出
+                </Nav.Link>
+              </Nav.Item>
+            ) : (
+              <Nav.Item id="account_status" className="flex items-center">
+                <img src={User} alt="" className="align-top" />
+                <Nav.Link href="/tplanet_signin" className="px-0">
+                  登入
+                </Nav.Link>
+                <span className="nav-link px-1 align-middle mb-0.5">/</span>
+                <Nav.Link href="/tplanet_signup" className="px-0">
+                  註冊
+                </Nav.Link>
+              </Nav.Item>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

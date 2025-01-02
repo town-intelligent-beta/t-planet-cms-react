@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { getGroup } from "./utils/Accounts";
+import { useAuth } from "./utils/ProtectRoute";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { setIsAuthenticated } = useAuth();
 
   const signin = async (formdata) => {
     setIsLoading(true);
@@ -57,6 +59,7 @@ export default function SignIn() {
         localStorage.setItem("username", result.username);
         localStorage.setItem("email", email);
         await getGroup(email);
+        setIsAuthenticated(true);
         navigate("/backend/admin_agent_dashboard");
       }
     } catch (error) {
