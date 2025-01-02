@@ -6,18 +6,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Nav />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-        <Routes>
-          <Route path="/tplanet_signin" element={<SignIn />} />
-        </Routes>
-      </BrowserRouter>
-      <Footer />
-    </>
+    <BrowserRouter>
+      <div className="min-h-screen flex flex-col">
+        {/* Fixed Navigation */}
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <Nav />
+        </div>
+
+        {/* Main Content with Padding for Fixed Nav */}
+        <main className="flex-grow mt-16">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tplanet_signin" element={<SignIn />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
