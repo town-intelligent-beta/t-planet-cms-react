@@ -13,7 +13,6 @@ export function addWeight(w1, w2) {
 export function plan_submit(form, uuid = null) {
   var resultJSON = {};
 
-  // FIXME: Require field check
   // Workaround for Prevent null project
   var path = window.location.pathname;
   var page = path.split("/").pop();
@@ -127,15 +126,6 @@ export function list_plans(email = null, sdg = null) {
 
 export function append_plan_submit_data(page, form) {
   if (page == "cms_plan_info.html") {
-    // Budget
-    var input_budget = document.getElementById('budget').value;
-    var isInteger = /^[0-9]+$/.test(input_budget);
-    if (!isInteger) {
-      alert('請輸入有效的整數');
-      return null;
-      // 可以進一步處理，例如清空輸入欄位或為其添加一些視覺效果來指示錯誤
-    }
-
     form.append("name", document.getElementById("name").value);
     form.append("project_a", document.getElementById("project_a").value);
     form.append("project_b", document.getElementById("project_b").value);
@@ -143,7 +133,7 @@ export function append_plan_submit_data(page, form) {
     form.append("project_due_date", document.getElementById("project_due_date").value);
     form.append("budget", document.getElementById("budget").value);
     form.append("philosophy", document.getElementById("philosophy").value);
-
+    form.append("is_budget_revealed", document.getElementById("displayProjectBudget").checked);
   } else if (page == "cms_sdgs_setting.html") {
 
     // Get SDGs data
@@ -177,7 +167,7 @@ export function append_plan_submit_data(page, form) {
       if (document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des") == null) {
         continue;
       }
-	    dataJSON[index] = document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des").innerText;
+      dataJSON[index] = document.getElementById("sdg_" + ("0" + (index + 1)).slice(-2) + "_des").innerText;
     }
 
     // Additional SDGs data

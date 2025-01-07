@@ -4,27 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <script type="module" src="/static/js/project_list.js"></script>
-    <script type="module" src="/static/js/kpi_filter.js"></script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
   </head>
 
   <body>
@@ -39,144 +23,31 @@
             <div class="col-md-10">
               <div class="d-flex justify-content-center align-items-center">
                 <img id="sdg_icon" class="mr-3" src="" alt="" style="height: 70px">
-		<!--<h3 class="text-center fw-bold">良質教育</h3>-->
               </div>
             </div>
           </div>
-            <!-- <div class="col-md-12"> --> <!--12 -->
             <div id="project_list" class="row justify-content-md-start">
-              <!-- <div class="col-md-4">
-                <a class="text-dark" href="/content.html" style="display: block; text-decoration:none">
-                  <div class="card mb-4 rounded-0">
-                    <div class="d-flex justify-content-center">
-                      <div class="img-fluid bg-cover" style="background-image:url(/static/imgs/project_img.jpg); width:100% ;height:200px; background-repeat: no-repeat"></div>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                      <p class="h5">竹山創生輔導合作計畫</p>
-                      <p class="card-text mt-4">永續企業:<span class="pl-2">永鑫能源<span></p>
-                        <p class="card-text">地方團隊:<span class="pl-2">元泰竹藝社、台灣長虹、東埔蚋溪環境保護協會<span></p>
-                        <p class="card-text">期間:<span class="pl-2">2021.08.01~2022.07.31<span></p>
-                      <div class="row mt-3">
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_04.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_08.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_11.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_15.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_17.jpg" alt="">
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-md-4">
-                <a class="text-dark" href="/content.html" style="display: block; text-decoration:none">
-                  <div class="card mb-4 rounded-0">
-                    <div class="d-flex justify-content-center">
-                      <div class="img-fluid bg-cover" style="background-image:url(/static/imgs/project_img.jpg); width:100% ;height:200px; background-repeat: no-repeat"></div>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                      <p class="h5">竹山創生輔導合作計畫</p>
-                      <p class="card-text mt-4">永續企業:<span class="pl-2">永鑫能源<span></p>
-                        <p class="card-text">地方團隊:<span class="pl-2">元泰竹藝社、台灣長虹、東埔蚋溪環境保護協會<span></p>
-                        <p class="card-text">期間:<span class="pl-2">2021.08.01~2022.07.31<span></p>
-                      <div class="row mt-3">
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_04.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_08.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_11.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_15.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_17.jpg" alt="">
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-md-4">
-                <a class="text-dark" href="/content.html" style="display: block; text-decoration:none">
-                  <div class="card mb-4 rounded-0">
-                    <div class="d-flex justify-content-center">
-                      <div class="img-fluid bg-cover" style="background-image:url(/static/imgs/project_img.jpg); width:100% ;height:200px; background-repeat: no-repeat"></div>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                      <p class="h5">竹山創生輔導合作計畫</p>
-                      <p class="card-text mt-4">永續企業:<span class="pl-2">永鑫能源<span></p>
-                      <p class="card-text">地方團隊:<span class="pl-2">元泰竹藝社、台灣長虹、東埔蚋溪環境保護協會<span></p>
-                      <p class="card-text">期間:<span class="pl-2">2021.08.01~2022.07.31<span></p>
-                      <div class="row mt-3">
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_04.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_08.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_11.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_15.jpg" alt="">
-                          </a>
-                        </div>
-                        <div class="col-2 pr-0">
-                          <a href="#">
-                            <img class="w-100" src="/static/imgs/SDGs_17.jpg" alt="">
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div> -->
             </div>
-            <!-- </div> -->
           </div>
       </div>
     </section>
     <!-- footer -->
     <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script type="module" src="/static/js/plan.js"></script>
+    <script type="module" src="/static/js/project_list.js"></script>
+    <script type="module" src="/static/js/kpi_filter.js"></script>
+    <script type="module" src="/static/js/set_page_info.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
   </body>
 </html>
