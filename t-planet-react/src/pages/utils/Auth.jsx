@@ -27,7 +27,9 @@ async function verifyToken(token) {
       localStorage.clear();
 
       // Redirect to signin page
-      window.location.replace("/tplanet_signin");
+      if (window.location.pathname.includes("/backend/")) {
+        window.location.replace(`/tplanet_signin`);
+      }
       return false;
     }
   } catch (error) {
@@ -43,7 +45,11 @@ async function checkAuth() {
     const path = window.location.pathname;
     const page = path.split("/").pop();
 
-    if (page !== "tplanet_signin" && page !== "tplanet_signup") {
+    if (
+      path.includes("/backend/") &&
+      page !== "tplanet_signin" &&
+      page !== "tplanet_signup"
+    ) {
       window.location.replace(`/tplanet_signin`);
     }
     return false;
