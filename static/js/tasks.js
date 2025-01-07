@@ -1,21 +1,3 @@
-
-/* function add_to_parent_task_queue(queue ,uuid) {
-  if (getLocalStorage("parent_task_queue") != "") {
-    queue = JSON.parse(getLocalStorage("parent_task_queue"));
-  }
-  queue.push(uuid);
-  setLocalStorage("parent_task_queue", JSON.stringify(uuid));
-}
-function parent_task_queue(queue, uuid) {
-  if (getLocalStorage("parent_task_queue") != "") {
-    queue = JSON.parse(getLocalStorage("parent_task_queue"));
-    queue = queue.filter(item => item !== uuid);
-
-    setLocalStorage("parent_task_queue", JSON.stringify(queue));
-  }
-  return queue;
-} */
-
 export function add_to_child_task_queue(uuid) {
   var queue = [];
   if (getLocalStorage("child_task_queue") != "") {
@@ -58,15 +40,6 @@ export function deep_deleted_task(uuid){
 
   return dataJSON;
 }
-
-// function delete_div(obj){
-//   let name = document.getElementById("uuid_name")
-//   let uuid = name.innerText
-//   let outter = document.getElementById('uuid_parent')
-//   if(obj.uuid = uuid){
-//     outter.remove()
-//   }
-// }
 
 export function deleted_task(uuid){
   var dataJSON = {};
@@ -174,23 +147,6 @@ export async function submitTaskCover(base64Img, uuid_task) {
     });
   });
 }
-
-/* function submitTaskCover(base64Img, uuid_task) {
-  var dataJSON = {};
-  // dataJSON.email = getLocalStorage("email");
-  dataJSON.uuid = uuid_task;
-  dataJSON.img = base64Img;
-  $.ajax({
-    url: HOST_URL_TPLANET_DAEMON + "/tasks/push_task_cover",
-    type: "POST",
-    async: true,
-    crossDomain: true,
-    data:  dataJSON,
-    success: function(returnData) {
-      const obj = JSON.parse(returnData);
-    }
-  });
-} */
 
 export function onclickuploadTaskCover(uuid) {
   uploadTaskCover(uuid);
@@ -367,24 +323,3 @@ export function getTaskWeight(task_UUID) {
 
   return TaskWeight;
 }
-
-/* export function verify_task_on_eid(uuid, email) {
-  var dataJSON = {};
-  dataJSON.tasks_list = uuid;
-  dataJSON.email = email;
-  $.ajax({
-    url: HOST_URL_TPLANET_DAEMON + "/tasks/verify",
-    type: "POST",
-    async: false,
-    crossDomain: true,
-    data:  dataJSON,
-    success: function(returnData) {
-       const obj = JSON.parse(returnData);
-       dataJSON = obj;
-    },
-    error: function(xhr, ajaxOptions, thrownError){
-      console.log(thrownError);
-    }
-  });
-  return dataJSON;
-} */

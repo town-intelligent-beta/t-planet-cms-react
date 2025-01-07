@@ -1,5 +1,19 @@
 import { comment_list, comment_get } from './comment.js'
 import { mockup_get, mockup_upload } from './mockup.js'
+import { getWeightMeta } from './api/weight.js';
+
+const allWeights = [];
+
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
 
 export function uploadCmsContactUsCover () {
   var file = new FileModal("image/*");
@@ -55,7 +69,7 @@ export function set_page_info_cms_contact_us_detail() {
       var obj_img = document.createElement("img");
       obj_img.className = "mr-3";
 
-      obj_img.src = "/static/imgs/SDGs_" + obj_comment.sdgs[index] + ".jpg"
+      obj_img.src = allWeights[index].thumbnail;
       obj_img.alt = "";
       obj_img.style = "width:40px";
 

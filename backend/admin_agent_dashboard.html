@@ -5,26 +5,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
-  <script src="/static/js/config.js"></script>
-  <script src="/static/js/innerHTML.js"></script>
-  <script src="/static/js/localStorage.js"></script>
-  <script src="/static/js/accounts.js"></script>
-  <script src="/static/js/auth.js"></script>
-  <script src="/static/js/permission.js"></script>
-  <script type="module" src="/static/js/admin_agent_dashboard.js"></script>
-  <script type="module" src="/static/js/set_page_info.js"></script>
-  <script type="module" src="/static/js/init.js"></script>
   <style>
     .agent-col {
       flex: 1 0 0;
@@ -81,7 +65,7 @@
                 <a href="/backend/cms_agent.html" class="stretched-link"></a>
               </div>
             </div>
-            <div id="llm" class="agent-col">
+            <div id="llm" class="agent-col" style="display: none;">
               <div class="card card-button">
                 <div class="d-flex justify-content-center align-items-center h-100">
                   <div class="text-center">
@@ -153,7 +137,24 @@
   </section>
   <!-- footer -->
   <div id="footer"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/innerHTML.js"></script>
+  <script src="/static/js/localStorage.js"></script>
+  <script src="/static/js/accounts.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/permission.js"></script>
+  <script type="module" src="/static/js/admin_agent_dashboard.js"></script>
+  <script type="module" src="/static/js/set_page_info.js"></script>
+  <script type="module" src="/static/js/init.js"></script>
+  <script src="../static/js/chart/line_pie.js"></script>
+
 </body>
-<script src="../static/js/chart/line_pie.js"></script>
 
 </html>

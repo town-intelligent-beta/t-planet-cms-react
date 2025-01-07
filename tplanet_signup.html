@@ -4,57 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="/static/css/style.css" rel="stylesheet" type="text/css">
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
-
-    <script>
-      function onSubmit() {
-        // Check format
-        var password = $("#password").val()
-        var cfm_password = $("#cfm_password").val()
-
-        if (password.length < 8 || cfm_password.length < 8) {
-          document.getElementById("war_msg").innerHTML = "密碼不得少於 8 字元";
-          return;
-        }
-        if (password != cfm_password) {
-          document.getElementById("war_msg").innerHTML = "兩次輸入的密碼不一致";
-          return;
-        }
-
-        var dataJSON = {};
-        dataJSON.username =  $("#username").val();
-        dataJSON.password =  $("#password").val();
-        dataJSON.email =  $("#email").val();
-        $.ajax({
-          url: HOST_URL_TPLANET_DAEMON + "/accounts/signup",
-          type: "POST",
-          crossDomain: true,
-          data:  dataJSON,
-          success: function(returnData) {
-            const obj = JSON.parse(returnData);
-      setLocalStorage("jwt", obj.token);
-            setLocalStorage("username", $("#username").val());
-            console.log("Get JWT from cookie" +  getLocalStorage("jwt"));
-            window.location.replace("/index.html");
-          },
-          error: function(xhr, ajaxOptions, thrownError){
-            console.log(thrownError);
-          }
-        });
-      }
-    </script>
-
   </head>
 
   <body class="d-flex flex-column">
@@ -79,7 +31,6 @@
             </div>
             <div class="form-group mb-0">
               <input type="password" class="form-control form-control-sm bg-2ndhome" id="cfm_password" placeholder="確認密碼">
-              <!-- <small class="fz-xs text-danger">密碼不得少於 8 字元</small> -->
               <small id="war_msg" class="fz-xs text-danger"></small>
             </div>
           </div>
@@ -93,15 +44,8 @@
           </div>
         </div>
         <div class="d-flex justify-content-center mt-3">
-          <div id="captcha">
-            <!-- <img class="d-none d-md-block" src="https://fakeimg.pl/526x60/?text=安全驗證&font=noto">
-	    <img class="d-md-none" src="https://fakeimg.pl/312x60/?text=安全驗證&font=noto"> -->
-          </div>
+          <div id="captcha"></div>
         </div>
-        <!-- <div class="text-center mt-4">
-	        <button type="button" class="btn btn-success" onclick="onSubmit()" >註冊</button>
-        </div> -->
-
         <div class="row justify-content-center mt-3">
           <div class="col-10 col-md-2 px-0">
             <button type="button" class="btn btn-block btn-dark" onclick="onSubmit()">註冊</button>
@@ -137,8 +81,54 @@
           </div>
         </div>
       </div>
-      </div>
     </div>
     <!-- footer -->
     <div id="footer"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
+    <script>
+      function onSubmit() {
+        // Check format
+        var password = $("#password").val()
+        var cfm_password = $("#cfm_password").val()
+
+        if (password.length < 8 || cfm_password.length < 8) {
+          document.getElementById("war_msg").innerHTML = "密碼不得少於 8 字元";
+          return;
+        }
+        if (password != cfm_password) {
+          document.getElementById("war_msg").innerHTML = "兩次輸入的密碼不一致";
+          return;
+        }
+
+        var dataJSON = {};
+        dataJSON.username =  $("#username").val();
+        dataJSON.password =  $("#password").val();
+        dataJSON.email =  $("#email").val();
+        $.ajax({
+          url: HOST_URL_TPLANET_DAEMON + "/accounts/signup",
+          type: "POST",
+          crossDomain: true,
+          data:  dataJSON,
+          success: function(returnData) {
+            const obj = JSON.parse(returnData);
+            setLocalStorage("jwt", obj.token);
+            setLocalStorage("username", $("#username").val());
+            console.log("Get JWT from cookie" +  getLocalStorage("jwt"));
+            window.location.replace("/index.html");
+          },
+          error: function(xhr, ajaxOptions, thrownError){
+            console.log(thrownError);
+          }
+        });
+      }
+    </script>
   </body>
+</html>

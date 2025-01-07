@@ -21,17 +21,12 @@ function eIDLogin(id_token, res) {
       const obj = JSON.parse(returnData);
       setLocalStorage("jwt", obj.token);
       setLocalStorage("username", obj.username);
-      console.log("Get JWT from cookie" +  getLocalStorage("jwt"));
 
-      // TODO, redirect by next
       if (next != null) {
         window.location.replace(next);
       } else {
-        // TODO, redirect by group
-        group = get_group(getLocalStorage("email"));
-        if (group == "100") {
-          window.location.replace("/backend/admin_dashboard.html");
-        } else if (group == "200" || group == "201") {
+        email = getLocalStorage("email");
+        if (SITE_HOSTERS.includes(email)) {
           window.location.replace("/backend/admin_agent_dashboard.html");
         } else {
           window.location.replace("/index.html");
