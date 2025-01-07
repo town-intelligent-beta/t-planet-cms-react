@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import GoogleLogo from "../assets/google-logo.svg";
 import FacebookLogo from "../assets/fb-logo-s.png";
-import Warning from "../assets/warning-icon.svg";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +10,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (password.length < 8 || confirmPassword.length < 8) {
@@ -20,12 +21,6 @@ const SignUp = () => {
       setWarningMessage("兩次輸入的密碼不一致");
       return;
     }
-
-    // const dataJSON = {
-    //   username,
-    //   password,
-    //   email,
-    // };
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -57,6 +52,89 @@ const SignUp = () => {
       window.location.replace("/");
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Initialize Google API
+    const initGoogleClient = () => {
+      window.gapi.load("client:auth2", () => {
+        window.gapi.client.init({
+          clientId:
+            "1080674192413-b1vnqslm4gif3p9ntaj4ifl4i572p0bn.apps.googleusercontent.com",
+          scope: "profile",
+          discoveryDocs: [
+            "https://www.googleapis.com/discovery/v1/apis/people/v1/rest",
+          ],
+        });
+      });
+    };
+
+    // Load Google API Script
+    const loadGoogleScript = () => {
+      const script = document.createElement("script");
+      script.src = "https://apis.google.com/js/api.js";
+      script.onload = () => initGoogleClient();
+      document.body.appendChild(script);
+    };
+
+    loadGoogleScript();
+  }, []);
+
+  const handleEidGoogleLogin = async (idToken, res) => {
+    const formData = new FormData();
+    formData.append("email", res.result.emailAddresses[0].value);
+    formData.append("username", res.result.names[0].displayName);
+    formData.append("token", idToken);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_HOST_URL_EID}/accounts/oauth/google`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const auth2 = window.gapi.auth2.getAuthInstance();
+      const googleUser = await auth2.signIn();
+
+      const userId = googleUser.getId();
+      console.log(`user_id: ${userId}`);
+
+      const authResponse = googleUser.getAuthResponse(true);
+      const idToken = authResponse.id_token;
+
+      const peopleResponse = await window.gapi.client.people.people.get({
+        resourceName: "people/me",
+        personFields: "names,emailAddresses",
+      });
+
+      const resultJSON = await handleEidGoogleLogin(idToken, peopleResponse);
+
+      try {
+        localStorage.setItem("jwt", resultJSON.token);
+        localStorage.setItem("username", resultJSON.username);
+        localStorage.setItem("email", resultJSON.emailAddresses[0].value);
+        navigate("/tplanet_signin");
+      } catch (e) {
+        alert("登入失敗，請洽系統管理員！");
+      }
+    } catch (error) {
+      console.error("Google登入失敗:", error);
     }
   };
 
@@ -153,12 +231,12 @@ const SignUp = () => {
               <hr className="border-sm" />
             </div>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             <div className="flex justify-center">
               <Button
                 variant="outline-secondary"
                 className="p-2 w-full"
-                //onClick={handleGoogleLogin}
+                onClick={handleGoogleLogin}
               >
                 <div className="flex justify-center">
                   <img
