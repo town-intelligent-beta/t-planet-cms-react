@@ -12,3 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: rgb(255 243 141) !important;
+  color: black !important;
+}
