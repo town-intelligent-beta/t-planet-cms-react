@@ -174,7 +174,6 @@ export default function Str_Nav() {
             <Nav.Item id="contact_us">
               <Nav.Link href="/contact_us">聯絡我們</Nav.Link>
             </Nav.Item>
-            {/* <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/static/imgs/user.svg" width="30" height="30" class="d-inline-block align-top" alt=""></a><div class="dropdown-menu" style="left: -100px;"><a class="dropdown-item" href="/backend/admin_agent_dashboard.html"><img src="/static/imgs/index.svg" style="width: 25px; height: 25px;"> 首頁管理</a><a class="dropdown-item" href="/backend/cms_agent.html"><img src="/static/imgs/cooperate.svg" style="width: 25px; height: 25px;"> 永續專區</a><a class="dropdown-item" href="/backend/cms_news_list.html"><img src="/static/imgs/news.svg" style="width: 25px; height: 25px;"> 最新消息</a><a class="dropdown-item" href="/backend/cms_contact_us.html"><img src="/static/imgs/contact_us.svg" style="width: 25px; height: 25px;"> 聯繫我們</a><a class="dropdown-item" href="javascript:logout();"><img src="/static/imgs/logout.svg" style="width: 25px; height: 25px;"> 登出</a><a class="dropdown-item" href="/backend/admin_agent_accountDelete.html"><img src="/static/imgs/delete.svg" style="width: 25px; height: 25px;"> 刪除帳號</a></div></li></li> */}
             {isAuthenticated ? (
               <NavDropdown
                 title={
