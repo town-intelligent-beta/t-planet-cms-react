@@ -3,8 +3,8 @@ import Warning from "../assets/warning-icon.svg";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import { getGroup } from "./utils/Accounts";
-import { useAuth } from "./utils/ProtectRoute";
+import { getGroup } from "../utils/Accounts";
+import { useAuth } from "../utils/ProtectRoute";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

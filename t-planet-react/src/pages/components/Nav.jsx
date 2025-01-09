@@ -3,8 +3,8 @@ import Logo from "../../assets/2nd-home.svg";
 import User from "../../assets/user.svg";
 import Logout from "../../assets/logout.svg";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { logout } from "../utils/Accounts";
-import { useAuth } from "../utils/ProtectRoute";
+import { logout } from "../../utils/Accounts";
+import { useAuth } from "../../utils/ProtectRoute";
 
 export default function Str_Nav() {
   const { isAuthenticated, isLoading } = useAuth();

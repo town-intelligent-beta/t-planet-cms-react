@@ -19,7 +19,7 @@ import News from "../../assets/news.svg";
 import ContactUs from "../../assets/contact_us.svg";
 import Logout from "../../assets/logout.svg";
 import Exclamation from "../../assets/exclamation.svg";
-import { logout } from "../utils/Accounts";
+import { logout } from "../../utils/Accounts";
 
 // Register the scales
 ChartJS.register(
