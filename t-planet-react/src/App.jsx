@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Kpi from "./pages/kpi/Kpi";
+import ProjectContent from "./pages/kpi/components/ProjectContent";
 import AdminAgentDashboard from "./pages/backend/AdminAgentDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./utils/ProtectRoute";
@@ -23,6 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/kpi" element={<Kpi />} />
+              <Route path="/content/:id" element={<ProjectContent />} />
               <Route path="/tplanet_signin" element={<SignIn />} />
               <Route path="/tplanet_signup" element={<SignUp />} />
               <Route

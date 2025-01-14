@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { list_plans, plan_info } from "../../../utils/Plan";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import generateSdgsIcons from "../../../utils/sdgs/SdgsImg";
 
 const getWeightMeta = async (name) => {
   const response = await fetch(
@@ -10,7 +12,7 @@ const getWeightMeta = async (name) => {
 };
 
 const ProjectList = () => {
-  const [allWeights, setAllWeights] = useState([]);
+  //const [allWeights, setAllWeights] = useState([]);
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [years, setYears] = useState([]);
@@ -32,7 +34,7 @@ const ProjectList = () => {
           const weightData = await getWeightMeta(WEIGHTS[i]);
           weights.push(...weightData.content.categories);
         }
-        setAllWeights(weights);
+        //setAllWeights(weights);
 
         const hosters =
           localStorage.getItem("jwt") &&
@@ -98,57 +100,41 @@ const ProjectList = () => {
     return (
       <Col md={4} key={project.uuid} className="mb-4">
         <Card className="kpi-card" style={{ borderRadius: "20px" }}>
-          <div
-            className="img-fluid bg-cover shadow"
-            style={{
-              backgroundImage: `url(${
-                project.img
-                  ? import.meta.env.VITE_HOST_URL_TPLANET + project.img
-                  : "#"
-              })`,
-              height: "200px",
-              borderRadius: "18px",
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-          ></div>
-          <Card.Body>
-            <h5>{project.name}</h5>
-            <p>永續企業: {project.project_a}</p>
-            <p>地方團隊: {project.project_b}</p>
-            <p>
-              期間:{" "}
-              {project.period ? project.period.split("-").join(" ~ ") : ""}
-            </p>
-            <p>預算: {budgetDisplay}</p>
-            <Row>{generateSDGsHTML(project.weight)}</Row>
-          </Card.Body>
+          <Link
+            to={`/content/${project.uuid}`}
+            className="no-underline text-black"
+          >
+            <div
+              className="img-fluid bg-cover shadow"
+              style={{
+                backgroundImage: `url(${
+                  project.img
+                    ? import.meta.env.VITE_HOST_URL_TPLANET + project.img
+                    : "#"
+                })`,
+                height: "200px",
+                borderRadius: "18px",
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+            ></div>
+            <Card.Body>
+              <h5>{project.name}</h5>
+              <p>永續企業: {project.project_a}</p>
+              <p>地方團隊: {project.project_b}</p>
+              <p>
+                期間:{" "}
+                {project.period ? project.period.split("-").join(" ~ ") : ""}
+              </p>
+              <p>預算: {budgetDisplay}</p>
+              <div className="flex flex-wrap gap-1">
+                {generateSdgsIcons(project.weight)}
+              </div>
+            </Card.Body>
+          </Link>
         </Card>
       </Col>
     );
-  };
-
-  // 生成 SDGs HTML
-  const generateSDGsHTML = (weight) => {
-    if (!weight) return null;
-
-    return weight.split(",").map((w, index) => {
-      if (parseInt(w) === 1 && allWeights[index]) {
-        const sdgInfo = allWeights[index];
-        return (
-          <Col key={index} className="p-2" style={{ width: "13%" }}>
-            <a
-              href="#"
-              className="stretched-link"
-              style={{ position: "relative", textDecoration: "none" }}
-            >
-              <img className="w-100" src={sdgInfo.thumbnail} alt="" />
-            </a>
-          </Col>
-        );
-      }
-      return null;
-    });
   };
 
   return (

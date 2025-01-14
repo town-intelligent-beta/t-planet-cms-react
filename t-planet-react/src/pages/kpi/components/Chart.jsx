@@ -11,6 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { fetchTotalProjectWeight } from "../../../utils/KpiApi";
 import { Row, Col, Container } from "react-bootstrap";
+import User from "../../../assets/weight/1.svg";
 
 ChartJS.register(
   CategoryScale,
@@ -21,40 +22,36 @@ ChartJS.register(
   Legend
 );
 
-// 自定義插件來處理圖片渲染
 const imagePlugin = {
   id: "customBarTopImage",
-  afterDraw: (chart) => {
-    const {
-      ctx,
-      scales: { x, y },
-      data,
-    } = chart;
-    const imageSize = 30;
+  beforeDatasetsDraw: (chart) => {
+    const { ctx } = chart;
+    const dataset = chart.data.datasets[0];
+    const meta = chart.getDatasetMeta(0);
 
-    // 確保有圖片數組
-    if (!data.images) return;
+    if (!meta.data || meta.data.length === 0) return;
 
-    data.datasets[0].data.forEach((value, index) => {
-      const xPos = x.getPixelForValue(index);
-      const yPos = y.getPixelForValue(value);
-
-      const imageSrc = data.images[index];
-      if (imageSrc) {
-        const image = new Image();
-        image.src = imageSrc;
-
-        image.onload = () => {
-          ctx.drawImage(
-            image,
-            xPos - imageSize / 2,
-            yPos - imageSize - 10,
-            imageSize,
-            imageSize
-          );
+    const loadAndDrawImage = (src, x, y) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          const size = 25;
+          ctx.drawImage(img, x - size / 2, y - size - 5, size, size);
+          resolve();
         };
-      }
-    });
+        img.src = src;
+      });
+    };
+
+    const drawImages = async () => {
+      const promises = dataset.images.map((src, i) => {
+        const { x, y } = meta.data[i];
+        return loadAndDrawImage(src, x, y);
+      });
+      await Promise.all(promises);
+    };
+
+    drawImages();
   },
 };
 
@@ -111,67 +108,46 @@ const getMappedSdgData = (data) => {
 
 const SDGsChart = () => {
   const [totalProjectWeight, setTotalProjectWeight] = useState({});
-  const [images, setImages] = useState({});
-  const [fiveLifeImages, setFiveLifeImages] = useState({});
-  const [communityImages, setCommunityImages] = useState({});
 
-  const imageNames = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
+  const images = [
+    "/src/assets/weight/1.svg",
+    "/src/assets/weight/2.svg",
+    "/src/assets/weight/3.svg",
+    "/src/assets/weight/4.svg",
+    "/src/assets/weight/5.svg",
+    "/src/assets/weight/6.svg",
+    "/src/assets/weight/7.svg",
+    "/src/assets/weight/8.svg",
+    "/src/assets/weight/9.svg",
+    "/src/assets/weight/10.svg",
+    "/src/assets/weight/11.svg",
+    "/src/assets/weight/12.svg",
+    "/src/assets/weight/13.svg",
+    "/src/assets/weight/14.svg",
+    "/src/assets/weight/15.svg",
+    "/src/assets/weight/16.svg",
+    "/src/assets/weight/17.svg",
   ];
-  const fiveLifeImageNames = [
-    "morality",
-    "intelligence",
-    "physique",
-    "social-skills",
-    "aesthetics",
+
+  const fiveLifeImage = [
+    "/src/assets/weight/morality.svg",
+    "/src/assets/weight/intelligence.svg",
+    "/src/assets/weight/physique.svg",
+    "/src/assets/weight/social-skills.svg",
+    "/src/assets/weight/aesthetics.svg",
   ];
-  const communityImageNames = [
-    "people",
-    "culture",
-    "place",
-    "specialty",
-    "landscape",
+
+  const communityImage = [
+    "/src/assets/weight/people.svg",
+    "/src/assets/weight/culture.svg",
+    "/src/assets/weight/place.svg",
+    "/src/assets/weight/specialty.svg",
+    "/src/assets/weight/landscape.svg",
   ];
 
   useEffect(() => {
     fetchTotalProjectWeight().then(setTotalProjectWeight);
-    loadImages(imageNames, setImages);
-    loadImages(fiveLifeImageNames, setFiveLifeImages);
-    loadImages(communityImageNames, setCommunityImages);
   }, []);
-
-  const loadImages = async (names, setState) => {
-    const imagePromises = names.map((name) =>
-      import(`../../../assets/weight/${name}.svg`).then((module) => ({
-        key: `weight_${name}`,
-        src: module.default,
-      }))
-    );
-
-    const loadedImages = await Promise.all(imagePromises);
-    const imagesObject = loadedImages.reduce((acc, image) => {
-      acc[image.key] = image.src;
-      return acc;
-    }, {});
-
-    setState(imagesObject);
-  };
 
   // Filter weights for SDGs (1-17)
   const sdgsWeights = Object.fromEntries(
@@ -222,9 +198,9 @@ const SDGsChart = () => {
           "#19486A",
         ],
         borderWidth: 1,
+        images: images,
       },
     ],
-    images: imageNames.map((name) => images[`weight_${name}`]),
   };
 
   const fiveData = {
@@ -235,9 +211,12 @@ const SDGsChart = () => {
         data: Object.values(getMappedSdgData(fiveWeights)),
         backgroundColor: "#0075A1",
         borderWidth: 1,
+        // images: fiveLifeImageNames.map(
+        //   (name) => fiveLifeImages[`weight_${name}`]
+        // ),
+        images: fiveLifeImage,
       },
     ],
-    images: fiveLifeImageNames.map((name) => fiveLifeImages[`weight_${name}`]),
   };
 
   const commData = {
@@ -248,11 +227,12 @@ const SDGsChart = () => {
         data: Object.values(getMappedSdgData(commWeights)),
         backgroundColor: "#28a745",
         borderWidth: 1,
+        // images: communityImageNames.map(
+        //   (name) => communityImages[`weight_${name}`]
+        // ),
+        images: communityImage,
       },
     ],
-    images: communityImageNames.map(
-      (name) => communityImages[`weight_${name}`]
-    ),
   };
 
   return (
