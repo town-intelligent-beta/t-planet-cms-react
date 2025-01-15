@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import placeMarker from "../../../assets/place_marker.svg";
-import { plan_info } from "../../../utils/Plan";
+import {
+  plan_info,
+  getProjectWeight,
+  list_plan_tasks,
+} from "../../../utils/Plan";
+import { getTaskInfo, listChildrenTasks } from "../../../utils/Task";
 import generateSdgsIcons from "../../../utils/sdgs/SdgsImg";
 import SdgsWeight from "../../../utils/sdgs/SdgsWeight";
+import SdgsChart from "../../../utils/sdgs/SdgsChart";
 
 export default function ProjectContent() {
   const [project, setProject] = useState({});
+  const [tasks, setTasks] = useState([]);
+  const [taskWeights, setTaskWeights] = useState([]);
+  const [totalWeight, setTotalWeight] = useState(0);
   const { id } = useParams();
 
   useEffect(() => {
@@ -14,13 +23,39 @@ export default function ProjectContent() {
       if (id) {
         const projectData = await plan_info(id);
         setProject(projectData);
+        const weight = await relatePeople(id);
+        setTotalWeight(weight);
+        const parentTasks = await list_plan_tasks(id, 1);
+        const list_task = await Promise.all(
+          parentTasks.tasks.map((taskUuid) => getTaskInfo(taskUuid))
+        );
+        setTasks(list_task);
+
+        const list_child_task = await Promise.all(
+          list_task.map((task) => listChildrenTasks(task.uuid))
+        );
+        const flattened_child_tasks = list_child_task.flat();
+
+        const list_weight = await Promise.all(
+          flattened_child_tasks.map((taskUuid) => getTaskInfo(taskUuid))
+        );
+        setTaskWeights(generateContentValues(list_weight));
       }
     };
 
     fetchProject();
   }, [id]);
 
-  console.log(project.weight_description);
+  const generateContentValues = (taskWeights) => {
+    return taskWeights.map((task) => {
+      const content = JSON.parse(task.content);
+      return Object.values(content).map((value) => parseInt(value));
+    });
+  };
+
+  //console.log(project.weight);
+  //console.log(tasks);
+  //console.log(taskWeights);
 
   const renderLocation = (locationString) => {
     if (!locationString) return [];
@@ -38,6 +73,17 @@ export default function ProjectContent() {
       .filter(Boolean);
   };
 
+  const relatePeople = async (projectUuid) => {
+    const parentTasks = await list_plan_tasks(projectUuid, 1);
+    const list_weight = await getProjectWeight(parentTasks.tasks);
+
+    let total_weight = 0;
+    for (const key in list_weight) {
+      total_weight += parseInt(list_weight[key]);
+    }
+
+    return total_weight;
+  };
   if (!project) return <div>Loading...</div>;
 
   return (
@@ -139,7 +185,6 @@ export default function ProjectContent() {
               className="row mt-5 pb-4 border-b"
               id="project_weight_description"
             >
-              {/* {project.weight_description} */}
               <SdgsWeight data={project.weight_description} />
             </div>
             <div className="row mt-4 pb-4 border-b">
@@ -150,7 +195,7 @@ export default function ProjectContent() {
                     style={{ fontSize: "96px", fontFamily: "Rozha One" }}
                     id="relate_people"
                   >
-                    {project.relate_people}
+                    {totalWeight}
                   </p>
                   <p className="text-center small mb-md-2">關係人口</p>
                   <p
@@ -165,7 +210,7 @@ export default function ProjectContent() {
               </div>
               <div className="col-md-6">
                 <div className="d-flex h-full items-center justify-center">
-                  <div className="w-full" id="obj_digital_fp_chart1"></div>
+                  <SdgsChart projectUuid={project.uuid} id="project" />
                 </div>
               </div>
             </div>
@@ -187,7 +232,49 @@ export default function ProjectContent() {
                   </a>
                 </div>
               </div>
-              <div id="tasks_container" className="tabs-section row"></div>
+              <div id="tasks_container" className="tabs-section row">
+                {tasks.map((task, index) => (
+                  <div key={index} className="row mt-4" id={`task_${index}`}>
+                    <div className="col-md-6">
+                      <img
+                        src={
+                          import.meta.env.VITE_HOST_URL_TPLANET + task.thumbnail
+                        }
+                      />
+                    </div>
+                    <div className="col-md-6 mt-4 mt-md-0">
+                      <SdgsChart
+                        projectUuid={project.uuid}
+                        title="永續指標"
+                        id="task"
+                      />
+                    </div>
+                    <div className="col-12 mb-2 font-bold">
+                      <div className="row mt-3">
+                        <div className="col-md-6">
+                          <h5 className="text-textColor font-bold">
+                            活動設計名稱: {task.name}
+                          </h5>
+                        </div>
+                        <div className="col-md-6 md:text-right">
+                          {" "}
+                          <p className="flex flex-wrap justify-center justify-md-end">
+                            {taskWeights[index] &&
+                              generateSdgsIcons(taskWeights[index].join(","))}
+                          </p>
+                        </div>
+                      </div>
+                      <p>日期：{task.period}</p>
+                      <p
+                        className="mt-3 mb-2"
+                        id="overview"
+                        dangerouslySetInnerHTML={{ __html: task.overview }}
+                      ></p>
+                    </div>
+                    <p className="bg-light ml-2 p-2 text-wrap">NFT:</p>
+                  </div>
+                ))}
+              </div>
               <div id="sroi-section" className="tabs-section pt-4"></div>
             </div>
           </div>

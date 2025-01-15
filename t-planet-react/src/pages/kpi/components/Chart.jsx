@@ -11,7 +11,6 @@ import {
 import { Bar } from "react-chartjs-2";
 import { fetchTotalProjectWeight } from "../../../utils/KpiApi";
 import { Row, Col, Container } from "react-bootstrap";
-import User from "../../../assets/weight/1.svg";
 
 ChartJS.register(
   CategoryScale,

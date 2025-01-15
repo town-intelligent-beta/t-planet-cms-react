@@ -16,16 +16,16 @@ const allWeights = [
   { thumbnail: "/src/assets/weight/15.svg" },
   { thumbnail: "/src/assets/weight/16.svg" },
   { thumbnail: "/src/assets/weight/17.svg" },
-  { thumbnail: "/src/assets/weight/morality.svg" },
-  { thumbnail: "/src/assets/weight/intelligence.svg" },
-  { thumbnail: "/src/assets/weight/physique.svg" },
-  { thumbnail: "/src/assets/weight/social-skills.svg" },
-  { thumbnail: "/src/assets/weight/aesthetics.svg" },
   { thumbnail: "/src/assets/weight/people.svg" },
   { thumbnail: "/src/assets/weight/culture.svg" },
   { thumbnail: "/src/assets/weight/place.svg" },
   { thumbnail: "/src/assets/weight/specialty.svg" },
   { thumbnail: "/src/assets/weight/landscape.svg" },
+  { thumbnail: "/src/assets/weight/morality.svg" },
+  { thumbnail: "/src/assets/weight/intelligence.svg" },
+  { thumbnail: "/src/assets/weight/physique.svg" },
+  { thumbnail: "/src/assets/weight/social-skills.svg" },
+  { thumbnail: "/src/assets/weight/aesthetics.svg" },
 ];
 
 const generateSdgsIcons = (weight) => {

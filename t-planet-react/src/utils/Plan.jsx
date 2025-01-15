@@ -23,17 +23,17 @@ export async function plan_info(uuid) {
 }
 
 export async function list_plan_tasks(uuid, parent = 0) {
-  const dataJSON = { uuid, parent };
+  const formdata = new FormData();
+  formdata.append("uuid", uuid);
+  formdata.append("parent", parent);
 
   try {
     const response = await fetch(
       `${import.meta.env.VITE_HOST_URL_TPLANET}/projects/tasks`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataJSON),
+        body: formdata,
+        redirect: "follow",
       }
     );
 
@@ -50,17 +50,16 @@ export async function list_plan_tasks(uuid, parent = 0) {
 }
 
 export async function getProjectWeight(list_task_UUIDs) {
-  const dataJSON = { uuid: list_task_UUIDs[0] };
+  const formdata = new FormData();
+  formdata.append("uuid", list_task_UUIDs[0]);
 
   try {
     const response = await fetch(
       `${import.meta.env.VITE_HOST_URL_TPLANET}/projects/weight`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataJSON),
+        body: formdata,
+        redirect: "follow",
       }
     );
 
