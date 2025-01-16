@@ -1,79 +1,15 @@
-import { useState, useEffect } from "react";
-import { list_plans, plan_info } from "../../../utils/Plan";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import generateSdgsIcons from "../../../utils/sdgs/SdgsImg";
 
-const getWeightMeta = async (name) => {
-  const response = await fetch(
-    `${import.meta.env.VITE_HOST_URL_TPLANET}/weight/get/${name}`
-  );
-  return await response.json();
-};
-
-const ProjectList = () => {
-  //const [allWeights, setAllWeights] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [filteredProjects, setFilteredProjects] = useState([]);
-  const [years, setYears] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("all");
-  const WEIGHTS = ["SDGs", "CommunityDevelopment", "FiveWaysofLife"];
-  const SITE_HOSTERS = [
-    "forus999@gmail.com",
-    "secondhome2023.1@gmail.com",
-    "mickeypeng@tpwl.org",
-    "400@gmail.com",
-  ];
-
-  // 初始化載入權重及專案
-  useEffect(() => {
-    const fetchWeightsAndProjects = async () => {
-      try {
-        const weights = [];
-        for (let i = 0; i < WEIGHTS.length; i++) {
-          const weightData = await getWeightMeta(WEIGHTS[i]);
-          weights.push(...weightData.content.categories);
-        }
-        //setAllWeights(weights);
-
-        const hosters =
-          localStorage.getItem("jwt") &&
-          localStorage.getItem("email") &&
-          window.location.search.includes("status=loggedin")
-            ? [localStorage.getItem("email")]
-            : SITE_HOSTERS;
-
-        const allProjects = [];
-        const projectYears = new Set();
-
-        for (const hoster of hosters) {
-          const objListProjects = await list_plans(hoster, null);
-          for (const uuid of objListProjects.projects) {
-            const projectInfo = await plan_info(uuid); // 使用 await 等待 Promise 解決
-            allProjects.push({ uuid, ...projectInfo });
-
-            if (projectInfo.period) {
-              const startYear = new Date(
-                projectInfo.period.split("-")[0]
-              ).getFullYear();
-              if (!isNaN(startYear)) {
-                projectYears.add(startYear);
-              }
-            }
-          }
-        }
-
-        setProjects(allProjects);
-        setFilteredProjects(allProjects);
-        setYears(Array.from(projectYears).sort());
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchWeightsAndProjects();
-  }, []);
-
+const ProjectList = ({
+  projects,
+  filteredProjects,
+  setFilteredProjects,
+  years,
+  selectedYear,
+  setSelectedYear,
+}) => {
   // 篩選專案
   const handleYearChange = (e) => {
     const year = e.target.value;

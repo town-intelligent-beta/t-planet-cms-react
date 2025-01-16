@@ -8,13 +8,13 @@ import {
 import SDGsCircle from "../../../assets/SDGs-circle.png";
 import { fetchTotalProjectWeight } from "../../../utils/KpiApi";
 
-const KPIList = () => {
+const KPIList = ({ projects }) => {
   const [images, setImages] = useState({});
   const [fiveLifeImages, setFiveLifeImages] = useState({});
   const [communityImages, setCommunityImages] = useState({});
   const [totalProjectWeight, setTotalProjectWeight] = useState({});
   const [projectCounts, setProjectCounts] = useState({});
-  //const [totalSdgsWeight, setTotalSdgsWeight] = useState(0);
+  const processedUuids = new Set();
 
   const imageNames = [
     "1",
@@ -57,8 +57,7 @@ const KPIList = () => {
     loadImages(fiveLifeImageNames, setFiveLifeImages);
     loadImages(communityImageNames, setCommunityImages);
     fetchTotalProjectWeight().then(setTotalProjectWeight);
-    //setPageInfoProjectCounts("your-uuid-project");
-  }, []);
+  }, [projects]);
 
   const loadImages = async (names, setState) => {
     const imagePromises = names.map((name) =>
@@ -77,6 +76,21 @@ const KPIList = () => {
     setState(imagesObject);
   };
 
+  useEffect(() => {
+    if (
+      projects &&
+      projects.result === "true" &&
+      projects.projects.length > 0
+    ) {
+      projects.projects.forEach((uuid) => {
+        if (!processedUuids.has(uuid)) {
+          setPageInfoProjectCounts(uuid);
+          processedUuids.add(uuid);
+        }
+      });
+    }
+  }, [projects]);
+
   const setPageInfoProjectCounts = async (uuid_project) => {
     let weight = {};
 
@@ -88,16 +102,18 @@ const KPIList = () => {
       return;
     }
 
-    const newProjectCounts = { ...projectCounts };
+    setProjectCounts((prevCounts) => {
+      const newProjectCounts = { ...prevCounts };
 
-    for (let index = 1; index < 28; index++) {
-      if (weight[`sdgs-${index}`] !== "0") {
-        newProjectCounts[`pc_${index}`] =
-          (newProjectCounts[`pc_${index}`] || 0) + 1;
+      for (let index = 1; index < 28; index++) {
+        if (weight[`sdgs-${index}`] !== "0") {
+          newProjectCounts[`pc_${index}`] =
+            (newProjectCounts[`pc_${index}`] || 0) + 1;
+        }
       }
-    }
 
-    setProjectCounts(newProjectCounts);
+      return newProjectCounts;
+    });
   };
 
   return (
@@ -175,10 +191,19 @@ const KPIList = () => {
                   />
                   <Card.Body>
                     <Card.Text>
-                      關係人口:<span id={`rp_${index + 18}`}>0</span>人
+                      關係人口:
+                      <span id={`rp_${index + 18}`}>
+                        {totalProjectWeight[`sdgs-${index + 18}`] || 0}
+                      </span>
+                      人
                     </Card.Text>
                     <Card.Text>
-                      專案件數:<span id={`pc_${index + 18}`}>0</span>件
+                      專案件數:
+                      <span id={`pc_${index + 18}`}>
+                        {" "}
+                        {projectCounts[`pc_${index + 18}`] || 0}{" "}
+                      </span>
+                      件
                     </Card.Text>
                     <Card.Link
                       href={`/kpi_filter.html?sdg=${index + 17}`}
@@ -208,10 +233,19 @@ const KPIList = () => {
                   />
                   <Card.Body>
                     <Card.Text>
-                      關係人口:<span id={`rp_${index + 23}`}>0</span>人
+                      關係人口:
+                      <span id={`rp_${index + 23}`}>
+                        {totalProjectWeight[`sdgs-${index + 23}`] || 0}
+                      </span>
+                      人
                     </Card.Text>
                     <Card.Text>
-                      專案件數:<span id={`pc_${index + 23}`}>0</span>件
+                      專案件數:
+                      <span id={`pc_${index + 23}`}>
+                        {" "}
+                        {projectCounts[`pc_${index + 23}`] || 0}{" "}
+                      </span>
+                      件
                     </Card.Text>
                     <Card.Link
                       href={`/kpi_filter.html?sdg=${index + 22}`}
