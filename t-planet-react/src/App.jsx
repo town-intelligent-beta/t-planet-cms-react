@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import Kpi from "./pages/kpi/Kpi";
 import ProjectContent from "./pages/kpi/components/ProjectContent";
 import AdminAgentDashboard from "./pages/backend/AdminAgentDashboard";
+import CsmAgent from "./pages/backend/CmsAgent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./utils/ProtectRoute";
 
@@ -20,7 +21,7 @@ function App() {
           </div>
 
           {/* Main Content with Padding for Fixed Nav */}
-          <main className="flex-grow mt-16">
+          <main className="flex-grow mt-20">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/kpi" element={<Kpi />} />
@@ -31,6 +32,7 @@ function App() {
                 path="/backend/admin_agent_dashboard"
                 element={<AdminAgentDashboard />}
               />
+              <Route path="/backend/cms_agent" element={<CsmAgent />} />
             </Routes>
           </main>
 
