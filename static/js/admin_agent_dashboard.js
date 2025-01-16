@@ -1,6 +1,6 @@
 export function set_page_info_admin_agent_dashboard() {
   var email = getLocalStorage("email");
-  if (email == SITE_HOSTERS[0]) {
+  if (email === SITE_HOSTERS[0]) {
     try {
       $('#admin_index').css('display', 'block');
       $('#cms_news_list').css('display', 'block');
@@ -12,7 +12,7 @@ export function set_page_info_admin_agent_dashboard() {
   }
 
   // Features
-  if (LLM) {
+  if (LLM && email === SITE_HOSTERS[0]) {
     $('#llm').css('display', 'block');
   } else  {
     $('#llm').css('display', 'none');

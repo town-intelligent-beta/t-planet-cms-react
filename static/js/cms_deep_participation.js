@@ -11,9 +11,22 @@ import {
   renderHandlebarsAppendTo,
   renderHandlebarsAppendToBody,
 } from "./utils/handlebars.js";
-var element_id;
+import { getWeightMeta } from './api/weight.js';
 
-const render_child_task = (child_uuid) => {
+var element_id;
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
+
+const render_child_task = async (child_uuid) => {
   var obj_task = get_task_info(child_uuid);
 
   let data = { ...obj_task };
@@ -22,9 +35,7 @@ const render_child_task = (child_uuid) => {
     data = { ...data, start_time, end_time };
   }
 
-  // Get task content
   const obj_task_content = JSON.parse(obj_task.content);
-
   const sdgs_indexes = Object.entries(obj_task_content)
     .map(([key, value]) => {
       let index = parseInt(key.replace("sdgs-", ""));
@@ -49,9 +60,47 @@ const render_child_task = (child_uuid) => {
 
   $("#task_start_date_" + obj_task.uuid).timepicker();
   $("#task_due_date_" + obj_task.uuid).timepicker();
+
+  if (document.getElementById('icon_container_' + obj_task.uuid)) {
+    sdgs_indexes.forEach(index => {
+      var category = allWeights[parseInt(index) - 1];
+      if (category) {
+        var anchor = document.createElement('a');
+        anchor.className = 'sdgs-item position-relative mx-2 mt-3 mb-3 mt-md-0';
+        anchor.setAttribute('data-index', index);
+        anchor.style.display = 'inline-block';
+
+        var button = document.createElement('button');
+        button.className = 'position-absolute close';
+        button.type = 'button';
+        button.style.top = '0';
+        button.style.right = '0';
+        button.style.width = '24px';
+        button.style.color = 'white';
+        button.style.backgroundColor = 'black';
+
+        var span = document.createElement('span');
+        span.setAttribute('aria-hidden', 'true');
+        span.innerHTML = '&times;';
+        button.appendChild(span);
+
+        var img = document.createElement('img');
+        img.id = 'target_sdgs_' + index;
+        img.src = category.thumbnail;
+        img.alt = '';
+        img.style.width = '80px';
+
+        anchor.appendChild(button);
+        anchor.appendChild(img);
+        document.getElementById('icon_container_' + obj_task.uuid).appendChild(anchor);
+      }
+    });
+  } else {
+    console.error("icon_container does not exist in the DOM");
+  }
 };
 
-export function set_page_info_cms_deep_participation() {
+export const set_page_info_cms_deep_participation = async () => {
   if (WEIGHT[1] == 1) $("#five").css("display", "block");
   if (WEIGHT[2] == 1) $("#community").css("display", "block");
 
@@ -60,7 +109,6 @@ export function set_page_info_cms_deep_participation() {
     if (document.getElementById("task_start_date_" + index) == null) break;
     $("#task_start_date_" + index).datepicker();
     $("#task_due_date_" + index).datepicker();
-
     index++;
   }
 
@@ -71,11 +119,54 @@ export function set_page_info_cms_deep_participation() {
 
   var list_uuid_child_child_tasks = list_children_tasks(uuid_parent);
 
-  if (list_uuid_child_child_tasks.length == 0) return;
-
-  for (var index; index < list_uuid_child_child_tasks.length; index++) {
+  for (var index = 0; index < list_uuid_child_child_tasks.length; index++) {
     const child_uuid = list_uuid_child_child_tasks[index];
     render_child_task(child_uuid);
+  }
+
+  // Load SDGs icons of modal
+  const container = document.getElementById('weight_container');
+
+  let globalIndex = 0;
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      const categories = weightData.content.categories;
+
+      categories.forEach((category, index) => {
+        const paddedIndex = (globalIndex + 1).toString().padStart(2, '0');
+        const card = document.createElement('div');
+        card.className = 'sdgs-modal-item card mt-2';
+        card.setAttribute('data-index', paddedIndex);
+
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body p-2';
+
+        const div = document.createElement('div');
+        div.className = 'd-flex align-items-center';
+
+        const img = document.createElement('img');
+        img.alt = '';
+        img.className = 'mr-2';
+        img.src = category.thumbnail;
+        img.style.width = '50px';
+
+        const p = document.createElement('p');
+        p.className = 'mb-0';
+        p.textContent = `${category.title}`;
+
+        div.appendChild(img);
+        div.appendChild(p);
+        cardBody.appendChild(div);
+        card.appendChild(cardBody);
+
+        container.appendChild(card);
+
+        globalIndex++;
+      });
+    } catch (error) {
+      console.error("Error generating weight DOMs:", error);
+    }
   }
 }
 
@@ -100,12 +191,11 @@ export function deep_participation_add_child_task_block(obj_task) {
     uuid_child = obj_task.task;
     render_child_task(uuid_child);
   } else {
-    console.log("Error, submit task failed.");
+    console.error("Error, submit task failed.");
     return;
   }
 }
 
-//
 export function showDeleteModal(uuid_task) {
   $("#deleteModal").modal("show");
   var delete_uuid = document.querySelector("#delete_uuid");
@@ -141,8 +231,6 @@ $("#deep_div_parent_task").on("click", "#icon_btn", (e) => {
     .find(".sdgs-item")
     .toArray()
     .map((element) => $(element).attr("data-index"));
-  console.log(indexes);
-
 
   $(".sdgs-modal .sdgs-modal-item")
     .toArray()
@@ -186,16 +274,40 @@ $(function () {
       .map((element) => $(element).attr("data-index"));
 
     sdgs_indexes.map((index) => {
-      const found = $(`#${element_id} .sdgs-item`)
-        .toArray()
-        .find((element) => {
-          return parseInt(index) < parseInt($(element).attr("data-index"));
-        });
+      var category = allWeights[parseInt(index) - 1];
 
-      if (found) {
-        $(found).before(compileHandlebars("tpl-sdgs-item", { index }));
-      } else {
-        renderHandlebarsAppendTo(element_id, "tpl-sdgs-item", { index });
+      if (category) {
+        var anchor = document.createElement('a');
+        anchor.className = 'sdgs-item position-relative mx-2 mt-3 mb-3 mt-md-0';
+        anchor.setAttribute('data-index', index);
+        anchor.style.display = 'inline-block';
+
+        var button = document.createElement('button');
+        button.className = 'position-absolute close';
+        button.type = 'button';
+        button.style.top = '0';
+        button.style.right = '0';
+        button.style.width = '24px';
+        button.style.color = 'white';
+        button.style.backgroundColor = 'black';
+
+        var span = document.createElement('span');
+        span.setAttribute('aria-hidden', 'true');
+        span.innerHTML = '&times;';
+
+        button.appendChild(span);
+
+        var img = document.createElement('img');
+        img.id = 'target_sdgs_' + index;
+        img.src = category.thumbnail;
+
+        img.alt = '';
+        img.style.width = '80px';
+
+        anchor.appendChild(button);
+        anchor.appendChild(img);
+
+        document.getElementById(element_id).appendChild(anchor);
       }
     });
 

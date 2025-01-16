@@ -1,11 +1,23 @@
 import { initMap, pad, getGPS } from "./map.js";
 import { plan_info } from "./plan.js";
 import { get_task_info } from "./tasks.js";
+import { getWeightMeta } from './api/weight.js';
+
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
 
 const getProjectUuid = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-
   return urlParams.get("uuid");
 };
 
@@ -25,7 +37,7 @@ const getTasks = (gpsItems) => {
           [key]: {
             key,
             value: parseInt(weights[key]),
-            icon: "/static/imgs/SDGsForMap/SDGs_" + pad(index + 1) + ".jpg",
+            icon: allWeights[index].thumbnail,
           },
         };
       })
@@ -34,52 +46,36 @@ const getTasks = (gpsItems) => {
     const task = { ...taskInfo, position, sdgs };
     return task;
   });
-  console.log(tasks);
-
   return tasks;
 };
 
 export function gotoHeatmap(next_site) {
-  // Get project uuid
-  var queryString = window.location.search;
-  var urlParams = new URLSearchParams(queryString);
-  var uuid = urlParams.get("uuid");
-
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const uuid = urlParams.get("uuid");
   window.location.replace(next_site + "?uuid=" + uuid);
 }
 
-const toDataURL = (url) =>
-  fetch(url)
-    .then((response) => response.blob())
-    .then(
-      (blob) =>
-        new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        })
-    );
-
 const renderer = {
   render: ({ count, position }, stats) => {
-    const color =
-      count > Math.max(10, stats.clusters.markers.mean) ? "#ff0000" : "#0000ff";
+    const color = count > Math.max(10, stats.clusters.markers.mean) ? "#ff0000" : "#0000ff";
 
     const currentSdgs = $("#sdgs-select").val();
     const currentSdgsImage = sdgsBase64Images[currentSdgs];
 
     const svg = `
-  <svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
-      <circle cx="120" cy="120" opacity=".5" r="80" />
-    <image href="${currentSdgsImage}" height="100" width="100" x="140" y="75" />
-  </svg>`;
+      <svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+        <circle cx="120" cy="120" opacity=".5" r="80" />
+        <g transform="translate(50, 50) scale(0.5)">
+          <image href="${currentSdgsImage}" height="200" width="200" x="0" y="0" />
+        </g>
+      </svg>`;
 
     const svgBase64 = window.btoa(svg);
 
     const marker = new google.maps.Marker({
       icon: {
-        url: `data:image/svg+xml;charset=utf-8;base64,${svgBase64}`,
+        url: `data:image/svg+xml;base64,${svgBase64}`,
         scaledSize: new google.maps.Size(75, 75),
       },
       label: {
@@ -89,7 +85,6 @@ const renderer = {
         fontWeight: "bold",
       },
       position,
-      // adjust zIndex to be above other markers
       zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
     });
     return marker;
@@ -119,7 +114,10 @@ const addMarkers = (sdgsSelected) => {
       const marker = new google.maps.Marker({
         position: task.position,
         map: map,
-        icon: currentSdgs.icon,
+        icon: {
+          url: currentSdgs.icon,
+          scaledSize: new google.maps.Size(30, 30),
+        },
         title: task.uuid + " : " + task.name,
       });
 
@@ -171,19 +169,17 @@ const addMarkers = (sdgsSelected) => {
 };
 
 export async function set_page_info_heat_map() {
-  console.log("set_page_info_heat_map");
-
   const uuid = getProjectUuid();
   try {
-    var obj_project = plan_info(uuid);
+    const obj_project = plan_info(uuid);
     document.getElementById("project_title").innerHTML = obj_project.name;
   } catch (e) {
     console.log(e);
   }
 
   // Get GPS record
-  var obj_gps_result = getGPS(uuid);
-  if (obj_gps_result.length == 0) {
+  const obj_gps_result = getGPS(uuid);
+  if (obj_gps_result.length === 0) {
     return;
   }
 
@@ -194,36 +190,18 @@ export async function set_page_info_heat_map() {
   tasks.push(...getTasks(obj_gps_result));
 
   const selector = $("#sdgs-select");
-  const sdgsLabels = {
-    "sdgs-18": "德",
-    "sdgs-19": "智",
-    "sdgs-20": "體",
-    "sdgs-21": "群",
-    "sdgs-22": "美",
-    "sdgs-23": "人",
-    "sdgs-24": "文",
-    "sdgs-25": "地",
-    "sdgs-26": "產",
-    "sdgs-27": "景",
-  };
-  for (var index = 1; index <= 27; index++) {
-    const value = `sdgs-${index}`;
-    const hasSdgs = tasks.some((task) => task.sdgs[value].value > 0);
-    let label = `SDGs ${index}`;
-    if (sdgsLabels[value]) {
-      label = sdgsLabels[value];
-    }
-
-    if (hasSdgs) {
+  let index = 1;
+  
+  for (const weight of allWeights) {
+    (async (currentIndex) => {
+      const value = `sdgs-${currentIndex}`;
+      const label = weight.title;
       selector.append(`<option value="${value}">${label}</option>`);
-    }
-  }
-
-  for (var index = 1; index <= 27; index++) {
-    const key = `sdgs-${index}`;
-    const url = `/static/imgs/SDGsForMap/SDGs_${pad(index)}.jpg`;
-    const base64 = await toDataURL(url);
-    sdgsBase64Images[key] = base64;
+  
+      // Image save
+      sdgsBase64Images[currentIndex] = weight.thumbnail;
+    })(index);
+    index++;
   }
 
   selector.on("change", (e) => {
