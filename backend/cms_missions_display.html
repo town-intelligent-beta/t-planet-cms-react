@@ -4,35 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css" >
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/progress_bar.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script type="module" src="/static/js/tasks.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <script type="module" src="/static/js/cms_agent.js"></script>
-    <script type="module" src="/static/js/cms_missions_display.js"></script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
     <!-- navbar -->
     <div id="navbar"></div>
     <!-- step progress bar -->
-    <div class="contanier pt-3 mb-4 mb-md-0">
+    <div class="container pt-3 mb-4 mb-md-0">
       <ul class="progressbar">
         <li class="active done"><span>計畫基本資料</span></li>
         <li class="active done"><span>SDGs 指標設定</span></li>
@@ -45,38 +28,54 @@
     <section>
       <div class="container">
         <form action="">
-        <div class="row mt-3 mt-md-5 pt-md-3 align-items-center justify-content-center">
-          <div class="col-10 px-0">
-            <p class="bg-2ndhome px-3 p-2">請選擇您預計呈現的方式</p>
-          </div>
-          <div class="col-10">
-            <div class="row d-flex justify-content-center border-light-gray bg-white p-3">
-              <div class="col-md-6">
-                <a href="#" id="btn_cms_plan_add_deep_task" class="btn btn-dark btn-lg btn-block my-3">深度參與形式</a>
+          <div class="row mt-3 mt-md-5 pt-md-3 align-items-center justify-content-center">
+            <div class="col-10 px-0">
+              <p class="bg-2ndhome px-3 p-2">請選擇您預計呈現的方式</p>
+            </div>
+            <div class="col-10">
+              <div class="row d-flex justify-content-center border-light-gray bg-white p-3">
+                <div class="col-md-6">
+                  <a href="#" id="btn_cms_plan_add_deep_task" class="btn btn-dark btn-lg btn-block my-3">深度參與形式</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row mt-5 mb-5 pb-3 justify-content-center">
-          <div class="col-md-8 mt-5 d-none d-md-block">
-            <div class="d-flex justify-content-between">
-              <button type="submit" id="btn_cms_plan_preview" class="btn btn-secondary rounded-pill" style="width: 20%">檢視</button>
-              <button id="btn_ab_project_prev" class="btn btn-dark rounded-pill" style="width: 20%">上一步</button>
-              <button type="submit" id="btn_ab_project_next" class="btn btn-dark rounded-pill" style="width: 20%">下一步</button>
-              <button type="submit" id="btn_cms_plan_save" class="btn btn-success rounded-pill" style="width: 20%">儲存草稿</button>
+          <div class="row mt-5 mb-5 pb-3 justify-content-center">
+            <div class="col-md-8 mt-5 d-none d-md-block">
+              <div class="d-flex justify-content-between">
+                <button type="submit" id="btn_cms_plan_preview" class="btn btn-secondary rounded-pill" style="width: 20%">檢視</button>
+                <button id="btn_ab_project_prev" class="btn btn-dark rounded-pill" style="width: 20%">上一步</button>
+                <button type="submit" id="btn_ab_project_next" class="btn btn-dark rounded-pill" style="width: 20%">下一步</button>
+                <button type="submit" id="btn_cms_plan_save" class="btn btn-success rounded-pill" style="width: 20%">儲存草稿</button>
+              </div>
+            </div>
+            <div class="col-12 mt-3 d-md-none">
+              <button type="submit" id="btn_cms_plan_preview" class="btn btn-secondary rounded-pill btn-block">檢視</button>
+              <button id="btn_ab_project_prev" class="btn btn-dark rounded-pill btn-block mt-3">上一步</button>
+              <button type="submit" id="btn_ab_project_next" class="btn btn-dark rounded-pill btn-block mt-3">下一步</button>
+              <button type="submit" id="btn_cms_plan_save" class="btn btn-success rounded-pill btn-block mt-3">儲存草稿</button>
             </div>
           </div>
-          <div class="col-12 mt-3 d-md-none">
-            <button type="submit" id="btn_cms_plan_preview" class="btn btn-secondary rounded-pill btn-block">檢視</button>
-            <button id="btn_ab_project_prev" class="btn btn-dark rounded-pill btn-block mt-3">上一步</button>
-            <button type="submit" id="btn_ab_project_next" class="btn btn-dark rounded-pill btn-block mt-3">下一步</button>
-            <button type="submit" id="btn_cms_plan_save" class="btn btn-success rounded-pill btn-block mt-3">儲存草稿</button>
-          </div>
-        </div>
-	</form>
+        </form>
       </div>
     </section>
     <!-- footer -->
     <div id="footer"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/accounts.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/permission.js"></script>
+    <script type="module" src="/static/js/tasks.js"></script>
+    <script type="module" src="/static/js/plan.js"></script>
+    <script type="module" src="/static/js/cms_agent.js"></script>
+    <script type="module" src="/static/js/cms_missions_display.js"></script>
+    <script type="module" src="/static/js/set_page_info.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
   </body>
 </html>

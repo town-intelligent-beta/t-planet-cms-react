@@ -1,5 +1,6 @@
 import { plan_info } from './plan.js';
 import { sdgsAutoGen } from './api/llm.js';
+import { getWeightMeta } from './api/weight.js';
 
 export async function set_page_info_cms_sdgs_setting(uuid) {
   if (WEIGHT[1] == 1)
@@ -68,6 +69,53 @@ export async function set_page_info_cms_sdgs_setting(uuid) {
     } else {
       loadingContainer.style.display = "none";
     }
+
+    // Render weight cards
+    const renderWeights = async () => {
+      const container = document.getElementById('weight_items');
+      let idCounter = 1;
+
+      for (const weight of WEIGHTS) {
+        try {
+          const data = await getWeightMeta(weight);
+
+          const outerDiv = document.createElement('div');
+          outerDiv.className = 'form-row mt-3 sds-font border-light-gray p-3';
+
+          data.content.categories.forEach(category => {
+            const formGroup = document.createElement('div');
+            formGroup.className = 'form-group col-12 col-sm-6 col-md-4';
+
+            const formCheck = document.createElement('div');
+            formCheck.className = 'form-check d-flex align-items-center';
+
+            const input = document.createElement('input');
+            input.className = 'form-check-input checkbox-1x';
+            input.type = 'checkbox';
+            input.id = `sdg_${idCounter}`;
+
+            const label = document.createElement('label');
+            label.className = 'form-check-label pl-3';
+            label.htmlFor = `sdg_${idCounter}`;
+            label.textContent = `${category.title}`;
+
+            formCheck.appendChild(input);
+            formCheck.appendChild(label);
+
+            formGroup.appendChild(formCheck);
+            outerDiv.appendChild(formGroup);
+
+            idCounter++;
+          });
+
+          container.appendChild(outerDiv);
+        } catch (error) {
+          console.error("Error generating weight DOMs:", error);
+        }
+      }
+    };
+
+    await renderWeights();
 
     // 更新 SDGs 列表
     for (var index = 0; index < list_sdgs.length; index++) {
