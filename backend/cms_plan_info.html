@@ -4,54 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/loading.css">
     <link rel="stylesheet" href="/static/css/progress_bar.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/file_handler.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script src="/static/js/core/upload_adapter.js"></script>
-    <script src="/static/js/core/editor.js"></script>
-    <script type="module" src="/static/js/cms_agent.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <script type="module" src="/static/js/tasks.js"></script>
-    <script type="module" src="/static/js/cms_plan_info.js"></script>
-    <script type="module">
-      import { uploadProjectCover } from '/static/js/cms_plan_info.js'
-      window.uploadProjectCover = uploadProjectCover;
-    </script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script src="/static/js/qrcode.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
-    <script>
-    // project_start_date
-    $( function() {
-      $("#project_start_date").datepicker();
-      $("#project_due_date").datepicker();
-      register_ckeditor(['#philosophy'])
-    });
-    </script>
   </head>
   <body>
     <!-- navbar -->
     <div id="navbar"></div>
+
     <!-- step progress bar -->
-    <div class="contanier pt-3">
+    <div class="container pt-3">
       <ul class="progressbar">
         <li class="active"><span>計畫基本資料</span></li>
         <li><span>SDGs 指標設定</span></li>
@@ -60,9 +25,9 @@
         <li><span></span></li>
       </ul>
     </div>
+
     <!-- content -->
     <section>
-
       <div id="loading">
         <div id="loading-text">
           <p>上傳中 ...</p>
@@ -81,67 +46,77 @@
             <div class="col-12">
               <div id="coverImg" class="border d-flex flex-column align-items-center justify-content-center" style="height: 300px;">
                 <button type="button" class="btn btn-light border-dark" id="btnUploadImg" onclick="uploadProjectCover()">
-                  <div id="divUploadImg" class="bg-contain" style="background-image: url(/static/imgs/image_icon.svg); width: 100px; height: 100px; background-repeat: no-repeat" ></div>
+                  <div id="divUploadImg" class="bg-contain" style="background-image: url(/static/imgs/image_icon.svg); width: 100px; height: 100px; background-repeat: no-repeat"></div>
                 </button>
-                <p class="text-center small mt-3">上傳照片（建議尺寸700x400） </p>
+                <p class="text-center small mt-3">上傳照片（建議尺寸700x400）</p>
               </div>
             </div>
           </div>
+
           <div class="row mt-4 align-items-center">
             <div class="col-12">
               <p class="bg-2ndhome p-2"><a style="color:Tomato;">(*必填) </a>永續專案名稱</p>
             </div>
             <div class="col-12">
-              <input id="name" class="form-control" type="text" placeholder="請填寫專案名稱" required>
+              <input id="name" class="form-control" type="text" placeholder="請填寫專案名稱" maxlength="30" required>
             </div>
           </div>
+
           <div class="row mt-4 align-items-center">
             <div class="col-12">
               <p class="bg-2ndhome p-2">永續企業名稱</p>
             </div>
             <div class="col-12">
-              <input id="project_a" class="form-control" type="text" placeholder="請填寫企業名稱">
+              <input id="project_a" class="form-control" type="text" placeholder="請填寫企業名稱" maxlength="20">
             </div>
           </div>
+
           <div class="row mt-4 align-items-center">
             <div class="col-12">
               <p class="bg-2ndhome p-2">地方團隊</p>
             </div>
             <div class="col-12">
-              <input id="project_b" class="form-control" type="text" placeholder="請填寫團隊名稱">
+              <input id="project_b" class="form-control" type="text" placeholder="請填寫團隊名稱" maxlength="20">
             </div>
           </div>
+
           <div class="row mt-4 align-items-center">
             <div class="col-12">
               <p class="bg-2ndhome p-2">計劃期間</p>
             </div>
-            <div class="form-group col-6 mb-0">
-              <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                <input id="project_start_date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" placeholder="開始日期"/>
-
-                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                </div>
+            <div class="col-6 mb-0">
+              <div class="input-group date" id="datetimepicker1">
+                <input id="project_start_date" type="text" class="form-control" placeholder="開始日期"/>
+                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
               </div>
             </div>
-            <div class="form-group col-6 mb-0">
-              <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                <input id="project_due_date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" placeholder="結束日期"/>
-		              <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                </div>
+            <div class="col-6 mb-0">
+              <div class="input-group date" id="datetimepicker2">
+                <input id="project_due_date" type="text" class="form-control" placeholder="結束日期"/>
+                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
               </div>
             </div>
           </div>
+
           <div class="row mt-4 align-items-center">
             <div class="col-12">
-              <p class="bg-2ndhome p-2"><a style="color:Tomato;">(*請輸入整數) </a>計畫金額</p>
-            </div>
+              <div class="row">
+                <div class="col-9">
+                  <p class="bg-2ndhome p-2"><a style="color:Tomato;">(*請輸入整數) </a>計畫金額</p>
+                </div>
+                <div class="col-3 d-flex align-items-center">
+                  <div class="form-check form-switch">          
+                    <input class="form-check-input" type="checkbox" id="displayProjectBudget" checked>
+                    <label class="form-check-label" for="displayProjectBudget">是否揭露計畫金額？</label>
+                  </div>
+                </div>
+              </div>
+            </div>                 
             <div class="col-12">
-              <input id="budget" class="form-control" type="text" placeholder="請輸入計畫金額">
+              <input id="budget" class="form-control" type="number" placeholder="請輸入計畫金額" min="0">
             </div>
           </div>
+
           <div class="row mt-4 align-items-center">
             <div class="col-12">
               <p class="bg-2ndhome p-2">計畫理念</p>
@@ -150,25 +125,66 @@
               <textarea class="form-control" id="philosophy" rows="6" style="resize: none; height: 158px;"></textarea>
             </div>
           </div>
-            <div class="row mt-4 mb-5 pb-3 justify-content-center">
-            <div class="col-md-8">
-              <div id="submit_container" class="d-flex justify-content-center">
-		            <button type="submit" id="btn_cms_plan_preview" class="btn btn-dark d-none d-md-block rounded-pill mr-3" style="width: 15%">檢視</button>
-                <button type="submit" id="btn_ab_project_next" class="btn btn-dark d-none d-md-block rounded-pill mr-3" style="width: 15%">下一步</button>
-                <button type="submit" id="btn_cms_plan_save" class="btn btn-success d-none d-md-block rounded-pill mr-3" style="width: 15%">儲存草稿</button>
-              </div>
+
+          <!-- 按鈕 -->
+          <div class="row mt-5 mb-5 pb-3 justify-content-center">
+            <div class="col-md-8 mt-5 d-none d-md-block">
+                <div class="d-flex justify-content-between">
+                    <button type="submit" id="btn_cms_plan_preview" class="btn btn-secondary rounded-pill"
+                        style="width: 20%">檢視</button>
+                    <button type="submit" id="btn_ab_project_prev" class="btn btn-dark rounded-pill"
+                        style="width: 20%">上一步</button>
+                    <button type="submit" id="btn_ab_project_next" class="btn btn-dark rounded-pill"
+                        style="width: 20%">下一步</button>
+                    <button type="submit" id="btn_cms_plan_save" class="btn btn-success rounded-pill"
+                        style="width: 20%">儲存草稿</button>
+                </div>
             </div>
-            <div class="col-12">
-              <div id="submit_container">
-                <button type="submit" id="btn_cms_plan_preview" class="btn btn-dark d-md-none rounded-pill mb-2 w-100">檢視</button>
-                <button type="submit" id="btn_ab_project_next" class="btn btn-dark d-md-none rounded-pill mb-2 w-100">下一步</button>
-                <button type="submit" id="btn_cms_plan_save" class="btn btn-success d-md-none rounded-pill w-100">儲存草稿</button>
-              </div>
+            <div class="col-12 mt-3 d-md-none">
+                <button type="submit" id="btn_cms_plan_preview" class="btn btn-secondary rounded-pill w-100">檢視</button>
+                <button type="submit" id="btn_ab_project_prev" class="btn btn-dark rounded-pill w-100 mt-3">上一步</button>
+                <button type="submit" id="btn_ab_project_next" class="btn btn-dark rounded-pill w-100 mt-3">下一步</button>
+                <button type="submit" id="btn_cms_plan_save" class="btn btn-success rounded-pill w-100 mt-3">儲存草稿</button>
             </div>
+          </div>
         </form>
       </div>
     </section>
+
     <!-- footer -->
     <div id="footer"></div>
+
+    <!-- JavaScript 放到頁面底部 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybbyEXoXG8lEdR7XGi1rA5M8sLby0PzUG/5cg92b6YY1w8z2g" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-oBqDVmMz4fnFO9gybbyEXoXG8lEdR7XGi1rA5M8sLby0PzUG/5cg92b6YY1w8z2g" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/file_handler.js"></script>
+    <script src="/static/js/accounts.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/permission.js"></script>
+    <script src="/static/js/core/upload_adapter.js"></script>
+    <script src="/static/js/core/editor.js"></script>
+    <script type="module" src="/static/js/cms_agent.js"></script>
+    <script type="module" src="/static/js/plan.js"></script>
+    <script type="module" src="/static/js/tasks.js"></script>
+    <script type="module" src="/static/js/cms_plan_info.js"></script>
+    <script type="module">
+      import { uploadProjectCover } from '/static/js/cms_plan_info.js';
+      window.uploadProjectCover = uploadProjectCover;
+    </script>
+    <script src="/static/js/qrcode.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
+    <script>
+      $(function() {
+        $("#project_start_date").datepicker();
+        $("#project_due_date").datepicker();
+        register_ckeditor(['#philosophy']);
+      });
+    </script>
   </body>
 </html>

@@ -22,7 +22,24 @@ import { set_page_info_admin_agent_dashboard } from './admin_agent_dashboard.js'
 import { set_page_info_admin_username } from "./admin_username.js";
 
 export function set_page_info() {
-  /* Get path and parameters */
+  /* Site title */
+  document.title = SITE_NAME;
+  // 動態設置 meta 標籤
+  var metaDescription = document.createElement('meta');
+  metaDescription.name = "人工智慧社區治理決策系統";
+  metaDescription.content = "打造社區內的數位 ESG 管理師";
+  document.head.appendChild(metaDescription);
+
+  var metaKeywords = document.createElement('meta');
+  metaKeywords.name = "keywords";
+  metaKeywords.content = "SDGs, CSR, ESG, SROI";
+  document.head.appendChild(metaKeywords);
+
+  var metaViewport = document.createElement('meta');
+  metaViewport.name = "viewport";
+  metaViewport.content = "width=device-width, initial-scale=1.0";
+  document.head.appendChild(metaViewport);
+
   // Path
   var path = window.location.pathname;
   var page = path.split("/").pop();
@@ -33,7 +50,6 @@ export function set_page_info() {
   var uuid = urlParams.get("uuid")
   var task = urlParams.get("task")
 
-  // TODO
   if (page == "admin_project_check.html") {
     set_page_info_admin_project_check(uuid)
   }
