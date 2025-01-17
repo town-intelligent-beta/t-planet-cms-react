@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { list_plan_tasks, getProjectWeight } from "../Plan";
 import { getTaskWeight } from "../Task";
+
 // 註冊 ChartJS 組件
 ChartJS.register(
   CategoryScale,
@@ -121,12 +122,13 @@ const SDGChart = ({ projectUuid, title = "專案指標累積", id }) => {
     const labels = Object.keys(filteredData);
     const values = Object.values(filteredData);
     const colors = SDG_COLORS.slice(0, labels.length);
+    const datasetTitle = id === "project" ? "專案指標累積" : "永續指標";
 
     return {
       labels,
       datasets: [
         {
-          label: title,
+          label: datasetTitle,
           data: values,
           backgroundColor: colors,
           borderWidth: 2,

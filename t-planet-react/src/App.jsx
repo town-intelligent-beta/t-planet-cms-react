@@ -7,6 +7,7 @@ import Kpi from "./pages/kpi/Kpi";
 import ProjectContent from "./pages/kpi/components/ProjectContent";
 import AdminAgentDashboard from "./pages/backend/AdminAgentDashboard";
 import CsmAgent from "./pages/backend/CmsAgent";
+import CmsProjectDetail from "./pages/backend/CmsProjectDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./utils/ProtectRoute";
 
@@ -33,6 +34,10 @@ function App() {
                 element={<AdminAgentDashboard />}
               />
               <Route path="/backend/cms_agent" element={<CsmAgent />} />
+              <Route
+                path="/backend/cms_project_detail/:id"
+                element={<CmsProjectDetail />}
+              />
             </Routes>
           </main>
 

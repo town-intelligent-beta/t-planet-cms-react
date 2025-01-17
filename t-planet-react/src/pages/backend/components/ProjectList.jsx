@@ -24,7 +24,7 @@ const ProjectCard = ({ project, onManage }) => {
     <div className="d-flex flex-column h-100 gap-3">
       <Card className="h-100 shadow-sm">
         <Link
-          to={`/project/detail/${project.id}`}
+          to={`/backend/cms_project_detail/${project.uuid}`}
           className="no-underline text-black"
         >
           <div
