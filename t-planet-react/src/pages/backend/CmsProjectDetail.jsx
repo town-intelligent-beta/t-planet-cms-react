@@ -72,7 +72,7 @@ export default function ProjectContent() {
           <div className="col-10">
             <img
               id="project_cover"
-              className="max-w-full h-auto mx-auto"
+              className="max-w-full h-auto mx-auto max-h-72"
               src={import.meta.env.VITE_HOST_URL_TPLANET + project.img}
               alt=""
             />

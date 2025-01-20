@@ -1,14 +1,27 @@
 import { useState, useEffect } from "react";
 import Add from "../../assets/add.svg";
 import ProjectList from "./components/ProjectList";
-import { list_plans, plan_info } from "../../utils/Plan";
+import { list_plans, plan_info, plan_submit } from "../../utils/Plan";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function CmsAgent() {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all");
+  const navigate = useNavigate();
+
+  const handleAddProject = async (event) => {
+    event.preventDefault();
+
+    const form = new FormData();
+    const obj_project = await plan_submit(form);
+
+    if (obj_project) {
+      navigate(`/backend/cms_plan_info/${obj_project.uuid}`);
+    }
+  };
 
   const fetchProjects = async () => {
     try {
@@ -92,6 +105,7 @@ export default function CmsAgent() {
           <div className="col-12">
             <button
               id="add_c_project"
+              onClick={handleAddProject}
               className="btn btn-block btn-outline-secondary py-3 w-full d-flex align-items-center justify-content-center"
               style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
             >
