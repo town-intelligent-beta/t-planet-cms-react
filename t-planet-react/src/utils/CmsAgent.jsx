@@ -1,142 +1,296 @@
-import { plan_submit } from "./Plan";
+import { plan_submit, createFormData } from "./Plan";
+
+const CMS_PROJECT_SUBMIT_PAGES = [
+  "cms_plan_info",
+  "cms_sdgs_setting",
+  "cms_impact",
+  "cms_contact_person",
+];
+
+const CMS_SUPPORT_FORMAT = ["cms_missions_display", "cms_deep_participation"];
 
 const getPageIndex = (page) => {
-  // Assuming these arrays are imported or defined elsewhere
-  const cms_support_format = [];
-  const cms_project_submit_pages = [];
+  const supportFormatIndex = CMS_SUPPORT_FORMAT.indexOf(page);
+  if (supportFormatIndex !== -1) return 3;
 
-  for (let index = 0; index < cms_support_format.length; index++) {
-    if (page === cms_support_format[index]) {
-      return 3;
-    }
-  }
-
-  for (let index = 0; index < cms_project_submit_pages.length; index++) {
-    if (page === cms_project_submit_pages[index]) {
-      return index;
-    }
-  }
-  return null;
+  return CMS_PROJECT_SUBMIT_PAGES.indexOf(page);
 };
 
 const getIndexPage = (index) => {
-  // Assuming this array is imported or defined elsewhere
-  const cms_project_submit_pages = [];
-  return cms_project_submit_pages[index];
+  return CMS_PROJECT_SUBMIT_PAGES[index];
 };
 
-// Preview button handler
-export const handlePreviewClick = async (formData, uuid) => {
-  await plan_submit(formData, uuid);
-  //window.open(`/backend/cms_project_detail/${uuid}`, "_blank");
+const navigateTo = (path) => {
+  window.location.href = path;
 };
 
-// Previous button handler
-export const handlePrevClick = (e) => {
-  e.preventDefault();
+// Submit form data & preview
+export const handlePreview = async (event, projectData, id) => {
+  event.preventDefault();
+  try {
+    const formData = createFormData(projectData);
 
-  // Get current page
+    // 提交表單邏輯
+    const response = await plan_submit(formData, id);
+    navigateTo(`/backend/cms_project_detail/${id}`);
+    console.log("Form submission response:", response);
+  } catch (error) {
+    console.error("Error during form submission:", error);
+  }
+};
+
+// Submit form data & to next page
+export const handleNextPage = async (event, projectData, id) => {
   const path = window.location.pathname;
-  const page = path.split("/").pop();
+  const segments = path.split("/");
+  const page = segments[2];
+  const currentIndex = getPageIndex(page);
 
-  // Get URL parameters
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const uuid = urlParams.get("uuid");
-  const task = urlParams.get("task");
-
-  // Build parameter string
-  let param = "";
-  if (uuid) {
-    param = `?uuid=${uuid}`;
-  }
-  if (task) {
-    param = param + `&task=${task}`;
-  }
-
-  // Get current page index
-  const index = getPageIndex(page);
-
-  // Handle navigation
-  if (index > 0) {
-    if (page === "cms_missions_display") {
-      window.location.replace(`cms_impact.html${param}`);
+  event.preventDefault();
+  try {
+    const formData = createFormData(projectData);
+    // 提交表單邏輯
+    const response = await plan_submit(formData, id);
+    if (currentIndex < CMS_PROJECT_SUBMIT_PAGES.length - 1) {
+      navigateTo(`/backend/${getIndexPage(currentIndex + 1)}/${id}`);
     } else {
-      window.location.replace(getIndexPage(index - 1) + param);
+      navigateTo(
+        `/backend/${getIndexPage(CMS_PROJECT_SUBMIT_PAGES.length - 1)}/${id}`
+      );
     }
-  } else {
-    window.location.replace(getIndexPage(0) + param);
+    console.log("Form submission response:", response);
+  } catch (error) {
+    console.error("Error during form submission:", error);
   }
 };
 
-// Next button handler
-//   export const handleNextClick = async (e, formData) => {
-//     e.preventDefault();
+// Submit form data
+export const handleSave = async (event, projectData, id) => {
+  event.preventDefault();
+  try {
+    const formData = createFormData(projectData);
 
-//     // Get current page and parameters
+    // 提交表單邏輯
+    const response = await plan_submit(formData, id);
+    alert("儲存成功");
+    console.log("Form submission response:", response);
+  } catch (error) {
+    console.error("Error during form submission:", error);
+  }
+};
+
+// const ProjectNavigation = ({ projectData }) => {
+//   const [currentPage, setCurrentPage] = useState("");
+//   const [uuid, setUuid] = useState("");
+//   //const [task, setTask] = useState("");
+
+//   // get path and uuid
+//   useEffect(() => {
 //     const path = window.location.pathname;
-//     const page = path.split("/").pop();
-//     const queryString = window.location.search;
-//     const urlParams = new URLSearchParams(queryString);
-//     const uuid = urlParams.get("uuid");
-//     const task = urlParams.get("task");
+//     const uuid = path.split("/").pop();
+//     const segments = path.split("/");
+//     const cmsSegment = segments[2];
+//     setUuid(uuid);
+//     setCurrentPage(cmsSegment);
 
-//     // Build parameter string
-//     let param = "";
-//     if (uuid) {
-//       param = `?uuid=${uuid}`;
-//     }
-//     if (task) {
-//       param = param + `&task=${task}`;
-//     }
+//     // const params = new URLSearchParams(window.location.search);
+//     // setUuid(params.get("uuid"));
+//     // setTask(params.get("task"));
+//   }, []);
 
-//     // Get current page index
-//     const index = getPageIndex(page);
+//   const buildUrlParams = () => {
+//     const params = new URLSearchParams();
+//     if (uuid) params.append("uuid", uuid);
+//     if (task) params.append("task", task);
+//     return params.toString() ? `?${params.toString()}` : "";
+//   };
 
-//     // Handle form submission and special cases
-//     try {
-//       // Submit form data
-//       await plan_submit(formData, uuid);
+//   // Previous page
+//   const handlePrevious = (e) => {
+//     e.preventDefault();
+//     const currentIndex = getPageIndex(currentPage);
 
-//       // Handle special cases
-//       if (page === "cms_impact") {
-//         await handleImpactPageSubmit(uuid);
-//       }
-
-//       if (page === "cms_deep_participation") {
-//         if (false === await child_task_submit(page)) {
-//           return;
-//         }
-//       }
-
-//       // Handle navigation
-//       if (page === "cms_contact_person") {
-//         window.location.replace(`/backend/cms_project_detail/${uuid}`);
-//       } else if (page === "cms_deep_participation") {
-//         window.location.replace(`/backend/cms_impact.html${param}`);
-//       } else if (index < cms_project_submit_pages.length - 1) {
-//         window.location.replace(`/backend/${getIndexPage(index + 1)}${param}`);
-//       } else {
-//         window.location.replace(`/backend/${getIndexPage(cms_project_submit_pages.length - 1)}${param}`);
-//       }
-//     } catch (error) {
-//       console.error("Error handling next click:", error);
+//     if (currentPage === "cms_missions_display") {
+//       navigateTo(`/backend/cms_impact/${buildUrlParams()}`);
+//     } else if (currentIndex > 0) {
+//       navigateTo(
+//         `/backend/${getIndexPage(currentIndex - 1)}${buildUrlParams()}`
+//       );
+//     } else {
+//       navigateTo(`/backend/${getIndexPage(0)}${buildUrlParams()}`);
 //     }
 //   };
 
-// Save draft button handler
-export const handleSaveDraftClick = async (e, formData) => {
-  e.preventDefault();
+//   const handleSubmit = async ({ projectData }) => {
+//     const currentIndex = getPageIndex(currentPage);
 
-  try {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const uuid = urlParams.get("uuid");
+//     // Create and populate form data
+//     // const formData = new FormData();
+//     // if (typeof window.append_plan_submit_data === "function") {
+//     //   window.append_plan_submit_data(currentPage, formData);
+//     // }
 
-    await plan_submit(formData, uuid);
-    alert("儲存成功");
-  } catch (error) {
-    console.error("Error saving draft:", error);
-    alert("儲存失敗");
-  }
-};
+//     // // Submit form data
+//     // if (typeof onSubmit === "function") {
+//     //   await onSubmit(formData, uuid);
+//     // }
+
+//     // // Handle special cases for cms_impact.html
+//     // if (currentPage === "cms_impact") {
+//     //   await handleImpactPageSubmit();
+//     // }
+
+//     // Handle special cases for cms_deep_participation.html
+//     if (currentPage === "cms_deep_participation") {
+//       if (
+//         typeof window.child_task_submit === "function" &&
+//         !window.child_task_submit(currentPage)
+//       ) {
+//         return;
+//       }
+//     }
+
+//     const formData = createFormData(projectData);
+//     await plan_submit(formData, projectData.id);
+
+//     // Handle navigation based on button clicked
+//     // switch (buttonId) {
+//     //   case "btn_ab_project_next":
+//     //     handleNextNavigation(currentIndex);
+//     //     break;
+//     //   case "btn_cms_plan_save":
+//     //     alert("儲存成功");
+//     //     break;
+//     //   case "btn_cms_plan_preview":
+//     //     window.open(`/backend/cms_project_detail/${uuid}`, "_blank");
+//     //     break;
+//     // }
+//   };
+
+//   const handlePreview = async ({ projectData }) => {
+//     await handleSubmit({ projectData });
+//     alert("儲存成功");
+//     //window.open(`/backend/cms_project_detail/${uuid}`, "_blank");
+//   };
+
+//   // Submit to next page
+//   const handleNextNavigation = (currentIndex) => {
+//     if (currentPage === "cms_contact_person") {
+//       navigateTo(`/backend/cms_project_detail/${uuid}`);
+//     } else if (currentPage === "cms_deep_participation") {
+//       navigateTo(`/backend/cms_impact/${buildUrlParams()}`);
+//     } else if (currentIndex < CMS_PROJECT_SUBMIT_PAGES.length - 1) {
+//       navigateTo(
+//         `/backend/${getIndexPage(currentIndex + 1)}${buildUrlParams()}`
+//       );
+//     } else {
+//       navigateTo(
+//         `/backend/${getIndexPage(
+//           CMS_PROJECT_SUBMIT_PAGES.length - 1
+//         )}${buildUrlParams()}`
+//       );
+//     }
+//   };
+
+//   const handleImpactPageSubmit = async () => {
+//     try {
+//       const result = await window.list_plan_tasks?.(uuid, 1);
+//       if (!result?.result) return;
+
+//       for (const taskId of result.tasks) {
+//         const formData = new FormData();
+//         try {
+//           // Populate form data
+//           formData.append("uuid", uuid);
+//           formData.append("task", taskId);
+//           formData.append("email", localStorage.getItem("email"));
+
+//           // Get form field values
+//           ["name", "task_start_date", "task_due_date", "overview"].forEach(
+//             (field) => {
+//               const element = document.getElementById(
+//                 `parent_task_${field}_${taskId}`
+//               );
+//               if (element) formData.append(field, element.value);
+//             }
+//           );
+
+//           const gpsFlag = document.getElementById(`gps_flag_${taskId}`);
+//           if (gpsFlag) formData.append("gps_flag", gpsFlag.checked);
+
+//           // Submit task
+//           await window.task_submit?.(formData);
+
+//           // Handle NFT creation
+//           const taskName = document.getElementById(
+//             `parent_task_name_${taskId}`
+//           )?.value;
+//           const overview = document.getElementById(
+//             `parent_task_overview_${taskId}`
+//           )?.value;
+
+//           if (taskName && overview) {
+//             const parser = new DOMParser();
+//             const doc = parser.parseFromString(overview, "text/html");
+//             const description = doc.body.firstChild?.innerText;
+
+//             if (
+//               typeof window.make_attrubute === "function" &&
+//               typeof window.mintNFT === "function"
+//             ) {
+//               const attribute = window.make_attrubute();
+//               await window.mintNFT({
+//                 uuid_project: uuid,
+//                 uuid_task: taskId,
+//                 name: taskName,
+//                 description,
+//                 attribute,
+//               });
+//             }
+//           }
+//         } catch (error) {
+//           console.error("Error processing task:", error);
+//         }
+//       }
+//     } catch (error) {
+//       console.error("Error in impact page submission:", error);
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-col md:flex-row gap-4 w-full">
+//       <button
+//         type="submit"
+//         id="btn_cms_plan_preview"
+//         className="btn btn-secondary rounded-pill w-full md:w-1/5"
+//         onClick={handlePreview}
+//       >
+//         檢視
+//       </button>
+//       <button
+//         type="button"
+//         id="btn_ab_project_prev"
+//         onClick={handlePrevious}
+//         className="btn btn-secondary rounded-pill w-full md:w-1/5"
+//       >
+//         上一步
+//       </button>
+//       <button
+//         type="submit"
+//         id="btn_ab_project_next"
+//         className="btn btn-dark rounded-pill w-full md:w-1/5"
+//       >
+//         下一步
+//       </button>
+//       <button
+//         type="submit"
+//         id="btn_cms_plan_save"
+//         className="btn btn-success rounded-pill w-full md:w-1/5"
+//       >
+//         儲存草稿
+//       </button>
+//     </div>
+//   );
+// };
+
+// export default ProjectNavigation;

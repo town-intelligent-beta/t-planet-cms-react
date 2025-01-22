@@ -6,12 +6,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../../progress_bar.css";
 import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router-dom";
-import { plan_info, createFormData, plan_submit } from "../../../utils/Plan";
-import {
-  handlePreviewClick,
-  handleSaveDraftClick,
-} from "../../../utils/CmsAgent";
+import { plan_info } from "../../../utils/Plan";
 import Loading from "../../../assets/loading.png";
+import {
+  handlePreview,
+  handleNextPage,
+  handleSave,
+} from "../../../utils/CmsAgent";
 
 const CmsPlanInfo = () => {
   const { id } = useParams();
@@ -26,11 +27,22 @@ const CmsPlanInfo = () => {
   const [coverImg, setCoverImg] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const projectData = {
+    name,
+    projectA,
+    projectB,
+    startDate,
+    dueDate,
+    budget,
+    philosophy,
+    isBudgetRevealed,
+    id,
+  };
+
   useEffect(() => {
     const fetchProjectInfo = async () => {
       if (id) {
         const obj_project = await plan_info(id);
-        console.log(obj_project);
         if (obj_project) {
           if (obj_project.img) {
             setCoverImg(
@@ -42,17 +54,18 @@ const CmsPlanInfo = () => {
           if (obj_project.name) {
             setName(obj_project.name);
           }
-          if (obj_project.projectA) {
-            setProjectA(obj_project.projectA);
+          if (obj_project.project_a) {
+            setProjectA(obj_project.project_a);
           }
-          if (obj_project.projectB) {
-            setProjectB(obj_project.projectB);
+          if (obj_project.project_b) {
+            setProjectB(obj_project.project_b);
           }
-          if (obj_project.startDate) {
-            setStartDate(new Date(obj_project.startDate));
-          }
-          if (obj_project.dueDate) {
-            setDueDate(new Date(obj_project.dueDate));
+          if (obj_project.period) {
+            const [start, end] = obj_project.period.split(" - ");
+            if (start && end) {
+              setStartDate(new Date(start));
+              setDueDate(new Date(end));
+            }
           }
           if (obj_project.budget) {
             setBudget(obj_project.budget);
@@ -69,23 +82,6 @@ const CmsPlanInfo = () => {
 
     fetchProjectInfo();
   }, [id]);
-
-  const handlePreview = async () => {
-    const formData = createFormData({
-      name,
-      projectA,
-      projectB,
-      startDate,
-      dueDate,
-      budget,
-      philosophy,
-      isBudgetRevealed,
-    });
-
-    console.log(formData, id);
-    await plan_submit(formData, id);
-    //await handlePreviewClick(formData, id);
-  };
 
   const submitProjectCover = async (base64Img, uuid) => {
     const formdata = new FormData();
@@ -366,6 +362,7 @@ const CmsPlanInfo = () => {
                   id="philosophy"
                   setDescription={setPhilosophy}
                   height="158px"
+                  initialContent={philosophy}
                 />
               </div>
             </div>
@@ -377,7 +374,7 @@ const CmsPlanInfo = () => {
                     type="submit"
                     id="btn_cms_plan_preview"
                     className="btn btn-secondary rounded-pill w-full md:w-1/5"
-                    onClick={handlePreview}
+                    onClick={(event) => handlePreview(event, projectData, id)}
                   >
                     檢視
                   </button>
@@ -385,7 +382,7 @@ const CmsPlanInfo = () => {
                     type="submit"
                     id="btn_ab_project_next"
                     className="btn btn-dark rounded-pill w-full md:w-1/5"
-                    //onClick={(e) => handleNextClick(e, formData)}
+                    onClick={(event) => handleNextPage(event, projectData, id)}
                   >
                     下一步
                   </button>
@@ -393,7 +390,7 @@ const CmsPlanInfo = () => {
                     type="submit"
                     id="btn_cms_plan_save"
                     className="btn btn-success rounded-pill w-full md:w-1/5"
-                    //onClick={(e) => handleSaveDraftClick(e, formData)}
+                    onClick={(event) => handleSave(event, projectData, id)}
                   >
                     儲存草稿
                   </button>
