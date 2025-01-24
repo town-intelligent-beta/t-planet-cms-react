@@ -36,7 +36,6 @@ const CmsPlanInfo = () => {
     budget,
     philosophy,
     isBudgetRevealed,
-    id,
   };
 
   useEffect(() => {
@@ -142,7 +141,9 @@ const CmsPlanInfo = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: {
+      "image/*": [".jpeg", ".jpg", ".png"],
+    },
   });
 
   return (
