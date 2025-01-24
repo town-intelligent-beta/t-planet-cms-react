@@ -4,57 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://d3js.org/d3.v6.js"></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://unpkg.com/chart.js@4.3.0/dist/chart.umd.js"></script>
-    <script src="https://unpkg.com/chart.js-plugin-labels-dv@4.0.0/dist/chartjs-plugin-labels.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-
-    <script src="https://s3.amazonaws.com/builds.handlebarsjs.com/handlebars.min-v4.7.8.js"></script>
-
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/progress_bar.css" />
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script type="module" src="/static/js/plan.js"></script>
-    <!-- <script type="module" src="/static/js/tasks.js"></script> -->
-    <script type="module" src="/static/js/content.js"></script>
-    <script type="module" src="/static/js/set_page_info.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css"
     />
-
     <script id="tpl-sdgs" type="text/x-handlebars-template">
-      {{#each sdgs_items as |sdg_item|}}
+      {{#each matchedWeights as |sdg_item|}}
         <div class="col-12 col-lg-6">
           <div
             class="f-flex w-100 h-100 row align-items-center justify-content-center pt-4"
           >
             <img
               class="col-3"
-              src="/static/imgs/SDGs_{{sdg_item.index}}.jpg"
+              src="{{sdg_item.thumbnail}}"
               alt=""
             />
             <div
@@ -125,10 +99,6 @@
       <div class="container">
         <div class="row mt-3 mt-md-5">
           <div class="col-md-12">
-            <!-- <div class="d-flex justify-content-center">
-              <iframe width="1110" height="480" src="https://www.youtube.com/embed/5otyOD5n8kM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-              </iframe>
-            </div> -->
           </div>
         </div>
         <div class="row justify-content-center mt-4 py-4 bg-white">
@@ -207,7 +177,7 @@
                   <p class="text-center small mb-md-2">關係人口</p>
                   <p
                     class="font-weight-bold text-center mb-md-2 text-blue"
-                    style="font-size: 96px; font-family: Rozha One"
+                    style="font-size: 90px; font-family: Rozha One"
                     id="budget"
                   >
                     0
@@ -220,8 +190,6 @@
                   class="d-flex h-100 align-items-center justify-content-center"
                 >
                   <div class="w-100" id="obj_digital_fp_chart1">
-                    <!-- <img class="w-100" src="/static/imgs/chart_2.jpg" alt="">-->
-                    <!-- <p class="text-center small">專案指標累積</p> -->
                   </div>
                 </div>
               </div>
@@ -246,7 +214,9 @@
     <!-- footer -->
     <div id="footer"></div>
     <div
-      aria-hidden="true"
+      aria-hidden="
+
+true"
       aria-labelledby="staticBackdropLabel"
       class="modal fade"
       data-backdrop="static"
@@ -282,5 +252,28 @@
         </div>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/chart.js@4.3.0/dist/chart.umd.js"></script>
+    <script src="https://unpkg.com/chart.js-plugin-labels-dv@4.0.0/dist/chartjs-plugin-labels.min.js"></script>
+    <script src="https://s3.amazonaws.com/builds.handlebarsjs.com/handlebars.min-v4.7.8.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script type="module" src="/static/js/plan.js"></script>
+    <!-- <script type="module" src="/static/js/tasks.js"></script> -->
+    <script type="module" src="/static/js/content.js"></script>
+    <script type="module" src="/static/js/set_page_info.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
   </body>
 </html>

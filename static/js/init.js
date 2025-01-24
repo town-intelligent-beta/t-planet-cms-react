@@ -1,7 +1,12 @@
 import { set_page_info } from './set_page_info.js';
 
 function add_navbar() {
-  $('#navbar').html(str_navbar)
+
+  if (getLocalStorage("jwt") === "" ) {
+    $('#navbar').html(str_navbar)
+  } else {
+    $('#navbar').html(str_navbar_loggedin)
+  }
 
   // Visible
   if (SITE_TYPE == 0) {
@@ -91,13 +96,13 @@ function set_navbar_animation() {
   });
 }
 
-function navbar(group) {
+function navbar(email) {
   add_navbar()
   add_footer()
   set_navbar_animation()
 
   // home logo href
-  if (group == "200" || group == "201" ) {
+  if (SITE_HOSTERS.includes(email)) {
     document.getElementById("index_logo").href = "/index.html";
 
     try {
@@ -160,7 +165,11 @@ function navbar(group) {
 
       obj_dropdown_menu.appendChild(obj_dropdown_item_index);
       obj_dropdown_menu.appendChild(obj_dropdown_item_sustainable);
-      obj_dropdown_menu.appendChild(obj_dropdown_item_AI);
+
+      if (email === SITE_HOSTERS[0]) {
+        obj_dropdown_menu.appendChild(obj_dropdown_item_AI);
+      }
+
       obj_dropdown_menu.appendChild(obj_dropdown_item_news);
       obj_dropdown_menu.appendChild(obj_dropdown_item_contact);
       obj_dropdown_menu.appendChild(obj_dropdown_item_logout);
@@ -175,11 +184,11 @@ function navbar(group) {
 // set page info
 set_page_info();
 
-// Get group
-var group = getLocalStorage("group");
+// Get email
+var email = getLocalStorage("email");
 
 // navbar
-navbar(group);
+navbar(email);
 
 // footer
 add_footer();
