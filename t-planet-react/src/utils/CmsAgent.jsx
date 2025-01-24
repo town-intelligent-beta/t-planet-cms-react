@@ -39,6 +39,23 @@ export const handlePreview = async (event, projectData, id) => {
   }
 };
 
+// Previous page
+export const handlePrevious = (event, id) => {
+  const path = window.location.pathname;
+  const segments = path.split("/");
+  const page = segments[2];
+  const currentIndex = getPageIndex(page);
+
+  event.preventDefault();
+  if (page === "cms_missions_display") {
+    navigateTo(`/backend/cms_impact`);
+  } else if (currentIndex > 0) {
+    navigateTo(`/backend/${getIndexPage(currentIndex - 1)}/${id}`);
+  } else {
+    navigateTo(`/backend/${getIndexPage(0)}/${id}`);
+  }
+};
+
 // Submit form data & to next page
 export const handleNextPage = async (event, projectData, id) => {
   const path = window.location.pathname;

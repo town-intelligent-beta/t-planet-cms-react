@@ -9,6 +9,7 @@ import AdminAgentDashboard from "./pages/backend/AdminAgentDashboard";
 import CsmAgent from "./pages/backend/CmsAgent";
 import CmsProjectDetail from "./pages/backend/CmsProjectDetail";
 import CmsPlanInfo from "./pages/backend/CmsProject/CmsPlanInfo";
+import CmsSdgsSetting from "./pages/backend/CmsProject/CmsSdgsSetting";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./utils/ProtectRoute";
 
@@ -42,6 +43,10 @@ function App() {
               <Route
                 path="/backend/cms_plan_info/:id"
                 element={<CmsPlanInfo />}
+              />
+              <Route
+                path="/backend/cms_sdgs_setting/:id"
+                element={<CmsSdgsSetting />}
               />
             </Routes>
           </main>

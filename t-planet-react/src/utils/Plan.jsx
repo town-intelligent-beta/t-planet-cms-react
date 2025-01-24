@@ -151,6 +151,10 @@ export async function plan_submit(formdata, uuid = null) {
 }
 //append_plan_submit_data待新增其他頁面的
 export function createFormData(projectData) {
+  const url = window.location.pathname;
+  const segments = url.split("/");
+  const page = segments[2];
+
   const formData = new FormData();
 
   const formatDate = (date) => {
@@ -162,14 +166,22 @@ export function createFormData(projectData) {
     return `${year}/${month}/${day}`;
   };
 
-  formData.append("name", projectData.name);
-  formData.append("project_a", projectData.projectA);
-  formData.append("project_b", projectData.projectB);
-  formData.append("project_start_date", formatDate(projectData.startDate));
-  formData.append("project_due_date", formatDate(projectData.dueDate));
-  formData.append("budget", projectData.budget);
-  formData.append("philosophy", projectData.philosophy);
-  formData.append("is_budget_revealed", projectData.isBudgetRevealed);
+  if (page === "cms_plan_info") {
+    formData.append("name", projectData.name);
+    formData.append("project_a", projectData.projectA);
+    formData.append("project_b", projectData.projectB);
+    formData.append("project_start_date", formatDate(projectData.startDate));
+    formData.append("project_due_date", formatDate(projectData.dueDate));
+    formData.append("budget", projectData.budget);
+    formData.append("philosophy", projectData.philosophy);
+    formData.append("is_budget_revealed", projectData.isBudgetRevealed);
+  } else if (page === "cms_sdgs_setting") {
+    const list_sdg = projectData.flatMap((weight) =>
+      weight.categories.map((category) => (category.isChecked ? 1 : 0))
+    );
+    formData.append("list_sdg", list_sdg);
+  }
+
   return formData;
 }
 
