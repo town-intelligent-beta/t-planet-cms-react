@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Placeholder from "@tiptap/extension-placeholder";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -145,9 +146,19 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const Tiptap = ({ setDescription, initialContent = "" }) => {
+const Tiptap = ({
+  setDescription,
+  initialContent = "",
+  placeholder = "",
+  className = "",
+}) => {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder,
+      }),
+    ],
     content: initialContent,
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
@@ -162,7 +173,7 @@ const Tiptap = ({ setDescription, initialContent = "" }) => {
   }, [editor, initialContent]);
 
   return (
-    <div className="w-full border rounded-md overflow-hidden">
+    <div className={`w-full border rounded-md overflow-hidden ${className}`}>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} className="p-4 min-h-[200px]" />
     </div>

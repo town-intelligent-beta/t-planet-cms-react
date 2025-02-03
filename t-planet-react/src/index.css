@@ -21,8 +21,7 @@
 
 
 .ProseMirror {
-  padding: 10px;
-  border-top: 1px solid grey;
+  margin-top: -16px;
   background: white;
   border-radius: 0 0 5px 5px;
   min-height: 100px;
@@ -47,6 +46,15 @@
 .ProseMirror h5,
 .ProseMirror h6 {
   line-height: 1.1;
+}
+
+/* Placeholder (at the top) */
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
 }
 
 #loading {
