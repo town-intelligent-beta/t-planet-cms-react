@@ -71,3 +71,26 @@ export async function listChildrenTasks(taskUuid) {
     return [];
   }
 }
+
+export async function TaskSubmit(formdata) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_HOST_URL_TPLANET}/tasks/new`,
+      {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data.task;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+}

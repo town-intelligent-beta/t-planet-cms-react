@@ -30,10 +30,15 @@ const allWeights = [
   { thumbnail: "/src/assets/weight/aesthetics.svg" },
 ];
 
-const generateSdgsIcons = (weight, comment) => {
+const generateSdgsIcons = (weight, comment, setComments) => {
   if (!weight) return null;
 
-  const comments = JSON.parse(comment);
+  const comments = comment ? JSON.parse(comment) : {};
+
+  const handleDescriptionChange = (index, newContent) => {
+    const updatedComments = { ...comments, [index]: newContent };
+    setComments(JSON.stringify(updatedComments));
+  };
 
   return weight.split(",").map((w, index) => {
     if (parseInt(w) === 1 && allWeights[index]) {
@@ -54,6 +59,9 @@ const generateSdgsIcons = (weight, comment) => {
             placeholder="填寫符合此指標的執行方式"
             initialContent={initialContent}
             className="max-h-36"
+            setDescription={(newContent) =>
+              handleDescriptionChange(index, newContent)
+            }
           />
         </div>
       );

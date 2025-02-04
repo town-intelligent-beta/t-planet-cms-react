@@ -11,12 +11,14 @@ import {
   handleNextPage,
   handleSave,
 } from "../../../utils/CmsAgent";
+import ParentTask from "../components/ParentTask";
 
 const CmsSdgsSetting = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [projectWeight, setProjectWeight] = useState("");
   const [weightComment, setWeightComment] = useState("");
+  console.log(weightComment);
 
   useEffect(() => {
     if (id) {
@@ -28,6 +30,7 @@ const CmsSdgsSetting = () => {
     setIsLoading(true);
     try {
       const projectInfo = await plan_info(id);
+      console.log(projectInfo);
       setProjectWeight(projectInfo.weight);
       setWeightComment(projectInfo.weight_description);
 
@@ -115,7 +118,7 @@ const CmsSdgsSetting = () => {
                 <p className="bg-nav px-3 p-2">選擇計劃總指標</p>
               </div>
               <div className="col-10" id="sdgs_container">
-                {SdgsCommand(projectWeight, weightComment)}
+                {SdgsCommand(projectWeight, weightComment, setWeightComment)}
               </div>
             </div>
             <div className="row mt-5 align-items-center justify-content-center">
@@ -123,7 +126,7 @@ const CmsSdgsSetting = () => {
                 <p className="bg-nav px-3 p-2">成果展現</p>
               </div>
             </div>
-            <div className="row justify-content-center my-2">
+            {/* <div className="row justify-content-center my-2">
               <div className="col-10 px-0">
                 <button
                   type="button"
@@ -133,8 +136,10 @@ const CmsSdgsSetting = () => {
                   + 新增活動
                 </button>
               </div>
+            </div> */}
+            <div id="div_parent_task">
+              <ParentTask />
             </div>
-            <div id="div_parent_task"></div>
 
             {/* 按鈕 */}
             <div className="row mt-5 mb-5 pb-3 justify-content-center">
