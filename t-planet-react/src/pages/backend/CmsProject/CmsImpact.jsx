@@ -1,9 +1,7 @@
 import "../../progress_bar.css";
 import { useState, useEffect } from "react";
-//import { Card, Form } from "react-bootstrap";
 import { plan_info } from "../../../utils/Plan";
 import { useParams } from "react-router-dom";
-//import { sdgsAutoGen, getWeightMeta } from "../../../utils/sdgs/Weight";
 import SdgsCommand from "../../../utils/sdgs/SdgsComment";
 import {
   handlePreview,
@@ -18,7 +16,6 @@ const CmsSdgsSetting = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projectWeight, setProjectWeight] = useState("");
   const [weightComment, setWeightComment] = useState("");
-  console.log(weightComment);
 
   useEffect(() => {
     if (id) {
@@ -30,57 +27,8 @@ const CmsSdgsSetting = () => {
     setIsLoading(true);
     try {
       const projectInfo = await plan_info(id);
-      console.log(projectInfo);
       setProjectWeight(projectInfo.weight);
       setWeightComment(projectInfo.weight_description);
-
-      //   let sdgsList = projectInfo.weight
-      //     ? projectInfo.weight.split(",")
-      //     : Array(27).fill("0");
-
-      //   const allZeros = sdgsList.every((value) => value === "0");
-
-      //   if (allZeros) {
-      //     try {
-      //       const result = await sdgsAutoGen(id);
-      //       const parsedResult = JSON.parse(result.content);
-
-      //       if (parsedResult.project_sdgs?.length > 0) {
-      //         const projectSDGs = parsedResult.project_sdgs[0];
-
-      //         localStorage.setItem("ai_sdgs", JSON.stringify(projectSDGs));
-
-      //         sdgsList = sdgsList.map((_, index) =>
-      //           projectSDGs[index + 1] ? "1" : "0"
-      //         );
-      //       }
-      //     } catch (error) {
-      //       console.error("Error fetching AI generated SDGs:", error);
-      //     }
-      //   }
-
-      //   const weightDetails = [];
-      //   let globalIdCounter = 1;
-
-      //   for (const weight of WEIGHTS) {
-      //     const data = await getWeightMeta(weight);
-      //     const categories = data.content.categories.map((category) => {
-      //       const uniqueId = `sdg_${globalIdCounter}`;
-      //       globalIdCounter++;
-      //       return {
-      //         title: category.title,
-      //         id: uniqueId,
-      //         isChecked: parseInt(sdgsList[uniqueId.split("_")[1] - 1]) !== 0,
-      //       };
-      //     });
-
-      //     weightDetails.push({
-      //       weightId: weight,
-      //       categories: categories,
-      //     });
-      //   }
-
-      //   setWeightData(weightDetails);
     } catch (error) {
       console.error("Error fetching SDGs data:", error);
     } finally {
@@ -126,17 +74,6 @@ const CmsSdgsSetting = () => {
                 <p className="bg-nav px-3 p-2">成果展現</p>
               </div>
             </div>
-            {/* <div className="row justify-content-center my-2">
-              <div className="col-10 px-0">
-                <button
-                  type="button"
-                  id="add_parent_tasks"
-                  className="btn btn-block btn-outline-secondary w-full"
-                >
-                  + 新增活動
-                </button>
-              </div>
-            </div> */}
             <div id="div_parent_task">
               <ParentTask />
             </div>
