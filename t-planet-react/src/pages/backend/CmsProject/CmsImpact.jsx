@@ -75,7 +75,7 @@ const CmsSdgsSetting = () => {
               </div>
             </div>
             <div id="div_parent_task">
-              <ParentTask />
+              <ParentTask weightComment={weightComment} />
             </div>
 
             {/* 按鈕 */}
@@ -86,7 +86,7 @@ const CmsSdgsSetting = () => {
                     type="submit"
                     id="btn_cms_plan_preview"
                     className="btn btn-secondary rounded-pill w-full md:w-1/5"
-                    onClick={(event) => handlePreview(event, weightData, id)}
+                    onClick={(event) => handlePreview(event, weightComment, id)}
                   >
                     檢視
                   </button>
@@ -102,7 +102,9 @@ const CmsSdgsSetting = () => {
                     type="submit"
                     id="btn_ab_project_next"
                     className="btn btn-dark rounded-pill w-full md:w-1/5"
-                    onClick={(event) => handleNextPage(event, weightData, id)}
+                    onClick={(event) =>
+                      handleNextPage(event, weightComment, id)
+                    }
                   >
                     下一步
                   </button>
@@ -110,7 +112,7 @@ const CmsSdgsSetting = () => {
                     type="submit"
                     id="btn_cms_plan_save"
                     className="btn btn-success rounded-pill w-full md:w-1/5"
-                    onClick={(event) => handleSave(event, weightData, id)}
+                    onClick={(event) => handleSave(event, weightComment, id)}
                   >
                     儲存草稿
                   </button>

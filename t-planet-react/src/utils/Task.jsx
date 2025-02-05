@@ -72,7 +72,7 @@ export const listChildrenTasks = async (taskUuid) => {
   }
 };
 
-export const addNewTask = async (formdata) => {
+export const submitTask = async (formdata) => {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_HOST_URL_TPLANET}/tasks/new`,
@@ -116,29 +116,6 @@ export const deleteTask = async (uuid) => {
 
     const data = await response.json();
     return data;
-  } catch (error) {
-    console.error("Error:", error);
-    return [];
-  }
-};
-
-export const submitTask = async (formdata) => {
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_HOST_URL_TPLANET}/tasks/submit`,
-      {
-        method: "POST",
-        body: formdata,
-        redirect: "follow",
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const data = await response.json();
-    return data.task;
   } catch (error) {
     console.error("Error:", error);
     return [];

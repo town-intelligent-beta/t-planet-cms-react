@@ -7,19 +7,22 @@ import { useDropzone } from "react-dropzone";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
-  addNewTask,
+  submitTask,
   getTaskInfo,
   deleteTask,
   submitTaskCover,
 } from "../../../utils/Task";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { list_plan_tasks } from "../../../utils/Plan";
+import { formatDate } from "../../../utils/Transform";
+import { handleSave } from "../../../utils/CmsAgent";
 
-const ParentTaskBlock = () => {
+const ParentTaskBlock = ({ weightComment }) => {
   const [parentTasks, setParentTasks] = useState([]);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-  console.log("parent", parentTasks);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -47,7 +50,7 @@ const ParentTaskBlock = () => {
       formData.append("email", localStorage.getItem("email"));
       formData.append("uuid", id);
 
-      const response = await addNewTask(formData);
+      const response = await submitTask(formData);
       if (!response) {
         console.log("Error, submit task failed.");
         return;
@@ -93,7 +96,6 @@ const ParentTaskBlock = () => {
       };
     });
     const [modalShow, setModalShow] = useState(false);
-    console.log("taskdata", taskData);
 
     const handleInputChange = (field, value) => {
       setTaskData((prev) => ({
@@ -171,6 +173,35 @@ const ParentTaskBlock = () => {
         alert("刪除成功");
       } else {
         alert("刪除失敗，請洽系統管理員。");
+      }
+    };
+
+    const handleSubmitTask = async (event) => {
+      event.preventDefault();
+      try {
+        const formData = new FormData();
+
+        formData.append("email", localStorage.getItem("email"));
+        formData.append("uuid", id);
+        formData.append("task", taskData.uuid);
+        formData.append("name", taskData.name);
+        formData.append("task_start_date", formatDate(taskData.startDate));
+        formData.append("task_due_date", formatDate(taskData.dueDate));
+        formData.append("overview", taskData.overview);
+        formData.append("gps_flag", taskData.gps);
+
+        const response = await submitTask(formData);
+        handleSave(event, weightComment, id);
+        if (response) {
+          localStorage.setItem("uuid_project", id);
+          navigate(
+            `/backend/cms_missions_display/${id}&task=${taskData.uuid}&gps=${taskData.gps}`
+          );
+        } else {
+          alert("更新失敗，請洽系統管理員。");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
     };
 
@@ -295,10 +326,10 @@ const ParentTaskBlock = () => {
                 刪除
               </button>
               <button
-                //type="submit"
+                type="submit"
                 id="btn_cms_plan_preview"
                 className="btn btn-success rounded-pill w-full"
-                //onClick={handleSubmitTask}
+                onClick={handleSubmitTask}
               >
                 新增
               </button>
