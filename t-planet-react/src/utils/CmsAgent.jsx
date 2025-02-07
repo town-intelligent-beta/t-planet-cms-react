@@ -48,7 +48,7 @@ export const handlePrevious = (event, id) => {
 
   event.preventDefault();
   if (page === "cms_missions_display") {
-    navigateTo(`/backend/cms_impact`);
+    navigateTo(`/backend/cms_impact/${id}`);
   } else if (currentIndex > 0) {
     navigateTo(`/backend/${getIndexPage(currentIndex - 1)}/${id}`);
   } else {
@@ -68,6 +68,12 @@ export const handleNextPage = async (event, projectData, id) => {
     const formData = createFormData(projectData);
     // 提交表單邏輯
     const response = await plan_submit(formData, id);
+
+    // Handle special cases for cms_impact.html
+    // if (page === "cms_impact") {
+    //   await handleImpactPageSubmit();
+    // }
+
     if (currentIndex < CMS_PROJECT_SUBMIT_PAGES.length - 1) {
       navigateTo(`/backend/${getIndexPage(currentIndex + 1)}/${id}`);
     } else {

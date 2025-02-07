@@ -11,6 +11,7 @@ import CmsProjectDetail from "./pages/backend/CmsProjectDetail";
 import CmsPlanInfo from "./pages/backend/CmsProject/CmsPlanInfo";
 import CmsSdgsSetting from "./pages/backend/CmsProject/CmsSdgsSetting";
 import CmsImpact from "./pages/backend/CmsProject/CmsImpact";
+import CmsMissionDisplay from "./pages/backend/CmsProject/CmsMissionDisplay";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./utils/ProtectRoute";
 
@@ -50,6 +51,10 @@ function App() {
                 element={<CmsSdgsSetting />}
               />
               <Route path="/backend/cms_impact/:id" element={<CmsImpact />} />
+              <Route
+                path="/backend/cms_missions_display/:id"
+                element={<CmsMissionDisplay />}
+              />
             </Routes>
           </main>
 

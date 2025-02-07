@@ -194,9 +194,7 @@ const ParentTaskBlock = ({ weightComment }) => {
         handleSave(event, weightComment, id);
         if (response) {
           localStorage.setItem("uuid_project", id);
-          navigate(
-            `/backend/cms_missions_display/${id}&task=${taskData.uuid}&gps=${taskData.gps}`
-          );
+          navigate(`/backend/cms_missions_display/${id}?task=${taskData.uuid}`);
         } else {
           alert("更新失敗，請洽系統管理員。");
         }
