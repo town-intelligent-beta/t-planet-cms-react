@@ -5,7 +5,8 @@ import { getWeightMeta } from "../../utils/sdgs/Weight";
 
 const GenerateSdgsModal = ({ weight }) => {
   const [weights, setWeights] = useState(new Array(27).fill(0));
-  const [weightData, setWeightData] = useState([]);
+  const [selectedWeights, setSelectedWeights] = useState(new Array(27).fill(0));
+  const [weightData, setWeightData] = useState([]); //for ModalData
   const [isLoading, setIsLoading] = useState(false);
   const WEIGHTS = ["SDGs", "CommunityDevelopment", "FiveWaysofLife"];
   const [show, setShow] = useState(false);
@@ -53,10 +54,28 @@ const GenerateSdgsModal = ({ weight }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleSelect = (index) => {
+    const newSelectedWeights = [...selectedWeights];
+    newSelectedWeights[index] = newSelectedWeights[index] === 1 ? 0 : 1;
+    setSelectedWeights(newSelectedWeights);
+  };
+
+  const handleAdd = () => {
+    setWeights(selectedWeights);
+    handleClose();
+  };
+
+  const handleRemove = (index) => {
+    const newWeights = [...weights];
+    newWeights[index] = 0;
+    setWeights(newWeights);
+    setSelectedWeights(newWeights);
+  };
+
   return (
     <>
       <p></p>
-      <div className="sdgs-container d-flex flex-wrap" id={`icon_container`}>
+      <div className="sdgs-container d-flex">
         <div className="d-block">
           <Button
             id="icon_btn"
@@ -66,7 +85,32 @@ const GenerateSdgsModal = ({ weight }) => {
             +
           </Button>
         </div>
-        <div id="icon_container" style={{ display: "inline-block" }}></div>
+        <div id="icon_container" className="flex flex-wrap gap-2 ">
+          {weights.map((w, index) => {
+            if (w === 1 && weightData[index]) {
+              const iconInfo = weightData[index];
+              return (
+                <div
+                  key={index}
+                  className="position-relative d-flex justify-content-center align-items-center w-20 h-20"
+                >
+                  <img
+                    className="w-100 h-100"
+                    src={iconInfo.thumbnail}
+                    alt={`Icon ${index + 1}`}
+                  />
+                  <button
+                    className="position-absolute top-0 right-0 border-0 text-white bg-black opacity-50 w-6 h-6"
+                    onClick={() => handleRemove(index)}
+                  >
+                    &times;
+                  </button>
+                </div>
+              );
+            }
+            return null;
+          })}
+        </div>
       </div>
 
       <Modal show={show} onHide={handleClose}>
@@ -81,7 +125,10 @@ const GenerateSdgsModal = ({ weight }) => {
                 return (
                   <button
                     key={index}
-                    className="flex items-center gap-3 w-full border-1 mt-2 h-20 rounded-md"
+                    className={`flex items-center gap-3 w-full border-1 mt-2 h-20 rounded-md ${
+                      selectedWeights[index] ? "bg-gray-300" : ""
+                    }`}
+                    onClick={() => handleSelect(index)}
                   >
                     <div
                       key={index}
@@ -103,7 +150,10 @@ const GenerateSdgsModal = ({ weight }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            關閉
+          </Button>
+          <Button variant="primary" onClick={handleAdd}>
+            新增
           </Button>
         </Modal.Footer>
       </Modal>

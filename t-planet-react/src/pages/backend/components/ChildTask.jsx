@@ -10,7 +10,6 @@ import {
 } from "../../../utils/Task";
 import { useParams, useLocation } from "react-router-dom";
 import SdgsModal from "../../../utils/sdgs/SdgsModal";
-//import { formatDate } from "../../../utils/Transform";
 
 const ChildTaskBlock = () => {
   const [AllChildTasks, setAllChildTasks] = useState([]);
@@ -18,7 +17,6 @@ const ChildTaskBlock = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const taskId = queryParams.get("task");
-  console.log(AllChildTasks);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -42,7 +40,6 @@ const ChildTaskBlock = () => {
 
   const addChildTask = async (objTask = null) => {
     if (!objTask) {
-      // Create new parent task
       const formData = new FormData();
       formData.append("email", localStorage.getItem("email"));
       formData.append("uuid", id);
@@ -105,33 +102,6 @@ const ChildTaskBlock = () => {
       }
     };
 
-    // const handleSubmitTask = async (event) => {
-    //   event.preventDefault();
-    //   try {
-    //     const formData = new FormData();
-
-    //     formData.append("email", localStorage.getItem("email"));
-    //     formData.append("uuid", id);
-    //     formData.append("task", taskData.uuid);
-    //     formData.append("name", taskData.name);
-    //     formData.append("task_start_date", formatDate(taskData.startDate));
-    //     formData.append("task_due_date", formatDate(taskData.dueDate));
-    //     formData.append("overview", taskData.overview);
-    //     formData.append("gps_flag", taskData.gps);
-
-    //     const response = await submitTask(formData);
-    //     handleSave(event, weightComment, id);
-    //     if (response) {
-    //       localStorage.setItem("uuid_project", id);
-    //       navigate(`/backend/cms_missions_display/${id}?task=${taskData.uuid}`);
-    //     } else {
-    //       alert("更新失敗，請洽系統管理員。");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // };
-
     return (
       <div className="parent-task-block mb-4 p-3 rounded row align-items-center justify-content-center">
         <Row className="border p-3 col-10">
@@ -176,8 +146,6 @@ const ChildTaskBlock = () => {
                 </div>
               </Form.Group>
             </div>
-
-            <SdgsModal />
           </Col>
           <Col md={{ offset: 3 }}>
             <div className="flex flex-col mt-3 md:flex-row justify-between space-y-3 md:space-y-0 md:space-x-3 ">
@@ -191,6 +159,7 @@ const ChildTaskBlock = () => {
               </button>
             </div>
           </Col>
+          <SdgsModal />
         </Row>
         <Modal
           aria-labelledby="contained-modal-title-vcenter"
@@ -215,7 +184,7 @@ const ChildTaskBlock = () => {
               variant="danger"
               className="rounded-pill w-36"
               id="delete-task"
-              onClick={() => handleDeleteTask(taskData.uuid)}
+              onClick={(e) => handleDeleteTask(e, taskData.uuid)}
             >
               確定
             </Button>
