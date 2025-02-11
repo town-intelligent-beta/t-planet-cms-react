@@ -357,7 +357,7 @@ const ParentTaskBlock = ({ weightComment }) => {
               variant="danger"
               className="rounded-pill w-36"
               id="delete-task"
-              onClick={() => handleDeleteTask(taskData.uuid)}
+              onClick={(e) => handleDeleteTask(e, taskData.uuid)}
             >
               確定
             </Button>

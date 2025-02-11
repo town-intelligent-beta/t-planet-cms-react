@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getWeightMeta } from "../../utils/sdgs/Weight";
 
-const GenerateSdgsModal = ({ weight }) => {
+const GenerateSdgsModal = ({ taskId, weight, handleInputChange }) => {
   const [weights, setWeights] = useState(new Array(27).fill(0));
   const [selectedWeights, setSelectedWeights] = useState(new Array(27).fill(0));
   const [weightData, setWeightData] = useState([]); //for ModalData
@@ -45,7 +45,8 @@ const GenerateSdgsModal = ({ weight }) => {
     if (!weight) {
       setWeights(new Array(27).fill(0));
     } else {
-      setWeights(weight);
+      const weightArray = Object.values(JSON.parse(weight)).map(Number);
+      setWeights(weightArray);
     }
 
     fetchSDGsData();
@@ -61,6 +62,14 @@ const GenerateSdgsModal = ({ weight }) => {
   };
 
   const handleAdd = () => {
+    const sdgsArray = selectedWeights
+      .map((w, index) => (w === 1 ? { sdg: index + 1, des: "" } : null))
+      .filter((item) => item !== null);
+
+    const result = [{ task_parent_id: taskId }, ...sdgsArray];
+
+    handleInputChange("tasks", JSON.stringify(result));
+
     setWeights(selectedWeights);
     handleClose();
   };

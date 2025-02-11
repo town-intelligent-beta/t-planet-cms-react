@@ -1,3 +1,5 @@
+import { formatDate } from "./Transform";
+
 export const getTaskWeight = async (list_task_UUIDs) => {
   const formdata = new FormData();
   formdata.append("uuid", list_task_UUIDs[0]);
@@ -143,5 +145,31 @@ export const submitTaskCover = async (base64Img, uuid) => {
   } catch (error) {
     console.error("Error:", error);
     throw error;
+  }
+};
+
+export const childTaskSubmit = async (formdata, id) => {
+  if (!formdata) {
+    return {};
+  }
+  for (const data of formdata) {
+    const form = new FormData();
+    const type = 3;
+    //const child_task_id = child_task_queue[index_child_task];
+
+    form.append("task", data.uuid);
+    form.append("name", data.name);
+    form.append("task_start_date", formatDate(data.startDate));
+    form.append("task_due_date", formatDate(data.dueDate));
+    form.append("uuid", id);
+    form.append("email", localStorage.getItem("email"));
+    form.append("type", type);
+    form.append("tasks", data.tasks);
+
+    try {
+      await submitTask(form);
+    } catch (e) {
+      console.log(e);
+    }
   }
 };
