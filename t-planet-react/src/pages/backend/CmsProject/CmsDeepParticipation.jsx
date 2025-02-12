@@ -16,7 +16,6 @@ const CmsDeepParticipation = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const taskId = queryParams.get("task");
-  console.log(AllChildTasks);
 
   useEffect(() => {
     const fetchTasks = async () => {
