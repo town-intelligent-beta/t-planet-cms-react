@@ -4,6 +4,20 @@ import { get_task_info } from "./tasks.js";
 import { renderHandlebars } from "./utils/handlebars.js";
 import { get_sorted_tasks, parse_sdgs_items } from "./utils/transformers.js";
 import { isOverflow } from "./utils/widgets.js";
+import { getWeightMeta } from './api/weight.js';
+
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
+
 function createModalDialog(title, content) {
   const modal = document.createElement("div");
   modal.classList.add(`modal`, `fade`);
@@ -75,11 +89,9 @@ export function set_page_info_cms_project_detail(uuid) {
       var obj_a = document.createElement("p");
       obj_a.href = "#";
 
-      // <img class="w-100" src="/static/imgs/SDGs_04.jpg" alt="">
       var obj_img = document.createElement("img");
       obj_img.className = "w-100";
-      obj_img.src =
-        "/static/imgs/SDGs_" + ("0" + (index + 1)).slice(-2) + ".jpg";
+      obj_img.src = allWeights[index].thumbnail;
       obj_img.alt = "";
 
       // Append
@@ -135,16 +147,29 @@ export function set_page_info_cms_project_detail(uuid) {
   var obj_philosophy = document.getElementById("philosophy");
   obj_philosophy.innerHTML = obj_project.philosophy;
 
-  // SDGs
-  // <div class="row align-items-center mt-4">
-  //   <img class="col-3 col-md-1" src="/static/imgs/SDGs_04.jpg" alt="">
-  //   <p class="col-9 col-md-11 col-form-label pr-md-0">支持，SDG 4 良質教育，你的評論內容你的評論內容你的評論內容你的評論內容你的評論內容你的評論內容</p>
-  // </div>
-
   var obj_sdg_container = document.getElementById("project_sdg_container");
 
+  // Project weight descriptio11n
   const sdgs_items = parse_sdgs_items(obj_project);
-  renderHandlebars("project_sdg_container", "tpl-sdgs", { sdgs_items });
+  const sdgsMap = sdgs_items.reduce((map, sdg) => {
+    map[sdg.index] = sdg;
+    return map;
+  }, {});
+
+  const matchedWeights = allWeights
+  .map(weight => {
+    const index = ("0" + weight.id).slice(-2);
+    const sdg = sdgsMap[index];
+    if (sdg) {
+      return {
+        ...weight,
+        value: sdg.value
+      };
+    }
+    return null;
+  })
+  .filter(weight => weight !== null);
+  renderHandlebars("project_sdg_container", "tpl-sdgs", { matchedWeights });
 
   $("#project_sdg_container").on("click", ".read-more", (e) => {
     e.preventDefault();
@@ -226,21 +251,6 @@ export function set_page_info_cms_project_detail(uuid) {
   const sorted_tasks = get_sorted_tasks(tasks);
   sorted_tasks.map((obj_task) => {
     // Create DOM
-    /*
-    <div class="row mt-4 mt-md-5 mb-3">
-      <div class="col-6 col-md-4">
-        <img class="img-fluid" src="/static/imgs/product.jpg" alt="">
-      </div>
-      <div class="col-4 text-center d-none d-md-block">
-        <img src="/static/imgs/qr_code.png" style="height: 188px;" alt="">
-      </div>
-      <div class="col-md-4 mt-4 mt-md-0">
-        <p>活動設計名稱: <span>減塑產品設計</span></p>
-        <p>日期: <span>2022.02.25</span></p>
-        <p class="small">設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念設計理念</p>
-      </div>
-    </div>
-    */
     var obj_div_root = document.createElement("div");
     obj_div_root.className =
       "row align-items-center bg-gray py-2 mt-4 mt-md-5 mb-3 project-detail-item";

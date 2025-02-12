@@ -38,6 +38,12 @@ if (uuid != null) {
 
     document.getElementById("budget").value = obj_project.budget;
     document.getElementById("philosophy").value = obj_project.philosophy;
+
+    if (obj_project.is_budget_revealed === true) {
+      document.getElementById("displayProjectBudget").checked = true;
+    } else {
+      document.getElementById("displayProjectBudget").checked = false;
+    }
   }
 }
 

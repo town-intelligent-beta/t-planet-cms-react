@@ -1,18 +1,40 @@
 import { list_plans, plan_info } from "./plan.js";
+import { getWeightMeta } from './api/weight.js';
+
+const allWeights = [];
+if (allWeights.length === 0) {
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    try {
+      const weightData = await getWeightMeta(WEIGHTS[i]);
+      allWeights.push(...weightData.content.categories);
+    } catch (error) {
+      console.error("Error fetching or processing weight data:", error);
+    }
+  }
+}
 
 export function set_page_info_project_list() {
   const yearFilterSelect = document.getElementById("year_filter");
   var list_project_uuids = [];
   var list_years = [];
+  var list_site_hosters = [];
 
   const selectAllOption = document.createElement("option");
   selectAllOption.value = "all";
   selectAllOption.textContent = "全部";
   yearFilterSelect.appendChild(selectAllOption);
 
-  for (var index = 0; index < SITE_HOSTERS.length; index++) {
+  const params = new URLSearchParams(window.location.search);  
+  if (getLocalStorage("jwt") != "" && getLocalStorage("email") && getLocalStorage("email") != "" && params.has('status') && params.get('status') === 'loggedin') {
+    list_site_hosters.push(getLocalStorage("email"))
+  } else {
+    list_site_hosters = SITE_HOSTERS;
+  }
+
+  for (var index = 0; index < list_site_hosters.length; index++) {
     try {
-      var obj_list_projects = list_plans(SITE_HOSTERS[index], null);
+      var obj_list_projects = list_plans(list_site_hosters[index], null);
+      
       list_project_uuids = list_project_uuids.concat(
         obj_list_projects.projects
       );
@@ -30,7 +52,6 @@ export function set_page_info_project_list() {
       console.log(e);
     }
   }
-
   list_years = Array.from(new Set(list_years)).sort();
 
   list_years.forEach((year) => {
@@ -112,6 +133,10 @@ function filterProjectsByYear(selectedYear, list_project_uuids) {
 }
 
 function generateProjectBlockHTML(obj_project) {
+  let budgetDisplay = obj_project.is_budget_revealed === true 
+    ? `新台幣 ${obj_project.budget} 元` 
+    : "(暫不揭露)";
+
   let str_project_block_in_project_page_innetHTML = `<a class="text-dark" href="/cms_project_detail.html?uuid=${
     obj_project.uuid
   }" style="display: block; text-decoration:none">
@@ -135,9 +160,7 @@ function generateProjectBlockHTML(obj_project) {
         } ~ ${
     obj_project.period ? obj_project.period.split("-")[1] : ""
   }<span></p>
-        <p class="card-text">預算: <span class="pl-2">新台幣 ${
-          obj_project.budget
-        } 元<span></p>
+        <p class="card-text">預算: <span class="pl-2">${budgetDisplay}<span></p>
         <a href="/content.html?uuid=${
           obj_project.uuid
         }" class="stretched-link"></a>
@@ -158,12 +181,15 @@ function generateSDGsHTML(weight) {
   let sdg = "";
   for (let index_segs = 0; index_segs < list_weight.length; index_segs++) {
     if (parseInt(list_weight[index_segs]) === 1) {
-      const index_sdg = ("0" + (index_segs + 1)).slice(-2);
-      sdg += `<div class="col-2 p-2" style="width:13%">
-                <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
-                  <img class="w-100" src="/static/imgs/SDGs_${index_sdg}.jpg" alt="">
-                </a>
-              </div>`;
+      const sdgInfo = allWeights[index_segs];
+      if (sdgInfo) {
+        sdg += `<div class="col-2 p-2" style="width:13%">
+                  <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
+                    <img class="w-100" src
+                    ="${sdgInfo.thumbnail}" alt="">
+                  </a>
+                </div>`;
+      }
     }
   }
   return sdg;
