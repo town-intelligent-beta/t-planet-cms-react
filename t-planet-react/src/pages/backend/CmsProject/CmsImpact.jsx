@@ -1,6 +1,7 @@
 import "../../progress_bar.css";
 import { useState, useEffect } from "react";
-import { plan_info } from "../../../utils/Plan";
+import { plan_info, list_plan_tasks } from "../../../utils/Plan";
+import { getTaskInfo } from "../../../utils/Task";
 import { useParams } from "react-router-dom";
 import SdgsCommand from "../../../utils/sdgs/SdgsComment";
 import {
@@ -16,6 +17,12 @@ const CmsSdgsSetting = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projectWeight, setProjectWeight] = useState("");
   const [weightComment, setWeightComment] = useState("");
+  const [parentTasks, setParentTasks] = useState([]);
+
+  const data = {
+    weightComment,
+    parentTasks,
+  };
 
   useEffect(() => {
     if (id) {
@@ -29,6 +36,19 @@ const CmsSdgsSetting = () => {
       const projectInfo = await plan_info(id);
       setProjectWeight(projectInfo.weight);
       setWeightComment(projectInfo.weight_description);
+
+      const list_parent_task_uuid = await list_plan_tasks(id, 1);
+      if (list_parent_task_uuid.result === false) {
+        return;
+      }
+
+      const tasks = await Promise.all(
+        list_parent_task_uuid.tasks.map((task_uuid) => getTaskInfo(task_uuid))
+      );
+
+      if (tasks.length !== 0) {
+        setParentTasks(tasks);
+      }
     } catch (error) {
       console.error("Error fetching SDGs data:", error);
     } finally {
@@ -75,7 +95,10 @@ const CmsSdgsSetting = () => {
               </div>
             </div>
             <div id="div_parent_task">
-              <ParentTask weightComment={weightComment} />
+              <ParentTask
+                parentTasks={parentTasks}
+                setParentTasks={setParentTasks}
+              />
             </div>
 
             {/* 按鈕 */}
@@ -86,7 +109,7 @@ const CmsSdgsSetting = () => {
                     type="submit"
                     id="btn_cms_plan_preview"
                     className="btn btn-secondary rounded-pill w-full md:w-1/5"
-                    onClick={(event) => handlePreview(event, weightComment, id)}
+                    onClick={(event) => handlePreview(event, data, id)}
                   >
                     檢視
                   </button>
@@ -102,9 +125,7 @@ const CmsSdgsSetting = () => {
                     type="submit"
                     id="btn_ab_project_next"
                     className="btn btn-dark rounded-pill w-full md:w-1/5"
-                    onClick={(event) =>
-                      handleNextPage(event, weightComment, id)
-                    }
+                    onClick={(event) => handleNextPage(event, data, id)}
                   >
                     下一步
                   </button>
@@ -112,7 +133,7 @@ const CmsSdgsSetting = () => {
                     type="submit"
                     id="btn_cms_plan_save"
                     className="btn btn-success rounded-pill w-full md:w-1/5"
-                    onClick={(event) => handleSave(event, weightComment, id)}
+                    onClick={(event) => handleSave(event, data, id)}
                   >
                     儲存草稿
                   </button>

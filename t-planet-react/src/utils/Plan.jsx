@@ -174,7 +174,7 @@ export function createFormData(projectData) {
     );
     formData.append("list_sdg", list_sdg);
   } else if (page === "cms_impact") {
-    formData.append("weight_description", projectData);
+    formData.append("weight_description", projectData.weightComment);
   }
 
   return formData;

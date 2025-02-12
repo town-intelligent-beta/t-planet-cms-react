@@ -139,7 +139,6 @@ const ChildTaskBlock = ({ AllChildTasks, setAllChildTasks }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const taskId = queryParams.get("task");
-  console.log(AllChildTasks);
 
   const addChildTask = async (objTask = null) => {
     if (!objTask) {

@@ -148,6 +148,30 @@ export const submitTaskCover = async (base64Img, uuid) => {
   }
 };
 
+export const parentTaskSubmit = async (formdata, id) => {
+  if (!formdata) {
+    return {};
+  }
+  for (const data of formdata.parentTasks) {
+    const form = new FormData();
+
+    form.append("uuid", id);
+    form.append("task", data.uuid);
+    form.append("email", localStorage.getItem("email"));
+    form.append("name", data.name);
+    form.append("task_start_date", formatDate(data.startDate));
+    form.append("task_due_date", formatDate(data.dueDate));
+    form.append("overview", data.overview);
+    form.append("gps_flag", data.gps);
+
+    try {
+      await submitTask(form);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+};
+
 export const childTaskSubmit = async (formdata, id) => {
   if (!formdata) {
     return {};
