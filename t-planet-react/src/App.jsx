@@ -13,6 +13,7 @@ import CmsSdgsSetting from "./pages/backend/CmsProject/CmsSdgsSetting";
 import CmsImpact from "./pages/backend/CmsProject/CmsImpact";
 import CmsMissionDisplay from "./pages/backend/CmsProject/CmsMissionDisplay";
 import CmsDeepParticipation from "./pages/backend/CmsProject/CmsDeepParticipation";
+import CmsContactPerson from "./pages/backend/CmsProject/CmsContactPerson";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./utils/ProtectRoute";
 
@@ -59,6 +60,10 @@ function App() {
               <Route
                 path="/backend/cms_deep_participation/:id"
                 element={<CmsDeepParticipation />}
+              />
+              <Route
+                path="/backend/cms_contact_person/:id"
+                element={<CmsContactPerson />}
               />
             </Routes>
           </main>

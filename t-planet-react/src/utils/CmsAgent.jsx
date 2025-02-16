@@ -80,6 +80,10 @@ export const handleNextPage = async (event, projectData, id) => {
       return;
     }
 
+    if (page === "cms_contact_person") {
+      navigateTo(`/backend/cms_project_detail/${id}`);
+      return;
+    }
     if (currentIndex < CMS_PROJECT_SUBMIT_PAGES.length - 1) {
       navigateTo(`/backend/${getIndexPage(currentIndex + 1)}/${id}`);
     } else {

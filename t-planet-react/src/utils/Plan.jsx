@@ -175,6 +175,19 @@ export function createFormData(projectData) {
     formData.append("list_sdg", list_sdg);
   } else if (page === "cms_impact") {
     formData.append("weight_description", projectData.weightComment);
+  } else if (page === "cms_contact_person") {
+    formData.append("hoster", projectData.hoster);
+    formData.append("org", projectData.org);
+    formData.append("hoster_email", projectData.email);
+    formData.append("tel", projectData.tel);
+    formData.append(
+      "list_location",
+      JSON.stringify(
+        Object.values(projectData.locations).map((location) =>
+          location ? 1 : 0
+        )
+      )
+    );
   }
 
   return formData;
