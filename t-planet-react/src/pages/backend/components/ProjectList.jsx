@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Form,
-  Modal,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import generateSdgsIcons from "../../../utils/sdgs/SdgsImg";
 import Add from "../../../assets/add-project.svg";
@@ -16,6 +8,7 @@ import Delete from "../../../assets/del-project.svg";
 import Verify from "../../../assets/verify-project.svg";
 import SROI from "../../../assets/menu-sroi.svg";
 import HotZone from "../../../assets/hot-zone.svg";
+import { plan_delete } from "../../../utils/Plan";
 
 const ProjectCard = ({ project, onManage }) => {
   if (!project) return null;
@@ -84,16 +77,16 @@ const ProjectList = ({ filteredProjects }) => {
     setShowModal(true);
   };
 
-  const handleDelete = () => {
-    setShowModal(false);
-    setShowDeleteModal(true);
-  };
-
-  const confirmDelete = () => {
-    // TODO: 實作刪除邏輯
-    console.log(`Deleting project: ${selectedProject?.id}`);
-    setShowDeleteModal(false);
-    setSelectedProject(null);
+  const handleDelete = async () => {
+    const result = await plan_delete(selectedProject?.uuid);
+    if (result.result === true) {
+      setShowDeleteModal(false);
+      alert("刪除成功");
+      window.location.reload();
+    } else {
+      setShowDeleteModal(false);
+      alert("刪除失敗");
+    }
   };
 
   return (
@@ -116,9 +109,6 @@ const ProjectList = ({ filteredProjects }) => {
         }}
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedProject?.name} - 專案管理</Modal.Title>
-        </Modal.Header>
         <Modal.Body>
           <div className="container my-5">
             <div className="row justify-content-center">
@@ -131,7 +121,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Update} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Update}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">更新專案</p>
                         </div>
                       </div>
@@ -148,7 +142,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Add} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Add}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">新增任務</p>
                         </div>
                       </div>
@@ -165,7 +163,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Verify} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Verify}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">驗證專案</p>
                         </div>
                       </div>
@@ -182,7 +184,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={HotZone} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={HotZone}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">熱區圖示</p>
                         </div>
                       </div>
@@ -199,7 +205,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={SROI} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={SROI}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">SROI</p>
                         </div>
                       </div>
@@ -216,16 +226,21 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Delete} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Delete}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">刪除專案</p>
                         </div>
                       </div>
-                      <a
-                        href="#"
+                      <button
                         className="stretched-link"
-                        data-bs-toggle="modal"
-                        data-bs-target={`#projectDeleteModel_${selectedProject?.uuid}`}
-                      ></a>
+                        onClick={() => {
+                          setShowModal(false);
+                          setShowDeleteModal(true);
+                        }}
+                      ></button>
                     </div>
                   </div>
                 </div>
@@ -239,7 +254,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Update} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Update}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">更新專案</p>
                         </div>
                       </div>
@@ -256,7 +275,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Add} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Add}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">新增任務</p>
                         </div>
                       </div>
@@ -273,7 +296,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Verify} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Verify}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">驗證專案</p>
                         </div>
                       </div>
@@ -290,7 +317,11 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={HotZone} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={HotZone}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">熱區圖示</p>
                         </div>
                       </div>
@@ -307,15 +338,21 @@ const ProjectList = ({ filteredProjects }) => {
                     >
                       <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-center">
-                          <img src={Delete} alt="" style={{ width: "50px" }} />
+                          <img
+                            src={Delete}
+                            alt=""
+                            className="mx-auto d-block w-[50px]"
+                          />
                           <p className="mt-2 mb-0">刪除專案</p>
                         </div>
                       </div>
-                      <a
-                        href="#"
-                        onClick={handleDelete}
+                      <button
                         className="stretched-link"
-                      ></a>
+                        onClick={() => {
+                          setShowDeleteModal(true);
+                          setShowModal(false);
+                        }}
+                      ></button>
                     </div>
                   </div>
                 </div>
@@ -333,27 +370,25 @@ const ProjectList = ({ filteredProjects }) => {
           setSelectedProject(null);
         }}
         centered
+        size="sm"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>確認刪除</Modal.Title>
-        </Modal.Header>
         <Modal.Body>
-          <p>確定要刪除「{selectedProject?.name}」專案嗎？此操作無法復原。</p>
+          <p className="text-center text-lg">確定刪除專案?</p>
+          <div className="flex justify-center gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShowDeleteModal(false);
+                setSelectedProject(null);
+              }}
+            >
+              取消
+            </Button>
+            <Button variant="danger" onClick={handleDelete}>
+              確認刪除
+            </Button>
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setShowDeleteModal(false);
-              setSelectedProject(null);
-            }}
-          >
-            取消
-          </Button>
-          <Button variant="danger" onClick={confirmDelete}>
-            確認刪除
-          </Button>
-        </Modal.Footer>
       </Modal>
     </Container>
   );

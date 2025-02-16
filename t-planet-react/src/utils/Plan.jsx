@@ -151,6 +151,33 @@ export async function plan_submit(formdata, uuid = null) {
     return {};
   }
 }
+
+export async function plan_delete(uuid) {
+  const formdata = new FormData();
+  //formdata.append("email", localStorage.getItem("email"));
+  formdata.append("uuid", uuid);
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_HOST_URL_TPLANET}/projects/del_project`,
+      {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    return {};
+  }
+}
 //append_plan_submit_data待新增其他頁面的
 export function createFormData(projectData) {
   const url = window.location.pathname;
