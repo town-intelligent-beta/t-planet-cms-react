@@ -7,6 +7,7 @@ import {
   plan_submit,
 } from "./plan.js";
 import { child_task_submit, task_submit } from "./tasks.js";
+import { getWeightMeta } from './api/weight.js';
 
 const cms_project_submit_pages = [
   "cms_plan_info.html",
@@ -16,9 +17,10 @@ const cms_project_submit_pages = [
 ];
 const cms_support_format = [
   "cms_missions_display.html",
-  "cms_support_form.html",
   "cms_deep_participation.html",
 ];
+
+const allWeights = [];
 
 $(function () {
   $("#add_c_project").on("click", function (event) {
@@ -228,7 +230,7 @@ $(function () {
           const obj_input = {"uuid_project":uuid,
             "uuid_task":list_parent_tasks[index_task],
             "name":parent_task_name,
-            "description": description, // "社會影響力足跡: " + parent_task_name,
+            "description": description,
             "attribute":attribute};
 
           mintNFT(obj_input);
@@ -239,7 +241,6 @@ $(function () {
     }
 
     if (
-      page == "cms_support_form.html" ||
       page == "cms_deep_participation.html"
     ) {
       if (false == child_task_submit(page)) {
@@ -414,41 +415,6 @@ export function cms_plan_add_parent_tasks(uuid_task) {
   );
 }
 
-// btn_cms_plan_add_form_task
-$(function () {
-  $("#btn_cms_plan_add_form_task").on("click", function (e) {
-    e.preventDefault(); // To prevent following the link (optional)
-
-    // Path
-    var path = window.location.pathname;
-    var page = path.split("/").pop();
-    var url = new URL(window.location.href);
-    // Params
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var uuid = urlParams.get("uuid");
-    var task = urlParams.get("task");
-
-    // Submit
-    var uuid_project = null;
-    if (getLocalStorage("uuid_project") != "") {
-      uuid_project = getLocalStorage("uuid_project");
-    }
-
-    var form = new FormData();
-    var obj_project = plan_submit(form, uuid_project);
-    setLocalStorage("uuid_project", obj_project.uuid);
-
-    // Redirect to add parent window
-    window.location.replace(
-      "/backend/cms_support_form.html?uuid=" +
-        obj_project.uuid +
-        "&task=" +
-        task
-    );
-  });
-});
-
 // btn_cms_plan_add_deep_task
 $(function () {
   $("#btn_cms_plan_add_deep_task").on("click", function (e) {
@@ -529,62 +495,29 @@ $(function () {
     // Show widget
     var obj_sdgs_container = document.getElementById("sdgs_container");
 
-    if (page == "cms_support_form.html") {
-      // Create SDGs element - row
-      // <div class="row align-items-center justify-content-center mt-4">
-      var obj_div_row = document.createElement("div");
-      obj_div_row.className =
-        "row align-items-center justify-content-center mt-4";
-
-      // Create image
-      // <img class="col-3 col-md-1" src="/static/imgs/SDGs_04.jpg" alt="">
-      var obj_img = document.createElement("img");
-      obj_img.className = "col-3 col-md-1";
-      obj_img.src =
-        "/static/imgs/SDGs_" + getLocalStorage("target_sdgs") + ".jpg";
-      obj_img.setAttribute("width", "49px");
-      obj_img.setAttribute("height", "49px");
-
-      // Create label
-      // <label class="col-3 col-md-1 col-form-label pr-0">支持，</label>
-      var obj_label = document.createElement("label");
-      obj_label.className = "col-3 col-md-1 col-form-label pr-0";
-      obj_label.innerHTML = "支持，";
-
-      // Create div_child
-      // <div class="mt-3 mt-md-0 col-md-10 pl-md-0">
-      var obj_div_child = document.createElement("div");
-      obj_div_child.className = "mt-3 mt-md-0 col-md-10 pl-md-0";
-
-      // Create input
-      // <input type="text" class="form-control" placeholder="SDG 15 陸地生態保育，請留下您的支持評論。">
-      var obj_input = document.createElement("input");
-      obj_input.id = "target_sdgs_" + getLocalStorage("target_sdgs");
-      obj_input.type = "text";
-      obj_input.className = "form-control";
-      obj_input.placeholder = "請留下您的支持評論。";
-      obj_input.disabled = true;
-
-      // Append
-      obj_div_child.append(obj_input);
-
-      obj_div_row.append(obj_img);
-      obj_div_row.append(obj_label);
-      obj_div_row.append(obj_div_child);
-      obj_sdgs_container.append(obj_div_row);
-    }
-
     // Finish
     $("#SDGsModal").modal("hide");
   });
 });
 
-export function set_page_info_cms_agent(uuid) {
+// export function set_page_info_cms_agent(uuid) {
+export const set_page_info_cms_agent = async (uuid) => {
   /* Create DOM */
   const list_project_obj = list_plans(getLocalStorage("email"));
 
   if (list_project_obj == undefined) {
     return;
+  }
+
+  if (allWeights.length === 0) {
+    for (let i = 0; i < WEIGHTS.length; i++) {
+      try {
+        const weightData = await getWeightMeta(WEIGHTS[i]);
+        allWeights.push(...weightData.content.categories);
+      } catch (error) {
+        console.error("Error fetching or processing weight data:", error);
+      }
+    }
   }
 
   const yearFilterSelect = document.getElementById("year_filter");
@@ -750,7 +683,7 @@ export function set_page_info_cms_agent(uuid) {
       const index_sdg = ("0" + (index + 1)).slice(-2);
       $("<img/>", {
         class: "w-100",
-        src: `/static/imgs/SDGs_${index_sdg}.jpg`,
+        src: allWeights[index].thumbnail,
         alt: "",
       }).appendTo(container);
 

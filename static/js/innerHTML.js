@@ -265,7 +265,7 @@ const str_parent_task_block = `
           <div class="form-row">
             <div class="form-group col-12 mt-3 mt-md-0">
               <label for="inputEvent">活動設計名稱</label>
-              <input id="parent_task_name_UUID_TASK" type="text" class="form-control" id="inputEvent" placeholder="">
+              <input id="parent_task_name_UUID_TASK" type="text" class="form-control" id="inputEvent" placeholder="" maxlength="30">
             </div>
             <div class="form-group col-6">
               <label for="inputDatePicker1">開始日期</label>
@@ -337,42 +337,87 @@ const str_parent_task_block = `
   </div>
 </div> `
 
-const str_navbar = `    <nav class="navbar navbar-expand-xl navbar-light bg-navbar fz-18">
-<div name="admin_dropdown" class="container-fluid">
-  <a id="index_logo" class="navbar-brand d-none d-md-block my-md-1" href="/index.html">
-    <img class="logo-pc" src="/static/imgs/2nd-home.svg" alt="">
-  </a>
-  <a id="index_logo" class="navbar-brand d-md-none" href="/index.html">
-    <img class="logo-mobile" src="/static/imgs/2nd-home.svg" alt="">
-  </a>
-  <button class="navbar-toggler mr-md-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+const str_navbar = `
+<nav class="navbar navbar-expand-xl navbar-light bg-navbar fz-18">
+  <div name="admin_dropdown" class="container-fluid">
+    <a id="index_logo" class="navbar-brand d-none d-md-block my-md-1" href="/index.html">
+      <img class="logo-pc" src="/static/imgs/2nd-home.svg" alt="">
+    </a>
+    <a id="index_logo" class="navbar-brand d-md-none" href="/index.html">
+      <img class="logo-mobile" src="/static/imgs/2nd-home.svg" alt="">
+    </a>
+    <button class="navbar-toggler mr-md-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li id="index" class="nav-item">
-        <a id="about_nav" class="nav-link fw-bold" href="/index.html">關於 Second Home </a>
-      </li>
-      <li id="kpi" class="nav-item">
-        <a class="nav-link fw-bold" href="/kpi.html">永續專案</a>
-      </li>
-      <li id="solution" class="nav-item" style="display:none">
-        <a class="nav-link fw-bold" href="/solution.html">解決方案</a>
-      </li>
-      <li id="news_list" class="nav-item">
-        <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
-      </li>
-      <li id="contact_us" class="nav-item" style="display:none">
-        <a class="nav-link fw-bold" href="/contact_us.html">聯絡我們</a>
-      </li>
-      <li id="account_status" class="nav-item d-flex align-items-center">
-        <img class="align-top" src="/static/imgs/user.svg" alt=""><a class="nav-link fw-bold px-0" href="/tplanet_signin.html">登入</a><span class="nav-link px-1 align-middle" style="margin-bottom:2px">/</span><a class="nav-link fw-bold px-0" href="/tplanet_signup.html">註冊</a>
-      </li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto ms-xl-auto">
+        <li id="index" class="nav-item">
+          <a id="about_nav" class="nav-link fw-bold" href="/index.html">關於 Second Home </a>
+        </li>
+        <li id="kpi" class="nav-item">
+          <a class="nav-link fw-bold" href="/kpi.html">永續專案</a>
+        </li>
+        <li id="news_list" class="nav-item">
+          <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
+        </li>
+        <li id="contact_us" class="nav-item" style="display:none">
+          <a class="nav-link fw-bold" href="/contact_us.html">聯絡我們</a>
+        </li>
+        <li id="account_status" class="nav-item d-flex align-items-center">
+          <img class="align-top" src="/static/imgs/user.svg" alt="">
+          <a class="nav-link fw-bold px-0" href="/tplanet_signin.html">登入</a>
+          <span class="nav-link px-1 align-middle" style="margin-bottom:2px">/</span>
+          <a class="nav-link fw-bold px-0" href="/tplanet_signup.html">註冊</a>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
-</nav>`
+</nav>`;
+
+const str_navbar_loggedin = ` 
+<nav class="navbar navbar-expand-xl navbar-light bg-navbar fz-18">
+  <div name="admin_dropdown" class="container-fluid">
+    <a id="index_logo" class="navbar-brand d-none d-md-block my-md-1" href="/index.html">
+      <img class="logo-pc" src="/static/imgs/2nd-home.svg" alt="">
+    </a>
+    <a id="index_logo" class="navbar-brand d-md-none" href="/index.html">
+      <img class="logo-mobile" src="/static/imgs/2nd-home.svg" alt="">
+    </a>
+    <button class="navbar-toggler mr-md-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto ms-xl-auto">
+        <li id="index" class="nav-item">
+          <a id="about_nav" class="nav-link fw-bold" href="/index.html">關於 Second Home </a>
+        </li>
+        <li id="kpi" class="nav-item dropdown">
+          <a class="nav-link fw-bold dropdown-toggle" href="#" id="kpiDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            永續專案
+          </a>
+          <div class="dropdown-menu" aria-labelledby="kpiDropdown">
+            <a class="dropdown-item" href="/kpi.html">跨區跨域</a>
+            <a class="dropdown-item" href="/kpi.html?status=loggedin">公司個體</a>
+          </div>
+        </li>
+        <li id="news_list" class="nav-item">
+          <a class="nav-link fw-bold" href="/news_list.html">最新消息</a>
+        </li>
+        <li id="contact_us" class="nav-item" style="display:none">
+          <a class="nav-link fw-bold" href="/contact_us.html">聯絡我們</a>
+        </li>
+        <li id="account_status" class="nav-item d-flex align-items-center">
+          <img class="align-top" src="/static/imgs/user.svg" alt="">
+          <a class="nav-link fw-bold px-0" href="/tplanet_signin.html">登入</a>
+          <span class="nav-link px-1 align-middle" style="margin-bottom:2px">/</span>
+          <a class="nav-link fw-bold px-0" href="/tplanet_signup.html">註冊</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>`;
 
 const str_footer = `    <footer class="bg-footer">
 <div class="container-fluid">
@@ -381,7 +426,7 @@ const str_footer = `    <footer class="bg-footer">
       <div class="h-100 d-flex align-items-center justify-content-center justify-content-lg-start mt-2 mt-lg-0 fz-18">
         <p class="mr-3 mb-0"><a id="about_fot1" href="/index.html" class="text-dark nav-link px-0 fw-bold">關於 Second Home</a></p>
         <p class="mr-3 mb-0"><a href="/kpi.html" class="text-dark nav-link px-0 fw-bold">永續專案</a></p>
-        <p id="solution_fot1" style="display:none" class="mr-3 mb-0"><a href="/solution.html" class="text-dark nav-link px-0 fw-bold">解決方案</a></p>
+        <!-- <p id="solution_fot1" style="display:none" class="mr-3 mb-0"><a href="/solution.html" class="text-dark nav-link px-0 fw-bold">解決方案</a></p> -->
         <p class="mr-3 mb-0"><a href="/news_list.html" class="text-dark nav-link px-0 fw-bold">最新消息</a></p>
         <p id="contact_us_fot1" style="display:none" class="mr-3 mb-0"><a href="/contact_us.html" class="text-dark nav-link px-0 fw-bold">聯絡我們</a></p>
         <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="https://privacy.townway.com.tw/">隱私權條款</a></p>
@@ -412,7 +457,7 @@ const str_footer = `    <footer class="bg-footer">
     <div class="d-flex flex-wrap justify-content-center d-lg-none fz-18">
       <p class="mr-3 mb-0"><a id="about_fot2" class="text-dark nav-link px-0 fw-bold" href="/index.html">關於 Second Home</a></p>
       <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/kpi.html">永續專案</a></p>
-      <p id="solution_fot2" style="display:none" class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/solution.html">解決方案</a></p>
+      <!-- <p id="solution_fot2" style="display:none" class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/solution.html">解決方案</a></p> -->
       <p class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/news_list.html">最新消息</a></p>
       <p id="contact_us_fot2" style="display:none" class="mr-3 mb-0"><a class="text-dark nav-link px-0 fw-bold" href="/contact_us.html">聯絡我們</a></p>
       <p class="mb-0"><a class="text-dark nav-link px-0 fw-bold" href="https://privacy.townway.com.tw/">隱私權條款</a></p>
@@ -441,31 +486,6 @@ const str_project_block_in_project_page = `<a class="text-dark" href="/cms_proje
         <p class="card-text">預算: <span class="pl-2">新台幣 BUDGET 元<span></p>
         <a href="/content.html?uuid=PROJECT_UUID" class="stretched-link"></a>
         <div class="row mt-3">
-
-        <!--
-          <div class="pl-2">
-            <a href="#" class="stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%" src="/static/imgs/SDGs_01.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%" src="/static/imgs/SDGs_04.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_06.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_09.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_11.jpg" alt="">
-            </a>
-            <a href="#" class="pl-1 stretched-link" style="position: relative; text-decoration: none;">
-              <img style="width:13%"  src="/static/imgs/SDGs_13.jpg" alt="">
-            </a>
-
-
-          </div>
-          -->
           SDGS_LIST
         </div>
       </div>

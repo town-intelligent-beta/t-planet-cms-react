@@ -4,16 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/progress_bar.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css">
+  </head>
+
+  <body>
+      <!-- navbar -->
+      <div id="navbar"></div>
+      <!-- content -->
+      <section>
+        <div class="container my-5">
+          <div class="table-responsive pt-5">
+            <table class="table table-hover">
+              <thead>
+                <tr class="bg-2ndhome">
+                  <th scope="col" class="align-middle text-center table-width-l">活動設計名稱</th>
+                  <th scope="col" class="align-middle text-center table-width-m">驗證狀態</th>
+                  <th scope="col" class="align-middle text-center table-width-m">日期</th>
+                </tr>
+              </thead>
+              <tbody id="parent_tasks">
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+      <!-- footer -->
+      <div id="footer"></div>
+    <!-- </div> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/progress_bar.css">
     <script src="/static/js/config.js"></script>
     <script src="/static/js/innerHTML.js"></script>
     <script src="/static/js/localStorage.js"></script>
@@ -25,54 +54,6 @@
     <script type="module" src="/static/js/cms_agent.js"></script>
     <script type="module" src="/static/js/set_page_info.js"></script>
     <script type="module" src="/static/js/init.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css">
     <script type="module" src="/static/js/render.js"></script>
-  </head>
-
-  <body>
-    <!-- <div class="d-flex flex-column vh-100"> -->
-      <!-- navbar -->
-      <div id="navbar"></div>
-      <!-- content -->
-      <section>
-        <div class="container my-5">
-          <div class="table-responsive pt-5">
-            <table class="table table-hover">
-              <thead>
-                <tr class="bg-2ndhome">
-                  <!-- <th scope="col" class="align-middle text-center table-width-xs"></th> -->
-                  <th scope="col" class="align-middle text-center table-width-l">活動設計名稱</th>
-                  <th scope="col" class="align-middle text-center table-width-m">驗證狀態</th>
-                  <th scope="col" class="align-middle text-center table-width-m">日期</th>
-                </tr>
-              </thead>
-              <tbody id="parent_tasks">
-               <!--  <tr id="beta_parent_tasks1">
-                  <td><img style="float:left; margin-right:30px;" src="/static/imgs/drag-icon.svg" alt=""></img><span style="display:inline-block; text-align:center;">name</span></td>
-                  <td class="text-center"><button class="btn btn-verify btn-sm rounded-pill">驗證</button></td>
-                  <td class="text-center text-verify-date">05/01/2023</td>
-                </tr>
-                <tr id="beta_parent_tasks2">
-
-                  <td class="text-center">name</td>
-                  <td class="text-center"><button class="btn btn-light btn-sm rounded-pill">驗證按鍵</button></td>
-                  <td class="text-center">05/01/2023</td>
-                </tr>
-                <tr id="beta_parent_tasks3">
-
-                  <td class="text-center">name</td>
-                  <td class="text-center"><button class="btn btn-light btn-sm rounded-pill">驗證按鍵</button></td>
-                  <td class="text-center">05/01/2023</td>
-                </tr> -->
-
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-      </section>
-      <!-- footer -->
-      <div id="footer"></div>
-    <!-- </div> -->
   </body>
 </html>

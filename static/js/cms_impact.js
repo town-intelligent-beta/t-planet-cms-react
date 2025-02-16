@@ -1,6 +1,8 @@
 import { list_plan_tasks, plan_info } from "./plan.js";
 import { task_submit, get_task_info, onclickuploadTaskCover } from "./tasks.js";
 import { get_sorted_tasks } from "./utils/transformers.js";
+import { getWeightMeta } from './api/weight.js';
+
 export function add_parent_task_block(obj_task = null) {
   // Params
   var queryString = window.location.search;
@@ -107,46 +109,48 @@ export function add_parent_task_block(obj_task = null) {
   ].map((item) => `#${item.id}`);
   register_ckeditor(textareaIds);
 }
-function add_sdgs_comment(index, des) {
-  // Format index
+
+export const add_sdgs_comment = async (index, des) => {
   var index = ("0" + (index + 1)).slice(-2);
-  // Get textedit
   if (typeof des != "undefined") {
     document.getElementById("sdg_" + index + "_des").innerText = des;
   } else {
     document.getElementById("sdg_" + index + "_des").innerText = "";
   }
-}
-function add_sdgs_input(index) {
-  // Format index
-  var index = ("0" + (index + 1)).slice(-2);
-  // Get container
-  var obj_sdgs_container = document.getElementById("sdgs_container");
-  // Create SDGs element
-  // <div class="d-flex mt-2">
-  var obj_div = document.createElement("div");
-  obj_div.className = "d-flex mt-2";
-  // Create image
-  // <img src="/static/imgs/SDGs_11.jpg" alt="" style="width:60px">
-  var img = document.createElement("img");
-  img.src = "/static/imgs/SDGs_" + index + ".jpg";
-  img.setAttribute("width", "60px");
-  img.setAttribute("height", "60px");
-  // Create input
-  // <textarea class="form-control ml-3" placeholder="填寫符合此指標的執行方式" style="resize: none"></textarea>
-  var obj_textarea = document.createElement("textarea");
-  obj_textarea.id = "sdg_" + index + "_des";
-  obj_textarea.className = "form-control ml-3";
-  obj_textarea.placeholder = "填寫符合此指標的執行方式";
-  obj_textarea.style = "resize: none; height: 62px;";
-  // Append
-  obj_div.appendChild(img);
-  obj_div.appendChild(obj_textarea);
-  obj_sdgs_container.append(obj_div);
+};
+
+async function add_sdgs_inputs(index, allWeights) {
+  try {
+    const obj_sdgs_container = document.getElementById("sdgs_container");
+
+    allWeights.forEach((category, idx) => {
+      if (parseInt(index[idx]) === 1) {
+        const obj_div = document.createElement("div");
+        obj_div.className = "d-flex mt-2";
+
+        const img = document.createElement("img");
+        img.src = category.thumbnail;
+        img.setAttribute("width", "60px");
+        img.setAttribute("height", "60px");
+
+        const obj_textarea = document.createElement("textarea");
+        const paddedIndex = ("0" + (idx+1)).slice(-2);
+        obj_textarea.id = `sdg_${paddedIndex}_des`;
+        obj_textarea.className = "form-control ml-3";
+        obj_textarea.placeholder = "填寫符合此指標的執行方式";
+        obj_textarea.style = "resize: none; height: 62px;";
+
+        obj_div.appendChild(img);
+        obj_div.appendChild(obj_textarea);
+        obj_sdgs_container.append(obj_div);
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching or processing weight data:", error);
+  }
 }
 
-// export function set_page_info_cms_impact(uuid) {
-  export const set_page_info_cms_impact = async (uuid) => {
+export const set_page_info_cms_impact = async (uuid) => {
   var obj_plan = plan_info(uuid);
   var list_sdgs_input = [];
   try {
@@ -158,25 +162,29 @@ function add_sdgs_input(index) {
     obj_sdgs_comment = JSON.parse(obj_plan.weight_description);
   } catch (e) {}
 
-  // 提取本地存儲中的 ai_sdgs 並解析為 JSON
   var ai_sdgs = JSON.parse(localStorage.getItem('ai_sdgs') || "{}");
-  console.log(JSON.stringify(ai_sdgs));
+  const allWeights = [];
+
+  for (let i = 0; i < WEIGHTS.length; i++) {
+    const weightData = await getWeightMeta(WEIGHTS[i]);
+    allWeights.push(...weightData.content.categories);
+  }
+
+  await add_sdgs_inputs(list_sdgs_input, allWeights);
 
   for (var index = 0; index < list_sdgs_input.length; index++) {
     if (parseInt(list_sdgs_input[index]) == 1) {
-      add_sdgs_input(index);
       if (obj_sdgs_comment === null || obj_sdgs_comment[index.toString()] == null || obj_sdgs_comment[index.toString()] == "" || obj_sdgs_comment[index.toString()] == undefined){
         const ai_sdgs_index = (index + 1).toString();
         if (ai_sdgs[ai_sdgs_index]) {
-          add_sdgs_comment(index, ai_sdgs[ai_sdgs_index]);
+          await add_sdgs_comment(index, ai_sdgs[ai_sdgs_index]);
         }
       } else {
-        add_sdgs_comment(index, obj_sdgs_comment[index.toString()]);
+        await add_sdgs_comment(index, obj_sdgs_comment[index.toString()]);
       }
     }
   }
 
-  // Add parent task block list
   var list_parent_task_uuid = list_plan_tasks(uuid, 1);
   if (list_parent_task_uuid.result == false) {
     return;
@@ -189,13 +197,19 @@ function add_sdgs_input(index) {
   sorted_tasks.map((task) => {
     add_parent_task_block(task);
   });
+
+
+  const textareaIds = [
+    ...document.querySelectorAll("textarea[id^='sdg_']"),
+    ...document.querySelectorAll("textarea[id^='parent_task_overview_']"),
+  ].map((item) => `#${item.id}`);
+  register_ckeditor(textareaIds);
+
 }
 
-// Add_parent_tasks
 $(function () {
   $("#add_parent_tasks").on("click", function (e) {
-    e.preventDefault(); // To prevent following the link (optional)
-    // add_blank_parent_task_block();
+    e.preventDefault();
     add_parent_task_block();
   });
 });
