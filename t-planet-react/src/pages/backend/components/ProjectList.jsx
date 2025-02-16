@@ -77,6 +77,7 @@ const ProjectList = ({ filteredProjects }) => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  console.log(filteredProjects);
 
   const handleManage = (project) => {
     setSelectedProject(project);
