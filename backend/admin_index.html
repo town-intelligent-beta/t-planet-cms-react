@@ -4,37 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/style.css" >
-    <link rel="stylesheet" href="/static/css/loading.css" >
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/loading.css">
     <link rel="stylesheet" href="/static/css/kpi.css">
-    <script src="/static/js/config.js"></script>
-    <script src="/static/js/innerHTML.js"></script>
-    <script src="/static/js/localStorage.js"></script>
-    <script src="/static/js/file_handler.js"></script>
-    <script src="/static/js/accounts.js"></script>
-    <script src="/static/js/auth.js"></script>
-    <script src="/static/js/permission.js"></script>
-    <script type="module" src="/static/js/init.js"></script>
-    <script src="/static/js/core/upload_adapter.js"></script>
-    <script src="/static/js/core/editor.js"></script>
-    <script type="module">
-      import { mockup_new, banner_image_read, t_planet_img_read, csr_img_read, sdg_img_read, twins_img_read } from '/static/js/admin_index.js'
-      window.mockup_new = mockup_new;
-      window.banner_image_read = banner_image_read;
-      window.t_planet_img_read = t_planet_img_read;
-      window.csr_img_read = csr_img_read;
-      window.sdg_img_read = sdg_img_read;
-      window.twins_img_read = twins_img_read;
-    </script>
   </head>
 
   <body>
@@ -126,11 +101,9 @@
           <div class="row mt-4 mb-5 pb-3">
             <div class="col-12">
               <div class="d-flex justify-content-center">
- <!--                <a id="add"class="btn btn-primary d-none d-md-block mr-4" style="width: 15%">新增</a> -->
                 <a id="store" href="#" type="button" class="btn btn-success d-none d-md-block rounded-pill" style="width: 150px">儲存</a>
               </div>
               <div class="d-md-none">
-<!--		      <a id="add"  class="btn btn-primary btn-block">新增</a> -->
                 <a id="store" href="#" type="button" class="btn btn-success btn-block rounded-pill mt-3">儲存</a>
               </div>
             </div>
@@ -140,5 +113,31 @@
     </section>
     <!-- footer -->
     <div id="footer"></div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/innerHTML.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/file_handler.js"></script>
+    <script src="/static/js/accounts.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/permission.js"></script>
+    <script type="module" src="/static/js/init.js"></script>
+    <script src="/static/js/core/upload_adapter.js"></script>
+    <script src="/static/js/core/editor.js"></script>
+    <script type="module">
+      import { mockup_new, banner_image_read, t_planet_img_read, csr_img_read, sdg_img_read, twins_img_read } from '/static/js/admin_index.js'
+      window.mockup_new = mockup_new;
+      window.banner_image_read = banner_image_read;
+      window.t_planet_img_read = t_planet_img_read;
+      window.csr_img_read = csr_img_read;
+      window.sdg_img_read = sdg_img_read;
+      window.twins_img_read = twins_img_read;
+    </script>
   </body>
 </html>
