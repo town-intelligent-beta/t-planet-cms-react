@@ -153,7 +153,9 @@ export default function Str_Nav() {
             {isAuthenticated ? (
               <NavDropdown title="永續專案" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/kpi">跨區跨域</NavDropdown.Item>
-                <NavDropdown.Item href="/kpi">公司個體</NavDropdown.Item>
+                <NavDropdown.Item href="/kpi?status=loggedin">
+                  公司個體
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <Nav.Item id="kpi">

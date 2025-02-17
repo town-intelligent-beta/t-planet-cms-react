@@ -4,6 +4,7 @@ import KpiList from "./components/KpiList";
 import Chart from "./components/Chart";
 import { useState, useEffect } from "react";
 import { list_plans, plan_info } from "../../utils/Plan";
+import { SITE_HOSTERS } from "../../utils/Config";
 
 const KPI = () => {
   const [objListProjects, setObjListProjects] = useState([]);
@@ -11,13 +12,6 @@ const KPI = () => {
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all");
-  //const WEIGHTS = ["SDGs", "CommunityDevelopment", "FiveWaysofLife"];
-  const SITE_HOSTERS = [
-    "forus999@gmail.com",
-    "secondhome2023.1@gmail.com",
-    "mickeypeng@tpwl.org",
-    "400@gmail.com",
-  ];
 
   // 初始化載入權重及專案
   const fetchProjects = async () => {

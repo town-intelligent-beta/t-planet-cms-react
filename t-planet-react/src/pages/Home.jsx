@@ -4,14 +4,9 @@ import TPlanetMap from "../assets/tplanet_map.png";
 import CSR from "../assets/2nd-home-csr.png";
 import SDGs from "../assets/sdgs.png";
 import DigitalTwin from "../assets/digital-twin.png";
+import { SITE_HOSTERS } from "../utils/Config";
 
 const Home = () => {
-  const SITE_HOSTERS = [
-    "forus999@gmail.com",
-    "secondhome2023.1@gmail.com",
-    "mickeypeng@tpwl.org",
-    "400@gmail.com",
-  ];
   const [data, setData] = useState({
     "banner-image": ProjectImg,
     "t-planet-img": TPlanetMap,
