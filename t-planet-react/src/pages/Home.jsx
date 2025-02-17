@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import ProjectImg from "../assets/project_img.jpg";
 import TPlanetMap from "../assets/tplanet_map.png";
 import CSR from "../assets/2nd-home-csr.png";
@@ -5,24 +6,76 @@ import SDGs from "../assets/sdgs.png";
 import DigitalTwin from "../assets/digital-twin.png";
 
 const Home = () => {
+  const SITE_HOSTERS = [
+    "forus999@gmail.com",
+    "secondhome2023.1@gmail.com",
+    "mickeypeng@tpwl.org",
+    "400@gmail.com",
+  ];
+  const [data, setData] = useState({
+    "banner-image": ProjectImg,
+    "t-planet-img": TPlanetMap,
+    "csr-img": CSR,
+    "sdg-img": SDGs,
+    "twins-img": DigitalTwin,
+    "t-planet-description": "",
+    "csr-description": "",
+    "sdg-description": "",
+    "twins-description": "",
+  });
+
+  useEffect(() => {
+    const mockup_get = async () => {
+      const form = new FormData();
+      form.append("email", SITE_HOSTERS[0]);
+
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_HOST_URL_TPLANET}/mockup/get`,
+          {
+            method: "POST",
+            body: form,
+          }
+        );
+
+        const obj = await response.json();
+        if (obj.result !== false && Object.keys(obj.description).length > 0) {
+          setData(obj.description);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    mockup_get();
+  }, []);
+
   return (
-    <section className="flex-grow">
+    <section className="flex-grow mt-5">
       <div className="container mx-auto px-0">
         <div className="text-center">
           <img
             className="img-fluid"
             id="Tbanner_image"
-            src={ProjectImg}
+            src={`${import.meta.env.VITE_HOST_URL_TPLANET}${
+              data["banner-image"]
+            }`}
             style={{ maxHeight: "100%", maxWidth: "100%" }}
             alt="Project Banner"
           />
         </div>
       </div>
       <div className="container mx-auto">
-        <div className="bg-light py-4">
-          <div className="flex justify-center">
-            <div className="w-full md:w-10/12">
-              <p id="textarea1" className="px-3 md:px-0"></p>
+        <div className=" py-4">
+          <div className="flex justify-center bg-light py-6">
+            <div className="col-md-10">
+              <p
+                id="textarea1"
+                className="px-3 md:px-0 text-xl"
+                dangerouslySetInnerHTML={{
+                  __html: data["t-planet-description"],
+                }}
+              ></p>
             </div>
           </div>
         </div>
@@ -33,7 +86,9 @@ const Home = () => {
                 <img
                   id="t_planet_img"
                   className="img-fluid"
-                  src={TPlanetMap}
+                  src={`${import.meta.env.VITE_HOST_URL_TPLANET}${
+                    data["t-planet-img"]
+                  }`}
                   alt="T Planet Map"
                 />
               </div>
@@ -50,14 +105,22 @@ const Home = () => {
                   <div className="w-full md:w-5/12 text-center">
                     <img
                       id="csr_img"
-                      src={CSR}
+                      src={`${import.meta.env.VITE_HOST_URL_TPLANET}${
+                        data["csr-img"]
+                      }`}
                       className="img-fluid p-3 md:p-0"
                       alt="CSR"
                     />
                   </div>
                   <div className="w-full md:w-7/12">
                     <div className="card-body">
-                      <p id="textarea2" className="card-text"></p>
+                      <p
+                        id="textarea2"
+                        className="card-text text-xl"
+                        dangerouslySetInnerHTML={{
+                          __html: data["csr-description"],
+                        }}
+                      ></p>
                     </div>
                   </div>
                 </div>
@@ -71,14 +134,22 @@ const Home = () => {
                   <div className="w-full md:w-5/12 text-center">
                     <img
                       id="sdg_img"
-                      src={SDGs}
+                      src={`${import.meta.env.VITE_HOST_URL_TPLANET}${
+                        data["sdg-img"]
+                      }`}
                       className="img-fluid p-3 md:p-0"
                       alt="SDGs"
                     />
                   </div>
                   <div className="w-full md:w-7/12">
                     <div className="card-body">
-                      <p id="textarea3" className="card-text"></p>
+                      <p
+                        id="textarea3"
+                        className="card-text text-xl"
+                        dangerouslySetInnerHTML={{
+                          __html: data["sdg-description"],
+                        }}
+                      ></p>
                     </div>
                   </div>
                 </div>
@@ -92,14 +163,22 @@ const Home = () => {
                   <div className="w-full md:w-5/12 text-center">
                     <img
                       id="twins_img"
-                      src={DigitalTwin}
+                      src={`${import.meta.env.VITE_HOST_URL_TPLANET}${
+                        data["twins-img"]
+                      }`}
                       className="img-fluid p-3 md:p-0"
                       alt="Digital Twin"
                     />
                   </div>
                   <div className="w-full md:w-7/12">
                     <div className="card-body">
-                      <p id="textarea4" className="card-text"></p>
+                      <p
+                        id="textarea4"
+                        className="card-text text-xl"
+                        dangerouslySetInnerHTML={{
+                          __html: data["twins-description"],
+                        }}
+                      ></p>
                     </div>
                   </div>
                 </div>
