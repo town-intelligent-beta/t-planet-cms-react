@@ -105,7 +105,7 @@ const createSdgImages = () => {
   const images = [];
   for (var index = 1; index <= 17; index++) {
     images.push({
-      src: `/static/imgs/SDGs-${index}.png`,
+      src: `/static/imgs/weight/${index}.svg`,
       height: 25,
       width: 25,
     });
@@ -117,27 +117,27 @@ export const sdgImages = createSdgImages();
 
 export const fiveImges = [
   {
-    src: `/static/imgs/morality.png`,
+    src: `/static/imgs/weight/morality.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/intelligence.png`,
+    src: `/static/imgs/weight/intelligence.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/physique.png`,
+    src: `/static/imgs/weight/physique.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/social-skills.png`,
+    src: `/static/imgs/weight/social-skills.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/aesthetics.png`,
+    src: `/static/imgs/weight/aesthetics.svg`,
     height: 25,
     width: 25,
   },
@@ -145,27 +145,27 @@ export const fiveImges = [
 
 export const commonImages = [
   {
-    src: `/static/imgs/people.png`,
+    src: `/static/imgs/weight/people.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/culture.png`,
+    src: `/static/imgs/weight/culture.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/place.png`,
+    src: `/static/imgs/weight/place.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/specialty.png`,
+    src: `/static/imgs/weight/specialty.svg`,
     height: 25,
     width: 25,
   },
   {
-    src: `/static/imgs/landscape.png`,
+    src: `/static/imgs/weight/landscape.svg`,
     height: 25,
     width: 25,
   },
